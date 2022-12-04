@@ -2,7 +2,9 @@ using StateMachineLogic.DI;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.MovementStateMachine.Features;
 using ThirdPersonController.MovementStateMachine.Features.Move;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 
