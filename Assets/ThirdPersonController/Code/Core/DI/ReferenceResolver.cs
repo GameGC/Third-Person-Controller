@@ -9,7 +9,6 @@ namespace StateMachineLogic.DI
     public class ReferenceResolver : MonoBehaviour , IReferenceResolver
     {
         [SerializeField,ComponentSelect] private List<Component> cachedComponents;
-        [SerializeField] private BaseInputReader input;
         [SerializeField] private Transform cameraTransform;
 
         [SerializeField] private bool releaseMemoryOnStart = true;

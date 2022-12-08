@@ -513,7 +513,6 @@ MonoBehaviour:
   - {fileID: 1617079114466961491}
   - {fileID: 0}
   - {fileID: 1617079114379089268}
-  input: {fileID: 0}
   cameraTransform: {fileID: 0}
   releaseMemoryOnStart: 1
 --- !u!54 &1617079114466961489
@@ -2279,6 +2278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MovementSmooth>k__BackingField: 6
+  <GroundLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &1617079115778208685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2374,14 +2376,11 @@ MonoBehaviour:
         airSmooth: 6
         jumpWithRigidbodyForce: 1
         jumpAndRotate: 1
-        <rotationSpeed>k__BackingField: 16
+        rotationSpeed: 16
     - rid: 8563616750158479570
       type: {class: GroundCheckFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
       data:
         path: 
-        groundLayer:
-          serializedVersion: 2
-          m_Bits: 1
         groundMinDistance: 0.25
         groundMaxDistance: 0.5
         extraGravity: -10
@@ -2389,10 +2388,7 @@ MonoBehaviour:
       type: {class: CheckSlopeFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
       data:
         path: 
-        groundLayer:
-          serializedVersion: 2
-          m_Bits: 1
-        slopeLimit: 45
+        _slopeLimit: 45
     - rid: 8563616750158479572
       type: {class: FootStepFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
       data:
