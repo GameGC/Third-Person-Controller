@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ThirdPersonController.MovementStateMachine;
+using UnityEngine;
 
 namespace ThirdPersonController.Input
 {
@@ -18,5 +19,9 @@ namespace ThirdPersonController.Input
         public bool isCrouch           ;
         public bool isProne            ;
         public bool isRoll             ;
+
+        
+        protected IMoveStateMachineVariables MoveStateMachineVariables;
+        public void UseVariables(IMoveStateMachineVariables variables) => MoveStateMachineVariables = variables;
     }
 }

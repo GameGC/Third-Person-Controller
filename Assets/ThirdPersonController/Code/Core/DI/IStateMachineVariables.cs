@@ -1,4 +1,7 @@
-﻿public interface IStateMachineVariables
+﻿namespace ThirdPersonController.Core.DI
 {
+    public interface IStateMachineVariables
+    {
     
+    }
 }

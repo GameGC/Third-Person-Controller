@@ -510,8 +510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cachedComponents:
-  - {fileID: 1617079114466961491}
   - {fileID: 0}
+  - {fileID: 1617079114466961491}
   - {fileID: 1617079114379089268}
   cameraTransform: {fileID: 0}
   releaseMemoryOnStart: 1

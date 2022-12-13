@@ -28,7 +28,7 @@ Third-Person-Controller is rigidbody character controller with statemachine base
 ###### Example: Creating custom Feature for state
 
 ```csharp
-using StateMachineLogic.DI;
+using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core;
 using UnityEngine;
 
@@ -58,7 +58,7 @@ public class ExampleFeature : BaseFeature
 
 ```csharp
 using System;
-using StateMachineLogic.DI;
+using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.CodeStateMachine;
 
 public class GroundedStateTransition : BaseStateTransition

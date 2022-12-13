@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using ThirdPersonController.Core.DI.CustomEditor;
-using ThirdPersonController.Input;
 using UnityEngine;
 
-namespace StateMachineLogic.DI
+namespace ThirdPersonController.Core.DI
 {
     public class ReferenceResolver : MonoBehaviour , IReferenceResolver
     {
@@ -31,7 +30,6 @@ namespace StateMachineLogic.DI
 
         public new T GetComponent<T>() where T: Component
         {
-            var type = typeof(T);
             if (cachedComponents.Count > 0)
             {
                 foreach (var component in cachedComponents)
@@ -47,6 +45,29 @@ namespace StateMachineLogic.DI
             else
             {
                 var component = base.GetComponent<T>();
+                cachedComponents.Add(component);
+                return component;
+            }
+        }
+
+        public new Component GetComponent(Type componentType)
+        {
+            if (cachedComponents.Count > 0)
+            {
+                foreach (var component in cachedComponents)
+                {
+                    var mType = component.GetType();
+                    if (mType == componentType || componentType.IsSubclassOf(mType) || mType.IsSubclassOf(componentType))
+                        return component;
+                }
+
+                var newComponent = base.GetComponent(componentType);
+                cachedComponents.Add(newComponent);
+                return newComponent;
+            }
+            else
+            {
+                var component = base.GetComponent(componentType);
                 cachedComponents.Add(component);
                 return component;
             }

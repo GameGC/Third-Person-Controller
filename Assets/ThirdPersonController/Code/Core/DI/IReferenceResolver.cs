@@ -1,11 +1,12 @@
-﻿using ThirdPersonController.Input;
+﻿using System;
 using UnityEngine;
 
-namespace StateMachineLogic.DI
+namespace ThirdPersonController.Core.DI
 {
     public interface IReferenceResolver
     {
         public T GetComponent<T>() where T: Component;
+        public Component GetComponent(Type componentType);
 
       // public Transform GetPlayerTransform();
       // 

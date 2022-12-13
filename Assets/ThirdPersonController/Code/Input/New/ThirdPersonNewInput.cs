@@ -8,14 +8,13 @@ namespace ThirdPersonController.Input
 
     public sealed class ThirdPersonNewInput : BaseInputReader
     { 
-        [Header("Legacy refs")] 
-        [SerializeField] private MovementStateMachineVariables cc;
         private Transform _cameraMain;
 
         private void Awake()
         {
             _cameraMain = Camera.main.transform;
         }
+        
         
         private void OnMove(InputValue obj)
         {
@@ -44,7 +43,7 @@ namespace ThirdPersonController.Input
 
             
             // calculate moveInput smooth
-            moveInputSmooth = Vector2.MoveTowards(moveInputSmooth, moveInput, cc.MovementSmooth * Time.deltaTime);
+            moveInputSmooth = Vector2.MoveTowards(moveInputSmooth, moveInput, MoveStateMachineVariables.MovementSmooth * Time.deltaTime);
         }
 
 
@@ -52,7 +51,7 @@ namespace ThirdPersonController.Input
         {
             if (moveInput.magnitude <= 0.01)
             {
-                moveDirection = Vector3.Lerp(moveDirection, Vector3.zero,  cc.MovementSmooth * Time.deltaTime);
+                moveDirection = Vector3.Lerp(moveDirection, Vector3.zero,  MoveStateMachineVariables.MovementSmooth * Time.deltaTime);
                 return;
             }
 

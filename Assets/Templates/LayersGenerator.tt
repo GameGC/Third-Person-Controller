@@ -1,0 +1,9 @@
+﻿<#@ template language="C#" linePragmas="false"#>
+<#@ parameter name="m_ClassName"  type="System.String" #>
+
+ using UnityEditor;
+ 
+ public static class <#=m_ClassName#>
+ {
+ 
+ }

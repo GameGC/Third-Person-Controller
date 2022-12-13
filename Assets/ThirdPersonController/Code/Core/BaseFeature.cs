@@ -1,5 +1,5 @@
 ﻿using System;
-using StateMachineLogic.DI;
+using ThirdPersonController.Core.DI;
 using UnityEditor;
 using UnityEngine;
 

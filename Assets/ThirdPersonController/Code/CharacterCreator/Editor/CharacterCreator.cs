@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using StateMachineLogic.DI;
+using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using ThirdPersonController.MovementStateMachine.Code;
 using UnityEditor;
