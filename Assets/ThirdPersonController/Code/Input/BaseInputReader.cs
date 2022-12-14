@@ -1,5 +1,4 @@
-﻿using ThirdPersonController.MovementStateMachine;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ThirdPersonController.Input
 {
@@ -21,7 +20,6 @@ namespace ThirdPersonController.Input
         public bool isRoll             ;
 
         
-        protected IMoveStateMachineVariables MoveStateMachineVariables;
-        public void UseVariables(IMoveStateMachineVariables variables) => MoveStateMachineVariables = variables;
+        public float movementSmooth { protected get; set; }
     }
 }

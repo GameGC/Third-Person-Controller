@@ -25,7 +25,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             base.CacheReferences(variables,resolver);
-            _useNewInputSystem = Input is ThirdPersonNewInput;
+            _useNewInputSystem = Input.GetType().Name.Contains("ThirdPersonNewInput");
         }
 
         public override void OnEnterState()

@@ -309,6 +309,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterController_testModel
       objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: ReferenceResolver
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: states.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: states.Array.data[0].Name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: alwaysExecutedFeatures.Array.data[0]
+      value: 8563616994406432784
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: alwaysExecutedFeatures.Array.data[1]
+      value: 8563616994406432785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432784]
+      value: Assembly-CSharp ThirdPersonController.MovementStateMachine.Features.GroundCheckFeature
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432785]
+      value: Assembly-CSharp ThirdPersonController.MovementStateMachine.Features.CheckSlopeFeature
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: states.Array.data[0].features.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432784].path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432785].path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: states.Array.data[0].Transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432785]._slopeLimit
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432784].extraGravity
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432784].groundMaxDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617079115778208685, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
+      propertyPath: managedReferences[8563616994406432784].groundMinDistance
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
 --- !u!4 &702831527 stripped

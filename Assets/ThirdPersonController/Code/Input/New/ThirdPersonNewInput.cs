@@ -1,5 +1,4 @@
-﻿using ThirdPersonController.MovementStateMachine;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ThirdPersonController.Input
@@ -43,7 +42,7 @@ namespace ThirdPersonController.Input
 
             
             // calculate moveInput smooth
-            moveInputSmooth = Vector2.MoveTowards(moveInputSmooth, moveInput, MoveStateMachineVariables.MovementSmooth * Time.deltaTime);
+            moveInputSmooth = Vector2.MoveTowards(moveInputSmooth, moveInput, movementSmooth * Time.deltaTime);
         }
 
 
@@ -51,7 +50,7 @@ namespace ThirdPersonController.Input
         {
             if (moveInput.magnitude <= 0.01)
             {
-                moveDirection = Vector3.Lerp(moveDirection, Vector3.zero,  MoveStateMachineVariables.MovementSmooth * Time.deltaTime);
+                moveDirection = Vector3.Lerp(moveDirection, Vector3.zero,  movementSmooth * Time.deltaTime);
                 return;
             }
 

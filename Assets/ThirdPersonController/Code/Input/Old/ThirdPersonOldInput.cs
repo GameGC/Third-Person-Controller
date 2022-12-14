@@ -1,5 +1,4 @@
 ﻿using System;
-using ThirdPersonController.MovementStateMachine;
 using UnityEngine;
 
 namespace ThirdPersonController.Input
@@ -51,7 +50,7 @@ namespace ThirdPersonController.Input
             moveInputMagnitude = Mathf.Max(Mathf.Abs(moveInput.x), Mathf.Abs(moveInput.y));
             
             // calculate moveInput smooth
-            moveInputSmooth = Vector2.MoveTowards(moveInputSmooth, moveInput, MoveStateMachineVariables.MovementSmooth * Time.deltaTime);
+            moveInputSmooth = Vector2.MoveTowards(moveInputSmooth, moveInput, movementSmooth * Time.deltaTime);
         }
 
         private void CameraInput()
@@ -80,7 +79,7 @@ namespace ThirdPersonController.Input
         {
             if (moveInput.magnitude <= 0.01)
             {
-                moveDirection = Vector3.Lerp(moveDirection, Vector3.zero,  MoveStateMachineVariables.MovementSmooth * Time.deltaTime);
+                moveDirection = Vector3.Lerp(moveDirection, Vector3.zero,  movementSmooth * Time.deltaTime);
                 return;
             }
 
