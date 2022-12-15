@@ -13,6 +13,17 @@ MonoBehaviour:
   m_Name: PackageSettings
   m_EditorClassIdentifier: 
   packages:
-  - {fileID: 0}
+  - input: 0
+    type: 0
+    package: {fileID: 11400000, guid: 5cee63356e51b8b4faf1fbd3c2e7ae7b, type: 2}
+  - input: 1
+    type: 0
+    package: {fileID: 11400000, guid: 9b5d081800919084998bbe883341ab96, type: 2}
+  - input: 0
+    type: 1
+    package: {fileID: 11400000, guid: 74b615f676777c9408c90b252a565f5e, type: 2}
+  - input: 1
+    type: 1
+    package: {fileID: 11400000, guid: f299081442add0e4dbc78e62b139f1e3, type: 2}
   input: 2
   scriptingType: 2

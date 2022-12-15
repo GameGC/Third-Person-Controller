@@ -55,7 +55,7 @@ namespace ThirdPersonController.ModuleInformation
          if(dependsOnNames==null)
             dependsOnNames = new string[0];
          
-         AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(unityPackage),true);
+         AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(unityPackage),false);
          
          var targetAssembly = JsonConvert.DeserializeObject<Dictionary<string, object>>(targetAsset.text);
 
