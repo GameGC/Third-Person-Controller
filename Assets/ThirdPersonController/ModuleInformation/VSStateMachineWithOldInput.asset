@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 16
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -18,7 +18,8 @@ MonoBehaviour:
   - {fileID: 1617079114466961501, guid: 7ead2b2b4ed4ef3439ccd333f3bab127, type: 3}
   - {fileID: 102900000, guid: 00c3089d6f36d0b48bbd87b0a3f04fc2, type: 3}
   - {fileID: 7676026736372397470, guid: 791fd67abb4f3ad4fba059ac244d78e6, type: 3}
-  - {fileID: 102900000, guid: 2444b7d5b2f6c3d41ad60678ece52202, type: 3}
-  - {fileID: 5897886265953266890, guid: b3e2c7f59d8c46e46884d322c7c4e46f, type: 3}
-  - {fileID: 5897886265953266890, guid: 03ab777e65a5d5e4780b185102b03fa6, type: 3}
   - {fileID: 102900000, guid: aca1f20718e652745b489423c38ea064, type: 3}
+  - {fileID: 102900000, guid: 2bf708b2594341dc8b8c60665c58942f, type: 3}
+  targetAsset: {fileID: 5897886265953266890, guid: 358ab966fa8802b4d8061bcfd93dcc22, type: 3}
+  dependsOnNames:
+  - Unity.VisualScripting.Core

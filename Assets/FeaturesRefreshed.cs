@@ -22,7 +22,6 @@ public class FeaturesRefreshed : MonoBehaviour
             {
                 BoltCore.Configuration.typeOptions.Add(typeOption);
             }
-
         }
         BoltCore.Configuration.Save();
     }
