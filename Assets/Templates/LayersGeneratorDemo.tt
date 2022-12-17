@@ -1,6 +1,0 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
-<#@ output extension=".cs"#>
-<#
-    _m_ClassNameField = "UnityLayers";
-#>
-<#@ include file ="$(ProjectDir)Assets\Templates\LayersGenerator.tt" #>
