@@ -1,4 +1,4 @@
-# Third-Person-Controller VERSION:alpha 0.1
+# Third-Person-Controller VERSION:alpha 0.2
 DO NOT USE IN COMERCIAL PROJECTS without permisions
 
 ![](https://img.shields.io/badge/Rigidbody-8775FF)
@@ -100,8 +100,6 @@ public class GroundedStateTransition : BaseStateTransition
 
 <br/> 
 Known issues:
-<br/>
-Bad arhitecture when input use IMoveStateMachineVariables inspector reference
 <br/>
 FootStep Feature lagging and code refactor
 <br/>
