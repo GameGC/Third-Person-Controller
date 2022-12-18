@@ -56,6 +56,8 @@ public class ExampleFeature : BaseFeature
 ```
 
 <h6>Example: Creating custom Feature for state&nbsp;<i>Using Visual Scripting</i></h6>
+Here is still used code, but it's possible to do same using Visual Scripting, but not recomended
+<br/>
 
 <img src="Docs/exampleFeatureVC.png" height="50%">
 
