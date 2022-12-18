@@ -11,7 +11,7 @@ Third-Person-Controller is rigidbody character controller with statemachine base
 |                                       | Supported state machines|
 |---------------------------------------|------------------      |
 |Code State Machine                     |:heavy_check_mark:      |
-|Visual scripting state machine         |:x: <b>[IN PROGRESS]</b>|
+|Visual scripting state machine         |:heavy_check_mark:      |
 <br/>
 
 |                        | Current States |
@@ -25,7 +25,8 @@ Third-Person-Controller is rigidbody character controller with statemachine base
 |Prone                   |:heavy_check_mark:
 |In Air                  |:heavy_check_mark:
 
-###### Example: Creating custom Feature for state
+
+<h6>Example: Creating custom Feature for state&nbsp;<i>Using Code</i></h6>
 
 ```csharp
 using ThirdPersonController.Core.DI;
@@ -54,8 +55,13 @@ public class ExampleFeature : BaseFeature
 
 ```
 
-###### Example: Creating custom Transition
+<h6>Example: Creating custom Feature for state&nbsp;<i>Using Visual Scripting</i></h6>
 
+<img src="Docs/exampleFeatureVC.png" height="50%">
+
+
+<h6>Example: Creating custom Transition&nbsp;<i>Using Code</i></h6>
+   
 ```csharp
 using System;
 using ThirdPersonController.Core.DI;
@@ -74,6 +80,11 @@ public class GroundedStateTransition : BaseStateTransition
     public override bool couldHaveTransition => _variables.IsGrounded == shouldBeGrounded;
 }
 ```
+
+<h6>Example: Creating custom Transition&nbsp;<i>Using Visual Scripting</i></h6>
+  
+<img src="Docs/exampleTransitionVC.png" height="50%">
+
 <br/> 
 
 
@@ -82,8 +93,10 @@ public class GroundedStateTransition : BaseStateTransition
 <p align="center">	
 <img src="Docs/overviewWindow.png" width="35%" height="35%">
 <img src="Docs/characterCreator.png" width="35%" height="35%">
+
 </p>
 <img src="Docs/overviewWindow2.png" height="50%">
+<img src="Docs/vsStateMachine.png" height="50%">
 
 <br/> 
 Known issues:
