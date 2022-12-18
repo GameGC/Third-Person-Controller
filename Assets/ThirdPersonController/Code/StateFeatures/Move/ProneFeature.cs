@@ -11,12 +11,12 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
     public class ProneFeature : BaseFeature
     {
        
-        [SerializeField] private Vector3 _capsuleCenter;
-        [SerializeField] private float _capsuleHeight;
-        [SerializeField] private float _capsuleRadius;
+        [SerializeField] private Vector3 capsuleCenter;
+        [SerializeField] private float capsuleHeight;
+        [SerializeField] private float capsuleRadius;
     
-        [SerializeField] private float _enterTransitionTime = 0.2f;
-        [SerializeField] private float _exitTransitionTime = 0.1f;
+        [SerializeField] private float enterTransitionTime = 0.2f;
+        [SerializeField] private float exitTransitionTime = 0.1f;
         
         /*
      case 0:
@@ -29,7 +29,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
           this.m_BoundsHandle.heightAxis = CapsuleBoundsHandle.HeightAxis.Z;
           break;
      */
-        [SerializeField] private int _capsuleDirection;
+        [SerializeField] private int capsuleDirection;
 
         private Vector3 _tempCapsuleCenter;
         private float _tempCapsuleHeight;
@@ -54,17 +54,17 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
             _tempCapsuleRadius = _capsuleCollider.radius;
             _tempCapsuleDirection = _capsuleCollider.direction;
 
-            _capsuleCollider.center = _capsuleCenter;
-            _capsuleCollider.height = _capsuleHeight;
-            _capsuleCollider.radius = _capsuleRadius;
-            _capsuleCollider.direction = _capsuleDirection;
+            _capsuleCollider.center = capsuleCenter;
+            _capsuleCollider.height = capsuleHeight;
+            _capsuleCollider.radius = capsuleRadius;
+            _capsuleCollider.direction = capsuleDirection;
 
             _animator.CrossFadeInFixedTime("Prone", .2f);
             
             // camera reposition logic
             
             _positionConstraint.enabled = true;
-            WaitAndDisableCameraConstraint(_enterTransitionTime);
+            WaitAndDisableCameraConstraint(enterTransitionTime);
         }
         
         private async void WaitAndDisableCameraConstraint(float timer)
@@ -81,12 +81,12 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
             _capsuleCollider.radius = _tempCapsuleRadius;
             _capsuleCollider.direction = _tempCapsuleDirection;
         
-            _animator.CrossFadeInFixedTime("DefaultMove", _exitTransitionTime);
+            _animator.CrossFadeInFixedTime("DefaultMove", exitTransitionTime);
             
             // camera reposition logic
             
             _positionConstraint.enabled = true;
-            WaitAndDisableCameraConstraint(_exitTransitionTime);
+            WaitAndDisableCameraConstraint(exitTransitionTime);
         }
     }
 }

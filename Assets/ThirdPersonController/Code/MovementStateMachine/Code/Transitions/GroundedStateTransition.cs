@@ -1,5 +1,4 @@
-﻿using System;
-using ThirdPersonController.Core.DI;
+﻿using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.CodeStateMachine;
 
 namespace ThirdPersonController.MovementStateMachine.Code.Transitions

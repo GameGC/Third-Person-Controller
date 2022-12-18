@@ -1,6 +1,5 @@
 ﻿using System;
 using ThirdPersonController.Core.DI;
-using ThirdPersonController.Input;
 using UnityEngine;
 
 namespace ThirdPersonController.MovementStateMachine.Features.Move

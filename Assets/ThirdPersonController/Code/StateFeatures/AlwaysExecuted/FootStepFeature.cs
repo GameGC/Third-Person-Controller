@@ -2,7 +2,6 @@ using System;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ThirdPersonController.MovementStateMachine.Features
 {
@@ -12,15 +11,16 @@ namespace ThirdPersonController.MovementStateMachine.Features
         private static readonly int LeftFootIkProperty = Animator.StringToHash("a_LeftFootIK");
         private static readonly int RightFootIkProperty = Animator.StringToHash("a_RightFootIK");
     
+       
         [Header("Cast Height properties")]
-        [SerializeField] private float _startOffsetX;
-        [SerializeField] private float _RaycastOriginY = 0.5f;
-        [SerializeField] private float _RaycastEndY = -0.2f;
+        [SerializeField] private float startOffsetX;
+        [SerializeField] private float RaycastOriginY = 0.5f;
+        [SerializeField] private float RaycastEndY = -0.2f;
         
         [Header("Cast Forward properties")]
-        [SerializeField] private float _startOffsetY;
-        [SerializeField] private float _stepLength;
-        [SerializeField] private float _smoothTime = 300;
+        [SerializeField] private float startOffsetY;
+        [SerializeField] private float stepLength;
+        [SerializeField] private float smoothTime = 300;
     
     
 
@@ -106,11 +106,11 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
 
             var position = footTransform.position;
-            var distance = _RaycastOriginY - _RaycastEndY;
+            var distance = RaycastOriginY - RaycastEndY;
 
         
-            position += localUp * _RaycastOriginY;
-            position += localForward * _startOffsetX;
+            position += localUp * RaycastOriginY;
+            position += localForward * startOffsetX;
 
 
             Debug.DrawLine(position,position-localUp*distance,Color.white);
@@ -121,7 +121,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
                     return;
             }
             
-            position = hit.point - localForward * _startOffsetX + localUp * footBottomHeight;
+            position = hit.point - localForward * startOffsetX + localUp * footBottomHeight;
             
             // Use the hit normal to calculate the desired rotation.
             var rotAxis = Vector3.Cross(localUp, hit.normal);
@@ -134,17 +134,17 @@ namespace ThirdPersonController.MovementStateMachine.Features
             
             
             ForwardCast( hit.point + localUp * 0.01f, localForward,ref position);
-            _animator.SetIKPosition(goal,Vector3.Lerp(_animator.GetIKPosition(goal), position,Time.deltaTime *_smoothTime));
+            _animator.SetIKPosition(goal,Vector3.Lerp(_animator.GetIKPosition(goal), position,Time.deltaTime *smoothTime));
         }
 
 
         private void ForwardCast(Vector3 position,Vector3 forwardDirection,ref Vector3 finalPosition)
         {
-            Debug.DrawLine(position,position+forwardDirection*_stepLength,Color.yellow);
+            Debug.DrawLine(position,position+forwardDirection*stepLength,Color.yellow);
 
-            if (Physics.Raycast(position, forwardDirection, out var hit, _stepLength,_variables.GroundLayer,QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(position, forwardDirection, out var hit, stepLength,_variables.GroundLayer,QueryTriggerInteraction.Ignore))
             {
-                var direction = hit.point-forwardDirection*_stepLength;
+                var direction = hit.point-forwardDirection*stepLength;
                 finalPosition.x = direction.x;
                 finalPosition.z = direction.z;
             }

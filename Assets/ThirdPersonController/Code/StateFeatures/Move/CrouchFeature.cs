@@ -10,11 +10,11 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
     [Serializable]
     public class CrouchFeature : BaseFeature
     {
-        [SerializeField] private Vector3 _capsuleCenter;
-        [SerializeField] private float _capsuleHeight;
-
-        [SerializeField] private float _enterTransitionTime = 0.2f;
-        [SerializeField] private float _exitTransitionTime = 0.1f;
+        [SerializeField] private Vector3 capsuleCenter;
+        [SerializeField] private float capsuleHeight;
+       
+        [SerializeField] private float enterTransitionTime = 0.2f;
+        [SerializeField] private float exitTransitionTime = 0.1f;
         
         private Vector3 _tempCapsuleCenter;
         private float _tempCapsuleHeight;
@@ -36,16 +36,16 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
             _tempCapsuleCenter = _capsuleCollider.center;
             _tempCapsuleHeight = _capsuleCollider.height;
 
-            _capsuleCollider.center = _capsuleCenter;
-            _capsuleCollider.height = _capsuleHeight;
+            _capsuleCollider.center = capsuleCenter;
+            _capsuleCollider.height = capsuleHeight;
         
-            _animator.CrossFadeInFixedTime("Crouch", _enterTransitionTime);
+            _animator.CrossFadeInFixedTime("Crouch", enterTransitionTime);
             
             
             // camera reposition logic
 
             _positionConstraint.enabled = true;
-            WaitAndDisableCameraConstraint(_enterTransitionTime);
+            WaitAndDisableCameraConstraint(enterTransitionTime);
         }
 
         private async void WaitAndDisableCameraConstraint(float timer)
@@ -59,13 +59,13 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
             _capsuleCollider.center = _tempCapsuleCenter;
             _capsuleCollider.height = _tempCapsuleHeight;
         
-            _animator.CrossFadeInFixedTime("DefaultMove", _exitTransitionTime);
+            _animator.CrossFadeInFixedTime("DefaultMove", exitTransitionTime);
             
                  
             // camera reposition logic
 
             _positionConstraint.enabled = true;
-            WaitAndDisableCameraConstraint(_exitTransitionTime);
+            WaitAndDisableCameraConstraint(exitTransitionTime);
         }
     }
 }

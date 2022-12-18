@@ -20,6 +20,7 @@ MonoBehaviour:
   - {fileID: 7676026736372397470, guid: 791fd67abb4f3ad4fba059ac244d78e6, type: 3}
   - {fileID: 102900000, guid: aca1f20718e652745b489423c38ea064, type: 3}
   - {fileID: 102900000, guid: 2bf708b2594341dc8b8c60665c58942f, type: 3}
+  - {fileID: 102900000, guid: 79784b8f57e04634ea79825077bbbf1e, type: 3}
   targetAsset: {fileID: 5897886265953266890, guid: 358ab966fa8802b4d8061bcfd93dcc22, type: 3}
   dependsOnNames:
   - Unity.VisualScripting.Core

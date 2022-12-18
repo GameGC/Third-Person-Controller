@@ -1,6 +1,5 @@
 ﻿using System;
 using ThirdPersonController.Core.DI;
-using UnityEditor;
 using UnityEngine;
 
 namespace ThirdPersonController.Core

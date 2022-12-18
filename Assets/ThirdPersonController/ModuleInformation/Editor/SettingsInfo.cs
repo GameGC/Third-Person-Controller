@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -35,8 +34,25 @@ namespace ThirdPersonController.ModuleInformation.Editor
     
         public InputHandler input;
         public ScriptingType scriptingType;
-    
-    
+
+
+        [InitializeOnLoadMethod]
+        public static void SelectOnStart()
+        {
+            const string kShowSettings = "Tps.Settings.ShowDefaults";
+            if (!SessionState.GetBool(kShowSettings, false))
+            {
+                EditorApplication.delayCall += () =>
+                {
+                    SessionState.SetBool(kShowSettings, true);
+                    Selection.activeObject = instance;
+                };
+            }
+
+        }
+
+
+
         private void OnValidate()
         {
           //  if(EditorApplication.isCompiling || EditorApplication.isUpdating) return;

@@ -201,10 +201,6 @@ Preset:
     value: states.Array.data[0].features.Array.data[0]
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479564].Name
-    value: BaseMoveFeature
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479564].animationSmooth
     value: 0.2
     objectReference: {fileID: 0}
@@ -239,10 +235,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479566].path
     value: states.Array.data[1].features.Array.data[0]
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479566].Name
-    value: BaseMoveFeature
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479566].animationSmooth
@@ -329,7 +321,7 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479571]._slopeLimit
+    propertyPath: managedReferences[8563616750158479571].slopeLimit
     value: 45
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -341,27 +333,27 @@ Preset:
     value: states.Array.data[0].features.Array.data[2]
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479572]._startOffsetX
+    propertyPath: managedReferences[8563616750158479572].startOffsetX
     value: -0.05
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479572]._RaycastOriginY
+    propertyPath: managedReferences[8563616750158479572].RaycastOriginY
     value: 0.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479572]._RaycastEndY
+    propertyPath: managedReferences[8563616750158479572].RaycastEndY
     value: -0.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479572]._startOffsetY
+    propertyPath: managedReferences[8563616750158479572].startOffsetY
     value: -0.08
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479572]._stepLength
+    propertyPath: managedReferences[8563616750158479572].stepLength
     value: 0.18
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479572]._smoothTime
+    propertyPath: managedReferences[8563616750158479572].smoothTime
     value: 300
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -371,10 +363,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479573].path
     value: states.Array.data[2].features.Array.data[0]
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479573].Name
-    value: BaseMoveFeature
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479573].animationSmooth
@@ -395,10 +383,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479574].path
     value: states.Array.data[3].features.Array.data[0]
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479574].Name
-    value: BaseMoveFeature
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: managedReferences[8563616750158479574].animationSmooth
@@ -641,27 +625,27 @@ Preset:
     value: states.Array.data[2].features.Array.data[1]
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479630]._capsuleCenter.x
+    propertyPath: managedReferences[8563616750158479630].capsuleCenter.x
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479630]._capsuleCenter.y
+    propertyPath: managedReferences[8563616750158479630].capsuleCenter.y
     value: 0.471
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479630]._capsuleCenter.z
+    propertyPath: managedReferences[8563616750158479630].capsuleCenter.z
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479630]._capsuleHeight
+    propertyPath: managedReferences[8563616750158479630].capsuleHeight
     value: 0.972
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479630]._enterTransitionTime
+    propertyPath: managedReferences[8563616750158479630].enterTransitionTime
     value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479630]._exitTransitionTime
+    propertyPath: managedReferences[8563616750158479630].exitTransitionTime
     value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -673,35 +657,35 @@ Preset:
     value: states.Array.data[3].features.Array.data[1]
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._capsuleCenter.x
+    propertyPath: managedReferences[8563616750158479635].capsuleCenter.x
     value: -0.03330905
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._capsuleCenter.y
+    propertyPath: managedReferences[8563616750158479635].capsuleCenter.y
     value: 0.21409895
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._capsuleCenter.z
+    propertyPath: managedReferences[8563616750158479635].capsuleCenter.z
     value: -0.03400767
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._capsuleHeight
+    propertyPath: managedReferences[8563616750158479635].capsuleHeight
     value: 2.307009
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._capsuleRadius
+    propertyPath: managedReferences[8563616750158479635].capsuleRadius
     value: 0.2306226
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._enterTransitionTime
+    propertyPath: managedReferences[8563616750158479635].enterTransitionTime
     value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._exitTransitionTime
+    propertyPath: managedReferences[8563616750158479635].exitTransitionTime
     value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: managedReferences[8563616750158479635]._capsuleDirection
+    propertyPath: managedReferences[8563616750158479635].capsuleDirection
     value: 2
     objectReference: {fileID: 0}
   m_ExcludedProperties: []

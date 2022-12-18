@@ -1,6 +1,5 @@
 ﻿#if ENABLE_CODE_MOVEMENTSTATEMACHINE
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;

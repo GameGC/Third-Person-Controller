@@ -7,8 +7,6 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
 {
     public abstract class BaseMoveFeature : BaseFeature
     {
-        [HideInInspector]public string Name = nameof(BaseMoveFeature);
-        
         // animation hashes
         private static readonly int InputMagnitude = Animator.StringToHash("InputMagnitude");
 

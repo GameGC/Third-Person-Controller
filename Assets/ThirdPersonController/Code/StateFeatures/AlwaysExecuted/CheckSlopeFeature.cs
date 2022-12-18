@@ -10,7 +10,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
     public class CheckSlopeFeature : BaseFeature
     {
         [Tooltip("Max angle to walk")]
-        [Range(30, 80),SerializeField] private float _slopeLimit = 45f;
+        [Range(30, 80),SerializeField] private float slopeLimit = 45f;
 
 
         private Transform _transform;
@@ -43,13 +43,13 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
                 var targetPoint = hitInfo.point + moveDirection * radius;
 
-                if ((hitAngle > _slopeLimit) && Physics.Linecast(rayStart, targetPoint, out hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
+                if ((hitAngle > slopeLimit) && Physics.Linecast(rayStart, targetPoint, out hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
                 {
                     hitAngle = Vector3.Angle(Vector3.up, hitInfo.normal);
                     _variables.SlopeAngle = hitAngle;
 
                 
-                    if (hitAngle > _slopeLimit && hitAngle < 85f)
+                    if (hitAngle > slopeLimit && hitAngle < 85f)
                         _variables.IsSlopeBadForMove = true;
                     else
                         _variables.IsSlopeBadForMove = false;
