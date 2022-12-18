@@ -1,0 +1,691 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MovementStateMachine
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 73fbf3aa05f6be24780438449f505aa3, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: ReferenceResolver
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].Name
+    value: Move
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].features.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].features.Array.data[0]
+    value: 8563616750158479564
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].features.Array.data[1]
+    value: 8563616750158479565
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].features.Array.data[2]
+    value: 8563616750158479572
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].Transitions.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].Transitions.Array.data[0]
+    value: 8563616750158479575
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].Transitions.Array.data[1]
+    value: 8563616750158479576
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].Transitions.Array.data[2]
+    value: 8563616750158479577
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[0].Transitions.Array.data[3]
+    value: 8563616750158479578
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].Name
+    value: Sprint
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].features.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].features.Array.data[0]
+    value: 8563616750158479566
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].features.Array.data[1]
+    value: 8563616750158479567
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].Transitions.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].Transitions.Array.data[0]
+    value: 8563616750158479581
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[1].Transitions.Array.data[1]
+    value: 8563616750158479580
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].Name
+    value: Crouch
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].features.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].features.Array.data[0]
+    value: 8563616750158479573
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].features.Array.data[1]
+    value: 8563616750158479630
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].Transitions.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].Transitions.Array.data[0]
+    value: 8563616750158479583
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[2].Transitions.Array.data[1]
+    value: 8563616750158479584
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].Name
+    value: Prone
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].features.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].features.Array.data[0]
+    value: 8563616750158479574
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].features.Array.data[1]
+    value: 8563616750158479635
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].Transitions.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].Transitions.Array.data[0]
+    value: 8563616750158479590
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[3].Transitions.Array.data[1]
+    value: 8563616750158479591
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[4].Name
+    value: Air
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[4].features.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[4].features.Array.data[0]
+    value: 8563616750158479569
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[4].Transitions.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: states.Array.data[4].Transitions.Array.data[0]
+    value: 8563616750158479597
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: onStateChanged.m_PersistentCalls.m_Calls.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: alwaysExecutedFeatures.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: alwaysExecutedFeatures.Array.data[0]
+    value: 8563616750158479570
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: alwaysExecutedFeatures.Array.data[1]
+    value: 8563616750158479571
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479564]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.Move.MoveFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479564].path
+    value: states.Array.data[0].features.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479564].animationSmooth
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479564].rotationSpeed
+    value: 16
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479564].runningSpeed
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479565]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.JumpFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479565].path
+    value: states.Array.data[0].features.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479565].jumpTimer
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479565].jumpHeight
+    value: 7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479566]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.Move.SprintFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479566].path
+    value: states.Array.data[1].features.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479566].animationSmooth
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479566].rotationSpeed
+    value: 16
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479566].runningSpeed
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479567]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.JumpFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479567].path
+    value: states.Array.data[1].features.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479567].jumpTimer
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479567].jumpHeight
+    value: 7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.AirFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569].path
+    value: states.Array.data[4].features.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569].airSpeed
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569].airSmooth
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569].jumpWithRigidbodyForce
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569].jumpAndRotate
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479569].rotationSpeed
+    value: 16
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479570]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.GroundCheckFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479570].path
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479570].groundMinDistance
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479570].groundMaxDistance
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479570].extraGravity
+    value: -10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479571]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.CheckSlopeFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479571].path
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479571].slopeLimit
+    value: 45
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.FootStepFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].path
+    value: states.Array.data[0].features.Array.data[2]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].startOffsetX
+    value: -0.05
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].RaycastOriginY
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].RaycastEndY
+    value: -0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].startOffsetY
+    value: -0.08
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].stepLength
+    value: 0.18
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479572].smoothTime
+    value: 300
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479573]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.Move.MoveFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479573].path
+    value: states.Array.data[2].features.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479573].animationSmooth
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479573].rotationSpeed
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479573].runningSpeed
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479574]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.Move.MoveFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479574].path
+    value: states.Array.data[3].features.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479574].animationSmooth
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479574].rotationSpeed
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479574].runningSpeed
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479575]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.GroundedStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479575]._transitionIndex
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479575]._transitionName
+    value: Air
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479575].path
+    value: states.Array.data[0].Transitions.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479575].shouldBeGrounded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479576]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.SprintStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479576]._transitionIndex
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479576]._transitionName
+    value: Sprint
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479576].path
+    value: states.Array.data[0].Transitions.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479576].IsSprinting
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479577]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.CrouchStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479577]._transitionIndex
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479577]._transitionName
+    value: Crouch
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479577].path
+    value: states.Array.data[0].Transitions.Array.data[2]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479577].IsCrouching
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479578]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.ProneStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479578]._transitionIndex
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479578]._transitionName
+    value: Prone
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479578].path
+    value: states.Array.data[0].Transitions.Array.data[3]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479578].IsProne
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479580]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.GroundedStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479580]._transitionIndex
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479580]._transitionName
+    value: Air
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479580].path
+    value: states.Array.data[1].Transitions.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479580].shouldBeGrounded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479581]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.SprintStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479581]._transitionIndex
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479581]._transitionName
+    value: Move
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479581].path
+    value: states.Array.data[1].Transitions.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479581].IsSprinting
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479583]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.CrouchStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479583]._transitionIndex
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479583]._transitionName
+    value: Move
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479583].path
+    value: states.Array.data[2].Transitions.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479583].IsCrouching
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479584]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.GroundedStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479584]._transitionIndex
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479584]._transitionName
+    value: Air
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479584].path
+    value: states.Array.data[2].Transitions.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479584].shouldBeGrounded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479590]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.ProneStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479590]._transitionIndex
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479590]._transitionName
+    value: Move
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479590].path
+    value: states.Array.data[3].Transitions.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479590].IsProne
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479591]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.GroundedStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479591]._transitionIndex
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479591]._transitionName
+    value: Air
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479591].path
+    value: states.Array.data[3].Transitions.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479591].shouldBeGrounded
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479597]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Code.Transitions.GroundedStateTransition
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479597]._transitionIndex
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479597]._transitionName
+    value: Move
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479597].path
+    value: states.Array.data[4].Transitions.Array.data[0]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479597].shouldBeGrounded
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.Move.CrouchFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].path
+    value: states.Array.data[2].features.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].capsuleCenter.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].capsuleCenter.y
+    value: 0.471
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].capsuleCenter.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].capsuleHeight
+    value: 0.972
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].enterTransitionTime
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479630].exitTransitionTime
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635]
+    value: ThirdPersonController ThirdPersonController.MovementStateMachine.Features.Move.ProneFeature
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].path
+    value: states.Array.data[3].features.Array.data[1]
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].capsuleCenter.x
+    value: -0.03330905
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].capsuleCenter.y
+    value: 0.21409895
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].capsuleCenter.z
+    value: -0.03400767
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].capsuleHeight
+    value: 2.307009
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].capsuleRadius
+    value: 0.2306226
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].enterTransitionTime
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].exitTransitionTime
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[8563616750158479635].capsuleDirection
+    value: 2
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

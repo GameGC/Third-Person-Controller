@@ -18,5 +18,8 @@ namespace ThirdPersonController.Input
         public bool isCrouch           ;
         public bool isProne            ;
         public bool isRoll             ;
+
+        
+        public float movementSmooth { protected get; set; }
     }
 }

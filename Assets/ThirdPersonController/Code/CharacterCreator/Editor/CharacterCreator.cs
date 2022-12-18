@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿#if ENABLE_CODE_MOVEMENTSTATEMACHINE
+using System.Collections.Generic;
 using System.Linq;
-using StateMachineLogic.DI;
+using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using ThirdPersonController.MovementStateMachine.Code;
 using UnityEditor;
@@ -38,7 +39,7 @@ namespace ThirdPersonController.CharacterCreator.Editor
         private bool isHuman, isValidAvatar, charExist;
 
         private void OnEnable()
-        {           
+        {
             charAnimator = Selection.activeGameObject?.GetComponent<Animator>();
             charExist = charAnimator != null;
 
@@ -229,3 +230,4 @@ namespace ThirdPersonController.CharacterCreator.Editor
 
     }
 }
+#endif

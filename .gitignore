@@ -58,7 +58,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.aab
-*.unitypackage
 *.app
 
 # Crashlytics generated file
@@ -71,8 +70,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-/[Aa]ssets/Visual/*
-/[Aa]ssets/CharacterController_testModel VC.prefab
-/[Aa]ssets/ThirdPersonController/Code/MovementStateMachine/*
+/[Aa]ssets/Visual/**
 
 .idea/*

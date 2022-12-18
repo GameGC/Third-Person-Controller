@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 16
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586505e02720562429a1eb01ce48a96a, type: 3}
+  m_Name: VSStateMachineWithNewInput
+  m_EditorClassIdentifier: 
+  unityPackage: {fileID: 102900000, guid: d7b864c1c6d3ae44898531d3dc062c4b, type: 3}
+  files:
+  - {fileID: 102900000, guid: dafe0426e486c0747a1af274a3f9f5f7, type: 3}
+  - {fileID: 1617079114466961501, guid: 7ead2b2b4ed4ef3439ccd333f3bab127, type: 3}
+  - {fileID: 102900000, guid: 911a82128a704c1419ac13ddc65c34bb, type: 3}
+  - {fileID: 6143228886838447297, guid: 82eacf2ed08b0874da464806d144ffdc, type: 3}
+  - {fileID: 102900000, guid: e2f1690b54a75e04a8e11e89d230c29b, type: 3}
+  - {fileID: 102900000, guid: aca1f20718e652745b489423c38ea064, type: 3}
+  - {fileID: 102900000, guid: 79784b8f57e04634ea79825077bbbf1e, type: 3}
+  targetAsset: {fileID: 5897886265953266890, guid: 358ab966fa8802b4d8061bcfd93dcc22, type: 3}
+  dependsOnNames:
+  - Unity.VisualScripting.Core
+  - Unity.InputSystem

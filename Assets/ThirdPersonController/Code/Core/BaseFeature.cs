@@ -1,6 +1,5 @@
 ﻿using System;
-using StateMachineLogic.DI;
-using UnityEditor;
+using ThirdPersonController.Core.DI;
 using UnityEngine;
 
 namespace ThirdPersonController.Core

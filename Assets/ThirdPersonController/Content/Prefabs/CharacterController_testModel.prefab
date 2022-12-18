@@ -510,8 +510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cachedComponents:
-  - {fileID: 1617079114466961491}
   - {fileID: 0}
+  - {fileID: 1617079114466961491}
   - {fileID: 1617079114379089268}
   cameraTransform: {fileID: 0}
   releaseMemoryOnStart: 1
@@ -2344,7 +2344,6 @@ MonoBehaviour:
       type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:
         path: states.Array.data[0].features.Array.data[0]
-        Name: BaseMoveFeature
         animationSmooth: 0.2
         rotationSpeed: 16
         runningSpeed: 4
@@ -2358,7 +2357,6 @@ MonoBehaviour:
       type: {class: SprintFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:
         path: states.Array.data[1].features.Array.data[0]
-        Name: BaseMoveFeature
         animationSmooth: 0.2
         rotationSpeed: 16
         runningSpeed: 6
@@ -2388,22 +2386,21 @@ MonoBehaviour:
       type: {class: CheckSlopeFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
       data:
         path: 
-        _slopeLimit: 45
+        slopeLimit: 45
     - rid: 8563616750158479572
       type: {class: FootStepFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
       data:
         path: states.Array.data[0].features.Array.data[2]
-        _startOffsetX: -0.05
-        _RaycastOriginY: 0.4
-        _RaycastEndY: -0.4
-        _startOffsetY: -0.08
-        _stepLength: 0.18
-        _smoothTime: 300
+        startOffsetX: -0.05
+        RaycastOriginY: 0.4
+        RaycastEndY: -0.4
+        startOffsetY: -0.08
+        stepLength: 0.18
+        smoothTime: 300
     - rid: 8563616750158479573
       type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:
         path: states.Array.data[2].features.Array.data[0]
-        Name: BaseMoveFeature
         animationSmooth: 0.2
         rotationSpeed: 8
         runningSpeed: 2
@@ -2411,7 +2408,6 @@ MonoBehaviour:
       type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:
         path: states.Array.data[3].features.Array.data[0]
-        Name: BaseMoveFeature
         animationSmooth: 0.2
         rotationSpeed: 2
         runningSpeed: 0.5
@@ -2496,20 +2492,20 @@ MonoBehaviour:
       type: {class: CrouchFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:
         path: states.Array.data[2].features.Array.data[1]
-        _capsuleCenter: {x: 0, y: 0.471, z: 0}
-        _capsuleHeight: 0.972
-        _enterTransitionTime: 0.2
-        _exitTransitionTime: 0.1
+        capsuleCenter: {x: 0, y: 0.471, z: 0}
+        capsuleHeight: 0.972
+        enterTransitionTime: 0.2
+        exitTransitionTime: 0.1
     - rid: 8563616750158479635
       type: {class: ProneFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: ThirdPersonController}
       data:
         path: states.Array.data[3].features.Array.data[1]
-        _capsuleCenter: {x: -0.03330905, y: 0.21409895, z: -0.03400767}
-        _capsuleHeight: 2.307009
-        _capsuleRadius: 0.2306226
-        _enterTransitionTime: 0.2
-        _exitTransitionTime: 0.1
-        _capsuleDirection: 2
+        capsuleCenter: {x: -0.03330905, y: 0.21409895, z: -0.03400767}
+        capsuleHeight: 2.307009
+        capsuleRadius: 0.2306226
+        enterTransitionTime: 0.2
+        exitTransitionTime: 0.1
+        capsuleDirection: 2
 --- !u!1 &1617079115842489934
 GameObject:
   m_ObjectHideFlags: 0
