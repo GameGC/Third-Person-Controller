@@ -104,5 +104,3 @@ public class GroundedStateTransition : BaseStateTransition
 Known issues:
 <br/>
 FootStep Feature lagging and code refactor
-<br/>
-Input processors code needs to pe improved
