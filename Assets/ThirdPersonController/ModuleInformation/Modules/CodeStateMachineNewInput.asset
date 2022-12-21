@@ -21,6 +21,8 @@ MonoBehaviour:
   - {fileID: 102900000, guid: e2f1690b54a75e04a8e11e89d230c29b, type: 3}
   - {fileID: 102900000, guid: 8559e982ee6280f42976aafb1eba7ff0, type: 3}
   - {fileID: 102900000, guid: 66b4402cb6719684d9f2acc4726efd1d, type: 3}
+  - {fileID: 7951457861174012894, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
   targetAsset: {fileID: 5897886265953266890, guid: 358ab966fa8802b4d8061bcfd93dcc22, type: 3}
   dependsOnNames:
   - Unity.InputSystem
+  - Cinemachine

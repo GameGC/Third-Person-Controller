@@ -1,1 +1,24 @@
-{"name":"ThirdPersonController","rootNamespace":"","references":["Unity.VisualScripting.Core","Unity.InputSystem"],"includePlatforms":[],"excludePlatforms":[],"allowUnsafeCode":false,"overrideReferences":false,"precompiledReferences":[],"autoReferenced":true,"defineConstraints":[],"versionDefines":[{"name":"com.unity.visualscripting","expression":"","define":"ENABLE_VisualScripting"}],"noEngineReferences":false}
+{
+    "name": "ThirdPersonController",
+    "rootNamespace": "",
+    "references": [
+        "Unity.VisualScripting.Core",
+        "Unity.InputSystem",
+        "Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualscripting",
+            "expression": "",
+            "define": "ENABLE_VisualScripting"
+        }
+    ],
+    "noEngineReferences": false
+}

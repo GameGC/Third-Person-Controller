@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ThirdPersonController.Input
@@ -6,34 +8,66 @@ namespace ThirdPersonController.Input
 #if ENABLE_INPUT_SYSTEM
 
     public sealed class ThirdPersonNewInput : BaseInputReader
-    { 
+    {
+        [SerializeField] private InputActionAsset inputActions;
         private Transform _cameraMain;
 
+        
         private void Awake()
         {
             _cameraMain = Camera.main.transform;
+            
+            var Player = inputActions.FindActionMap("Player", throwIfNotFound: true);
+            Player.Enable();
+            
+            var tempArray = new[]
+            {
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Move",OnMove), 
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Look", OnLook),
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Jump",OnJump),
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Sprint",OnSprint),
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Crouch",OnCrouch),
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Prone",OnProne),
+            };
+            
+            foreach (var keyValuePair in tempArray)
+            {
+                var action = Player.FindAction(keyValuePair.Key, true);
+                action.performed += keyValuePair.Value;
+                action.canceled += keyValuePair.Value;
+                action.started += keyValuePair.Value;
+                action.Enable();
+            }
         }
         
         
-        private void OnMove(InputValue obj)
+        private void OnMove(InputAction.CallbackContext obj)
         {
-            moveInput = obj.Get<Vector2>();
+            moveInput = obj.ReadValue<Vector2>();
             moveInputMagnitude = Mathf.Max(Mathf.Abs(moveInput.x), Mathf.Abs(moveInput.y));
          
         }
-        private void OnLook(InputValue obj)
+        private void OnLook(InputAction.CallbackContext obj)
         {
-            lookInput = obj.Get<Vector2>();
+            lookInput = obj.ReadValue<Vector2>();
         }
         
         
-        private void OnJump(InputValue obj) => isJump = obj.isPressed;
+        private void OnJump(InputAction.CallbackContext obj) => isJump = obj.action.IsPressed();
 
-        private void OnSprint(InputValue obj) => isSprinting = obj.isPressed;
+        private void OnSprint(InputAction.CallbackContext obj) => isSprinting = obj.action.IsPressed();
 
-        private void OnCrouch(InputValue obj) => isCrouch = !isCrouch;
+        private void OnCrouch(InputAction.CallbackContext obj)
+        {
+            if(obj.action.WasPerformedThisFrame())
+                isCrouch = !isCrouch;
+        }
 
-        private void OnProne(InputValue obj) => isProne = !isProne;
+        private void OnProne(InputAction.CallbackContext obj)
+        {
+            if(obj.action.WasPerformedThisFrame())
+                isProne = !isProne;
+        }
 
 
         private void Update()
@@ -73,6 +107,18 @@ namespace ThirdPersonController.Input
             {
                 moveDirection = new Vector3(moveInputSmooth.x, 0, moveInputSmooth.y);
             }
+        }
+
+        private void OnDisable()
+        {
+            inputActions.Disable();
+
+            foreach (var assetActionMap in inputActions.actionMaps)
+            {
+                assetActionMap.Disable();
+                assetActionMap.Dispose();
+            }
+
         }
     }
 #endif

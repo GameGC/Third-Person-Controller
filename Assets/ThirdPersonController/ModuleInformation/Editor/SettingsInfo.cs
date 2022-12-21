@@ -147,6 +147,8 @@ namespace ThirdPersonController.ModuleInformation.Editor
             //}
 
             this.scriptingType = scriptingType;
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
         }
     
     
