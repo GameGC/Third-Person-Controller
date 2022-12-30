@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ThirdPersonController.MovementStateMachine.Code
 {
     [RequireComponent(typeof(MovementStateMachineVariables))]
-    public class MoveStateMachine : CodeStateMachine
+    public class MoveStateMachine : DefaultCodeStateMachine
     {
         [SerializeReference, NonReorderable, SerializeReferenceAddButton(typeof(BaseFeature))]
         public BaseFeature[] alwaysExecutedFeatures = new BaseFeature[0];//= new BaseFeature[]{ new GroundCheckFeature(), new CheckSlopeFeature(), };

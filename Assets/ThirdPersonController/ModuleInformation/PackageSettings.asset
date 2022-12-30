@@ -25,5 +25,5 @@ MonoBehaviour:
   - input: 1
     type: 1
     package: {fileID: 11400000, guid: f299081442add0e4dbc78e62b139f1e3, type: 2}
-  input: 2
-  scriptingType: 2
+  input: 1
+  scriptingType: 0

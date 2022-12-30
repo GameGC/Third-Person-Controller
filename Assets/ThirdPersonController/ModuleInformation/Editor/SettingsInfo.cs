@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ThirdPersonController.ModuleInformation.Editor
 {
-    public class SettingsInfo :  ScriptableSingleton<SettingsInfo>
+    public class SettingsInfo :  ScriptableObject
     {
         [Serializable]
         private struct TwoKeysValuePair
@@ -45,7 +45,7 @@ namespace ThirdPersonController.ModuleInformation.Editor
                 EditorApplication.delayCall += () =>
                 {
                     SessionState.SetBool(kShowSettings, true);
-                    Selection.activeObject = instance;
+                    Selection.activeObject =AssetDatabase.LoadAssetAtPath<SettingsInfo>(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t:"+typeof(SettingsInfo)).First()));
                 };
             }
 
@@ -61,11 +61,15 @@ namespace ThirdPersonController.ModuleInformation.Editor
 
             if (systemInputValue != input)
             {
+                Debug.Log(systemInputValue);
+                Debug.Log(this.GetInstanceID());
+              //  Selection.activeObject = this;
+                return;
                 ImportTargetPackages(systemInputValue, scriptingType);
             }
         }
 
-        public async void ImportTargetPackages(InputHandler input, ScriptingType scriptingType)
+        public void ImportTargetPackages(InputHandler input, ScriptingType scriptingType)
         {
             if(this.input == input && this.scriptingType == scriptingType) return;
         
@@ -170,7 +174,7 @@ namespace ThirdPersonController.ModuleInformation.Editor
         private Texture _stateMachinesTex;
         
         private SettingsInfo _target;
-        private void OnEnable()
+        private void Awake()
         {
             _inputTypesTex = EditorGUIUtility.Load("ThirdPersonController/Settings/inputtypes.png") as Texture;
             _stateMachinesTex = EditorGUIUtility.Load("ThirdPersonController/Settings/statemachines.png") as Texture;

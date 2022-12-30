@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1506062242848116311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1506062242848116304}
+  - component: {fileID: 1506062242848116306}
+  - component: {fileID: 1506062242848116305}
+  m_Layer: 0
+  m_Name: FightingPistolLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1506062242848116304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506062242848116311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1506062242848116306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506062242848116311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e1db32aea341198b37478ddbde1d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1506062242848116305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506062242848116311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c558b8bcd1dce81419fe0615e0798215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReferenceResolver: {fileID: 0}
+  states:
+  - Name: GetWeapon
+    features:
+    - rid: 8563617271089463296
+    Transitions:
+    - rid: 8563617203606781954
+    clip: {fileID: 7400000, guid: 8bfa8d2fd3e856442a31843bdc71248c, type: 3}
+  - Name: Idle
+    features: []
+    Transitions:
+    - rid: 8563617203606781955
+    - rid: 8563617271089463297
+    clip: {fileID: 7400000, guid: 6d3d9c92c8d90e948b603c60612d5bcf, type: 3}
+  - Name: Aim
+    features: []
+    Transitions:
+    - rid: 8563617271089463298
+    - rid: 8563617271089463299
+    clip: {fileID: -2302975276331617043, guid: 6ab46135ec08c3c4186dbd118166e933, type: 3}
+  - Name: Shoot
+    features: []
+    Transitions:
+    - rid: 8563617203606781956
+    clip: {fileID: 7400000, guid: 5185e4cdcf2be5842817831df3a33950, type: 3}
+  - Name: Cooldown
+    features:
+    - rid: 8563617203606781959
+    Transitions:
+    - rid: 8563617203606781957
+    - rid: 8563617203606781960
+    - rid: 8563617203606781965
+    - rid: 8563617203606781969
+    clip: {fileID: -2302975276331617043, guid: 6ab46135ec08c3c4186dbd118166e933, type: 3}
+  - Name: Reload
+    features: []
+    Transitions: []
+    clip: {fileID: 7400000, guid: 4a6826744e93c9948b78281db1081c40, type: 3}
+  - Name: PutWeaponBackFromAim
+    features: []
+    Transitions: []
+    clip: {fileID: 7400000, guid: f41fdd3fd62533a4abd59de675a27a48, type: 3}
+  onStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  weight: 1
+  avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
+  isAdditive: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8563617203606781954
+      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[0].Transitions.Array.data[0]
+        delayTime: 2.6
+    - rid: 8563617203606781955
+      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 3
+        _transitionName: Shoot
+        path: states.Array.data[1].Transitions.Array.data[0]
+        isAttacking: 1
+    - rid: 8563617203606781956
+      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 4
+        _transitionName: Cooldown
+        path: states.Array.data[3].Transitions.Array.data[0]
+        delayTime: 1
+    - rid: 8563617203606781957
+      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 5
+        _transitionName: Reload
+        path: states.Array.data[4].Transitions.Array.data[0]
+        isReloading: 1
+    - rid: 8563617203606781959
+      type: {class: ResetCooldownFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[4].features.Array.data[0]
+        cooldownTimer: 3
+    - rid: 8563617203606781960
+      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[4].Transitions.Array.data[1]
+        Transitions:
+        - rid: 8563617203606781961
+        - rid: 8563617271089463301
+    - rid: 8563617203606781961
+      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[4].Transitions.Array.data[1].Transitions.Array.data[0]
+        isCooldown: 0
+    - rid: 8563617203606781965
+      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 2
+        _transitionName: Aim
+        path: states.Array.data[4].Transitions.Array.data[2]
+        Transitions:
+        - rid: 8563617203606781967
+        - rid: 8563617271089463300
+    - rid: 8563617203606781967
+      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 2
+        _transitionName: Aim
+        path: states.Array.data[4].Transitions.Array.data[2].Transitions.Array.data[0]
+        isCooldown: 0
+    - rid: 8563617203606781969
+      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 3
+        _transitionName: Shoot
+        path: states.Array.data[4].Transitions.Array.data[3]
+        Transitions:
+        - rid: 8563617203606781971
+        - rid: 8563617203606781970
+    - rid: 8563617203606781970
+      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 3
+        _transitionName: Shoot
+        path: states.Array.data[4].Transitions.Array.data[3].Transitions.Array.data[1]
+        isAttacking: 1
+    - rid: 8563617203606781971
+      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 3
+        _transitionName: Shoot
+        path: states.Array.data[4].Transitions.Array.data[3].Transitions.Array.data[0]
+        isCooldown: 0
+    - rid: 8563617271089463296
+      type: {class: IntantiateWeaponAtHand, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].features.Array.data[0]
+        prefab: {fileID: 8903231967639380790, guid: 4d696ec485ada6f40a69259b979c096b, type: 3}
+        localPosition: {x: 0, y: 0, z: 0}
+        localRotation: {x: -0.7390075, y: 0.17113048, z: -0.20168927, w: -0.6195996}
+    - rid: 8563617271089463297
+      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 2
+        _transitionName: Aim
+        path: states.Array.data[1].Transitions.Array.data[1]
+        isAim: 1
+    - rid: 8563617271089463298
+      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 3
+        _transitionName: Shoot
+        path: states.Array.data[2].Transitions.Array.data[0]
+        isAttacking: 1
+    - rid: 8563617271089463299
+      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[2].Transitions.Array.data[1]
+        isAim: 0
+    - rid: 8563617271089463300
+      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 2
+        _transitionName: Aim
+        path: states.Array.data[4].Transitions.Array.data[2].Transitions.Array.data[1]
+        isAim: 1
+    - rid: 8563617271089463301
+      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[4].Transitions.Array.data[1].Transitions.Array.data[1]
+        isAim: 0

@@ -13,7 +13,7 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
     public class DataContainer
     {
         public bool cached;
-        public CodeStateMachine _stateMachine;
+        public ICStateMachine _stateMachine;
         public BaseStateTransition _transition;
     }
     
@@ -23,17 +23,20 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
         // base.OnGUI(position, property, label);
         if (!customData.cached)
         {
-            customData._stateMachine = property.serializedObject.targetObject as CodeStateMachine; 
+            customData._stateMachine = (ICStateMachine) property.serializedObject.targetObject; 
             customData._transition = GetParent(property) as BaseStateTransition;
             customData.cached = true;
         }
 
         int selected = property.intValue;
         EditorGUI.BeginChangeCheck();
-        selected = EditorGUI.Popup(position,"Next State", selected, customData._stateMachine.states.Select(s => s.Name).ToArray());
+        selected = EditorGUI.Popup(position,"Next State", selected, customData._stateMachine.GetStates().Select(s => s.Name).ToArray());
         if (EditorGUI.EndChangeCheck())
         {
-            customData._transition.SetNextState(ref customData._stateMachine.states,ref customData._stateMachine.states[selected]);
+            var stateCopy = customData._stateMachine.GetStates();
+            var sel = stateCopy[selected];
+            
+            customData._transition.SetNextState(ref stateCopy,ref sel);
             property.serializedObject.ApplyModifiedProperties();
         }
 

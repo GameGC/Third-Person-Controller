@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.CodeStateMachine;
 #if UNITY_EDITOR
@@ -8,7 +10,20 @@ using UnityEngine.Events;
 
 namespace ThirdPersonController.Core.StateMachine
 {
-    public class CodeStateMachine : MonoBehaviour
+    public class DefaultCodeStateMachine : CodeStateMachine<State> { }
+
+
+    public interface ICStateMachine<T> : ICStateMachine where T : State
+    {
+        public new T[] GetStates();
+    }
+    
+    public interface ICStateMachine
+    {
+        public State[] GetStates();
+    }
+    
+    public class CodeStateMachine<T> : MonoBehaviour,ICStateMachine<T> where T : State 
     {
         [SerializeField] protected ReferenceResolver ReferenceResolver;
         protected IStateMachineVariables Variables;
@@ -16,14 +31,8 @@ namespace ThirdPersonController.Core.StateMachine
     
     
     
-#if UNITY_EDITOR
-        public
-#else
-    [SerializeField] private
-#endif
-            State[] states;
-
-        private State _currentState;
+        public T[] states;
+        protected T CurrentState;
 
         public UnityEvent onStateChanged;
     
@@ -40,7 +49,7 @@ namespace ThirdPersonController.Core.StateMachine
                 }
             }
         
-            _currentState = states[0];
+            CurrentState = states[0];
         }
 
 #if UNITY_EDITOR
@@ -71,12 +80,21 @@ namespace ThirdPersonController.Core.StateMachine
                     isDirty = codeStateTransition.ValidateTransition(ref states);
                     codeStateTransition.path =
                         Transitions.GetArrayElementAtIndex(f).propertyPath;
+                    
+                    
                 }
                 
                 foreach (var codeStateTransition in codeState.Transitions)
                 {
                     if (codeStateTransition != null)
+                    {
                         isDirty = codeStateTransition.ValidateTransition(ref states);
+
+                        if (codeStateTransition.GetType().Name == "MultipleConditionTransition")
+                        {
+                            ((dynamic) codeStateTransition).OnValidate();
+                        }
+                    }
                 }
             }
 
@@ -89,19 +107,19 @@ namespace ThirdPersonController.Core.StateMachine
 
         private void Start()
         {
-            _currentState.OnEnterState();
+            CurrentState.OnEnterState();
         }
 
         protected virtual void Update()
         {
-            _currentState.OnUpdateState();
-            foreach (var transition in _currentState.Transitions)
+            CurrentState.OnUpdateState();
+            foreach (var transition in CurrentState.Transitions)
             {
                 if (transition.couldHaveTransition)
                 {
-                    _currentState.OnExitState();
-                    _currentState = transition.GetNextState(ref states);
-                    _currentState.OnEnterState();
+                    CurrentState.OnExitState();
+                    CurrentState = transition.GetNextState(ref states);
+                    CurrentState.OnEnterState();
                     onStateChanged.Invoke();
                     break;
                 }
@@ -110,7 +128,18 @@ namespace ThirdPersonController.Core.StateMachine
 
         protected virtual void FixedUpdate()
         {
-            _currentState.OnFixedUpdateState();
+            CurrentState.OnFixedUpdateState();
+        }
+        
+        
+        public T[] GetStates()
+        {
+            return states;
+        }
+
+        State[] ICStateMachine.GetStates()
+        {
+            return (State[])states;
         }
     }
 }

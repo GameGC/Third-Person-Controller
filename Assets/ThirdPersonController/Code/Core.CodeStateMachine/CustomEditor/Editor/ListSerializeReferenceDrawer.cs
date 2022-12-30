@@ -105,12 +105,12 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
                 // UX improvement: If no elements are available the add button should be faded out or
                 // just not visible.
-                bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
-                if (alreadyHasIt)
-                    continue;
+               //bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
+               //if (alreadyHasIt)
+               //    continue;
 
                 InsertSpaceBeforeCaps(ref actionName);
-                menu.AddItem(new GUIContent(actionName), false, OnAddItemFromDropdown,new KeyValuePair<SerializedProperty,Type>(list.serializedProperty,type));
+                menu.AddItem(new GUIContent(actionName), false, OnAddItemFromDropdown,new KeyValuePair<SerializedProperty,Type>(list.serializedProperty.Copy(),type));
             }
 
             menu.ShowAsContext();
@@ -152,9 +152,8 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
         private List<Type> GetNonAbstractTypesSubclassOf(Type parentType,bool sorted = true)
         {
-            Assembly assembly = Assembly.GetAssembly(parentType);
-
-            List<Type> types = assembly.GetTypes().Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType)).ToList();
+           // Assembly assembly = Assembly.GetAssembly(parentType);
+            List<Type> types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a=>a.GetTypes()).Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType)).ToList();
 
             if (sorted)
                 types.Sort(CompareTypesNames);

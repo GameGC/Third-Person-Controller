@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2095070348527172489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2095070348527172494}
+  - component: {fileID: 2095070348527172492}
+  - component: {fileID: 2095070348527172495}
+  m_Layer: 0
+  m_Name: FightingLayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2095070348527172494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095070348527172489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2095070348527172492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095070348527172489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e1db32aea341198b37478ddbde1d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2095070348527172495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095070348527172489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c558b8bcd1dce81419fe0615e0798215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ReferenceResolver: {fileID: 0}
+  states:
+  - Name: Idle
+    features: []
+    Transitions:
+    - rid: 8563617179404337153
+    clip: {fileID: 0}
+  - Name: Attack
+    features:
+    - rid: 8563617203606781952
+    Transitions:
+    - rid: 8563617179404337154
+    clip: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+  - Name: Cooldown
+    features:
+    - rid: 8563617203606781953
+    Transitions:
+    - rid: 8563617179404337152
+    clip: {fileID: 0}
+  onStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  weight: 1
+  avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
+  isAdditive: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 8563617179404337152
+      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 0
+        _transitionName: Idle
+        path: states.Array.data[2].Transitions.Array.data[0]
+        isCooldown: 0
+    - rid: 8563617179404337153
+      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Attack
+        path: states.Array.data[0].Transitions.Array.data[0]
+        isAttacking: 1
+    - rid: 8563617179404337154
+      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 2
+        _transitionName: Cooldown
+        path: states.Array.data[1].Transitions.Array.data[0]
+        isCooldown: 1
+    - rid: 8563617203606781952
+      type: {class: SetCooldownFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].features.Array.data[0]
+        clip: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+    - rid: 8563617203606781953
+      type: {class: ResetCooldownFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].features.Array.data[0]
+        cooldownTimer: 3

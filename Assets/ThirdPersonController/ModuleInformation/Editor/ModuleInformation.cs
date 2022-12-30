@@ -68,6 +68,26 @@ namespace ThirdPersonController.ModuleInformation.Editor
          File.WriteAllText(AssetDatabase.GetAssetPath(targetAsset),JsonConvert.SerializeObject(targetAssembly));
          AssetDatabase.Refresh();
       }
+      
+      [ContextMenu(nameof(LoadPackageInteractive))]
+      public void LoadPackageInteractive()
+      {
+         if (unityPackage == null)
+            throw new NullReferenceException("no package");
+         
+         if(dependsOnNames==null)
+            dependsOnNames = new string[0];
+        
+         AssetDatabase.ImportPackage(AssetDatabase.GetAssetPath(unityPackage),true);
+
+         
+         var targetAssembly = JsonConvert.DeserializeObject<Dictionary<string, object>>(targetAsset.text);
+
+         targetAssembly["references"] = dependsOnNames;
+         
+         File.WriteAllText(AssetDatabase.GetAssetPath(targetAsset),JsonConvert.SerializeObject(targetAssembly));
+         AssetDatabase.Refresh();
+      }
 
      
 

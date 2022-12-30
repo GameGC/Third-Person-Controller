@@ -1,5 +1,5 @@
 {
-    "name": "StarterAssets",
+    "name": "InputActions",
     "maps": [
         {
             "name": "Player",
@@ -33,9 +33,27 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "5cef6404-f5cc-44a9-96de-56d7006f208f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Sprint",
                     "type": "PassThrough",
                     "id": "980e881e-182c-404c-8cbf-3d09fdb48fef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "PassThrough",
+                    "id": "16fc55a7-c1ab-47b1-afd5-1dbb916089a4",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -256,6 +274,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Prone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3687d1c6-107c-4dd3-9d6e-baf7c96a8a42",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c95ecd3-acd1-4304-b3dc-722abe67c9d9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

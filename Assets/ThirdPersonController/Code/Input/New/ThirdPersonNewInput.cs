@@ -28,6 +28,9 @@ namespace ThirdPersonController.Input
                 new KeyValuePair<string, Action<InputAction.CallbackContext>>("Sprint",OnSprint),
                 new KeyValuePair<string, Action<InputAction.CallbackContext>>("Crouch",OnCrouch),
                 new KeyValuePair<string, Action<InputAction.CallbackContext>>("Prone",OnProne),
+                
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Attack",OnAttack),
+                new KeyValuePair<string, Action<InputAction.CallbackContext>>("Aim",OnAim),
             };
             
             foreach (var keyValuePair in tempArray)
@@ -67,6 +70,16 @@ namespace ThirdPersonController.Input
         {
             if(obj.action.WasPerformedThisFrame())
                 isProne = !isProne;
+        }
+        
+        private void OnAim(InputAction.CallbackContext obj)
+        {
+            IsAim = obj.action.IsPressed();
+        }
+        
+        private void OnAttack(InputAction.CallbackContext obj)
+        {
+            IsAttack = obj.action.IsPressed();
         }
 
 

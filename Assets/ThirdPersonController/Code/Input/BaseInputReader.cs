@@ -19,6 +19,9 @@ namespace ThirdPersonController.Input
         public bool isProne            ;
         public bool isRoll             ;
 
+        public bool IsAttack;
+        public bool IsAim;
+        
         
         public float movementSmooth { protected get; set; }
     }
