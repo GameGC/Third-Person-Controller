@@ -53,6 +53,7 @@ namespace Fighting.Pushing
             if (!shooter)
                 shooter = GameObject.FindObjectOfType<GunShootingInfo>();
             
+            //wait until animation apply
             DelayShoot();
         }
 

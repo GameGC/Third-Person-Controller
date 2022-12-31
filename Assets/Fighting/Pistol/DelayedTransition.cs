@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
+using ThirdPersonController.Core;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 [Serializable]
 public class DelayedTransition : BaseStateTransition
@@ -87,6 +89,66 @@ public class MultipleConditionTransition : BaseStateTransition
         get { return Transitions.All(t => t.couldHaveTransition); }
     }
 }
+
+
+
+[Serializable]
+public class BaseRigFeature : BaseFeature
+{
+    [SerializeField] private string layerName;
+    [SerializeField] private bool returnPreviousValueOnExit = true;
+    
+    protected RigLayer _targetLayer;
+    private float _previousValue;
+    
+    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    {
+        _targetLayer = resolver.GetComponent<RigBuilder>().layers.
+            FirstOrDefault(l => l.name == layerName);
+    }
+
+    public override void OnEnterState()
+    {
+        _previousValue = _targetLayer.rig.weight;
+    }
+
+    public override void OnExitState()
+    {
+        if (returnPreviousValueOnExit)
+            _targetLayer.rig.weight = _previousValue;
+    }
+}
+public class RigFadeFeature : BaseRigFeature
+{
+     [SerializeField] private float fadeMax = 1;
+     [SerializeField] private float deltaMultiplayer = 1;
+
+    private float tempLerp;
+
+    public override void OnEnterState()
+    {
+        tempLerp = 0;
+        base.OnEnterState();
+    }
+
+    public override void OnUpdateState()
+    {
+        tempLerp += deltaMultiplayer * Time.deltaTime;
+        _targetLayer.rig.weight = Mathf.Lerp(0, fadeMax, tempLerp);
+    }
+}
+
+public class RigSetFeature : BaseRigFeature
+{
+    [SerializeField] private float weight;
+
+    public override void OnEnterState()
+    {
+        base.OnEnterState();
+        _targetLayer.rig.weight = weight;
+    }
+}
+
 
 
 
