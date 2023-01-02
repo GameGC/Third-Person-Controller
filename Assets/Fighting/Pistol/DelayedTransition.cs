@@ -6,6 +6,7 @@ using ThirdPersonController.Core;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -71,7 +72,6 @@ public class MultipleConditionTransition : BaseStateTransition
         for (var i = 0; i < Transitions.Length; i++)
         {
             Transitions[i].path = $"{path}.Transitions.Array.data[{i}]";
-            Debug.Log( Transitions[i].path);
         }
 
     }
@@ -148,6 +148,12 @@ public class RigSetFeature : BaseRigFeature
         _targetLayer.rig.weight = weight;
     }
 }
+
+
+
+
+
+
 
 
 
