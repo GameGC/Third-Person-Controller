@@ -10,6 +10,8 @@ namespace Fighting.Pushing
 {
     public class FightingStateMachineVariables : MonoBehaviour,IFightingStateMachineVariables
     {
+        public GameObject weaponInstance { get; set; }
+        
         public bool couldAttack { get; set; } = true;
         public bool isCooldown { get; set; }
         public bool isReloading { get; set; }
@@ -39,7 +41,7 @@ namespace Fighting.Pushing
 
     public class ShootFeature : BaseFeature
     {
-        public GunShootingInfo shooter;
+        private GunShootingInfo _shooter;
         private IFightingStateMachineVariables _variables;
 
         
@@ -50,8 +52,8 @@ namespace Fighting.Pushing
 
         public override void OnEnterState()
         {
-            if (!shooter)
-                shooter = GameObject.FindObjectOfType<GunShootingInfo>();
+            if (!_shooter)
+                _shooter = _variables.weaponInstance.GetComponent<GunShootingInfo>();
             
             //wait until animation apply
             DelayShoot();
@@ -60,7 +62,7 @@ namespace Fighting.Pushing
         private async void DelayShoot()
         {
             await Task.Delay(1000);
-            shooter.Shoot();
+            _shooter.Shoot();
         }
     }
     

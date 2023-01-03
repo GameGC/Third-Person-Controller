@@ -10,5 +10,11 @@ public class CameraManager : MonoBehaviour
         Aiming,
     }
 
-    public SKeyValuePair<CameraType, GameObject>[] cameras;
+    [SerializeField] private SKeyValuePair<CameraType, GameObject>[] cameras;
+
+    public void SetActiveCamera(CameraType type)
+    {
+        foreach (var cam in cameras) 
+            cam.Value.SetActive(type == cam.Key);
+    }
 }

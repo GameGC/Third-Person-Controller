@@ -19,7 +19,7 @@ public abstract class PropertyDrawerWithCustomData<T> : PropertyDrawer
         return GetPropertyHeight(property, label, customData);
     }
 
-    public virtual float GetPropertyHeight(SerializedProperty property, GUIContent label, T customData)
+    protected virtual float GetPropertyHeight(SerializedProperty property, GUIContent label, T customData)
     {
         return base.GetPropertyHeight(property, label);
     }
@@ -36,5 +36,5 @@ public abstract class PropertyDrawerWithCustomData<T> : PropertyDrawer
         OnGUI(position,property, label, customData);
     }
 
-    public abstract void OnGUI(Rect position, SerializedProperty property, GUIContent label, T customData);
+    protected abstract void OnGUI(Rect position, SerializedProperty property, GUIContent label, T customData);
 }

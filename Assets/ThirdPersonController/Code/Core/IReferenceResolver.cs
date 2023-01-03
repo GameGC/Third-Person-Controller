@@ -12,5 +12,7 @@ namespace ThirdPersonController.Core.DI
       // 
       // public BaseInputReader GetInput();
         public Transform GetCamera();
+        
+        public T GetNamedComponent<T>(string name) where T: Component;
     }
 }

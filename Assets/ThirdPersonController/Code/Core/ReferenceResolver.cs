@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameGC.Collections;
 using ThirdPersonController.Core.DI.CustomEditor;
 using UnityEngine;
 
@@ -9,12 +10,10 @@ namespace ThirdPersonController.Core.DI
     {
         [SerializeField,ComponentSelect] private List<Component> cachedComponents;
         [SerializeField] private Transform cameraTransform;
-
         [SerializeField] private bool releaseMemoryOnStart = true;
 
 
-        private Transform _playerTransform;
-
+        [SerializeField] private SDictionary<string, Component> namedReferences;
         private void OnValidate()
         {
             if (cachedComponents == null || cachedComponents.Count < 1)
@@ -84,5 +83,15 @@ namespace ThirdPersonController.Core.DI
       //}
 
         public Transform GetCamera() => cameraTransform;
+        public T GetNamedComponent<T>(string name) where T : Component
+        {
+            foreach (var (key, component) in namedReferences)
+            {
+                if (key == name && component is T casted)
+                    return casted;
+            }
+            
+            throw new NullReferenceException("No component with such key");
+        }
     }
 }
