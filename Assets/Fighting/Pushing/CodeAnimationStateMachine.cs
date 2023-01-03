@@ -26,7 +26,6 @@ public class CodeAnimationStateMachine : CodeStateMachine<AnimationState>
         _mixerPlayable = AnimationMixerPlayable.Create(playableGraph, states.Length);
         for (int i = 0, length =states.Length; i < length; i++)
         {
-            Debug.Log( states[i].clip);
             var clipPlayable = AnimationClipPlayable.Create(playableGraph, states[i].clip);
             playableGraph.Connect(clipPlayable, 0, _mixerPlayable, i);
         }
