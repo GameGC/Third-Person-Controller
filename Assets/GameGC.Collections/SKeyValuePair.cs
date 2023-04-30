@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameGC.Collections
 {
@@ -12,6 +13,17 @@ namespace GameGC.Collections
         {
             Key = key;
             Value = value;
+        }
+        
+        public static implicit operator SKeyValuePair<TKey, TValue> (KeyValuePair<TKey, TValue> pair)
+        {
+            return new SKeyValuePair<TKey, TValue>(pair.Key, pair.Value);
+        }
+
+   
+        public static explicit operator KeyValuePair<TKey, TValue>( SKeyValuePair<TKey, TValue> pair)
+        {
+            return new KeyValuePair<TKey, TValue>(pair.Key, pair.Value);
         }
     }
 }

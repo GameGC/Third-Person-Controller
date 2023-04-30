@@ -47,14 +47,21 @@ namespace GameGC.Collections.Editor
         public void OnValueGUI(SerializedProperty property,Rect sourceRect)
         {
             var valueProp = property.FindPropertyRelative("Value");
-            
+            bool isClass = valueProp.propertyType == SerializedPropertyType.Generic;
+
+
             var valuePos = sourceRect;
             valuePos.width /= 2;
             valuePos.x += valuePos.width;
             valuePos.height = EditorGUI.GetPropertyHeight(valueProp);
+
+            if(isClass)
+                EditorGUIUtility.labelWidth /= 2.5f;
             
+            EditorGUI.PropertyField(valuePos,valueProp,GUIContent.none,isClass);
             
-            EditorGUI.PropertyField(valuePos,valueProp,GUIContent.none);
+            if(isClass)
+                EditorGUIUtility.labelWidth *= 2.5f;
         }
     }
 }

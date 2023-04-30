@@ -6,27 +6,27 @@ using UnityEngine.Playables;
 [RequireComponent(typeof(Animator))]
 public class HybridAnimator : MonoBehaviour
 {
-    [Serializable]
-    public abstract class BaseStateMachineLayer
-    {
-        public float weight;
-    }
-    [Serializable]
-    public class AnimatorStateMachineLayer : BaseStateMachineLayer
-    {
-        public Animator Animator;
-    }
+   //[Serializable]
+   //public abstract class BaseStateMachineLayer
+   //{
+   //    public float weight;
+   //}
+   //[Serializable]
+   //public class AnimatorStateMachineLayer : BaseStateMachineLayer
+   //{
+   //    public Animator Animator;
+   //}
+   //
+   //[Serializable]
+   //public class CodeStateMachineLayer : BaseStateMachineLayer
+   //{
+   //    public AvatarMask avatarMask;
+   //    public bool isAdditive;
+   //    public CodeAnimationStateMachine Layer;
+   //}
     
-    [Serializable]
-    public class CodeStateMachineLayer : BaseStateMachineLayer
-    {
-        public AvatarMask avatarMask;
-        public bool isAdditive;
-        public CodeAnimationStateMachine Layer;
-    }
     
-    
-    public CodeAnimationStateMachine[] stateMachines;
+    public AnimationLayer[] stateMachines;
 
    // [SerializeReference,SerializeReferenceAddButton(typeof(BaseStateMachineLayer))]
    // public BaseStateMachineLayer[] Layers;
@@ -59,7 +59,7 @@ public class HybridAnimator : MonoBehaviour
         for (var i = 1; i < stateMachines.Length+1; i++)
         {
             var stateMachine = stateMachines[i-1];
-            playableGraph.Connect(stateMachine.ConstructPlayable(playableGraph), 0, layerPlayble, i);
+            playableGraph.Connect(stateMachine.ConstructPlayable(playableGraph,gameObject), 0, layerPlayble, i);
             
             if(stateMachine.avatarMask)
                 layerPlayble.SetLayerMaskFromAvatarMask((uint)i,stateMachine.avatarMask);

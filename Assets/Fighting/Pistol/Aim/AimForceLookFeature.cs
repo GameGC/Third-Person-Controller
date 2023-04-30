@@ -17,7 +17,6 @@ public class AimForceLookFeature : BaseFeature
 
     public override void OnUpdateState()
     {
-        var bodyEuler = _bodyTransform.eulerAngles;
-        _bodyTransform.eulerAngles = new Vector3(bodyEuler.x,_targetLookTransform.eulerAngles.y,bodyEuler.z);
+        _bodyTransform.rotation = Quaternion.AngleAxis(_targetLookTransform.eulerAngles.y,_bodyTransform.up);
     }
 }

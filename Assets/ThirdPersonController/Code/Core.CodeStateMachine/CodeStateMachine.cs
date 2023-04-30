@@ -10,9 +10,6 @@ using UnityEngine.Events;
 
 namespace ThirdPersonController.Core.StateMachine
 {
-    public class DefaultCodeStateMachine : CodeStateMachine<State> { }
-
-
     public interface ICStateMachine<T> : ICStateMachine where T : State
     {
         public new T[] GetStates();
@@ -32,7 +29,7 @@ namespace ThirdPersonController.Core.StateMachine
     
     
         public T[] states;
-        protected T CurrentState;
+        public T CurrentState;
 
         public UnityEvent onStateChanged;
     
@@ -58,6 +55,7 @@ namespace ThirdPersonController.Core.StateMachine
             bool isDirty = false;
             var statesProp = new SerializedObject(this).FindProperty("states");
 
+            if (states == null) states = Array.Empty<T>();
             for (var s = 0; s < states.Length; s++)
             {
                 var codeState = states[s];

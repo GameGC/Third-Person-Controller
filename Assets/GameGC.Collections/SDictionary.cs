@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 #if UNITY_EDITOR
 using System.Linq;
@@ -12,8 +13,23 @@ namespace GameGC.Collections
     public class SDictionary<TKey,TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver 
     {
         [SerializeField] private SKeyValuePair<TKey, TValue>[] _keyValuePairs;
-    
-  
+
+        public SDictionary()
+        {
+        }
+
+        public SDictionary([NotNull] IDictionary<TKey, TValue> dictionary) : base(dictionary)
+        {
+            _keyValuePairs = new SKeyValuePair<TKey, TValue>[dictionary.Count];
+            int i = 0;
+            foreach (var keyValuePair in dictionary)
+            {
+                _keyValuePairs[i] = keyValuePair;
+                i++;
+            }
+        }
+
+
         /// <summary>
         /// OnBeforeSerialize implementation.
         /// </summary>
