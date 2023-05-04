@@ -29,7 +29,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
 
             // update rotation
         
-            if (Input.moveInput != Vector2.zero) 
+            if (Input.moveInputMagnitude >0) 
                 RotateToDirection(Input.moveDirection, in dt);
         
             //update animation

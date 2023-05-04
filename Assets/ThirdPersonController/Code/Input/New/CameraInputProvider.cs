@@ -1,6 +1,7 @@
 #if ENABLE_INPUT_SYSTEM
 
 using Cinemachine;
+using ThirdPersonController.Core.DI.CustomEditor;
 using UnityEngine;
 
 namespace ThirdPersonController.Input.New
@@ -13,8 +14,9 @@ namespace ThirdPersonController.Input.New
     /// </summary>
     public class CameraInputProvider : MonoBehaviour, AxisState.IInputAxisProvider
     {
-        [SerializeField] private BaseInputReader input;
-
+        public IBaseInputReader _inputReader;
+        
+      
 
         /// <summary>
         /// Implementation of AxisState.IInputAxisProvider.GetAxisValue().
@@ -25,8 +27,9 @@ namespace ThirdPersonController.Input.New
         /// <returns>The current axis value</returns>
         public virtual float GetAxisValue(int axis)
         {
+            if (_inputReader == null) return 0;
             if (axis > 2) return 0;
-            return input.lookInput[axis];
+            return _inputReader.lookInput[axis];
         }
     }
 }

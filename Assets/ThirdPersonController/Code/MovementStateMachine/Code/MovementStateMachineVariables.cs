@@ -16,6 +16,9 @@ namespace ThirdPersonController.MovementStateMachine
         public bool IsSlopeBadForMove { get; set; }
         public float SlopeAngle { get; set; }
         public bool JumpCounterElapsed { get; set; } = true;
+
+        public bool DonTAddGravity { get; set; } = false;
+
         public float MoveSpeed { get; set; }
     }
 }

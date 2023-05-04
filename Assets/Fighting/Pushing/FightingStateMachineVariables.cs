@@ -21,11 +21,11 @@ namespace Fighting.Pushing
     {
         [SerializeField] private bool isAttacking;
 
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
         private IFightingStateMachineVariables _variables;
         public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
             _variables= variables as IFightingStateMachineVariables;
         }
 
@@ -72,10 +72,10 @@ namespace Fighting.Pushing
     {
         [SerializeField] private bool isAim;
 
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
         public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
         }
 
         public override bool couldHaveTransition => _input.IsAim == isAim;

@@ -18,7 +18,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
         [Tooltip("Speed of character move using rigidbody")]
         [SerializeField] protected float runningSpeed = 4f;
     
-        protected BaseInputReader Input;
+        protected IBaseInputReader Input;
         protected IMoveStateMachineVariables Variables;
         
         private Animator _animator;
@@ -34,7 +34,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
             _animator = resolver.GetComponent<Animator>();
             _transform = resolver.GetComponent<Transform>();
             
-            Input = resolver.GetComponent<BaseInputReader>();
+            Input = resolver.GetComponent<IBaseInputReader>();
         }
 
 
@@ -44,7 +44,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
         // we don't use delta time because already used in smoothing of input and move speed... and velocity is constant
         protected void MoveCharacter(bool stopMove,Vector3 direction)
         {
-            Vector3 targetVelocity = direction * (stopMove ? 0 : Variables.MoveSpeed);
+            Vector3 targetVelocity = direction * (stopMove || Input.isInputFrozen ? 0 : Variables.MoveSpeed);
             targetVelocity.y = _rigidbody.velocity.y;
             _rigidbody.velocity = targetVelocity;
         }

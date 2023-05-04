@@ -8,14 +8,14 @@ namespace ThirdPersonController.Core.CodeStateMachine
     [Serializable]
     public abstract class BaseStateTransition
     {
-        public T GetNextState<T>(ref T[] states) where T: State => states[_transitionIndex];
+        public State GetNextState(ref State[] states) => states[_transitionIndex];
 
         [SerializeField,StateTransition] private int _transitionIndex;
 
     
         // don't store in build
 #if UNITY_EDITOR
-        [SerializeField,HideInInspector] private string _transitionName;
+        [SerializeField] private string _transitionName;
 
         public void SetNextState(ref State[] states, ref State state)
         {
@@ -23,9 +23,9 @@ namespace ThirdPersonController.Core.CodeStateMachine
             // update index
             ValidateTransition(ref states);
         }
-
+    
         // returns is dirty
-        internal bool ValidateTransition<T>(ref T[] states) where T: State
+        internal bool ValidateTransition(ref State[] states)
         {
             int nexIndex = ArrayUtility.FindIndex(states, s => s.Name == _transitionName);
             if (nexIndex == _transitionIndex) return false;

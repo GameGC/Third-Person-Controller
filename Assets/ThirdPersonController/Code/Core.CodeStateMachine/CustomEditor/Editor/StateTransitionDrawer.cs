@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.Collections;
 using System.Linq;
@@ -13,30 +14,27 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
     public class DataContainer
     {
         public bool cached;
-        public ICStateMachine _stateMachine;
+        public CodeStateMachine _stateMachine;
         public BaseStateTransition _transition;
     }
-
-
-    protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
+    
+   
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
     {
         // base.OnGUI(position, property, label);
         if (!customData.cached)
         {
-            customData._stateMachine = (ICStateMachine) property.serializedObject.targetObject; 
+            customData._stateMachine = property.serializedObject.targetObject as CodeStateMachine; 
             customData._transition = GetParent(property) as BaseStateTransition;
             customData.cached = true;
         }
 
         int selected = property.intValue;
         EditorGUI.BeginChangeCheck();
-        selected = EditorGUI.Popup(position,"Next State", selected, customData._stateMachine.GetStates().Select(s => s.Name).ToArray());
+        selected = EditorGUI.Popup(position,"Next State", selected, customData._stateMachine.states.Select(s => s.Name).ToArray());
         if (EditorGUI.EndChangeCheck())
         {
-            var stateCopy = customData._stateMachine.GetStates();
-            var sel = stateCopy[selected];
-            
-            customData._transition.SetNextState(ref stateCopy,ref sel);
+            customData._transition.SetNextState(ref customData._stateMachine.states,ref customData._stateMachine.states[selected]);
             property.serializedObject.ApplyModifiedProperties();
         }
 
@@ -89,3 +87,4 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
         return enm.Current;
     }
 }
+#endif

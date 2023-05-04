@@ -1,4 +1,6 @@
-﻿#if ENABLE_CODE_MOVEMENTSTATEMACHINE
+﻿#if  UNITY_EDITOR
+
+#if ENABLE_CODE_MOVEMENTSTATEMACHINE
 using System.Collections.Generic;
 using System.Linq;
 using ThirdPersonController.Core.DI;
@@ -145,7 +147,7 @@ namespace ThirdPersonController.CharacterCreator.Editor
 
             var resolver = new SerializedObject(controllerGameObject.AddComponent<ReferenceResolver>());
             resolver.FindProperty("cameraTransform").objectReferenceValue = GameObject.FindWithTag("MainCamera");
-            resolver.FindProperty("input").objectReferenceValue = FindObjectOfType<BaseInputReader>();
+            resolver.FindProperty("input").objectReferenceValue = FindObjectsOfType<MonoBehaviour>().First(i=>i is IBaseInputReader);
             resolver.ApplyModifiedPropertiesWithoutUndo();
 
             
@@ -230,4 +232,6 @@ namespace ThirdPersonController.CharacterCreator.Editor
 
     }
 }
+#endif
+
 #endif

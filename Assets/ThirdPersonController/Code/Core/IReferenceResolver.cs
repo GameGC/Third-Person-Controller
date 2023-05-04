@@ -5,7 +5,12 @@ namespace ThirdPersonController.Core.DI
 {
     public interface IReferenceResolver
     {
-        public T GetComponent<T>() where T: Component;
+        public bool isReady { get; }
+        
+        public T GetComponent<T>();
+        
+        public T GetNamedComponent<T>(string name) where T: Component;
+        
         public Component GetComponent(Type componentType);
 
       // public Transform GetPlayerTransform();
@@ -13,6 +18,6 @@ namespace ThirdPersonController.Core.DI
       // public BaseInputReader GetInput();
         public Transform GetCamera();
         
-        public T GetNamedComponent<T>(string name) where T: Component;
+        
     }
 }

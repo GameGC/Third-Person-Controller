@@ -15,7 +15,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
         private Transform _transform;
         private CapsuleCollider _capsuleCollider;
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
         private IMoveStateMachineVariables _variables;
 
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
@@ -24,7 +24,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
             _transform = resolver.GetComponent<Transform>();
             _capsuleCollider = resolver.GetComponent<CapsuleCollider>();
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
         }
 
         public override void OnFixedUpdateState() => CheckSlopeLimit();

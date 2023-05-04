@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 
 public class BaseListSerializeReferenceDrawer : PropertyDrawer
 {
@@ -30,3 +31,4 @@ public class BaseListSerializeReferenceDrawer : PropertyDrawer
         return property.serializedObject.FindProperty(target);
     }
 }
+#endif

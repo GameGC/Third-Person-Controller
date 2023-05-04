@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,8 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
         private static readonly MethodInfo GetPropertyIdentifier;
         private static readonly FieldInfo s_reorderableLists;
         private static readonly FieldInfo m_ReorderableList;
-        
+
+        private Action forawrdToGui;
         
         static ListCustomSerializeButton()
         {
@@ -48,6 +51,8 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
         
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            forawrdToGui?.Invoke();
+
             label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
             EditorGUI.PropertyField(position, property,label,true);
             
@@ -55,6 +60,7 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             if(!couldDraw) return;
 
             DoListFooter(GetTargetProperty(property));
+
         }
 
 
@@ -105,12 +111,16 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
                 // UX improvement: If no elements are available the add button should be faded out or
                 // just not visible.
-               //bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
-               //if (alreadyHasIt)
-               //    continue;
+                bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
+                if (alreadyHasIt)
+                    continue;
 
                 InsertSpaceBeforeCaps(ref actionName);
-                menu.AddItem(new GUIContent(actionName), false, OnAddItemFromDropdown,new KeyValuePair<SerializedProperty,Type>(list.serializedProperty.Copy(),type));
+                var dynamicType =
+                    new Tuple<SerializedProperty, Type, int, ReorderableList,string>(list.serializedProperty, type, list.count,
+                        list,list.serializedProperty.propertyPath);
+                menu.AddItem(new GUIContent(actionName), false, OnAddItemFromDropdown, dynamicType);
+                
             }
 
             menu.ShowAsContext();
@@ -118,18 +128,43 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
         private void OnAddItemFromDropdown(object obj)
         {
-            var element = (KeyValuePair<SerializedProperty, Type>)obj;
+            var element = obj as Tuple<SerializedProperty, Type, int, ReorderableList,string>;
+
+            var _tempList = element.Item1;
+
+            int last = element.Item3;
+
+            try
+            {
+                _tempList.InsertArrayElementAtIndex(last);
+                SerializedProperty lastProp = _tempList.GetArrayElementAtIndex(last);
+                lastProp.managedReferenceValue = Activator.CreateInstance(element.Item2);
+
+                _tempList.serializedObject.ApplyModifiedProperties();
+            }
+            catch
+            {
+                forawrdToGui = () =>
+                {
+                    Debug.Log("invoke");
+                    var element = obj as Tuple<SerializedProperty, Type, int, ReorderableList,string>;
+
+                    var _tempList =element.Item1.serializedObject.FindProperty(element.Item5);
+
+                    int last = element.Item3;
+
+                        _tempList.InsertArrayElementAtIndex(last);
+                        SerializedProperty lastProp = _tempList.GetArrayElementAtIndex(last);
+                        lastProp.managedReferenceValue = Activator.CreateInstance(element.Item2);
+
+                        _tempList.serializedObject.ApplyModifiedProperties();
+                    forawrdToGui = null;
+                };
+            }
 
 
-            var _tempList = element.Key;
 
-            int last = _tempList.arraySize;
-            _tempList.InsertArrayElementAtIndex(last);
-
-            SerializedProperty lastProp = _tempList.GetArrayElementAtIndex(last);
-            lastProp.managedReferenceValue = Activator.CreateInstance(element.Value);
-
-            _tempList.serializedObject.ApplyModifiedProperties();
+         
         }
         
         
@@ -152,7 +187,6 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
         private List<Type> GetNonAbstractTypesSubclassOf(Type parentType,bool sorted = true)
         {
-           // Assembly assembly = Assembly.GetAssembly(parentType);
             List<Type> types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a=>a.GetTypes()).Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType)).ToList();
 
             if (sorted)
@@ -450,3 +484,5 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
         #endregion
     }*/
 }
+
+#endif

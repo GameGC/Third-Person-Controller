@@ -27,7 +27,9 @@ namespace ThirdPersonController.Core.DI
             cachedComponents = null;
         }
 
-        public new T GetComponent<T>() where T: Component
+        public bool isReady { get; set; }
+
+        public new T GetComponent<T>()
         {
             if (cachedComponents.Count > 0)
             {
@@ -38,13 +40,13 @@ namespace ThirdPersonController.Core.DI
                 }
 
                 var newComponent = base.GetComponent<T>();
-                cachedComponents.Add(newComponent);
+                cachedComponents.Add(newComponent as Component);
                 return newComponent;
             }
             else
             {
                 var component = base.GetComponent<T>();
-                cachedComponents.Add(component);
+                cachedComponents.Add(component as Component);
                 return component;
             }
         }
@@ -83,6 +85,11 @@ namespace ThirdPersonController.Core.DI
       //}
 
         public Transform GetCamera() => cameraTransform;
+        T IReferenceResolver.GetComponent<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         public T GetNamedComponent<T>(string name) where T : Component
         {
             foreach (var (key, component) in namedReferences)

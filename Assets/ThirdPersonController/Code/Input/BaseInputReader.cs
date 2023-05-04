@@ -2,27 +2,32 @@
 
 namespace ThirdPersonController.Input
 {
-    public class BaseInputReader : MonoBehaviour
+    public interface IBaseInputReader
     {
-        public Vector2 lookInput       ;
-        
-        public Vector2 moveInput       ;
-        public Vector2 moveInputSmooth ;
-        
-        public float moveInputMagnitude;
-        public Vector3 moveDirection   ;
-        
-        public bool isSprinting        ;
-        public bool isJump             ;
-        
-        public bool isCrouch           ;
-        public bool isProne            ;
-        public bool isRoll             ;
+        public Vector2 lookInput       {get;}
+        public Quaternion cameraRotation { get; }
 
-        public bool IsAttack;
-        public bool IsAim;
+        
+        public Vector2 moveInput       {get;}
+        public Vector2 moveInputSmooth {get;}
+        
+        public float moveInputMagnitude{get; set; }
+        public Vector3 moveDirection   {get;}
+        
+        public bool isSprinting        {get;}
+        public bool isJump             {get;}
+        
+        public bool isCrouch           {get;}
+        public bool isProne            {get;}
+        public bool isRoll             {get;}
+
+        public float movementSmooth { get; set; }
         
         
-        public float movementSmooth { protected get; set; }
+        public bool isInputFrozen { get; set; }
+        
+        
+        public bool IsAttack { get; set; }
+        public bool IsAim  { get; set; }
     }
 }

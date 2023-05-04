@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+
+using System.Collections.Generic;
 using System.Linq;
-using GameGC.Collections;
-using GameGC.Collections.Editor;
 using UnityEditor;
 using UnityEngine;
 using static ThirdPersonController.Core.DI.CustomEditor.Editor.ComponentSelectDrawer;
+
 
 namespace ThirdPersonController.Core.DI.CustomEditor.Editor
 {
@@ -19,7 +20,7 @@ namespace ThirdPersonController.Core.DI.CustomEditor.Editor
             public int _selected = 0;
         }
 
-        protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
         {
             if (property.objectReferenceValue)
             {
@@ -68,27 +69,6 @@ namespace ThirdPersonController.Core.DI.CustomEditor.Editor
             }
         }
     }
-
-    [CustomPropertyDrawer(typeof(SKeyValuePair<string, Component>))]
-    internal class StringComponentKeyValDrawer : PropertyDrawer
-    {
-        static readonly SKeyValuePairDrawer _baseDrawer = new SKeyValuePairDrawer();
-        static readonly ComponentSelectDrawer _componentGUIDrawer = new ComponentSelectDrawer();
-        
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            _baseDrawer.TryDrawLabel(ref position,property,label);
-            _baseDrawer.OnKeyGUI(property,position);
-            
-            
-            var valueProp = property.FindPropertyRelative("Value");
-            
-            var valuePos = position;
-            valuePos.width /= 2;
-            valuePos.x += valuePos.width;
-            valuePos.height = EditorGUI.GetPropertyHeight(valueProp);
-            
-            _componentGUIDrawer.OnGUI(valuePos,valueProp,GUIContent.none);
-        }
-    }
 }
+
+#endif

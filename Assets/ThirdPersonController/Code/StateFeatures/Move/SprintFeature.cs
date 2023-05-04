@@ -24,7 +24,7 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             base.CacheReferences(variables,resolver);
-            _useNewInputSystem = Input.GetType().Name.Contains("ThirdPersonNewInput");
+            _useNewInputSystem = true; //Input.GetType().Name.Contains("ThirdPersonNewInput");
         }
 
         public override void OnEnterState()
@@ -35,12 +35,13 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
 
         public override void OnFixedUpdateState()
         {
+            if(Input.moveInputMagnitude< 0.1f) return;
             float dt = Time.fixedDeltaTime;
-
+            
             SetControllerMoveSpeed(Variables.MovementSmooth, in dt);
             MoveCharacter(Variables.IsSlopeBadForMove, Input.moveDirection);
 
-            if (Input.moveInput != Vector2.zero) 
+            if (Input.moveInputMagnitude > 0) 
                 RotateToDirection(Input.moveDirection, in dt);
 
             if(!_useNewInputSystem)

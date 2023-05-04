@@ -23,7 +23,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
         private IMoveStateMachineVariables _variables;
         private Animator _animator;
         private Rigidbody _rigidbody;
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
     
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
@@ -31,7 +31,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
         
             _animator = resolver.GetComponent<Animator>();
             _rigidbody = resolver.GetComponent<Rigidbody>();
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
         }
 
         public override void OnUpdateState()
@@ -61,7 +61,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
             _rigidbody.AddForce(Vector3.up * jumpHeight,ForceMode.VelocityChange);
         
             // trigger jump animations
-            if (_input.moveInput == Vector2.zero)
+            if (_input.moveInputMagnitude < 0.01f)
                 _animator.CrossFadeInFixedTime(Jump, 0.1f);
             else
                 _animator.CrossFadeInFixedTime(JumpDuringMove, .2f);

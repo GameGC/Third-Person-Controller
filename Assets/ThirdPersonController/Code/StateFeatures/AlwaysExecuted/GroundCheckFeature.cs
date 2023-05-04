@@ -36,7 +36,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
     
     
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
 
 
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
@@ -49,7 +49,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
         
             _animator = resolver.GetComponent<Animator>();
 
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
 
             //initialise material if needed
             if (_frictionPhysics) return;
@@ -92,19 +92,18 @@ namespace ThirdPersonController.MovementStateMachine.Features
         public override void OnFixedUpdateState()
         {
             _variables.GroundDistance = CalculateGroundDistance(_transform,ref _capsuleCollider);
-            ControlMaterialPhysics(_variables.IsGrounded,in _input.moveInput);
+            ControlMaterialPhysics(_variables.IsGrounded, _input.moveInputMagnitude);
             
             _variables.IsGrounded = _variables.GroundDistance < groundMinDistance;
-       
-        
+            
             if (_variables.JumpCounterElapsed && _variables.GroundDistance > 0.08f)
-                _rigidbody.AddForce(_transform.up * (extraGravity * 2 * Time.deltaTime), ForceMode.VelocityChange);
+                    _rigidbody.AddForce(_transform.up * (extraGravity * 2 * Time.deltaTime), ForceMode.VelocityChange);
         }
 
 
-        private void ControlMaterialPhysics(in bool isGrounded,in Vector2 input)
+        private void ControlMaterialPhysics(in bool isGrounded,in float inputMagnitude)
         {
-            _capsuleCollider.material = isGrounded ? input == Vector2.zero? _maxFrictionPhysics : _frictionPhysics  : _slippyPhysics;
+            _capsuleCollider.material = isGrounded ? inputMagnitude > 0 ?  _frictionPhysics : _maxFrictionPhysics : _slippyPhysics;
         }
 
         private float CalculateGroundDistance(Transform transform,ref CapsuleCollider capsuleCollider)

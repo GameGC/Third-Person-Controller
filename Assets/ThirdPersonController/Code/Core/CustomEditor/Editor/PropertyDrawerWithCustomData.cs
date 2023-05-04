@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -19,7 +21,7 @@ public abstract class PropertyDrawerWithCustomData<T> : PropertyDrawer
         return GetPropertyHeight(property, label, customData);
     }
 
-    protected virtual float GetPropertyHeight(SerializedProperty property, GUIContent label, T customData)
+    public virtual float GetPropertyHeight(SerializedProperty property, GUIContent label, T customData)
     {
         return base.GetPropertyHeight(property, label);
     }
@@ -36,5 +38,7 @@ public abstract class PropertyDrawerWithCustomData<T> : PropertyDrawer
         OnGUI(position,property, label, customData);
     }
 
-    protected abstract void OnGUI(Rect position, SerializedProperty property, GUIContent label, T customData);
+    public abstract void OnGUI(Rect position, SerializedProperty property, GUIContent label, T customData);
 }
+
+#endif

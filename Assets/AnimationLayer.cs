@@ -45,7 +45,7 @@ public class AnimationLayer : MonoBehaviour
     {
         //CurrentState = new BaseAnimState(GetComponent<CodeAnimationStateMachine>().states.First().Name);
         CurrentState = SDictionary.First().Key;
-        GetComponent<DefaultCodeStateMachine>().onStateChanged.AddListener(OnStateChanged);
+        GetComponent<CodeStateMachine>().onStateChanged.AddListener(OnStateChanged);
     }
 
     public AnimationMixerPlayable ConstructPlayable(PlayableGraph graph,GameObject root)
@@ -72,7 +72,7 @@ public class AnimationLayer : MonoBehaviour
     {
         if (defaultTransition.time == 0)
         {
-            CurrentState = GetComponent<DefaultCodeStateMachine>().CurrentState.Name;
+            CurrentState = GetComponent<CodeStateMachine>().CurrentState.Name;
             int i = 0;
         
             foreach (var element in SDictionary)
@@ -95,7 +95,7 @@ public class AnimationLayer : MonoBehaviour
     private async void AsyncTransition()
     {
         var previousIndex = ArrayUtility.IndexOf(SDictionary.Keys.ToArray(), CurrentState);
-        CurrentState = GetComponent<DefaultCodeStateMachine>().CurrentState.Name;
+        CurrentState = GetComponent<CodeStateMachine>().CurrentState.Name;
         
         var newIndex=  ArrayUtility.IndexOf(SDictionary.Keys.ToArray(), CurrentState);
 

@@ -22,17 +22,22 @@ namespace ThirdPersonController.MovementStateMachine.Features
         [Tooltip("Rotation speed of the character")]
         [SerializeField] private float rotationSpeed = 16f;
 
+        [Tooltip("Rotation speed of the character")]
+        [SerializeField] private bool dontAddGravity = false;
 
         private Transform _transform;
         private Rigidbody _rigidbody;
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
 
+        private IMoveStateMachineVariables _variables;
 
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
+            _variables = variables as IMoveStateMachineVariables;
+
             _transform = resolver.GetComponent<Transform>();
             _rigidbody = resolver.GetComponent<Rigidbody>();
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
         }
 
         public override void OnFixedUpdateState()

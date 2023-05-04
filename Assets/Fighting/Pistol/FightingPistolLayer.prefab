@@ -55,9 +55,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1506062242848116311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05df425da665426db87683cd1d9878c3, type: 3}
+  m_Script: {fileID: 11500000, guid: e4b38d8bb0a5cae47b83e8b083cac0b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startWhenResolverIsReady: 1
   ReferenceResolver: {fileID: 0}
   states:
   - Name: GetWeapon
@@ -103,10 +104,6 @@ MonoBehaviour:
     - rid: 1980703804186951702
     - rid: 1980703804186951703
   - Name: PutWeaponBackFromAim
-    features: []
-    Transitions: []
-  CurrentState:
-    Name: 
     features: []
     Transitions: []
   onStateChanged:

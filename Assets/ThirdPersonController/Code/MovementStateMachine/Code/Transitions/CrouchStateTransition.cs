@@ -8,10 +8,10 @@ namespace ThirdPersonController.MovementStateMachine.Code.Transitions
     {
         public bool IsCrouching;
     
-        private BaseInputReader _input;
+        private IBaseInputReader _input;
         public override void Initialise(IStateMachineVariables variables,IReferenceResolver resolver)
         {
-            _input = resolver.GetComponent<BaseInputReader>();
+            _input = resolver.GetComponent<IBaseInputReader>();
         }
 
         public override bool couldHaveTransition => IsCrouching == _input.isCrouch;

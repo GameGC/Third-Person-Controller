@@ -157,11 +157,15 @@ namespace ThirdPersonController.MovementStateMachine.Features
             _ikPassRedirector.OnStateIKEvent -= OnStateIK;
         }
 
+#if UNITY_EDITOR
+        
         public override int GetHashCode()
         {
             return
                 $"{path} {_animator?.GetInstanceID()} {_ikPassRedirector?.GetInstanceID()} {_LeftFoot?.GetInstanceID()} {_RightFoot?.GetInstanceID()}"
                     .GetHashCode();
         }
+#endif
+
     }
 }
