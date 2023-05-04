@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GameGC.Collections;
@@ -9,6 +6,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
+using Object = UnityEngine.Object;
 
 public abstract class AnimationValue : ScriptableObject
 {
@@ -24,7 +23,7 @@ public class AnimationLayer : MonoBehaviour
     public bool isAdditive;
 
 
-    public SDictionary<string, AnimationValue> SDictionary;
+    public SDictionary<string, Object> SDictionary;
 
     public AnimationTransition defaultTransition;
 
@@ -49,27 +48,20 @@ public class AnimationLayer : MonoBehaviour
         GetComponent<DefaultCodeStateMachine>().onStateChanged.AddListener(OnStateChanged);
     }
 
-    //public AnimationMixerPlayable ConstructPlayable(PlayableGraph playableGraph)
-    //{
-    //    _mixerPlayable = AnimationMixerPlayable.Create(playableGraph, states.Length);
-    //    for (int i = 0, length =states.Length; i < length; i++)
-    //    {
-    //        var clipPlayable = AnimationClipPlayable.Create(playableGraph, states[i].clip);
-    //        playableGraph.Connect(clipPlayable, 0, _mixerPlayable, i);
-    //    }
-    //    _mixerPlayable.SetInputWeight(0,1);
-//
-    //    return _mixerPlayable;
-    //}
-    
-    public AnimationMixerPlayable ConstructPlayable(PlayableGraph playableGraph,GameObject root)
+    public AnimationMixerPlayable ConstructPlayable(PlayableGraph graph,GameObject root)
     {
-        _mixerPlayable = AnimationMixerPlayable.Create(playableGraph, SDictionary.Count);
+        _mixerPlayable = AnimationMixerPlayable.Create(graph, SDictionary.Count);
         for (int i = 0, length =SDictionary.Count; i < length; i++)
         {
             var element = SDictionary.ElementAt(i);
-            var playable = element.Value.GetPlayable(playableGraph, root);
-            playableGraph.Connect(playable, 0, _mixerPlayable, i);
+            Playable playable = default;
+            switch (element.Value)
+            {
+                case AnimationClip clip:            playable = AnimationClipPlayable.Create(graph, clip);break;
+                case TimelineAsset asset:           playable = asset.CreatePlayable(graph, root);                break;
+                case AnimationValue animationValue: playable = animationValue.GetPlayable(graph, root);          break;
+            }
+            graph.Connect(playable, 0, _mixerPlayable, i);
         }
         _mixerPlayable.SetInputWeight(0,1);
 
@@ -119,14 +111,5 @@ public class AnimationLayer : MonoBehaviour
         
         _mixerPlayable.SetInputWeight(previousIndex,0);
         _mixerPlayable.SetInputWeight(newIndex,1);
-    }
-    
-    
-    
-    [Serializable]
-    public class BaseAnimState
-    {
-        public string Name;
-        public AnimationClip clip;
     }
 }

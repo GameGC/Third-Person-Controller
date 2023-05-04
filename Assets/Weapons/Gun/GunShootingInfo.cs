@@ -7,7 +7,9 @@ public class GunShootingInfo : MonoBehaviour
 {
     public Transform prefab;
     public Transform spawnPoint;
-
+    
+    public GameObject muzzle;
+    public float muzzleTime = 1;
 
     public bool hasAutoReloadOnStart = true;
     public int totalAmmo = 1000; 
@@ -53,6 +55,12 @@ public class GunShootingInfo : MonoBehaviour
             Variables.couldAttack = remainingAmmo > 0;
             
             Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+
+            if (muzzle)
+            {
+                muzzle.SetActive(true);
+                Invoke(nameof(DisableMuzzle),muzzleTime);
+            }
         }
 
         //reload
@@ -79,6 +87,8 @@ public class GunShootingInfo : MonoBehaviour
     }
     
     private void Cooldown() => Variables.isCooldown = false;
+    
+    private void DisableMuzzle() =>muzzle.SetActive(false);
 
 
     void OnDrawGizmos()

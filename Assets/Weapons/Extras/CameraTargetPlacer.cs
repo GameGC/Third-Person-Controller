@@ -1,20 +1,28 @@
+using System;
 using UnityEngine;
 
-public class CameraTargetPlacer : MonoBehaviour
+public class CameraTargetPlacer : MonoBehaviour, IBatchRaycasterSingle
 {
-    Transform transform;
-    [SerializeField] Transform targetTransform;
-    
-    void Awake()
-    {
-        transform = base.transform;
-    }
+    private Transform _transform;
+    [SerializeField] private Transform targetTransform;
 
-    void FixedUpdate()
+    private void Awake() => _transform = base.transform;
+
+    private void OnEnable() => RaycastManager.SubscribeRaycastCalls(this);
+
+    private void OnDisable() => RaycastManager.UnSubscribeRaycastCalls(this);
+
+    private void FixedUpdate() => this.Raycast(0,_transform.position,_transform.forward,100);
+
+    public void OnRaycastResult(RaycastHit hit)
     {
-        if (Physics.Raycast(transform.position, transform.forward, out var hit, 100))
+        if (hit.collider != null)
+        {
             targetTransform.position = hit.point;
+        }
         else
-            targetTransform.position = transform.position + transform.forward * 100;
+        {
+            targetTransform.position = _transform.position + _transform.forward * 100;
+        }
     }
 }

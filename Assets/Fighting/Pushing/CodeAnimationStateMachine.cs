@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using Object = UnityEngine.Object;
 
 public class CodeAnimationStateMachine : CodeStateMachine<AnimationState>
 {
@@ -47,19 +48,12 @@ public class CodeAnimationStateMachine : CodeStateMachine<AnimationState>
     [ContextMenu("Upgrade leg")]
     void Upgrade()
     {
-        var  dict =  new SDictionary<string, AnimationValue>();
+        var  dict =  new SDictionary<string, Object>();
         foreach (var state in states)
         {
-            var  value = ScriptableObject.CreateInstance<ClipValue>();
-            value.SetClip(state.clip);
-            AssetDatabase.CreateAsset(value,"Assets/"+state.Name+".asset");
-            dict.Add(state.Name,AssetDatabase.LoadAssetAtPath<ClipValue>("Assets/"+state.Name+".asset"));
+            dict.Add(state.Name,state.clip);
         }
         GetComponent<AnimationLayer>().SDictionary = dict;
-        
-        
-        
-        
     }
     [ContextMenu("Upgrade sec")]
     void Upgrade2()

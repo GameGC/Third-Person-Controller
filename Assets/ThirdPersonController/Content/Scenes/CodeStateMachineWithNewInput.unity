@@ -234,11 +234,11 @@ PrefabInstance:
       objectReference: {fileID: 1834127687}
     - target: {fileID: 7042680116276571522, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0005610404
+      value: -0.0005610756
       objectReference: {fileID: 0}
     - target: {fileID: 7042680116276571522, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00007074963
+      value: 0.00007075407
       objectReference: {fileID: 0}
     - target: {fileID: 7951457861174012892, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_Follow
@@ -306,11 +306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9158021295498759898, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0005630067
+      value: -0.00056301523
       objectReference: {fileID: 0}
     - target: {fileID: 9158021295498759898, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00005301492
+      value: 0.000053015723
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
@@ -544,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 1837240328}
     - target: {fileID: 1617079114466961500, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
       propertyPath: namedReferences._keyValuePairs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1617079114466961500, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
       propertyPath: namedReferences._keyValuePairs.Array.data[0].Key
@@ -552,7 +552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617079114466961500, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
       propertyPath: namedReferences._keyValuePairs.Array.data[1].Key
-      value: 
+      value: CameraManager
       objectReference: {fileID: 0}
     - target: {fileID: 1617079114466961500, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
       propertyPath: namedReferences._keyValuePairs.Array.data[0].Value
@@ -561,7 +561,7 @@ PrefabInstance:
     - target: {fileID: 1617079114466961500, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
       propertyPath: namedReferences._keyValuePairs.Array.data[1].Value
       value: 
-      objectReference: {fileID: 1719994770}
+      objectReference: {fileID: 1837240328}
     - target: {fileID: 1617079114466961501, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
       propertyPath: m_Name
       value: CharacterController_testModel
@@ -704,6 +704,43 @@ MonoBehaviour:
   - {fileID: 1398933465}
   - {fileID: 1904319579}
   - {fileID: 383489057}
+--- !u!114 &702831538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702831530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd2b6452001b4087b61f1e1bc7183d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  f:
+    path: 
+    _paramVariants:
+      _keyValuePairs:
+      - Key: Default
+        Value: {fileID: 702896645}
+      - Key: A
+        Value: {fileID: 702896645}
+    otherProp: 0
+    otherProp1: 0
+--- !u!114 &702896645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestFeatureVariable
+  test0: 
+  test1: 0
+  test2: 0
 --- !u!4 &725751337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1617079115842489933, guid: bd9b5265f9326e24cbad897c79058732, type: 3}
@@ -2313,7 +2350,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8944336656349189697}
-  m_LocalRotation: {x: 0.00005301492, y: 0.9955957, z: 0.0937492, w: -0.0005630067}
+  m_LocalRotation: {x: 0.000053015727, y: 0.9955957, z: 0.0937492, w: -0.0005630153}
   m_LocalPosition: {x: -54.16, y: 1.2520001, z: 6.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

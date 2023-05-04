@@ -36,15 +36,16 @@ public class AimLookFeature : BaseFeature
 public class SetCameraFeature : BaseFeature
 {
     [SerializeField] private CameraManager.CameraType _cameraType;
-    
-    
+
+    private CameraManager _cameraManager;
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
+        _cameraManager = resolver.GetNamedComponent<CameraManager>("CameraManager");
     }
 
     public override void OnEnterState()
     {
-        GameObject.FindObjectOfType<CameraManager>().SetActiveCamera(_cameraType);
+        _cameraManager.SetActiveCamera(_cameraType);
     }
 
     public override void OnExitState()

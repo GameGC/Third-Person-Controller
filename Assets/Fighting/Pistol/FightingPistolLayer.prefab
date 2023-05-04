@@ -365,19 +365,19 @@ MonoBehaviour:
   SDictionary:
     _keyValuePairs:
     - Key: GetWeapon
-      Value: {fileID: 11400000, guid: 490c3fc4a614a46fdac9c25d3c2f3cec, type: 2}
+      Value: {fileID: 7400000, guid: 8bfa8d2fd3e856442a31843bdc71248c, type: 3}
     - Key: Idle
-      Value: {fileID: 11400000, guid: 7d96a46e87ee945bc933cfa0c5074e1b, type: 2}
+      Value: {fileID: 7400000, guid: 6d3d9c92c8d90e948b603c60612d5bcf, type: 3}
     - Key: Aim
-      Value: {fileID: 11400000, guid: 8e8332e6038944f15b5727a9bdeacada, type: 2}
+      Value: {fileID: -2302975276331617043, guid: 6ab46135ec08c3c4186dbd118166e933, type: 3}
     - Key: Shoot
-      Value: {fileID: 11400000, guid: d7ab82a14ac234825955d055705f8da4, type: 2}
+      Value: {fileID: 7400000, guid: 5185e4cdcf2be5842817831df3a33950, type: 3}
     - Key: Cooldown
-      Value: {fileID: 11400000, guid: ba632b12ac54c4c0ea705970e2a1ad2c, type: 2}
+      Value: {fileID: -2302975276331617043, guid: 6ab46135ec08c3c4186dbd118166e933, type: 3}
     - Key: Reload
-      Value: {fileID: 11400000, guid: 3574f2c7909b0471b86469120d137436, type: 2}
+      Value: {fileID: 7400000, guid: 4a6826744e93c9948b78281db1081c40, type: 3}
     - Key: PutWeaponBackFromAim
-      Value: {fileID: 11400000, guid: da2b570de5da94234bc432bd37bf4691, type: 2}
+      Value: {fileID: 7400000, guid: f41fdd3fd62533a4abd59de675a27a48, type: 3}
   defaultTransition:
     time: 0.02
   CurrentState: 
