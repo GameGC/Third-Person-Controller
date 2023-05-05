@@ -12,15 +12,16 @@ using UnityEngine;
 namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 {
 
-    [CustomPropertyDrawer(typeof(SerializeReferenceAddButton))]
-    public class ListCustomSerializeButton : BaseListSerializeReferenceDrawer
+ //   [CustomPropertyDrawer(typeof(SerializeReferenceAddButton))]
+ [InitializeOnLoad]
+ public class ListCustomSerializeButton : BaseListSerializeReferenceDrawer
     {
         //var resultID = method.Invoke(null, new[] {property});
         private static readonly MethodInfo GetPropertyIdentifier;
         private static readonly FieldInfo s_reorderableLists;
         private static readonly FieldInfo m_ReorderableList;
 
-        private Action forawrdToGui;
+        private static Action forawrdToGui;
         
         static ListCustomSerializeButton()
         {
@@ -36,32 +37,59 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             
             var propertyHandler = unityEditorCoreModule.GetType("UnityEditor.PropertyHandler");
             s_reorderableLists = propertyHandler.GetField("s_reorderableLists", BindingFlags.Static | BindingFlags.NonPublic);
+
+            var instance = new ListCustomSerializeButton();
+            Selection.selectionChanged += instance.OnSelectionChanged;
+            if(Selection.activeGameObject)
+                instance.OnSelectionChanged();
+            //EditorApplication.update += Update;
         }
-        
-        
-        
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+
+        private void OnSelectionChanged()
         {
-            return EditorGUI.GetPropertyHeight(property, label);
-        }
-
-
-     
-        
-        
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            forawrdToGui?.Invoke();
-
-            label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
-            EditorGUI.PropertyField(position, property,label,true);
+            UnityEditor.Editor.finishedDefaultHeaderGUI -= EditorOnfinishedDefaultHeaderGUI;
             
-            bool couldDraw = DoesFitDrawCondition(property); 
-            if(!couldDraw) return;
-
-            DoListFooter(GetTargetProperty(property));
-
+            if (!Selection.activeGameObject) return;
+            if (!Selection.activeGameObject.TryGetComponent<StateMachine.CodeStateMachine>(out var st)) return;
+            
+            UnityEditor.Editor.finishedDefaultHeaderGUI += EditorOnfinishedDefaultHeaderGUI;
         }
+        
+        private void EditorOnfinishedDefaultHeaderGUI(UnityEditor.Editor obj)
+        {
+            if(Event.current.type != EventType.Layout && Event.current.type!= EventType.Repaint) return;
+            
+            if (!Selection.activeGameObject) return;
+            if (!Selection.activeGameObject.TryGetComponent<StateMachine.CodeStateMachine>(out var st)) return;
+            
+            var editor =new SerializedObject(st);
+            SerializedProperty iterator = editor.GetIterator();
+            bool next = iterator.NextVisible(true);
+        
+            while (next)
+            {
+                bool couldDraw = DoesFitDrawCondition(iterator);
+                if (couldDraw)
+                {
+                    DoListFooter(GetTargetProperty(iterator));
+                }
+                next = iterator.NextVisible(true);
+            }
+        }
+
+      //  public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+      //  {
+      //      forawrdToGui?.Invoke();
+//
+      //      label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
+      //      EditorGUI.PropertyField(position, property,label,true);
+      //      
+      //      bool couldDraw = DoesFitDrawCondition(property); 
+      //      if(!couldDraw) return;
+//
+      //      DoListFooter(GetTargetProperty(property));
+//
+      //  }
 
 
         private string GetPropertyTypeName(SerializedProperty property)
@@ -102,8 +130,8 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             // var asm = Assembly.Load(split[0]);
             // var _type = asm.GetType(split[1]).BaseType;
 
-            var attrInfo = (SerializeReferenceAddButton) attribute;
-            List<Type> showTypes = GetNonAbstractTypesSubclassOf(attrInfo.baseType);
+          //  var attrInfo = (SerializeReferenceAddButton) attribute;
+            List<Type> showTypes = GetNonAbstractTypesSubclassOf(typeof(BaseFeature));
 
             foreach (var type in showTypes)
             {

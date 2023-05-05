@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class SerializeReferenceAddButton : PropertyAttribute
+public class SerializeReferenceAddButton : System.Attribute
 {
     public Type baseType;
 

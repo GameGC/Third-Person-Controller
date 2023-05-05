@@ -1,15 +1,23 @@
 ﻿#if UNITY_EDITOR
+using System;
 using UnityEditor;
 
-public class BaseListSerializeReferenceDrawer : PropertyDrawer
+public class BaseListSerializeReferenceDrawer
 {
     protected bool DoesFitDrawCondition(SerializedProperty property)
     {
         var path = property.propertyPath;
         var index0 = path.LastIndexOf('[');
 
-        var currentIndex = int.Parse(path.Substring(index0+1,path.Length-2 - index0));
-        return currentIndex < 1;
+        try
+        {
+            var currentIndex = int.Parse(path.Substring(index0+1,path.Length-2 - index0));
+            return currentIndex < 1;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 
     protected SerializedProperty GetTargetProperty(SerializedProperty property)
