@@ -2,10 +2,8 @@ using System;
 using GameGC.Collections;
 using ThirdPersonController.Core;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 [Serializable]
@@ -19,7 +17,7 @@ public abstract class BaseMultiParamFeature<T> : BaseFeature where T : Scriptabl
 [CustomPropertyDrawer(typeof(BaseMultiParamFeature<>),true)]
 public class BaseMultiParamFeatureEditor : PropertyDrawerWithCustomData<BaseMultiParamFeatureEditor.Data>
 {
-    public struct Data
+    public class Data
     {
         public ReorderableList List;
     }
@@ -39,21 +37,20 @@ public class BaseMultiParamFeatureEditor : PropertyDrawerWithCustomData<BaseMult
         
         
         SerializedProperty iterator = property;
+        SerializedProperty end = iterator.GetEndProperty();
+
         bool next = iterator.NextVisible(true);
-        next = iterator.NextVisible(false);
 
         if (next)
         {
             EditorGUI.LabelField(new Rect(position.x,position.y,position.width,18),"Shared:", EditorStyles.boldLabel);
             position.y += 18f;
         }
-        
-        while (next)
+
+        while (iterator.NextVisible(false) && !SerializedProperty.EqualContents(iterator, end))
         {
             EditorGUI.PropertyField(position,iterator, true);
             position.y += EditorGUI.GetPropertyHeight(iterator);
-            
-            next = iterator.NextVisible(false);
         }
       
         var target =targetArray.GetArrayElementAtIndex(customData.List.selectedIndices[0]).FindPropertyRelative("Value");
@@ -102,7 +99,6 @@ public class BaseMultiParamFeatureEditor : PropertyDrawerWithCustomData<BaseMult
                 ReorderableList.defaultBehaviours.DrawElement(rect,property.GetArrayElementAtIndex(index),null,readable.IsSelected(index),focused,true,true);
                 // EditorGUI.PropertyField(rect, property.GetArrayElementAtIndex(index));
             },
-            onSelectCallback = list => {}
         };
         readable.Select(0);
         return readable;
