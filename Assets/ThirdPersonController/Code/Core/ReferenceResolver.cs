@@ -27,7 +27,7 @@ namespace ThirdPersonController.Core.DI
             cachedComponents = null;
         }
 
-        public bool isReady { get; set; }
+        public bool isReady { get; set; } = true;
 
         public new T GetComponent<T>()
         {
@@ -85,10 +85,6 @@ namespace ThirdPersonController.Core.DI
       //}
 
         public Transform GetCamera() => cameraTransform;
-        T IReferenceResolver.GetComponent<T>()
-        {
-            throw new NotImplementedException();
-        }
 
         public T GetNamedComponent<T>(string name) where T : Component
         {

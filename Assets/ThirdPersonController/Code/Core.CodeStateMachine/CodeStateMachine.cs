@@ -12,7 +12,7 @@ namespace ThirdPersonController.Core.StateMachine
     public class CodeStateMachine : MonoBehaviour
     {
         [SerializeField] protected bool startWhenResolverIsReady = true;
-        [SerializeField] protected ReferenceResolver ReferenceResolver;
+        public ReferenceResolver ReferenceResolver;
         protected IStateMachineVariables Variables;
 
     
@@ -105,7 +105,8 @@ namespace ThirdPersonController.Core.StateMachine
         {
             if (startWhenResolverIsReady)
             {
-                yield return new WaitUntil(() => ReferenceResolver.isReady);
+                if(!ReferenceResolver.isReady)
+                    yield return new WaitUntil(() => ReferenceResolver.isReady);
                 
                 foreach (var codeState in states)
                 {

@@ -75,6 +75,20 @@ public class HybridAnimator : MonoBehaviour
         playableGraph.Play();
     }
 
+    public void Rebuild(int i)
+    {
+        layerPlayble.DisconnectInput(i);
+        
+        var stateMachine = stateMachines[i-1];
+        if(!stateMachine) return;
+        playableGraph.Connect(stateMachine.ConstructPlayable(playableGraph,gameObject), 0, layerPlayble, i);
+            
+        if(stateMachine.avatarMask)
+            layerPlayble.SetLayerMaskFromAvatarMask((uint)i,stateMachine.avatarMask);
+            
+        layerPlayble.SetLayerAdditive((uint) i,stateMachine.isAdditive);
+        layerPlayble.SetInputWeight(i,stateMachine.weight);
+    }
    
     //private AnimationMixerPlayable StateMachineToPlayeble(CodeAnimationStateMachine stateMachine)
     //{
