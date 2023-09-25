@@ -35,7 +35,7 @@ public class AimLookFeature : BaseFeature
 
 public class SetCameraFeature : BaseFeature
 {
-    [SerializeField] private CameraManager.CameraType _cameraType;
+    [SerializeField] private CameraType _cameraType;
 
     private CameraManager _cameraManager;
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)

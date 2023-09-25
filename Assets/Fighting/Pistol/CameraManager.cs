@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public enum CameraType
-    {
-        Follow,
-        Aiming,
-    }
-
     [SerializeField] private SKeyValuePair<CameraType, GameObject>[] cameras;
 
     public void SetActiveCamera(CameraType type)

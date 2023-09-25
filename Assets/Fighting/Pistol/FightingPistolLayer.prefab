@@ -355,11 +355,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ca82ab430d5d5449167695c3e58891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoSyncWithOtherStateMachine: 0
+  autoSyncWithOtherStateMachine: 1
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  SDictionary:
+  States:
     _keyValuePairs:
     - Key: GetWeapon
       Value: {fileID: 7400000, guid: 8bfa8d2fd3e856442a31843bdc71248c, type: 3}
@@ -377,4 +377,3 @@ MonoBehaviour:
       Value: {fileID: 7400000, guid: f41fdd3fd62533a4abd59de675a27a48, type: 3}
   defaultTransition:
     time: 0.02
-  CurrentState: 
