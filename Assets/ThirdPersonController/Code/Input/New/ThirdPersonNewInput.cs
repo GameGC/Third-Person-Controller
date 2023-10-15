@@ -23,12 +23,13 @@ namespace ThirdPersonController.Input
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            var cameraObject = FindObjectOfType<CameraInputProvider>();
-            cameraObject._inputReader = this;
+            var cameraObject = FindObjectsOfType<CameraInputProvider>(true);
+            foreach (var cameraInputProvider in cameraObject) 
+                cameraInputProvider._inputReader = this;
 
-            var freeLook = cameraObject.GetComponent<CinemachineFreeLook>();
-            freeLook.Follow = transform;
-            freeLook.LookAt = transform;
+            //var freeLook = cameraObject.GetComponent<CinemachineFreeLook>();
+            //freeLook.Follow = transform;
+            //freeLook.LookAt = transform;
 
             var Player = inputActions.FindActionMap("Player", throwIfNotFound: true);
             Player.Enable();
