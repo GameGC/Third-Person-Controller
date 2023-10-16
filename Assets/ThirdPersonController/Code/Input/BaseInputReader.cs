@@ -7,7 +7,7 @@ namespace ThirdPersonController.Input
         public Vector2 lookInput       {get;}
         public Quaternion cameraRotation { get; }
 
-        
+
         public Vector2 moveInput       {get;}
         public Vector2 moveInputSmooth {get;}
         

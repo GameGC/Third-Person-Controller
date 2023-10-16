@@ -16,7 +16,6 @@ namespace ThirdPersonController.Input.New
     {
         public IBaseInputReader _inputReader;
         
-      
 
         /// <summary>
         /// Implementation of AxisState.IInputAxisProvider.GetAxisValue().
