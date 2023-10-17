@@ -75,3 +75,6 @@ crashlytics-build.properties
 .idea/*
 .DS_Store
 mono_crash*.json
+Assets/UMotionEditor/
+UMotionData/
+Assets/UMotionEditor.meta
