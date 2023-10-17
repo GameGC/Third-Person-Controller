@@ -20,7 +20,6 @@ namespace GameGC.Collections
             return new SKeyValuePair<TKey, TValue>(pair.Key, pair.Value);
         }
 
-   
         public static explicit operator KeyValuePair<TKey, TValue>( SKeyValuePair<TKey, TValue> pair)
         {
             return new KeyValuePair<TKey, TValue>(pair.Key, pair.Value);

@@ -26,15 +26,9 @@ namespace GameGC.Collections
       }
     }
 
-    public T GetValueOrDefault()
-    {
-      return value;
-    }
+    public T GetValueOrDefault() => value;
+    public T GetValueOrDefault(T defaultValue) => !HasValue ? defaultValue : value;
 
-    public T GetValueOrDefault(T defaultValue)
-    {
-      return !HasValue ? defaultValue : value;
-    }
     public override bool Equals(object other)
     {
       if (!HasValue)
@@ -42,26 +36,11 @@ namespace GameGC.Collections
       return other != null && value.Equals(other);
     }
 
-    public override int GetHashCode()
-    {
-      return !HasValue ? 0 : value.GetHashCode();
-    }
+    public override int GetHashCode() => HasValue ? value.GetHashCode() : 0;
+    public override string ToString() => HasValue ? value.ToString() : string.Empty;
 
-    public override string ToString()
-    {
-      return !HasValue ? "" : value.ToString();
-    }
-
-   
-    public static implicit operator SNullable<T>(T value)
-    {
-      return new SNullable<T>(value);
-    }
-
-   
-    public static explicit operator T(SNullable<T> value)
-    {
-      return value.Value;
-    }
+    
+    public static implicit operator SNullable<T>(T value) => new SNullable<T>(value);
+    public static explicit operator T(SNullable<T> value) => value.Value;
   }
 }
