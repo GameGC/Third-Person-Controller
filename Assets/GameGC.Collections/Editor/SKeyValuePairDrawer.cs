@@ -33,7 +33,7 @@ namespace GameGC.Collections.Editor
             position.width *= 3;
         }
         
-        public void OnKeyGUI(SerializedProperty property,Rect sourceRect)
+        public virtual void OnKeyGUI(SerializedProperty property,Rect sourceRect)
         {
             var keyProp = property.FindPropertyRelative("Key");
             
@@ -44,7 +44,7 @@ namespace GameGC.Collections.Editor
             EditorGUI.PropertyField(keyPos,keyProp,GUIContent.none);
         }
         
-        public void OnValueGUI(SerializedProperty property,Rect sourceRect)
+        public virtual void OnValueGUI(SerializedProperty property,Rect sourceRect)
         {
             var valueProp = property.FindPropertyRelative("Value");
             bool isClass = valueProp.propertyType == SerializedPropertyType.Generic;

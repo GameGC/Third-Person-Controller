@@ -5,8 +5,7 @@ using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-[Serializable]
-public class BaseRigFeature : BaseFeature
+public abstract class BaseRigFeature : BaseFeature
 {
     [SerializeField] private string layerName;
     [SerializeField] private bool returnPreviousValueOnExit = true;

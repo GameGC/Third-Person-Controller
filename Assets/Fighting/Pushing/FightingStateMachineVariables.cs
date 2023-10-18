@@ -5,6 +5,7 @@ using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace Fighting.Pushing
 {
@@ -44,10 +45,12 @@ namespace Fighting.Pushing
         private GunShootingInfo _shooter;
         private IFightingStateMachineVariables _variables;
 
+        private MultiAimConstraint _handAimConstaint;
         
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             _variables= variables as IFightingStateMachineVariables;
+            _handAimConstaint = resolver.GetNamedComponent<MultiAimConstraint>("HandAim");
         }
 
         public override void OnEnterState()
@@ -61,8 +64,15 @@ namespace Fighting.Pushing
 
         private async void DelayShoot()
         {
-            await Task.Delay(1000);
+            var animationController = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
+            await animationController.WaitForStateWeight1("Shoot");
+            _handAimConstaint.weight = 0;
             _shooter.Shoot();
+        }
+
+        public override void OnExitState()
+        {
+            _handAimConstaint.weight = 1;
         }
     }
     

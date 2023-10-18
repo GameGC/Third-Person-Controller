@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
@@ -20,17 +21,18 @@ public class GunShootingInfo : MonoBehaviour
     
     public float cooldownTime = 3;
     public float reloadingTime = 10;
-    
-    
-    public IFightingStateMachineVariables Variables;
+
+
 
     private int remainingAmmo;
 
-    
-    
+    private IFightingStateMachineVariables Variables;
+    private CinemachineImpulseSource _impulseSource;
+
     private void Start()
     {
         Variables = FindObjectOfType<FightingStateMachineVariables>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
         if (hasAutoReloadOnStart) 
             AutoReload();
     }
@@ -55,7 +57,8 @@ public class GunShootingInfo : MonoBehaviour
             Variables.couldAttack = remainingAmmo > 0;
             
             Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-
+            _impulseSource?.GenerateImpulse();
+                
             if (muzzle)
             {
                 muzzle.SetActive(true);

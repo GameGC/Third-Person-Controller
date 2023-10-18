@@ -82,13 +82,29 @@ public class AnimationLayer : MonoBehaviour
             AsyncTransition();
     }
 
+
+    public async Task WaitForStateWeight1(string stateName)
+    {
+        var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);
+        while ( _mixerPlayable.GetInputWeight(newIndex)<1) 
+            await Task.Delay(100);
+    }
+    
+    public async Task WaitForStateWeight0(string stateName)
+    {
+        var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);
+        while ( _mixerPlayable.GetInputWeight(newIndex)>0) 
+            await Task.Delay(100);
+    }
+    
     private async void AsyncTransition()
     {
         var previousIndex = ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
         CurrentState = _codeStateMachine.CurrentState.Name;
         
         var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
-
+        _mixerPlayable.GetInput(newIndex).SetTime(0);
+        
         float maxTimer = defaultTransition.time * 1000; 
         float timer = maxTimer;
         while (timer>0)

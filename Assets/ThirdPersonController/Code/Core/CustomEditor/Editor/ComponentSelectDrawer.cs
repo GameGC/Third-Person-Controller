@@ -2,6 +2,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using GameGC.Collections;
+using GameGC.Collections.Editor;
 using UnityEditor;
 using UnityEngine;
 using static ThirdPersonController.Core.DI.CustomEditor.Editor.ComponentSelectDrawer;
@@ -66,6 +68,51 @@ namespace ThirdPersonController.Core.DI.CustomEditor.Editor
             {
                 customData._isCached = false;
                 EditorGUI.PropertyField(position, property, label);
+            }
+        }
+    }
+    
+    
+    [CustomPropertyDrawer(typeof(SKeyValuePair<string,Component>))]
+    public class SKeyValuePairComponentDrawer : SKeyValuePairDrawer
+    {
+        public override void OnValueGUI(SerializedProperty property, Rect position)
+        {
+            var valueProp = property.FindPropertyRelative("Value");
+            var component = valueProp.objectReferenceValue as Component;
+            if (component)
+            {
+                EditorGUIUtility.labelWidth /= 2;
+                
+                List<Component> _components = new List<Component>();
+                component.GetComponents(_components);
+                var _componentsNames = EditorGUIUtility.TrTempContent(_components.Select(s => s.GetType().Name).ToArray());
+
+                var _selected = _components.IndexOf(component);
+                
+                
+                
+                EditorGUI.BeginChangeCheck();
+                position.width /= 3;
+                position.x += position.width;
+
+                EditorGUI.PropertyField(position, valueProp,GUIContent.none);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    EditorGUIUtility.labelWidth *= 2;
+                    return;
+                }
+                position.x += position.width;
+            
+                EditorGUI.BeginChangeCheck();
+                _selected = EditorGUI.Popup(position, _selected,_componentsNames);
+                if (EditorGUI.EndChangeCheck())
+                {
+                    valueProp.objectReferenceValue = _components[_selected];
+                }
+                
+                
+                EditorGUIUtility.labelWidth *= 2;
             }
         }
     }

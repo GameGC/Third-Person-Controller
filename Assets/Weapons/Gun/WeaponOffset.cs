@@ -7,7 +7,7 @@ namespace Weapons
         public Vector3 localPosition;
         [QuaternionAsEuler] public Quaternion localRotation;
 
-        void Awake()
+        private void Awake()
         {
             var thisTransform = transform;
             thisTransform.localRotation = localRotation;
