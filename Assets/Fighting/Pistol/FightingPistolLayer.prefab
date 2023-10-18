@@ -368,9 +368,9 @@ MonoBehaviour:
     - Key: Aim
       Value: {fileID: 7400000, guid: 108e7c021416342068a805cb977b6b2d, type: 2}
     - Key: Shoot
-      Value: {fileID: 7400000, guid: 5185e4cdcf2be5842817831df3a33950, type: 3}
+      Value: {fileID: 7400000, guid: 7b23c4e8d496b482b99e0e827c6e039c, type: 2}
     - Key: Cooldown
-      Value: {fileID: -2302975276331617043, guid: 6ab46135ec08c3c4186dbd118166e933, type: 3}
+      Value: {fileID: 7400000, guid: 108e7c021416342068a805cb977b6b2d, type: 2}
     - Key: Reload
       Value: {fileID: 7400000, guid: 4a6826744e93c9948b78281db1081c40, type: 3}
     - Key: PutWeaponBackFromAim
