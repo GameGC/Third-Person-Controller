@@ -17,7 +17,7 @@ MonoBehaviour:
     m_To: AimCam NewInput
     m_Blend:
       m_Style: 6
-      m_Time: 0.05
+      m_Time: 0.0625
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

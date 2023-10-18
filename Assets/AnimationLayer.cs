@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 using Object = UnityEngine.Object;
 
@@ -16,44 +17,40 @@ public abstract class AnimationValue : ScriptableObject
 
 public class AnimationLayer : MonoBehaviour
 {
-    public bool autoSyncWithOtherStateMachine;
+    public bool autoSyncWithOtherStateMachine = true;
 
     public float weight;
     public AvatarMask avatarMask;
     public bool isAdditive;
 
 
-    public SDictionary<string, Object> SDictionary;
-
+    [FormerlySerializedAs("SDictionary")]
+    public SDictionary<string, Object> States;
     public AnimationTransition defaultTransition;
 
     private AnimationMixerPlayable _mixerPlayable;
 
-    public string CurrentState;
+    public string CurrentState { get; set; }
 
-   // private void OnValidate()
-   // {
-   //     SDictionary = new SDictionary<string, AnimationValue>(new Dictionary<string, AnimationValue>()
-   //     {
-   //         {"clip",ScriptableObject.CreateInstance<ClipValue>()},
-   //         {"timeline",ScriptableObject.CreateInstance<TimelineValue>()}
-   //     });
-   // }
-
+    private CodeStateMachine _codeStateMachine;
 
     protected void Awake()
     {
         //CurrentState = new BaseAnimState(GetComponent<CodeAnimationStateMachine>().states.First().Name);
-        CurrentState = SDictionary.First().Key;
-        GetComponent<CodeStateMachine>().onStateChanged.AddListener(OnStateChanged);
+        CurrentState = States.First().Key;
+        if (autoSyncWithOtherStateMachine)
+        {
+            _codeStateMachine = GetComponent<CodeStateMachine>();
+            _codeStateMachine.onStateChanged.AddListener(OnStateChanged);
+        }
     }
 
     public AnimationMixerPlayable ConstructPlayable(PlayableGraph graph,GameObject root)
     {
-        _mixerPlayable = AnimationMixerPlayable.Create(graph, SDictionary.Count);
-        for (int i = 0, length =SDictionary.Count; i < length; i++)
+        _mixerPlayable = AnimationMixerPlayable.Create(graph, States.Count);
+        for (int i = 0, length =States.Count; i < length; i++)
         {
-            var element = SDictionary.ElementAt(i);
+            var element = States.ElementAt(i);
             Playable playable = default;
             switch (element.Value)
             {
@@ -72,32 +69,25 @@ public class AnimationLayer : MonoBehaviour
     {
         if (defaultTransition.time == 0)
         {
-            CurrentState = GetComponent<CodeStateMachine>().CurrentState.Name;
+            CurrentState = _codeStateMachine.CurrentState.Name;
             int i = 0;
         
-            foreach (var element in SDictionary)
+            foreach (var element in States)
             {
                 _mixerPlayable.SetInputWeight(i,element.Key == CurrentState?1:0);
                 i++;
             }
         }
         else
-        {
             AsyncTransition();
-        }
-        
-        //for (int i = 0, length = SDictionary.Count; i < length; i++)
-        //{
-        //    _mixerPlayable.SetInputWeight(i,SDictionary[i].Name == CurrentState.Name?1:0);
-        //}
     }
 
     private async void AsyncTransition()
     {
-        var previousIndex = ArrayUtility.IndexOf(SDictionary.Keys.ToArray(), CurrentState);
-        CurrentState = GetComponent<CodeStateMachine>().CurrentState.Name;
+        var previousIndex = ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
+        CurrentState = _codeStateMachine.CurrentState.Name;
         
-        var newIndex=  ArrayUtility.IndexOf(SDictionary.Keys.ToArray(), CurrentState);
+        var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
 
         float maxTimer = defaultTransition.time * 1000; 
         float timer = maxTimer;
