@@ -22,7 +22,11 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
         private static readonly FieldInfo m_ReorderableList;
 
         private static Action forawrdToGui;
-        
+
+        private delegate SerializeReferenceAddButton GetAttributesForField(SerializedProperty property);
+
+        private static GetAttributesForField GetAttributesForFieldF;
+      //  private static Predicate<PropertyAttribute> GetAttributesForField(SerializedProperty property);
         static ListCustomSerializeButton()
         {
             var unityEditorCoreModule = Assembly.Load("UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
@@ -36,6 +40,20 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             
             var propertyHandler = unityEditorCoreModule.GetType("UnityEditor.PropertyHandler");
             s_reorderableLists = propertyHandler.GetField("s_reorderableLists", BindingFlags.Static | BindingFlags.NonPublic);
+
+            var scriptAttributeUtil = unityEditorCoreModule.GetType("UnityEditor.ScriptAttributeUtility");
+            var getFiledInfoMethod = scriptAttributeUtil.GetMethod("GetFieldInfoAndStaticTypeFromProperty",BindingFlags.Static | BindingFlags.NonPublic);
+            
+            GetAttributesForFieldF = new GetAttributesForField(property =>
+            {
+                Type t = null;
+                var filedInfo = getFiledInfoMethod.Invoke(null,new object[]{ property, t}) as FieldInfo;
+               // return scriptAttributeUtil.GetMethod("GetFieldAttributes").Invoke(null, new []{filedInfo}) as List<PropertyAttribute>;
+               return filedInfo.GetCustomAttribute<SerializeReferenceAddButton>();
+            });
+
+            
+
 
             var instance = new ListCustomSerializeButton();
             Selection.selectionChanged += instance.OnSelectionChanged;
@@ -70,12 +88,13 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
                 bool couldDraw = DoesFitDrawCondition(iterator);
                 if (couldDraw)
                 {
-                    DoListFooter(GetTargetProperty(iterator));
+                    var attribute = GetAttributesForFieldF(iterator);
+                    DoListFooter(GetTargetProperty(iterator),attribute);
                 }
                 next = iterator.NextVisible(true);
             }
         }
-
+        
       //  public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
       //  {
       //      forawrdToGui?.Invoke();
@@ -93,7 +112,7 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
      
         
-        private void DoListFooter(SerializedProperty property)
+        private void DoListFooter(SerializedProperty property,SerializeReferenceAddButton attribute)
         {
             var resultID = GetPropertyIdentifier.Invoke(null, new[] {property});
             var s_reorderableListsValue = s_reorderableLists.GetValue(null) as IDictionary;
@@ -104,11 +123,11 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             if(element == null) return;
             
             var reorderableList = m_ReorderableList.GetValue(element) as ReorderableList;
-            reorderableList.onAddDropdownCallback = OnReorderListAddDropdown;
+            reorderableList.onAddDropdownCallback = (rect, list) => OnReorderListAddDropdown(rect,list,attribute);
         }
         
         
-        private void OnReorderListAddDropdown(Rect buttonRect, ReorderableList list)
+        private void OnReorderListAddDropdown(Rect buttonRect, ReorderableList list,SerializeReferenceAddButton attribute)
         {
             var menu = new GenericMenu();
 
@@ -119,7 +138,7 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             // var _type = asm.GetType(split[1]).BaseType;
 
           //  var attrInfo = (SerializeReferenceAddButton) attribute;
-            List<Type> showTypes = GetNonAbstractTypesSubclassOf(typeof(BaseFeature));
+            List<Type> showTypes = GetNonAbstractTypesSubclassOf(attribute.baseType);
 
             foreach (var type in showTypes)
             {

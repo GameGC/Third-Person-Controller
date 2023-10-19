@@ -455,7 +455,7 @@ MonoBehaviour:
   totalAmmo: 1000
   ammoImMagazine: 5
   cooldownTime: 2
-  reloadingTime: 5
+  reloadingTime: 1.9
 --- !u!114 &1563936919696421680
 MonoBehaviour:
   m_ObjectHideFlags: 0
