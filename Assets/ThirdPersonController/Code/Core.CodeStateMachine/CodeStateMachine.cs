@@ -15,9 +15,6 @@ namespace ThirdPersonController.Core.StateMachine
         public ReferenceResolver ReferenceResolver;
         protected IStateMachineVariables Variables;
 
-    
-    
-    
 #if UNITY_EDITOR
         public
 #else
@@ -26,7 +23,11 @@ namespace ThirdPersonController.Core.StateMachine
             State[] states;
 
         private State _currentState;
-        public State CurrentState => _currentState;
+        public State CurrentState
+        {
+            get => _currentState;
+            protected set => _currentState = value;
+        }
 
         public UnityEvent onStateChanged;
 

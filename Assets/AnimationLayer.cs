@@ -90,6 +90,16 @@ public class AnimationLayer : MonoBehaviour
             await Task.Delay(100);
     }
     
+    public async Task WaitForAnimationFinish(string stateName)
+    {
+        await WaitForStateWeight1(stateName);
+        switch (States[stateName])
+        {
+            case AnimationClip clip:            await Task.Delay((int)(clip.length * 1000));break;
+            case TimelineAsset asset:           await Task.Delay((int)(asset.duration * 1000));break;
+        }
+    }
+    
     public async Task WaitForStateWeight0(string stateName)
     {
         var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);

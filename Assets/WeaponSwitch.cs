@@ -14,11 +14,8 @@ using UnityEngine.InputSystem;
 public class WeaponSwitch : MonoBehaviour
 {
    public STurple<string, GameObject, Rig>[] weapons;
-
-   private void Awake()
-   {
-      
-   }
+   public GameObject fightingStateMachine;
+   
 
    private void Update()
    {
@@ -36,9 +33,11 @@ public class WeaponSwitch : MonoBehaviour
       }
    }
 
-   private void Switch(int i)
+   private async void Switch(int i)
    {
-      Destroy(GetComponentInChildren<FightingStateMachineVariables>().gameObject);
+      await fightingStateMachine.GetComponent<FightingStateMachine>().WaitForPutBack();
+      
+      Destroy(fightingStateMachine);
       var parent = transform.Find("StateMachines");
       var instance = Instantiate(weapons[i].Item2, parent);
       instance.GetComponent<CodeStateMachine>().ReferenceResolver = GetComponent<ReferenceResolver>();
@@ -106,5 +105,6 @@ public class WeaponSwitch : MonoBehaviour
       animator.UnbindAllStreamHandles();
       builder.Build();
       animator.enabled = true;
+      fightingStateMachine = instance;
    }
 }
