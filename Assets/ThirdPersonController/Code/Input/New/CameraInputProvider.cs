@@ -1,5 +1,6 @@
 #if ENABLE_INPUT_SYSTEM
 
+using System;
 using Cinemachine;
 using ThirdPersonController.Core.DI.CustomEditor;
 using UnityEngine;
@@ -15,7 +16,11 @@ namespace ThirdPersonController.Input.New
     public class CameraInputProvider : MonoBehaviour, AxisState.IInputAxisProvider
     {
         public IBaseInputReader _inputReader;
-        
+
+        private void Awake()
+        {
+            _inputReader = FindObjectOfType<ThirdPersonNewInput>();
+        }
 
         /// <summary>
         /// Implementation of AxisState.IInputAxisProvider.GetAxisValue().

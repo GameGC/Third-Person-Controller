@@ -10,5 +10,8 @@ public class RigSetFeature : BaseRigFeature
     {
         base.OnEnterState();
         _targetLayer.rig.weight = weight;
+        //Debug.LogError(_targetLayer);
+        //Debug.LogError( _targetLayer.rig);
+        //Debug.LogError( _targetLayer.rig.weight);
     }
 }

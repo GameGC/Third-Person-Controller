@@ -220,11 +220,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7042680116276571522, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00056107563
+      value: -0.0005610405
       objectReference: {fileID: 0}
     - target: {fileID: 7042680116276571522, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00007075407
+      value: 0.00007074964
       objectReference: {fileID: 0}
     - target: {fileID: 7951457861174012892, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_Follow
@@ -284,15 +284,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135860829431866260, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00056441233
+      value: -0.000564416
       objectReference: {fileID: 0}
     - target: {fileID: 8135860829431866260, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00003508184
+      value: 0.000035082077
       objectReference: {fileID: 0}
     - target: {fileID: 8135860829431866260, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.06203668
+      value: 0.062036682
       objectReference: {fileID: 0}
     - target: {fileID: 9158021295498759898, guid: 60efefb3be2fb4a409379439154072b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7696,12 +7696,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - Item1: Pistol
-    Item2: {fileID: 1506062242848116311, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
-    Item3: {fileID: 8499473845136863006, guid: a44c11b48dd144a8d908ab27133018f0, type: 3}
   - Item1: Hands
     Item2: {fileID: 2095070348527172489, guid: 25348e17f394e78418b225dab1cef3b7, type: 3}
     Item3: {fileID: 0}
+  - Item1: Pistol
+    Item2: {fileID: 1506062242848116311, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
+    Item3: {fileID: 8499473845136863006, guid: a44c11b48dd144a8d908ab27133018f0, type: 3}
+  - Item1: Rifle
+    Item2: {fileID: 1506062242848116311, guid: 77343ff3e10dd45bc85a487548365547, type: 3}
+    Item3: {fileID: 8762139834122937135, guid: 6514c120fb11b4962b06b176daa5b84b, type: 3}
 --- !u!4 &725751337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1617079115842489933, guid: bd9b5265f9326e24cbad897c79058732, type: 3}

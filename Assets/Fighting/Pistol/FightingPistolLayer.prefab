@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1506062242848116306}
   - component: {fileID: 4871160110387573235}
   - component: {fileID: 1506062241905660166}
+  - component: {fileID: 6229097565005637872}
   m_Layer: 2
   m_Name: FightingPistolLayer
   m_TagString: Untagged
@@ -319,28 +320,28 @@ MonoBehaviour:
       type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         _transitionIndex: 0
-        _transitionName: 
+        _transitionName: GetWeapon
         path: states.Array.data[5].Transitions.Array.data[0].Transitions.Array.data[0]
         isReloading: 0
     - rid: 1980703804186951711
       type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         _transitionIndex: 0
-        _transitionName: 
+        _transitionName: GetWeapon
         path: states.Array.data[5].Transitions.Array.data[0].Transitions.Array.data[1]
         isAim: 0
     - rid: 1980703804186951712
       type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         _transitionIndex: 0
-        _transitionName: 
+        _transitionName: GetWeapon
         path: states.Array.data[5].Transitions.Array.data[1].Transitions.Array.data[0]
         isReloading: 0
     - rid: 1980703804186951713
       type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         _transitionIndex: 0
-        _transitionName: 
+        _transitionName: GetWeapon
         path: states.Array.data[5].Transitions.Array.data[1].Transitions.Array.data[1]
         isAim: 1
 --- !u!114 &1506062241905660166
@@ -377,3 +378,16 @@ MonoBehaviour:
       Value: {fileID: 7400000, guid: f41fdd3fd62533a4abd59de675a27a48, type: 3}
   defaultTransition:
     time: 0.02
+--- !u!114 &6229097565005637872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506062242848116311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5b8ae0e9f7a428b8b25509b9adbf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraPrefab: {fileID: 2058272916817463284, guid: efa50c4a4e27fc842a466cf19b3e68da, type: 3}
