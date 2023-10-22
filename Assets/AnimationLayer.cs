@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using GameGC.Collections;
@@ -102,19 +103,33 @@ public class AnimationLayer : MonoBehaviour
     
     public async Task WaitForStateWeight0(string stateName)
     {
-        var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);
-        while ( _mixerPlayable.GetInputWeight(newIndex)>0) 
-            await Task.Delay(100);
+        try
+        {
+            var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);
+            while ( _mixerPlayable.GetInputWeight(newIndex)>0) 
+                await Task.Delay(100);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error at state: "+stateName);
+        }
     }
     
     private async void AsyncTransition()
     {
         var previousIndex = ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
         CurrentState = _codeStateMachine.CurrentState.Name;
-        
-        var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
-        _mixerPlayable.GetInput(newIndex).SetTime(0);
-        
+
+        int newIndex = -1;
+        try
+        {
+            newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
+            _mixerPlayable.GetInput(newIndex).SetTime(0);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error at state: "+CurrentState);
+        }
         float maxTimer = defaultTransition.time * 1000; 
         float timer = maxTimer;
         while (timer>0)

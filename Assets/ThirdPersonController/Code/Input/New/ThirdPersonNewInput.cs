@@ -54,6 +54,11 @@ namespace ThirdPersonController.Input
                 action.started += keyValuePair.Value;
                 action.Enable();
             }
+            
+#if UNITY_EDITOR
+            Keyboard.current.leftCommandKey.pressPoint =0.0001f;
+            Keyboard.current.fKey.pressPoint =0.0001f;
+#endif
         }
 
 
@@ -71,6 +76,7 @@ namespace ThirdPersonController.Input
         }
         private void OnLook(InputAction.CallbackContext obj)
         {
+            if (isInputFrozen) return;
             lookInput = obj.ReadValue<Vector2>();
         }
 
@@ -103,17 +109,31 @@ namespace ThirdPersonController.Input
 
         private void OnAim(InputAction.CallbackContext obj)
         {
+            if (isInputFrozen) return; 
             IsAim = obj.action.IsPressed();
         }
         
         private void OnAttack(InputAction.CallbackContext obj)
         {
+            if (isInputFrozen) return; 
             IsAttack = obj.action.IsPressed();
         }
 
 
         private void Update()
         {
+#if UNITY_EDITOR
+            bool cmd = Keyboard.current.leftCommandKey.wasReleasedThisFrame ||
+                       Keyboard.current.leftCommandKey.IsValueConsideredPressed(Keyboard.current.leftCommandKey
+                           .ReadValueFromPreviousFrame());
+            bool f = Keyboard.current.fKey.wasReleasedThisFrame || Keyboard.current.fKey.IsValueConsideredPressed(Keyboard.current.fKey
+                .ReadValueFromPreviousFrame());
+            
+            
+            if (cmd && f)
+                isInputFrozen = !isInputFrozen;
+            if (isInputFrozen) return; 
+#endif
             UpdateMoveDirection();
 
 

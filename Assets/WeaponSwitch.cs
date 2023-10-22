@@ -31,6 +31,10 @@ public class WeaponSwitch : MonoBehaviour
       {
          Switch(2);
       }
+      if (Keyboard.current.digit3Key.wasPressedThisFrame)
+      {
+         Switch(3);
+      }
    }
 
    private async void Switch(int i)
@@ -72,8 +76,8 @@ public class WeaponSwitch : MonoBehaviour
                if (newConst > -1)
                {
                   var newMulti = newConstaints[newConst] as MultiAimConstraint;
-                  newMulti.weight = multi.weight;
-                  newMulti.data = multi.data;
+                  newMulti.data.constrainedObject = multi.data.constrainedObject;
+                  newMulti.data.sourceObjects = multi.data.sourceObjects;
                }
             }
             else if(beh is TwoBoneIKConstraint two)
@@ -85,8 +89,11 @@ public class WeaponSwitch : MonoBehaviour
                if (newConst > -1)
                {
                   var newTwo = newConstaints[newConst] as TwoBoneIKConstraint;
-                  newTwo.weight = two.weight;
-                  newTwo.data = two.data;
+                  newTwo.data.hint = two.data.hint;
+                  newTwo.data.mid = two.data.mid;
+                  newTwo.data.root = two.data.root;
+                  newTwo.data.target = two.data.target;
+                  newTwo.data.tip = two.data.tip;
                }
             }
          }

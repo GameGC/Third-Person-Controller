@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GunShootingInfo : MonoBehaviour
 {
+    public bool isGranade;
+    
     public Transform prefab;
     public Transform spawnPoint;
     
@@ -43,6 +45,12 @@ public class GunShootingInfo : MonoBehaviour
         if (totalAmmo - ammoImMagazine <= 0) return;
         totalAmmo -= ammoImMagazine;
         remainingAmmo = ammoImMagazine;
+
+        if (isGranade)
+        {
+            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation,spawnPoint)
+                .GetComponent<GranadeBullet>().enabled = false;
+        }
     }
 
     public void Shoot()
@@ -56,7 +64,20 @@ public class GunShootingInfo : MonoBehaviour
             remainingAmmo--;
             Variables.couldAttack = remainingAmmo > 0;
             
-            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+
+            if (isGranade)
+            {
+                var line = transform.root.Find("StateMachines").GetComponentInChildren<BalisticPreview>();
+                line.GenerateTrajectoryOut(out var points);
+                spawnPoint.GetChild(0).GetComponent<GranadeBullet>().enabled = true;
+                spawnPoint.GetChild(0).GetComponent<GranadeBullet>().Init(points);
+                spawnPoint.GetChild(0).SetParent(null);
+            }
+            else
+            {
+               Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+            }
+            
             _impulseSource?.GenerateImpulse();
                 
             if (muzzle)
@@ -89,8 +110,16 @@ public class GunShootingInfo : MonoBehaviour
         Variables.couldAttack = true;
     }
     
-    private void Cooldown() => Variables.isCooldown = false;
-    
+    private void Cooldown()
+    {
+        if (isGranade)
+        {
+            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation,spawnPoint)
+                .GetComponent<GranadeBullet>().enabled = false;
+        }
+        Variables.isCooldown = false;
+    }
+
     private void DisableMuzzle() =>muzzle.SetActive(false);
 
 

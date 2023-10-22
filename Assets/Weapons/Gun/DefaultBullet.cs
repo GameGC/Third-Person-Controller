@@ -10,7 +10,7 @@ public class DefaultBullet : MonoBehaviour
     
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         transform = base.transform;
         if (Physics.Raycast(transform.position, transform.forward,out var hit,distance))
@@ -24,7 +24,7 @@ public class DefaultBullet : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, flyDestination, Time.deltaTime * speed);
         if(Vector3.Distance(transform.position,flyDestination)<0.1f)
