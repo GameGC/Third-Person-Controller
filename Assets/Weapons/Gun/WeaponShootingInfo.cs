@@ -4,7 +4,7 @@ using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 
-public class GunShootingInfo : MonoBehaviour
+public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
 {
     public bool isGranade;
     
@@ -31,10 +31,14 @@ public class GunShootingInfo : MonoBehaviour
     private IFightingStateMachineVariables Variables;
     private CinemachineImpulseSource _impulseSource;
 
+    
+    public void CacheReferences(IFightingStateMachineVariables variables)
+    {
+        Variables = variables;
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
+    }
     private void Start()
     {
-        Variables = FindObjectOfType<FightingStateMachineVariables>();
-        _impulseSource = GetComponent<CinemachineImpulseSource>();
         if (hasAutoReloadOnStart) 
             AutoReload();
     }
@@ -49,7 +53,7 @@ public class GunShootingInfo : MonoBehaviour
         if (isGranade)
         {
             Instantiate(prefab, spawnPoint.position, spawnPoint.rotation,spawnPoint)
-                .GetComponent<GranadeBullet>().enabled = false;
+                .GetComponent<GrenadeBullet>().enabled = false;
         }
     }
 
@@ -69,8 +73,8 @@ public class GunShootingInfo : MonoBehaviour
             {
                 var line = transform.root.Find("StateMachines").GetComponentInChildren<BalisticPreview>();
                 line.GenerateTrajectoryOut(out var points);
-                spawnPoint.GetChild(0).GetComponent<GranadeBullet>().enabled = true;
-                spawnPoint.GetChild(0).GetComponent<GranadeBullet>().Init(points);
+                spawnPoint.GetChild(0).GetComponent<GrenadeBullet>().enabled = true;
+                spawnPoint.GetChild(0).GetComponent<GrenadeBullet>().Init(points);
                 spawnPoint.GetChild(0).SetParent(null);
             }
             else
@@ -115,7 +119,7 @@ public class GunShootingInfo : MonoBehaviour
         if (isGranade)
         {
             Instantiate(prefab, spawnPoint.position, spawnPoint.rotation,spawnPoint)
-                .GetComponent<GranadeBullet>().enabled = false;
+                .GetComponent<GrenadeBullet>().enabled = false;
         }
         Variables.isCooldown = false;
     }
@@ -133,4 +137,19 @@ public class GunShootingInfo : MonoBehaviour
     {
         CancelInvoke();
     }
+}
+
+
+public interface IWeaponInfo
+{
+    public void CacheReferences(IFightingStateMachineVariables variables);
+
+    public void Shoot();
+}
+
+public abstract class GunModule : MonoBehaviour
+{
+    protected IFightingStateMachineVariables Variables;
+
+    public virtual void OnAfterShoot(){}
 }

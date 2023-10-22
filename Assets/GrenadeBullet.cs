@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class GranadeBullet : MonoBehaviour
+public class GrenadeBullet : MonoBehaviour
 {
     Transform transform;
     Vector3 flyDestination;

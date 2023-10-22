@@ -42,7 +42,7 @@ namespace Fighting.Pushing
 
     public class ShootFeature : BaseFeature
     {
-        private GunShootingInfo _shooter;
+        private IWeaponInfo _shooter;
         private IFightingStateMachineVariables _variables;
 
         private MultiAimConstraint _handAimConstaint;
@@ -55,9 +55,8 @@ namespace Fighting.Pushing
 
         public override void OnEnterState()
         {
-            if (!_shooter)
-                _shooter = _variables.weaponInstance.GetComponent<GunShootingInfo>();
-            
+            _shooter ??= _variables.weaponInstance.GetComponent<IWeaponInfo>();
+
             //wait until animation apply
             DelayShoot();
         }

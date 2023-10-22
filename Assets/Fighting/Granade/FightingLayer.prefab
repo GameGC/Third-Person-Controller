@@ -491,7 +491,6 @@ MonoBehaviour:
     - rid: 2369756999764410377
     - rid: 2369756999764410383
     - rid: 2369756999764410378
-    - rid: 2369756999764410381
     Transitions:
     - rid: 2369756999764410382
   - Name: Cooldown
@@ -560,11 +559,6 @@ MonoBehaviour:
       data:
         path: states.Array.data[3].features.Array.data[3]
         _cameraType: 1
-    - rid: 2369756999764410381
-      type: {class: SetCooldownFeature, ns: , asm: Assembly-CSharp}
-      data:
-        path: states.Array.data[3].features.Array.data[4]
-        clip: {fileID: 8436158629256463427, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
     - rid: 2369756999764410382
       type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
