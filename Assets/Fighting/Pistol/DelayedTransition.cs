@@ -67,19 +67,25 @@ public class ClipToSecondsDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return 36;
+        return 18;
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        float width = position.width;
+        position.width = width * 0.6666667F;
+        EditorGUI.PropertyField(position, property, label);
+        position.x +=  position.width;
+        position.width = width * 0.33333334F;
+        
         var path = property.propertyPath;
         tempBuffer.TryGetValue(path, out var clip);
 
 
-        position.height = 18;
+      
         
         EditorGUI.BeginChangeCheck();
-        clip= EditorGUI.ObjectField(position,"Clip", clip,typeof(AnimationClip),false) as AnimationClip;
+        clip= EditorGUI.ObjectField(position, clip,typeof(AnimationClip),false) as AnimationClip;
         if (EditorGUI.EndChangeCheck())
         {
             if (!tempBuffer.ContainsKey(path))
@@ -89,10 +95,5 @@ public class ClipToSecondsDrawer : PropertyDrawer
             property.floatValue = clip.length;
             property.serializedObject.ApplyModifiedProperties();
         }
-
-        position.y += position.height;
-
-        EditorGUI.PropertyField(position, property, label);
-
     }
 }

@@ -11,7 +11,12 @@ public class QuaternionAsEulerDrawer : PropertyDrawer
             tempValue = property.quaternionValue.ToEuler() * 57.29578f;
 
         EditorGUI.BeginChangeCheck();
-        tempValue = EditorGUI.Vector3Field(position, label, tempValue.Value);
+
+        EditorGUI.BeginProperty(position, label, property);
+        tempValue = EditorGUI.Vector3Field(position,label, tempValue.Value);
+
+        EditorGUI.EndProperty();
+        
         if (EditorGUI.EndChangeCheck())
         {
             property.quaternionValue = Quaternion.Euler(tempValue.Value);
