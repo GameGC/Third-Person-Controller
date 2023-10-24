@@ -479,7 +479,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!95 &1617079114466961488
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -496,7 +496,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1617079114466961500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +516,8 @@ MonoBehaviour:
   - {fileID: 1617079114379089268}
   cameraTransform: {fileID: 0}
   releaseMemoryOnStart: 1
+  namedReferences:
+    _keyValuePairs: []
 --- !u!54 &1617079114466961489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2293,6 +2296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73fbf3aa05f6be24780438449f505aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startWhenResolverIsReady: 1
   ReferenceResolver: {fileID: 1617079114466961500}
   states:
   - Name: Move
@@ -2375,6 +2379,7 @@ MonoBehaviour:
         jumpWithRigidbodyForce: 1
         jumpAndRotate: 1
         rotationSpeed: 16
+        dontAddGravity: 0
     - rid: 8563616750158479570
       type: {class: GroundCheckFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: ThirdPersonController}
       data:

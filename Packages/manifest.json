@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "com.gamegc.animation.rigging.saver": "https://github.com/GameGC/AnimationRiggingSaver.git",
+    "com.gamegc.collections": "https://github.com/GameGC/GameGC.Collections.git",
     "com.unity.animation.rigging": "1.1.1",
     "com.unity.cinemachine": "2.8.9",
-    "com.unity.feature.development": "1.0.1",
     "com.unity.ide.rider": "3.0.18",
     "com.unity.inputsystem": "1.5.1",
     "com.unity.nuget.newtonsoft-json": "3.1.0",

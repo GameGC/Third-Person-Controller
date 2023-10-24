@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using GameGC.Collections;
 using ThirdPersonController.Core.StateMachine;
@@ -37,12 +38,20 @@ public class AnimationLayer : MonoBehaviour
 
     protected void Awake()
     {
-        //CurrentState = new BaseAnimState(GetComponent<CodeAnimationStateMachine>().states.First().Name);
         CurrentState = States.First().Key;
         if (autoSyncWithOtherStateMachine)
         {
             _codeStateMachine = GetComponent<CodeStateMachine>();
             _codeStateMachine.onStateChanged.AddListener(OnStateChanged);
+            
+            //if syncing state not exist in States
+            int length = _codeStateMachine.states.Length;
+            if(length > States.Count)
+                for (int i = 0; i < length; i++)
+                {
+                    if (States.ContainsKey(_codeStateMachine.states[i].Name)) continue;
+                    States.Add(_codeStateMachine.states[i].Name,null);
+                }
         }
     }
 

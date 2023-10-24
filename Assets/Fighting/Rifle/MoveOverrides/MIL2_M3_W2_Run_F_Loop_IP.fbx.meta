@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9bd115380073174480becaf53920194
+guid: 3af8bb7f6eb7b5b47be217f694985329
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
@@ -524,7 +524,7 @@ ModelImporter:
     second: Motus_Man_01
   - first:
       74: 7400000
-    second: MIL2_M3_W2_Run_F_Loop
+    second: MIL2_M3_W2_Run_F_Loop_IP
   - first:
       95: 9500000
     second: //RootNode
@@ -549,7 +549,7 @@ ModelImporter:
       rotation in copied configuration does not match rotation in animation file:\n\t'Neck1'
       : rotation error = 3.224599 deg\n"
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'MIL2_M3_W2_Run_F_Loop' has import animation
+    animationImportWarnings: "\nClip 'MIL2_M3_W2_Run_F_Loop_IP' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
       DOF on avatar to improve retargeting quality.\n\t'Neck1' is inbetween humanoid
       transforms and has rotation animation that will be discarded.\n"
@@ -564,7 +564,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: MIL2_M3_W2_Run_F_Loop_IP
+      takeName: MIL2_M3_W2_Run_F_Loop_IP
+      internalID: 7400000
+      firstFrame: 0
+      lastFrame: 18
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

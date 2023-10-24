@@ -13,6 +13,5 @@ public class WeaponCameraOverride : MonoBehaviour
    {
       _cameraManager = GetComponentInParent<ReferenceResolver>().GetNamedComponent<CameraManager>("CameraManager");
       _cameraManager.ReplaceCamera(CameraType.Aiming, cameraPrefab);
-      //_cameraManager.SetActiveCamera();
    }
 }

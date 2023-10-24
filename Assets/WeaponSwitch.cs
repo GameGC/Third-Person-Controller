@@ -39,6 +39,7 @@ public class WeaponSwitch : MonoBehaviour
 
    private async void Switch(int i)
    {
+      if(fightingStateMachine.GetComponent<FightingStateMachine>()!=null &&fightingStateMachine.GetComponent<FightingStateMachine>().hasPutWeaponBackState)
       await fightingStateMachine.GetComponent<FightingStateMachine>().WaitForPutBack();
       
       Destroy(fightingStateMachine);
@@ -59,8 +60,9 @@ public class WeaponSwitch : MonoBehaviour
       {
          var rig = Instantiate(weapons[i].Item3, parent);
          rig.name = weapons[i].Item3.name;
-         //if(builder.layers.Count<1)
-         //   builder.layers.Add(default);
+         
+         if(builder.layers.Count<1)
+            builder.layers.Add(default);
 
          var oldConstaints = builder.layers[0].rig.GetComponentsInChildren<IRigConstraint>(true);
          var newConstaints = rig.GetComponentsInChildren<IRigConstraint>(true);

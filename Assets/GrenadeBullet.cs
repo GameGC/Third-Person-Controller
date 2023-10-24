@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GrenadeBullet : MonoBehaviour
 {
-    Transform transform;
-    Vector3 flyDestination;
+    new Transform transform;
+    private Vector3 _flyDestination;
     
     
     private Vector3[] _points;
@@ -32,11 +32,11 @@ public class GrenadeBullet : MonoBehaviour
 
     public void Cast()
     {
-        flyDestination = _points[^1];
+        _flyDestination = _points[^1];
         _distance = Vector3.Distance(_points[_pointIndex - 1],_points[_pointIndex]) + _size;
         if (Physics.Raycast(transform.position, (_points[_pointIndex] - transform.position).normalized,out var hit,_distance))
         {
-            flyDestination = hit.point;
+            _flyDestination = hit.point;
             return;
         }
 
@@ -50,7 +50,7 @@ public class GrenadeBullet : MonoBehaviour
         if(stopUpdate) return;
         Cast();
         transform.position = Vector3.MoveTowards(transform.position, _points[_pointIndex], Time.deltaTime * speed);
-        if (Vector3.Distance(transform.position, flyDestination) < 0.1f)
+        if (Vector3.Distance(transform.position, _flyDestination) < 0.1f)
         {
             stopUpdate = true;
             OnTouchGround();

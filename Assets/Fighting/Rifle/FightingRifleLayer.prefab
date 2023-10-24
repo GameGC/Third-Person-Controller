@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1506062242848116306}
   - component: {fileID: -329474136180689854}
   - component: {fileID: 1506062241905660166}
+  - component: {fileID: -3723019905366359828}
+  - component: {fileID: -2469758948940512443}
   m_Layer: 2
   m_Name: FightingRifleLayer
   m_TagString: Untagged
@@ -385,3 +387,29 @@ MonoBehaviour:
       Value: {fileID: 7400000, guid: 4c9d839a6fb41db469bc1ac2a714e6b8, type: 3}
   defaultTransition:
     time: 0.02
+--- !u!114 &-3723019905366359828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506062242848116311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5b8ae0e9f7a428b8b25509b9adbf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraPrefab: {fileID: 8988634382487572944, guid: b73caf23ebf9c4e1fbc098a6133280e2, type: 3}
+--- !u!114 &-2469758948940512443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506062242848116311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74c8d948dc94eee9cef09465dbac6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Controller: {fileID: 22100000, guid: 60de550443d904c2a959571d36e570f8, type: 2}
