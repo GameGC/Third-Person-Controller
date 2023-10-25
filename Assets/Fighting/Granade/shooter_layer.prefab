@@ -32,8 +32,6 @@ Transform:
   - {fileID: 6283030972520366874}
   - {fileID: 4012153348370244056}
   - {fileID: 4992545310367862302}
-  - {fileID: 6283030972199485661}
-  - {fileID: 4012153349453200279}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61,6 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4012153348370244056}
   - component: {fileID: 4012153348370244059}
+  - component: {fileID: 3215821323897776144}
   m_Layer: 2
   m_Name: BodyAim
   m_TagString: Untagged
@@ -125,7 +124,7 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: 0
+    m_MinLimit: -35
     m_MaxLimit: 75
     m_AimAxis: 4
     m_UpAxis: 2
@@ -137,62 +136,24 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
---- !u!1 &4012153349453200276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4012153349453200279}
-  - component: {fileID: 4012153349453200278}
-  m_Layer: 2
-  m_Name: SecondAimRig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4012153349453200279
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4012153349453200276}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2726598440744615247}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4012153349453200278
+--- !u!114 &3215821323897776144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4012153349453200276}
+  m_GameObject: {fileID: 4012153348370244057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Script: {fileID: 11500000, guid: ef7d093c899b84992b2dab2886b040a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
-  m_Data:
-    m_Root: {fileID: 0}
-    m_Mid: {fileID: 0}
-    m_Tip: {fileID: 0}
-    m_Target: {fileID: 0}
-    m_Hint: {fileID: 0}
-    m_TargetPositionWeight: 1
-    m_TargetRotationWeight: 1
-    m_HintWeight: 1
-    m_MaintainTargetPositionOffset: 0
-    m_MaintainTargetRotationOffset: 0
+  transformPathes:
+  - Hips/Spine
+  - 
+  - MainCamera/Sphere
+  target: {fileID: 4012153348370244059}
+  AllPropertyCount: 3
 --- !u!1 &4992545310367862301
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4992545310367862302}
   - component: {fileID: 4992545310367862303}
+  - component: {fileID: 1660592474574499358}
   m_Layer: 2
   m_Name: HandAim
   m_TagString: Untagged
@@ -279,62 +241,24 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
---- !u!1 &6283030972199485650
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6283030972199485661}
-  - component: {fileID: 6283030972199485660}
-  m_Layer: 2
-  m_Name: RightHandRig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6283030972199485661
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6283030972199485650}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2726598440744615247}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6283030972199485660
+--- !u!114 &1660592474574499358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6283030972199485650}
+  m_GameObject: {fileID: 4992545310367862301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Script: {fileID: 11500000, guid: ef7d093c899b84992b2dab2886b040a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
-  m_Data:
-    m_Root: {fileID: 0}
-    m_Mid: {fileID: 0}
-    m_Tip: {fileID: 0}
-    m_Target: {fileID: 0}
-    m_Hint: {fileID: 0}
-    m_TargetPositionWeight: 1
-    m_TargetRotationWeight: 1
-    m_HintWeight: 1
-    m_MaintainTargetPositionOffset: 0
-    m_MaintainTargetRotationOffset: 0
+  transformPathes:
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand
+  - 
+  - MainCamera/Sphere
+  target: {fileID: 4992545310367862303}
+  AllPropertyCount: 3
 --- !u!1 &6283030972520366875
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6283030972520366874}
   - component: {fileID: 6283030972520366853}
+  - component: {fileID: 6803655976249839703}
   m_Layer: 2
   m_Name: HeadAim
   m_TagString: Untagged
@@ -409,7 +334,7 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: 0
+    m_MinLimit: -180
     m_MaxLimit: 180
     m_AimAxis: 4
     m_UpAxis: 2
@@ -421,3 +346,21 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
+--- !u!114 &6803655976249839703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6283030972520366875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7d093c899b84992b2dab2886b040a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPathes:
+  - Hips/Spine/Spine1/Spine2/Neck/Head
+  - 
+  - MainCamera/Sphere
+  target: {fileID: 6283030972520366853}
+  AllPropertyCount: 3

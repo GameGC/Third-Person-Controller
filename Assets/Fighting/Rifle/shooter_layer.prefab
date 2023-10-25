@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828172455005609341}
   - component: {fileID: 828172455005609314}
+  - component: {fileID: 9060423078620656127}
   m_Layer: 2
   m_Name: HeadAim
   m_TagString: Untagged
@@ -86,6 +87,24 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
+--- !u!114 &9060423078620656127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828172455005609340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7d093c899b84992b2dab2886b040a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPathes:
+  - Hips/Spine/Spine1/Spine2/Neck/Head
+  - 
+  - MainCamera/Sphere
+  target: {fileID: 828172455005609314}
+  AllPropertyCount: 3
 --- !u!1 &828172455892721333
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828172455892721338}
   - component: {fileID: 828172455892721339}
+  - component: {fileID: 1237831838848648103}
   m_Layer: 2
   m_Name: RightHandRig
   m_TagString: Untagged
@@ -142,6 +162,25 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!114 &1237831838848648103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828172455892721333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09825935823774c6c95c6483034d8995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPathes:
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Pistol_RightAimRig_target
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/Pistol_RightAimRig_hint
+  target: {fileID: 828172455892721339}
 --- !u!1 &1803296473924833402
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803296473924833401}
   - component: {fileID: 1803296473924833400}
+  - component: {fileID: 3809477763850145718}
   m_Layer: 2
   m_Name: HandAim
   m_TagString: Untagged
@@ -228,6 +268,24 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
+--- !u!114 &3809477763850145718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803296473924833402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7d093c899b84992b2dab2886b040a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPathes:
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand
+  - 
+  - MainCamera/Sphere
+  target: {fileID: 1803296473924833400}
+  AllPropertyCount: 3
 --- !u!1 &7773640813539852222
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7773640813539852223}
   - component: {fileID: 7773640813539852220}
+  - component: {fileID: 1114222739922028984}
   m_Layer: 2
   m_Name: BodyAim
   m_TagString: Untagged
@@ -314,6 +373,24 @@ MonoBehaviour:
       x: 1
       y: 1
       z: 1
+--- !u!114 &1114222739922028984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773640813539852222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7d093c899b84992b2dab2886b040a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPathes:
+  - Hips/Spine
+  - 
+  - MainCamera/Sphere
+  target: {fileID: 7773640813539852220}
+  AllPropertyCount: 3
 --- !u!1 &7773640814605428211
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7773640814605428208}
   - component: {fileID: 7773640814605428209}
+  - component: {fileID: 653842981067963293}
   m_Layer: 2
   m_Name: SecondAimRig
   m_TagString: Untagged
@@ -370,6 +448,25 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!114 &653842981067963293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773640814605428211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09825935823774c6c95c6483034d8995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPathes:
+  - Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm
+  - Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm
+  - Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Pistol_SecondAimRig_target
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/Pistol_SecondAimRig_hint
+  target: {fileID: 7773640814605428209}
 --- !u!1 &8762139834122937129
 GameObject:
   m_ObjectHideFlags: 0

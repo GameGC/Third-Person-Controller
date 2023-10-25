@@ -8,7 +8,7 @@
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.animation.rigging": "1.2.1"
       },
-      "hash": "f9922a1d96a40024398d632fa51067a8d15392e5"
+      "hash": "010abccbe70f51ac30c0a963af82d8031f2c8a1b"
     },
     "com.gamegc.collections": {
       "version": "https://github.com/GameGC/GameGC.Collections.git",

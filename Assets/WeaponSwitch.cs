@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using Fighting.Pushing;
 using GameGC.Collections;
 using ThirdPersonController.Core.DI;
@@ -56,15 +57,15 @@ public class WeaponSwitch : MonoBehaviour
       var animator = GetComponent<Animator>();
       animator.enabled = false;
 
+      if(builder.layers.Count>0)
+         Destroy(builder.layers[0].rig.gameObject);
+      
       if (weapons[i].Item3)
       {
          var rig = Instantiate(weapons[i].Item3, parent);
          rig.name = weapons[i].Item3.name;
          
-         if(builder.layers.Count<1)
-            builder.layers.Add(default);
-
-         var oldConstaints = builder.layers[0].rig.GetComponentsInChildren<IRigConstraint>(true);
+        /* var oldConstaints = builder.layers[0].rig.GetComponentsInChildren<IRigConstraint>(true);
          var newConstaints = rig.GetComponentsInChildren<IRigConstraint>(true);
 
          foreach (var beh in oldConstaints)
@@ -100,11 +101,13 @@ public class WeaponSwitch : MonoBehaviour
             }
          }
          builder.Clear();
+*/
+         
+        builder.Clear();
 
-         if(builder.layers.Count>0)
-            Destroy(builder.layers[0].rig.gameObject);
-
-         builder.layers[0] = (new RigLayer(rig, true));
+         if(builder.layers.Count<1)
+            builder.layers.Add((new RigLayer(rig, true)));
+         else builder.layers[0] = (new RigLayer(rig, true));
       }
       else
       {
@@ -112,6 +115,7 @@ public class WeaponSwitch : MonoBehaviour
       }
 
       animator.UnbindAllStreamHandles();
+      await Task.Delay(1000);
       builder.Build();
       animator.enabled = true;
       fightingStateMachine = instance;
