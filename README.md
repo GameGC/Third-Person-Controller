@@ -1,5 +1,6 @@
 # Third-Person-Controller VERSION:alpha 0.2
 DO NOT USE IN COMERCIAL PROJECTS without permisions
+BRANCH IS IN DEVELOPMENT PROCESS
 
 ![](https://img.shields.io/badge/Rigidbody-8775FF)
 ![](https://img.shields.io/badge/StateMachine-8775FF)
