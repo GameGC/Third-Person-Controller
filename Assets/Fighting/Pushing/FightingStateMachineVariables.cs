@@ -6,6 +6,8 @@ using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace Fighting.Pushing
 {
@@ -16,8 +18,19 @@ namespace Fighting.Pushing
         public bool couldAttack { get; set; } = true;
         public bool isCooldown { get; set; }
         public bool isReloading { get; set; }
+        public bool RequestedHolsterWeapon  { get; set; }
     }
     
+    public class HolsterTransition : BaseStateTransition
+    {
+        private IFightingStateMachineVariables _variables;
+        public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _variables= variables as IFightingStateMachineVariables;
+        }
+
+        public override bool couldHaveTransition => _variables.RequestedHolsterWeapon;
+    }
     public class AttackTransition : BaseStateTransition
     {
         [SerializeField] private bool isAttacking;
@@ -36,6 +49,32 @@ namespace Fighting.Pushing
             {
                 if (_input.IsAttack && isAttacking && _variables.couldAttack) return true;
                 else return _input.IsAttack == isAttacking;
+            }
+        }
+    }
+    
+    public class LongShootTransition : BaseStateTransition
+    {
+        [SerializeField] private InputActionReference shootButtonReference;
+
+        private IBaseInputReader _input;
+        private IFightingStateMachineVariables _variables;
+        public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _input = resolver.GetComponent<IBaseInputReader>();
+            _variables= variables as IFightingStateMachineVariables;
+        }
+
+        public override bool couldHaveTransition
+        {
+            get
+            {
+                if (shootButtonReference.action.triggered)
+                {
+                    Debug.Log("sadagf");
+                    return true;
+                }
+                return false;
             }
         }
     }

@@ -14,8 +14,8 @@ using UnityEngine.InputSystem;
 
 public class WeaponSwitch : MonoBehaviour
 {
-   public STurple<string, GameObject, Rig>[] weapons;
-   public GameObject fightingStateMachine;
+   public STurple<string, CodeStateMachine, Rig>[] weapons;
+   public CodeStateMachine currentStateMachine;
    
 
    private void Update()
@@ -40,10 +40,13 @@ public class WeaponSwitch : MonoBehaviour
 
    private async void Switch(int i)
    {
-      if(fightingStateMachine.GetComponent<FightingStateMachine>()!=null &&fightingStateMachine.GetComponent<FightingStateMachine>().hasPutWeaponBackState)
-      await fightingStateMachine.GetComponent<FightingStateMachine>().WaitForPutBack();
+      // wait for previous Fighting Hide Animation
+      if (currentStateMachine !=null && currentStateMachine is FightingStateMachine fighting && fighting.hasPutWeaponBackState)
+         await fighting.RequestForPutBack();
+
+      Destroy(currentStateMachine.gameObject);
       
-      Destroy(fightingStateMachine);
+      //assign new Animations      
       var parent = transform.Find("StateMachines");
       var instance = Instantiate(weapons[i].Item2, parent);
       instance.GetComponent<CodeStateMachine>().ReferenceResolver = GetComponent<ReferenceResolver>();
@@ -57,53 +60,17 @@ public class WeaponSwitch : MonoBehaviour
       var animator = GetComponent<Animator>();
       animator.enabled = false;
 
+      // remove previous rig
       if(builder.layers.Count>0)
          Destroy(builder.layers[0].rig.gameObject);
       
+      //assign new Rig
       if (weapons[i].Item3)
       {
          var rig = Instantiate(weapons[i].Item3, parent);
          rig.name = weapons[i].Item3.name;
-         
-        /* var oldConstaints = builder.layers[0].rig.GetComponentsInChildren<IRigConstraint>(true);
-         var newConstaints = rig.GetComponentsInChildren<IRigConstraint>(true);
 
-         foreach (var beh in oldConstaints)
-         {
-            if (beh is MultiAimConstraint multi)
-            {
-               int newConst = Array.FindIndex(newConstaints,
-                  c => c.component.gameObject.name == multi.gameObject.name &&
-                       c.component.transform.GetSiblingIndex() == multi.transform.GetSiblingIndex());
-
-               if (newConst > -1)
-               {
-                  var newMulti = newConstaints[newConst] as MultiAimConstraint;
-                  newMulti.data.constrainedObject = multi.data.constrainedObject;
-                  newMulti.data.sourceObjects = multi.data.sourceObjects;
-               }
-            }
-            else if(beh is TwoBoneIKConstraint two)
-            {
-               int newConst = Array.FindIndex(newConstaints,
-                  c => c.component.gameObject.name == two.gameObject.name &&
-                       c.component.transform.GetSiblingIndex() == two.transform.GetSiblingIndex());
-               
-               if (newConst > -1)
-               {
-                  var newTwo = newConstaints[newConst] as TwoBoneIKConstraint;
-                  newTwo.data.hint = two.data.hint;
-                  newTwo.data.mid = two.data.mid;
-                  newTwo.data.root = two.data.root;
-                  newTwo.data.target = two.data.target;
-                  newTwo.data.tip = two.data.tip;
-               }
-            }
-         }
          builder.Clear();
-*/
-         
-        builder.Clear();
 
          if(builder.layers.Count<1)
             builder.layers.Add((new RigLayer(rig, true)));
@@ -114,10 +81,11 @@ public class WeaponSwitch : MonoBehaviour
          builder.layers.RemoveAt(0);
       }
 
+      // rebuild everything
       animator.UnbindAllStreamHandles();
       await Task.Delay(1000);
       builder.Build();
       animator.enabled = true;
-      fightingStateMachine = instance;
+      currentStateMachine = instance;
    }
 }

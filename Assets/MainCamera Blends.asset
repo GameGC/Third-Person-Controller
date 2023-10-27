@@ -25,7 +25,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: AimCam NewInput
-    m_To: FollowCamManager
+    m_To: FollowCam NewInput
     m_Blend:
       m_Style: 1
       m_Time: 2

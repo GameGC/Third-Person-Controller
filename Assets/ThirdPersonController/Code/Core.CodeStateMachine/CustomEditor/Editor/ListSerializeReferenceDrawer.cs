@@ -89,7 +89,8 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
                 if (couldDraw)
                 {
                     var attribute = GetAttributesForFieldF(iterator);
-                    DoListFooter(GetTargetProperty(iterator),attribute);
+                    if(attribute != null) 
+                        DoListFooter(GetTargetProperty(iterator),attribute);
                 }
                 next = iterator.NextVisible(true);
             }
@@ -131,13 +132,6 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
         {
             var menu = new GenericMenu();
 
-            // var typeName = list.serializedProperty.GetArrayElementAtIndex(0).managedReferenceFullTypename;
-            // var split = typeName.Split(" ");
-            // 
-            // var asm = Assembly.Load(split[0]);
-            // var _type = asm.GetType(split[1]).BaseType;
-
-          //  var attrInfo = (SerializeReferenceAddButton) attribute;
             List<Type> showTypes = GetNonAbstractTypesSubclassOf(attribute.baseType);
 
             foreach (var type in showTypes)
@@ -259,6 +253,72 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
      {
          label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
          EditorGUI.PropertyField(position, property,label,true);
+     }
+     
+     private string GetPropertyTypeName(SerializedProperty property)
+     {
+         string actionName = property.managedReferenceFullTypename.Split(" ").Last();
+
+         var split = actionName.Split('.');
+         if (split.Length > 2) 
+             actionName = split[^2] + '.' + split[^1];
+
+         return actionName;
+     }
+ }
+ 
+ [CustomPropertyDrawer(typeof(BaseStateTransition),true)]
+ public class BaseTransitionDrawer : PropertyDrawer
+ {
+     public static bool hideDestinationState;
+     
+     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+     {
+         return EditorGUI.GetPropertyHeight(property,label,true)
+                + (hideDestinationState && property.isExpanded? - EditorGUIUtility.singleLineHeight : 0);
+     }
+
+     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+     {
+         label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
+         if(!hideDestinationState) EditorGUI.PropertyField(position, property,label,true);
+         else
+         {
+             Rect temp = position;
+             temp.height = EditorGUIUtility.singleLineHeight;
+             position.height -= temp.height;
+             position.y += temp.height;
+             
+             EditorGUI.PropertyField(temp, property, label, false);
+             if (property.isExpanded)
+             {
+                 string basePath = property.propertyPath;
+
+                 property.NextVisible(true);
+                 if (property.name != "_transitionName" && property.name != "_transitionIndex")
+                 {
+                     temp = position;
+                     temp.height = EditorGUI.GetPropertyHeight(property);
+                     EditorGUI.PropertyField(temp, property, false);
+                     position.height -= temp.height;
+                     position.y += temp.height;
+                 }
+
+                 //pCount--;
+                 while (property.NextVisible(false) && property.propertyPath.StartsWith(basePath))
+                 {
+                     if (property.name != "_transitionName" && property.name != "_transitionIndex")
+                     {
+                         temp = position;
+                         temp.height = EditorGUI.GetPropertyHeight(property);
+                         EditorGUI.PropertyField(temp, property, false);
+                         position.height -= temp.height;
+                         position.y += temp.height;
+                     }
+                 }
+             }
+         }
+        
      }
      
      private string GetPropertyTypeName(SerializedProperty property)

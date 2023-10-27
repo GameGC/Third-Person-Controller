@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
 {
-    public bool isGranade;
-    
-    public Transform prefab;
+    public DefaultRaycastBullet prefab;
     public Transform spawnPoint;
     
     public GameObject muzzle;
@@ -18,24 +16,22 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
     public int totalAmmo = 1000; 
     public int ammoImMagazine = 5;
     
-    
-    
-    
     public float cooldownTime = 3;
+    [ClipToSeconds]
     public float reloadingTime = 10;
-
-
 
     private int remainingAmmo;
 
     private IFightingStateMachineVariables Variables;
-    private CinemachineImpulseSource _impulseSource;
-
     
+    private CinemachineImpulseSource _impulseSource;
+    private ShellDispancer _shellDispancer;
+
     public void CacheReferences(IFightingStateMachineVariables variables)
     {
         Variables = variables;
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+        _shellDispancer = GetComponent<ShellDispancer>();
     }
     private void Start()
     {
@@ -49,12 +45,6 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
         if (totalAmmo - ammoImMagazine <= 0) return;
         totalAmmo -= ammoImMagazine;
         remainingAmmo = ammoImMagazine;
-
-        if (isGranade)
-        {
-            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation,spawnPoint)
-                .GetComponent<GrenadeBullet>().enabled = false;
-        }
     }
 
     public void Shoot()
@@ -67,23 +57,14 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
         {
             remainingAmmo--;
             Variables.couldAttack = remainingAmmo > 0;
-            
 
-            if (isGranade)
-            {
-                var line = transform.root.Find("StateMachines").GetComponentInChildren<BalisticPreview>();
-                line.GenerateTrajectoryOut(out var points);
-                spawnPoint.GetChild(0).GetComponent<GrenadeBullet>().enabled = true;
-                spawnPoint.GetChild(0).GetComponent<GrenadeBullet>().Init(points);
-                spawnPoint.GetChild(0).SetParent(null);
-            }
-            else
-            {
-               Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-            }
+
+            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
             
             _impulseSource?.GenerateImpulse();
-                
+            
+            _shellDispancer?.OnShoot();
+            
             if (muzzle)
             {
                 muzzle.SetActive(true);
@@ -114,20 +95,12 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
         Variables.couldAttack = true;
     }
     
-    private void Cooldown()
-    {
-        if (isGranade)
-        {
-            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation,spawnPoint)
-                .GetComponent<GrenadeBullet>().enabled = false;
-        }
-        Variables.isCooldown = false;
-    }
+    private void Cooldown() => Variables.isCooldown = false;
 
     private void DisableMuzzle() =>muzzle.SetActive(false);
 
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.DrawLine(spawnPoint.position,spawnPoint.position+spawnPoint.forward*100);
     }

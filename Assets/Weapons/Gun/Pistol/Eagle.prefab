@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d7cf4a45ead7a448e24e2ea1a5028a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 420956, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
+  prefab: {fileID: 122534689024825775, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
   spawnPoint: {fileID: 1835416645751342516}
   muzzle: {fileID: 1841766752692672142}
   muzzleTime: 0.25
@@ -455,7 +455,7 @@ MonoBehaviour:
   totalAmmo: 1000
   ammoImMagazine: 5
   cooldownTime: 2
-  reloadingTime: 1.9
+  reloadingTime: 2.9
 --- !u!114 &1563936919696421680
 MonoBehaviour:
   m_ObjectHideFlags: 0

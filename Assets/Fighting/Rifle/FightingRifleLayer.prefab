@@ -73,6 +73,8 @@ MonoBehaviour:
     - rid: 2369756975662104578
     - rid: 2369756975662104579
     Transitions:
+    - rid: 2369757137951260685
+    - rid: 2369757137951260673
     - rid: 2369756975662104580
     - rid: 2369756975662104581
   - Name: Aim
@@ -81,6 +83,7 @@ MonoBehaviour:
     - rid: 2369756975662104583
     - rid: 2369756975662104584
     Transitions:
+    - rid: 2369757137951260675
     - rid: 2369756975662104585
     - rid: 2369756975662104586
   - Name: Shoot
@@ -95,6 +98,7 @@ MonoBehaviour:
     features:
     - rid: 2369756975662104592
     Transitions:
+    - rid: 2369757137951260676
     - rid: 2369756975662104593
     - rid: 2369756975662104594
     - rid: 2369756975662104595
@@ -102,7 +106,9 @@ MonoBehaviour:
   - Name: Reload
     features:
     - rid: 2369756975662104597
+    - rid: 2369757137951260672
     Transitions:
+    - rid: 2369757137951260677
     - rid: 2369756975662104598
     - rid: 2369756975662104599
   - Name: PutWeaponBackFromAim
@@ -146,14 +152,14 @@ MonoBehaviour:
       data:
         _transitionIndex: 3
         _transitionName: Shoot
-        path: states.Array.data[1].Transitions.Array.data[0]
+        path: states.Array.data[1].Transitions.Array.data[2]
         isAttacking: 1
     - rid: 2369756975662104581
       type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         _transitionIndex: 2
         _transitionName: Aim
-        path: states.Array.data[1].Transitions.Array.data[1]
+        path: states.Array.data[1].Transitions.Array.data[3]
         isAim: 1
     - rid: 2369756975662104582
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
@@ -178,14 +184,14 @@ MonoBehaviour:
       data:
         _transitionIndex: 3
         _transitionName: Shoot
-        path: states.Array.data[2].Transitions.Array.data[0]
+        path: states.Array.data[2].Transitions.Array.data[1]
         isAttacking: 1
     - rid: 2369756975662104586
       type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         _transitionIndex: 1
         _transitionName: Idle
-        path: states.Array.data[2].Transitions.Array.data[1]
+        path: states.Array.data[2].Transitions.Array.data[2]
         isAim: 0
     - rid: 2369756975662104587
       type: {class: ShootFeature, ns: Fighting.Pushing, asm: Assembly-CSharp}
@@ -222,16 +228,16 @@ MonoBehaviour:
     - rid: 2369756975662104593
       type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
-        _transitionIndex: 5
-        _transitionName: Reload
-        path: states.Array.data[4].Transitions.Array.data[0]
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[4].Transitions.Array.data[1]
         isReloading: 1
     - rid: 2369756975662104594
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
         _transitionIndex: 1
         _transitionName: Idle
-        path: states.Array.data[4].Transitions.Array.data[1]
+        path: states.Array.data[4].Transitions.Array.data[2]
         Transitions:
         - rid: 2369756975662104600
         - rid: 2369756975662104601
@@ -240,7 +246,7 @@ MonoBehaviour:
       data:
         _transitionIndex: 2
         _transitionName: Aim
-        path: states.Array.data[4].Transitions.Array.data[2]
+        path: states.Array.data[4].Transitions.Array.data[3]
         Transitions:
         - rid: 2369756975662104602
         - rid: 2369756975662104603
@@ -249,7 +255,7 @@ MonoBehaviour:
       data:
         _transitionIndex: 3
         _transitionName: Shoot
-        path: states.Array.data[4].Transitions.Array.data[3]
+        path: states.Array.data[4].Transitions.Array.data[4]
         Transitions:
         - rid: 2369756975662104604
         - rid: 2369756975662104605
@@ -265,7 +271,7 @@ MonoBehaviour:
       data:
         _transitionIndex: 1
         _transitionName: Idle
-        path: states.Array.data[5].Transitions.Array.data[0]
+        path: states.Array.data[5].Transitions.Array.data[1]
         Transitions:
         - rid: 2369756975662104606
         - rid: 2369756975662104607
@@ -274,7 +280,7 @@ MonoBehaviour:
       data:
         _transitionIndex: 2
         _transitionName: Aim
-        path: states.Array.data[5].Transitions.Array.data[1]
+        path: states.Array.data[5].Transitions.Array.data[2]
         Transitions:
         - rid: 2369756975662104608
         - rid: 2369756975662104609
@@ -352,7 +358,43 @@ MonoBehaviour:
       type: {class: DestroyWeaponAtHand, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[6].features.Array.data[0]
-        delay: 2.8666668
+        delay: 2.5
+    - rid: 2369757137951260672
+      type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[5].features.Array.data[1]
+        _cameraType: 0
+    - rid: 2369757137951260673
+      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 5
+        _transitionName: Reload
+        path: states.Array.data[1].Transitions.Array.data[1]
+        isReloading: 1
+    - rid: 2369757137951260675
+      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[2].Transitions.Array.data[0]
+    - rid: 2369757137951260676
+      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[4].Transitions.Array.data[0]
+    - rid: 2369757137951260677
+      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 1
+        _transitionName: Idle
+        path: states.Array.data[5].Transitions.Array.data[0]
+    - rid: 2369757137951260685
+      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        _transitionIndex: 6
+        _transitionName: PutWeaponBackFromAim
+        path: states.Array.data[1].Transitions.Array.data[0]
 --- !u!114 &1506062241905660166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,9 +424,9 @@ MonoBehaviour:
     - Key: Cooldown
       Value: {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
     - Key: Reload
-      Value: {fileID: 7400000, guid: 8a5acd41f59e0424c87de809ee3c223d, type: 3}
+      Value: {fileID: 7400000, guid: eb51a5b1ec48be04d8824319f99e9edf, type: 3}
     - Key: PutWeaponBackFromAim
-      Value: {fileID: 7400000, guid: 4c9d839a6fb41db469bc1ac2a714e6b8, type: 3}
+      Value: {fileID: 100084, guid: da4d8e56ecf9c7244b1936a6ebe1fbe0, type: 3}
   defaultTransition:
     time: 0.02
 --- !u!114 &-3723019905366359828

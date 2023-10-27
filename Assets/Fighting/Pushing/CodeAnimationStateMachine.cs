@@ -56,7 +56,7 @@ public class CodeAnimationStateMachine : CodeStateMachine
    //     GetComponent<AnimationLayer>().SDictionary = dict;
     
     [ContextMenu("Upgrade sec")]
-    void Upgrade2()
+    private void Upgrade2()
     {
         var stateMachine = gameObject.AddComponent<CodeStateMachine>();
         stateMachine.states = this.states;

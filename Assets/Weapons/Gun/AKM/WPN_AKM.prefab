@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 8492190204914902017}
   - component: {fileID: 9217136868478848954}
   - component: {fileID: -4560132979145315442}
+  - component: {fileID: 2998853927601559321}
   m_Layer: 0
   m_Name: WPN_AKM
   m_TagString: Untagged
@@ -251,15 +252,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d7cf4a45ead7a448e24e2ea1a5028a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 420956, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
+  prefab: {fileID: 122534689024825775, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
   spawnPoint: {fileID: 7210411419212002163}
   muzzle: {fileID: 1412079853349416998}
   muzzleTime: 0.25
   hasAutoReloadOnStart: 1
   totalAmmo: 1000
   ammoImMagazine: 45
-  cooldownTime: 0.01
-  reloadingTime: 1.9
+  cooldownTime: 0.001
+  reloadingTime: 5.3
 --- !u!114 &9217136868478848954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +327,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPrefab: {fileID: 8988634382487572944, guid: b73caf23ebf9c4e1fbc098a6133280e2, type: 3}
+--- !u!114 &2998853927601559321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460542305277932983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1d52ce96fb44b94bec8b63bb218c1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shell: {fileID: 6299609513703342833, guid: 9c865a5cdbd6143ce84442b10e9c4809, type: 3}
+  shellLifeTime: 4
+  relativePoint: {x: 0.015805244, y: 0.027996063, z: -0.04125476}
+  minVelocity: {x: 2.93, y: -2.31, z: -3.17}
+  maxVelocity: {x: 4.19, y: 2.31, z: 3.17}
+  minTorque: {x: -50, y: -50, z: -50}
+  maxTorque: {x: 50, y: 50, z: 50}
 --- !u!1 &460542305277932985
 GameObject:
   m_ObjectHideFlags: 0
