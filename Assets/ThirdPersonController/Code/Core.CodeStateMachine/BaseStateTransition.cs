@@ -8,6 +8,18 @@ namespace ThirdPersonController.Core.CodeStateMachine
     [Serializable]
     public abstract class BaseStateTransition
     {
+        // there issues in unity editor ,so this is a fix
+#if UNITY_EDITOR
+
+        [HideInInspector]
+        public string path;
+
+        public override int GetHashCode()
+        {
+            return path.GetHashCode();
+        }
+        
+#endif
         public State GetNextState(ref State[] states) => states[_transitionIndex];
 
         [SerializeField,StateTransition] private int _transitionIndex;
@@ -51,19 +63,5 @@ namespace ThirdPersonController.Core.CodeStateMachine
 
         public abstract void Initialise(IStateMachineVariables variables,IReferenceResolver resolver);
         public abstract bool couldHaveTransition { get; }
-        
-        
-        // there issues in unity editor ,so this is a fix
-#if UNITY_EDITOR
-
-        [HideInInspector]
-        public string path;
-
-        public override int GetHashCode()
-        {
-            return path.GetHashCode();
-        }
-        
-#endif
     }
 }

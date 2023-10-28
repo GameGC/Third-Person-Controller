@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Timers;
+using Fighting.Pushing;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
@@ -48,6 +50,44 @@ public class DelayedTransition : BaseStateTransition
                 return true;
             }
 
+            return false;
+        }
+    }
+    
+    
+}
+
+public class EndPlayTransition : BaseStateTransition
+{
+    public string WaitForAnimationEnd;
+    
+    private AnimationLayer _layer;
+    private bool _wasStarted;
+
+    private Task waitTask;
+    
+    public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
+    {
+        _layer = (variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
+    }
+
+    
+    public override bool couldHaveTransition
+    {
+        get
+        {
+            if (!_wasStarted)
+            {
+                waitTask = _layer.WaitForAnimationFinish(WaitForAnimationEnd);
+                _wasStarted = true;
+            }
+
+            if (waitTask.IsCompleted)
+            {
+                waitTask = null;
+                _wasStarted = false;
+                return true;
+            }
             return false;
         }
     }

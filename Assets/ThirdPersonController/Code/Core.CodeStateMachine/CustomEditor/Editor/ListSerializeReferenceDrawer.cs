@@ -92,6 +92,11 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
                     if(attribute != null) 
                         DoListFooter(GetTargetProperty(iterator),attribute);
                 }
+                else
+                {
+                    if (iterator.name == "states")
+                        DoStateListFooter(iterator);
+                }
                 next = iterator.NextVisible(true);
             }
         }
@@ -126,8 +131,53 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             var reorderableList = m_ReorderableList.GetValue(element) as ReorderableList;
             reorderableList.onAddDropdownCallback = (rect, list) => OnReorderListAddDropdown(rect,list,attribute);
         }
-        
-        
+
+        public void DoStateListFooter(SerializedProperty property)
+        {
+            var resultID = GetPropertyIdentifier.Invoke(null, new[] {property});
+            var s_reorderableListsValue = s_reorderableLists.GetValue(null) as IDictionary;
+
+
+            var element = s_reorderableListsValue[resultID];
+            
+            if(element == null) return;
+            
+            var reorderableList = m_ReorderableList.GetValue(element) as ReorderableList;
+            reorderableList.onAddCallback = list =>
+            {
+
+                int index = list.selectedIndices.Count > 0
+                    ? list.selectedIndices[0]
+                    : list.count - 1;
+
+                list.ClearSelection();
+
+                
+                var stateMachine = list.serializedProperty.GetPropertyParent<StateMachine.CodeStateMachine>();
+                ref var states = ref stateMachine.states;
+
+                var copy = new State(states[index]);
+                copy.Name += " (1)";
+                ArrayUtility.Insert(ref states,index+1,copy);
+                list.serializedProperty.serializedObject.Update();
+                stateMachine.OnValidate();
+                return;
+                //var copy = list.serializedProperty.GetArrayElementAtIndex(index).Copy();
+                //var path = copy.propertyPath.Replace($"[{index}]", $"[{index+1}]");
+                //index++;
+                //
+                //var  featuresProp=   copy.FindPropertyRelative("features");
+                //for (int i = 0; i < featuresProp.arraySize; i++)
+                //{
+                //    var pathProperty = featuresProp.GetArrayElementAtIndex(i).FindPropertyRelative("path");
+                //    pathProperty.stringValue = pathProperty.stringValue.Replace(copy.propertyPath, path);
+                //}
+                //list.serializedProperty.arraySize++;
+              //  list.serializedProperty.GetArrayElementAtIndex(index).obj = copy.managedReferenceValue;
+            };
+        }
+
+
         private void OnReorderListAddDropdown(Rect buttonRect, ReorderableList list,SerializeReferenceAddButton attribute)
         {
             var menu = new GenericMenu();
@@ -140,9 +190,9 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
                 // UX improvement: If no elements are available the add button should be faded out or
                 // just not visible.
-                bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
-                if (alreadyHasIt)
-                    continue;
+                //bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
+                //if (alreadyHasIt)
+                //    continue;
 
                 InsertSpaceBeforeCaps(ref actionName);
                 var dynamicType =
@@ -251,6 +301,7 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
      public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
      {
+         property.FindPropertyRelative("path").stringValue = property.propertyPath;
          label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
          EditorGUI.PropertyField(position, property,label,true);
      }
@@ -332,6 +383,79 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
          return actionName;
      }
  }
+ 
+public static class GCUtils
+{
+    public static T GetProperty<T>(this SerializedProperty prop) => (T) GetProperty(prop);
+    public static object GetProperty(this SerializedProperty prop)
+    {
+        var path = prop.propertyPath.Replace(".Array.data[", "[");
+        object obj = prop.serializedObject.targetObject;
+        var elements = path.Split('.');
+        foreach (var element in elements)
+        {
+            if (element.Contains("["))
+            {
+                var elementName = element.Substring(0, element.IndexOf("["));
+                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                obj = GetValue(obj, elementName, index);
+            }
+            else
+            {
+                obj = GetValue(obj, element);
+            }
+        }
+
+        return obj;
+    }
+
+    public static T GetPropertyParent<T>(this SerializedProperty prop) => (T) GetPropertyParent(prop);
+    public static object GetPropertyParent(this SerializedProperty prop)
+    {
+        var path = prop.propertyPath.Replace(".Array.data[", "[");
+        object obj = prop.serializedObject.targetObject;
+        var elements = path.Split('.');
+        foreach (var element in elements.Take(elements.Length - 1))
+        {
+            if (element.Contains("["))
+            {
+                var elementName = element.Substring(0, element.IndexOf("["));
+                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                obj = GetValue(obj, elementName, index);
+            }
+            else
+            {
+                obj = GetValue(obj, element);
+            }
+        }
+
+        return obj;
+    }
+
+    private static object GetValue(object source, string name)
+    {
+        if (source == null) return null;
+        var type = source.GetType();
+        var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+        if (f == null)
+        {
+            var p = type.GetProperty(name,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+            if (p == null) return null;
+            return p.GetValue(source, null);
+        }
+
+        return f.GetValue(source);
+    }
+
+    private static object GetValue(object source, string name, int index)
+    {
+        var enumerable = GetValue(source, name) as IEnumerable;
+        var enm = enumerable.GetEnumerator();
+        while (index-- >= 0) enm.MoveNext();
+        return enm.Current;
+    }
+}
 }
 
 #endif

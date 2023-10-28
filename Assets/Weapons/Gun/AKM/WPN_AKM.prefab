@@ -258,9 +258,11 @@ MonoBehaviour:
   muzzleTime: 0.25
   hasAutoReloadOnStart: 1
   totalAmmo: 1000
-  ammoImMagazine: 45
-  cooldownTime: 0.001
+  ammoImMagazine: 30
+  cooldownTime: 0.25
   reloadingTime: 5.3
+  calcFormat: 0
+  maxShootsPerMinute: 0
 --- !u!114 &9217136868478848954
 MonoBehaviour:
   m_ObjectHideFlags: 0

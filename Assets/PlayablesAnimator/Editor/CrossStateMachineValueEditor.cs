@@ -20,7 +20,7 @@ public class CrossStateMachineValueEditor : PropertyDrawer
     private bool inited = false;
     private void OnEnable(SerializedProperty p)
     {
-        target = (CrossStateMachineValue) GetParent(p);
+        target = p.GetProperty<CrossStateMachineValue>();
         AnimatorController controller = null;
         if (target.Controller is AnimatorController c) controller = c; 
         else if (target.Controller is AnimatorOverrideController ov)
@@ -69,18 +69,22 @@ public class CrossStateMachineValueEditor : PropertyDrawer
                 GetAllStates(childStateMachines, statesResult);
         }
     }
-    
-    public object GetParent(SerializedProperty prop)
+}
+
+public static class GCUtils
+{
+    public static T GetProperty<T>(this SerializedProperty prop) => (T) GetProperty(prop);
+    public static object GetProperty(this SerializedProperty prop)
     {
         var path = prop.propertyPath.Replace(".Array.data[", "[");
         object obj = prop.serializedObject.targetObject;
         var elements = path.Split('.');
-        foreach(var element in elements)
+        foreach (var element in elements)
         {
-            if(element.Contains("["))
+            if (element.Contains("["))
             {
                 var elementName = element.Substring(0, element.IndexOf("["));
-                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[","").Replace("]",""));
+                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
                 obj = GetValue(obj, elementName, index);
             }
             else
@@ -88,32 +92,54 @@ public class CrossStateMachineValueEditor : PropertyDrawer
                 obj = GetValue(obj, element);
             }
         }
+
         return obj;
     }
 
-    public object GetValue(object source, string name)
+    public static T GetPropertyParent<T>(this SerializedProperty prop) => (T) GetPropertyParent(prop);
+    public static object GetPropertyParent(this SerializedProperty prop)
     {
-        if(source == null)
-            return null;
+        var path = prop.propertyPath.Replace(".Array.data[", "[");
+        object obj = prop.serializedObject.targetObject;
+        var elements = path.Split('.');
+        foreach (var element in elements.Take(elements.Length - 1))
+        {
+            if (element.Contains("["))
+            {
+                var elementName = element.Substring(0, element.IndexOf("["));
+                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                obj = GetValue(obj, elementName, index);
+            }
+            else
+            {
+                obj = GetValue(obj, element);
+            }
+        }
+
+        return obj;
+    }
+
+    private static object GetValue(object source, string name)
+    {
+        if (source == null) return null;
         var type = source.GetType();
         var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-        if(f == null)
+        if (f == null)
         {
-            var p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-            if(p == null)
-                return null;
+            var p = type.GetProperty(name,
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+            if (p == null) return null;
             return p.GetValue(source, null);
         }
+
         return f.GetValue(source);
     }
 
-    public object GetValue(object source, string name, int index)
+    private static object GetValue(object source, string name, int index)
     {
         var enumerable = GetValue(source, name) as IEnumerable;
         var enm = enumerable.GetEnumerator();
-        while(index-- >= 0)
-            enm.MoveNext();
+        while (index-- >= 0) enm.MoveNext();
         return enm.Current;
     }
-    
 }

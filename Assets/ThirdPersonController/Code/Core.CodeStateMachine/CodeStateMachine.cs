@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.CodeStateMachine;
@@ -58,7 +59,7 @@ namespace ThirdPersonController.Core.StateMachine
         
 
 #if UNITY_EDITOR
-        private void OnValidate()
+        public void OnValidate()
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode) return;
             bool isDirty = false;
@@ -72,8 +73,14 @@ namespace ThirdPersonController.Core.StateMachine
 
                 for (var f = 0; f < codeState.features.Length; f++)
                 {
-                    codeState.features[f].path =
-                        features.GetArrayElementAtIndex(f).propertyPath;
+                    try
+                    {
+                        codeState.features[f].path =
+                            features.GetArrayElementAtIndex(f).propertyPath;
+                    }
+                    catch (Exception e)
+                    {
+                    }
                 }
 
 
@@ -84,8 +91,7 @@ namespace ThirdPersonController.Core.StateMachine
                     if (codeStateTransition == null) continue;
                       
                     isDirty = codeStateTransition.ValidateTransition(ref states);
-                    codeStateTransition.path =
-                        Transitions.GetArrayElementAtIndex(f).propertyPath;
+                    codeStateTransition.path = Transitions.GetArrayElementAtIndex(f).propertyPath;
                 }
                 
                 foreach (var codeStateTransition in codeState.Transitions)
@@ -99,6 +105,52 @@ namespace ThirdPersonController.Core.StateMachine
 
             if(isDirty)
                 EditorUtility.SetDirty(this);
+        }
+
+        /// <summary>
+        /// sometime bugs happens and transitions and features across different states become
+        /// one objects non unique,this function is to fix that bug after reason found
+        /// </summary>
+        [ContextMenu("Repair")]
+        public void Repair()
+        {
+            var copy = states.Clone() as State[];
+            states = new State[copy.Length];
+            
+            var statesProp = new SerializedObject(this).FindProperty("states"); 
+            for (int i = 0; i < states.Length; i++)
+            {
+                states[i] = new State(copy[i]);
+                statesProp.serializedObject.Update();
+                var features = statesProp.GetArrayElementAtIndex(i).FindPropertyRelative("features");
+
+                for (var f = 0; f < states[i].features.Length; f++)
+                {
+                    try
+                    {
+                        states[i].features[f].path =
+                            features.GetArrayElementAtIndex(f).propertyPath;
+                    }
+                    catch (Exception e)
+                    {
+                        
+                    }
+                }
+
+                var transitions = statesProp.GetArrayElementAtIndex(i).FindPropertyRelative("Transitions");
+                for (var f = 0; f < states[i].Transitions.Length; f++)
+                {
+                    try
+                    {
+                        states[i].Transitions[f].path =
+                            transitions.GetArrayElementAtIndex(f).propertyPath;
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
+            }
+            OnValidate();
         }
 #endif
 

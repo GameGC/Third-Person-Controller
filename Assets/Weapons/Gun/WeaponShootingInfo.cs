@@ -20,6 +20,9 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
     [ClipToSeconds]
     public float reloadingTime = 10;
 
+    public bool calcFormat;
+    public int maxShootsPerMinute;
+    
     private int remainingAmmo;
 
     private IFightingStateMachineVariables Variables;
@@ -32,6 +35,12 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
         Variables = variables;
         _impulseSource = GetComponent<CinemachineImpulseSource>();
         _shellDispancer = GetComponent<ShellDispancer>();
+
+        if (calcFormat)
+        {
+            float reloadsPerMinute = (float)maxShootsPerMinute / ammoImMagazine;
+            reloadingTime = 60f / reloadsPerMinute;
+        }
     }
     private void Start()
     {

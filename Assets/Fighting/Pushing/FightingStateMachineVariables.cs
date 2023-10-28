@@ -65,22 +65,13 @@ namespace Fighting.Pushing
             _variables= variables as IFightingStateMachineVariables;
         }
 
-        public override bool couldHaveTransition
-        {
-            get
-            {
-                if (shootButtonReference.action.triggered)
-                {
-                    Debug.Log("sadagf");
-                    return true;
-                }
-                return false;
-            }
-        }
+        public override bool couldHaveTransition => shootButtonReference.action.phase == InputActionPhase.Performed;
     }
 
     public class ShootFeature : BaseFeature
     {
+        public string waitForStateWeightName = "Shoot";
+        
         private IWeaponInfo _shooter;
         private IFightingStateMachineVariables _variables;
 
@@ -103,7 +94,7 @@ namespace Fighting.Pushing
         private async void DelayShoot()
         {
             var animationController = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
-            await animationController.WaitForStateWeight1("Shoot");
+            await animationController.WaitForStateWeight1(waitForStateWeightName);
             _handAimConstaint.weight = 0;
             _shooter.Shoot();
         }

@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ThirdPersonController.Core.CodeStateMachine;
+using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using State = ThirdPersonController.Core.CodeStateMachine.State;
 
 [CustomEditor(typeof(FightingStateMachine))]
 public class FightingStateMachineEditor : Editor
@@ -43,8 +46,16 @@ public class FightingStateMachineEditor : Editor
                 {
                     if (hasEnterState && !target.hasGetWeaponState)
                     {
-                        _states.InsertArrayElementAtIndex(0);
-                        _states.GetArrayElementAtIndex(0).FindPropertyRelative("Name").stringValue = "GetWeapon";
+                        var stateMachine = _states.GetPropertyParent<CodeStateMachine>();
+                        ref var states = ref stateMachine.states;
+
+                        var copy = new State
+                        {
+                            Name = "GetWeapon"
+                        };
+                        ArrayUtility.Insert(ref states,0,copy);
+                        _states.serializedObject.Update();
+                        stateMachine.OnValidate();
                     }
                     else if(!hasEnterState && target.hasGetWeaponState) 
                         _states.DeleteArrayElementAtIndex(0);
@@ -62,8 +73,16 @@ public class FightingStateMachineEditor : Editor
                 {
                     if (hasEnterState && !target.hasGetWeaponState)
                     {
-                        _states.InsertArrayElementAtIndex(_states.arraySize-1);
-                        _states.GetArrayElementAtIndex(_states.arraySize-1).FindPropertyRelative("Name").stringValue = "PutWeaponBackFromAim";
+                        var stateMachine = _states.GetPropertyParent<CodeStateMachine>();
+                        ref var states = ref stateMachine.states;
+
+                        var copy = new State
+                        {
+                            Name = "PutWeaponBackFromAim"
+                        };
+                        ArrayUtility.Insert(ref states,_states.arraySize-1,copy);
+                        _states.serializedObject.Update();
+                        stateMachine.OnValidate();
                     }
                     else if(!hasEnterState && target.hasGetWeaponState) 
                         _states.DeleteArrayElementAtIndex(_states.arraySize-1);
@@ -95,10 +114,21 @@ public class FightingStateMachineEditor : Editor
                     };
                     _stateList.onAddCallback += list =>
                     {
-                        int index = _stateList.selectedIndices.Count > 0 ?
-                            _stateList.selectedIndices[0] : target.hasPutWeaponBackState ?_stateList.count - 2 :_stateList.count - 1;
-                        
-                        _states.InsertArrayElementAtIndex(index);
+                        int index = list.selectedIndices.Count > 0
+                            ? list.selectedIndices[0]
+                            : list.count - 1;
+
+                        list.ClearSelection();
+
+                
+                        var stateMachine = list.serializedProperty.GetPropertyParent<CodeStateMachine>();
+                        ref var states = ref stateMachine.states;
+
+                        var copy = new State(states[index]);
+                        copy.Name += " (1)";
+                        ArrayUtility.Insert(ref states,index+1,copy);
+                        list.serializedProperty.serializedObject.Update();
+                        stateMachine.OnValidate();
                     };
                 }
                 
