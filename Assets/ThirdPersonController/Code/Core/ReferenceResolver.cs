@@ -22,12 +22,13 @@ namespace ThirdPersonController.Core.DI
 
         private void Start()
         {
+            isReady = true;
             if (!releaseMemoryOnStart) return;
             cachedComponents.Clear();
             cachedComponents = null;
         }
 
-        public bool isReady { get; set; } = true;
+        public bool isReady { get; set; } = false;
 
         public new T GetComponent<T>()
         {

@@ -3275,6 +3275,10 @@ PrefabInstance:
       propertyPath: managedReferences[-2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1506062241905660166, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
+      propertyPath: States._keyValuePairs.Array.data[5].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: d1c23f124764742bd96fc875181640db, type: 2}
     - target: {fileID: 1506062242848116304, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
       propertyPath: m_RootOrder
       value: 1

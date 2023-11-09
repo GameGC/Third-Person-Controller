@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: -6232933178388690382}
   - component: {fileID: 4711476508975331510}
   - component: {fileID: 1563936919696421680}
+  - component: {fileID: 3574508149782771116}
   m_Layer: 0
   m_Name: Eagle
   m_TagString: Untagged
@@ -456,6 +457,11 @@ MonoBehaviour:
   ammoImMagazine: 5
   cooldownTime: 2
   reloadingTime: 2.9
+  calcFormat: 0
+  maxShootsPerMinute: 0
+  clipElement: {fileID: 8907101463742682132}
+  localPositionInLeftHand: {x: -0.002, y: 0.0937, z: 0.0272}
+  localRotationInLeftHand: {x: -0.04054224, y: -0.64922017, z: -0.2173118, w: -0.72776717}
 --- !u!114 &1563936919696421680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +515,51 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: 0, z: -0.1}
+--- !u!114 &3574508149782771116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903231967639380790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 465695d8ec5834e71a9a1828c668533c, type: 2}
+    - {fileID: 11400000, guid: 06522124a9d5141d9abdee42aaf80271, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4711476508975331510}
+          m_TargetAssemblyTypeName: WeaponShootingInfo, Assembly-CSharp
+          m_MethodName: AttachToLeftHand
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4711476508975331510}
+          m_TargetAssemblyTypeName: WeaponShootingInfo, Assembly-CSharp
+          m_MethodName: AttachToRightHand
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1840130151297496896
 PrefabInstance:
   m_ObjectHideFlags: 0

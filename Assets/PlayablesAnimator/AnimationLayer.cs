@@ -1,12 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using DefaultNamespace;
+using Fighting.Pushing;
 using GameGC.Collections;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Audio;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using UnityEngine.Timeline;
@@ -17,6 +21,7 @@ public abstract class AnimationValue : ScriptableObject
     public abstract Playable GetPlayable(PlayableGraph graph,GameObject root);
 }
 
+
 public class AnimationLayer : MonoBehaviour
 {
     public bool autoSyncWithOtherStateMachine = true;
@@ -26,7 +31,6 @@ public class AnimationLayer : MonoBehaviour
     public bool isAdditive;
 
 
-    [FormerlySerializedAs("SDictionary")]
     public SDictionary<string, Object> States;
     public AnimationTransition defaultTransition;
 
@@ -66,7 +70,14 @@ public class AnimationLayer : MonoBehaviour
             switch (element.Value)
             {
                 case AnimationClip clip:            playable = AnimationClipPlayable.Create(graph, clip);break;
-                case TimelineAsset asset:           playable = asset.CreatePlayable(graph, root);                break;
+                case TimelineAsset asset:
+                {
+                    playable = asset.CreatePlayable(graph, root);;
+                    Graph = new TimelineGraph();
+                    Graph.Create(asset, root, ref playable);
+                    //playable = asset.CreatePlayable(graph, root);
+                    break;
+                }
                 case AnimationValue animationValue: playable = animationValue.GetPlayable(graph, root);          break;
             }
             graph.Connect(playable, 0, _mixerPlayable, i);
@@ -76,8 +87,15 @@ public class AnimationLayer : MonoBehaviour
         return _mixerPlayable;
     }
 
+    public TimelineGraph Graph;
     private void OnStateChanged()
     {
+        Graph.Stop();
+        //for (int i = 1; i <  _mixerPlayable.GetGraph().GetOutputCount(); i++)
+        //{
+        //    _mixerPlayable.GetGraph().DestroyOutput(_mixerPlayable.GetGraph().GetOutput(i));
+        //}
+        
         if (defaultTransition.time == 0)
             SyncedTransition();
         else
@@ -136,9 +154,72 @@ public class AnimationLayer : MonoBehaviour
         try
         {
             newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
-            var playable = _mixerPlayable.GetInput(newIndex);
-            if(!playable.IsNull() && playable.IsValid())
-                playable.SetTime(0);
+            if (States[CurrentState] is AnimationClip clip && !clip.isLooping)
+            {
+                var playable = _mixerPlayable.GetInput(newIndex);
+                if (!playable.IsNull() && playable.IsValid())
+                    playable.SetTime(0);
+            }
+            else if(States[CurrentState] is TimelineAsset asset)
+            {
+                var playable = _mixerPlayable.GetInput(newIndex);
+                if (!playable.IsNull() && playable.IsValid())
+                    playable.SetTime(0);
+
+                Graph.Play();
+                /*
+                int index = 0;
+                bool scriptCreated = false;
+                var graph = _mixerPlayable.GetGraph();
+                foreach (var outputTrack in asset.GetOutputTracks())
+                {
+                    if (index < 1)
+                    {
+                        index++;
+                        continue;
+                    }
+                    
+                    switch (outputTrack)
+                    {
+                        case ActivationTrack activationTrack:ScriptPlayableOutput.Create(graph, outputTrack.name); break;
+                        case AnimationTrack animationTrack: AnimationPlayableOutput.Create(graph, outputTrack.name, null); break;
+                        case AudioTrack audioTrack: AudioPlayableOutput.Create(graph, outputTrack.name, null); break;
+                        case ControlTrack controlTrack: ScriptPlayableOutput.Create(graph, outputTrack.name); break;
+                        case SignalTrack signalTrack: ScriptPlayableOutput.Create(graph, outputTrack.name); break;
+                        case MarkerTrack markerTrack: ScriptPlayableOutput.Create(graph, outputTrack.name); break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(outputTrack));
+                    }
+
+                    index++;
+                }
+                
+                var script = (ScriptPlayableOutput) playable.GetGraph().GetOutput(1);
+                
+                var receiver = GetComponent<FightingStateMachineVariables>().weaponInstance
+                    .GetComponent<SignalReceiver>();
+                script.AddNotificationReceiver(receiver);
+
+                Debug.Log(receiver);
+                
+                script.SetSourcePlayable(playable);
+
+              */
+
+                
+         
+          //     var script = (ScriptPlayableOutput) playable.GetGraph().GetOutput(1);
+          //     script.GetSourcePlayable().SetInputWeight(0,1);
+          //     script.GetSourcePlayable().Pause();
+          //     script.GetSourcePlayable().SetTime(0);
+          //     script.GetSourcePlayable().Play();
+          //     
+          //    // (playable.GetOutput(1).GetOutput(0) as ScriptPlayable<TimeNotificationBehaviour>).GetBehaviour().
+                
+                //script.SetReferenceObject(GetComponent<FightingStateMachineVariables>().weaponInstance.GetComponent<SignalReceiver>());
+                //script.SetUserData(GetComponent<FightingStateMachineVariables>().weaponInstance.GetComponent<SignalReceiver>());
+
+            }
         }
         catch (Exception e)
         {
@@ -158,6 +239,21 @@ public class AnimationLayer : MonoBehaviour
         
         _mixerPlayable.SetInputWeight(previousIndex,0);
         _mixerPlayable.SetInputWeight(newIndex,1);
+        
+        if(States[CurrentState] is TimelineAsset a)
+        {
+            var playable = _mixerPlayable.GetInput(newIndex);
+            if (!playable.IsNull() && playable.IsValid())
+                playable.SetTime(0);
+       //        
+       //    for (int j = 0; j < playable.GetGraph().GetOutputCount(); j++)
+       //    {
+       //        // (asset.GetOutputTrack(0) as SignalTrack).
+       //        //   playable.GetGraph().GetOutput(j).
+       //        var ouput = playable.GetGraph().GetOutput(j);
+       //        Debug.Log(j+" "+ playable.GetGraph().GetOutput(j).GetPlayableOutputType());
+       //    }
+        }
     }
 
 

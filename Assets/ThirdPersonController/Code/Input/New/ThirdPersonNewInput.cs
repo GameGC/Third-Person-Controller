@@ -20,9 +20,9 @@ namespace ThirdPersonController.Input
         {
             _cameraMain = Camera.main.transform;
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
+//
             var cameraObject = FindObjectsOfType<CameraInputProvider>(true);
             foreach (var cameraInputProvider in cameraObject) 
                 cameraInputProvider._inputReader = this;

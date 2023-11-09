@@ -1,12 +1,13 @@
 using GameGC.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ExtendedAnimationLayer : AnimationLayer
 {
     private Animator _mecanicAnimator;
 
-    public SKeyValuePair<CrossStateMachineValue,AnimationClip>[] extendedStates;
+    public SKeyValuePair<CrossStateMachineValue,AnimationClip>[] overrideStates;
 
     protected override void Awake()
     {
@@ -19,9 +20,9 @@ public class ExtendedAnimationLayer : AnimationLayer
         if(!_mecanicAnimator)
             _mecanicAnimator = GetComponentInParent<Animator>();
 
-        for (var i = 0; i < extendedStates.Length; i++)
+        for (var i = 0; i < overrideStates.Length; i++)
         {
-            ref var keyValuePair = ref extendedStates[i];
+            ref var keyValuePair = ref overrideStates[i];
             keyValuePair.Key.Controller = _mecanicAnimator.runtimeAnimatorController;
             keyValuePair.Key.Layer = this;
         }
@@ -43,19 +44,19 @@ public class ExtendedAnimationLayer : AnimationLayer
     {
         //discard previous
         var state = _mecanicAnimator.GetCurrentAnimatorStateInfo(0);
-        int OverrideIndex = ArrayUtility.FindIndex(extendedStates,s=>s.Key.playableState == CurrentState && state.IsName(s.Key.mecanicState));
+        int OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableState == CurrentState && state.IsName(s.Key.mecanicState));
         if (OverrideIndex > -1)
-            GetComponentInParent<HybridAnimator>().DiscardAnimClip(extendedStates[OverrideIndex].Value);
+            GetComponentInParent<HybridAnimator>().DiscardAnimClip(overrideStates[OverrideIndex].Value);
 
         var nextState= _codeStateMachine.CurrentState.Name;
         
         //override new one
         state = _mecanicAnimator.GetCurrentAnimatorStateInfo(0);
-        OverrideIndex = ArrayUtility.FindIndex(extendedStates,s=>s.Key.playableState == nextState && state.IsName(s.Key.mecanicState));
+        OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableState == nextState && state.IsName(s.Key.mecanicState));
         if (OverrideIndex > -1)
         {
             var  lips = _mecanicAnimator.GetCurrentAnimatorClipInfo(0);
-            GetComponentInParent<HybridAnimator>().OverrideAnimClip(lips[0].clip,extendedStates[OverrideIndex].Value);
+            GetComponentInParent<HybridAnimator>().OverrideAnimClip(lips[0].clip,overrideStates[OverrideIndex].Value);
         }
     }
 }

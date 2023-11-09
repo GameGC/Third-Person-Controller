@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
+using UnityEngine.Timeline;
 
 [RequireComponent(typeof(Animator))]
 public class HybridAnimator : MonoBehaviour
@@ -29,7 +30,9 @@ public class HybridAnimator : MonoBehaviour
         var playableOutput = AnimationPlayableOutput.Create(_playableGraph, "Animation", _animator);
         _layerPlayable = AnimationLayerMixerPlayable.Create(_playableGraph, stateMachines.Length+1);
         playableOutput.SetSourcePlayable(_layerPlayable);
+        
 
+        
         // Creates AnimationClipPlayable and connects them to the mixer.
         var animatorPlayable = AnimatorControllerPlayable.Create(_playableGraph, _animator.runtimeAnimatorController);
         
@@ -166,6 +169,8 @@ public class HybridAnimator : MonoBehaviour
         else
             _overridesCache.Add(new KeyValuePair<object, AnimationClip>(clipName,newClip));
     }
+
+    public void Fuck() => Debug.LogError("fuck");
 }
 
 public static class CollectionHelpers

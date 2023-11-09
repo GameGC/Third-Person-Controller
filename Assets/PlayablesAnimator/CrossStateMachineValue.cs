@@ -1,7 +1,9 @@
 using System;
+using GameGC.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using Object = UnityEngine.Object;
 
 [Serializable]
 public struct CrossStateMachineValue
@@ -15,4 +17,12 @@ public struct CrossStateMachineValue
     {
         return (mecanicState + "-" + playableState).GetHashCode();
     }
+}
+
+public class TransitionDependedStateMachineValue : ScriptableObject
+{
+    /// <summary>
+    /// string: playableState transition is from
+    /// </summary>
+    public SKeyValuePair<string, Object> states;
 }

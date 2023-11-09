@@ -36,6 +36,10 @@ public class WeaponSwitch : MonoBehaviour
       {
          Switch(3);
       }
+      if (Keyboard.current.digit4Key.wasPressedThisFrame)
+      {
+         Switch(4);
+      }
    }
 
    private async void Switch(int i)

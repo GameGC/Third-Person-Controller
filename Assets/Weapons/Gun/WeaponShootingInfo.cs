@@ -3,6 +3,7 @@ using Cinemachine;
 using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
+using Weapons;
 
 public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
 {
@@ -47,6 +48,8 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
         if (hasAutoReloadOnStart) 
             AutoReload();
     }
+
+    public void Fired() => Debug.LogError("event fired");
 
 
     private void AutoReload()
@@ -118,6 +121,21 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
     private void OnDisable()
     {
         CancelInvoke();
+    }
+
+    public Transform clipElement;
+    public Vector3 localPositionInLeftHand;
+    public Quaternion localRotationInLeftHand;
+    public void AttachToLeftHand()
+    {
+        clipElement.SetParent(transform.root.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.LeftHand));
+        clipElement.SetLocalPositionAndRotation(localPositionInLeftHand,localRotationInLeftHand);
+    }
+    
+    public void AttachToRightHand()
+    {
+        clipElement.SetParent(transform.root.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.RightHand));
+        GetComponent<WeaponOffset>().Invoke("Awake",0);
     }
 }
 

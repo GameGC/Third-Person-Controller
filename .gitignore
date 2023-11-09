@@ -78,3 +78,5 @@ mono_crash*.json
 Assets/UMotionEditor/
 UMotionData/
 Assets/UMotionEditor.meta
+Assets/AmplifyShaderEditor/
+/[Uu]IElementsSchema/
