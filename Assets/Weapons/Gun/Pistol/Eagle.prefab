@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: -6232933178388690382}
   - component: {fileID: 4711476508975331510}
   - component: {fileID: 1563936919696421680}
+  - component: {fileID: 1296255864080165920}
   - component: {fileID: 3574508149782771116}
   m_Layer: 0
   m_Name: Eagle
@@ -515,6 +516,26 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: 0, z: -0.1}
+--- !u!114 &1296255864080165920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903231967639380790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef82e4ba95c43f38fd0dff8a9a3c24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipElement: {fileID: 0}
+  localPositionInLeftHand: {x: 0, y: 0, z: 0}
+  localRotationInLeftHand: {x: 0, y: 0, z: 0, w: 0}
+  initialPosition:
+    value:
+      position: {x: -0.002, y: 0.0937, z: 0.0272}
+      rotation: {x: -0.04054224, y: -0.64922017, z: -0.2173118, w: -0.72776717}
+    <HasValue>k__BackingField: 1
 --- !u!114 &3574508149782771116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,8 +555,8 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4711476508975331510}
-          m_TargetAssemblyTypeName: WeaponShootingInfo, Assembly-CSharp
+        - m_Target: {fileID: 1296255864080165920}
+          m_TargetAssemblyTypeName: ClipPlaceModule, Assembly-CSharp
           m_MethodName: AttachToLeftHand
           m_Mode: 1
           m_Arguments:
@@ -548,8 +569,8 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4711476508975331510}
-          m_TargetAssemblyTypeName: WeaponShootingInfo, Assembly-CSharp
+        - m_Target: {fileID: 1296255864080165920}
+          m_TargetAssemblyTypeName: ClipPlaceModule, Assembly-CSharp
           m_MethodName: AttachToRightHand
           m_Mode: 1
           m_Arguments:

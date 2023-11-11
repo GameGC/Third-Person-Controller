@@ -15,7 +15,7 @@ public struct CrossStateMachineValue
 
     public override int GetHashCode()
     {
-        return (mecanicState + "-" + playableState).GetHashCode();
+        return (mecanicState + "-" + playableState).GetHashCode()+base.GetHashCode();
     }
 }
 

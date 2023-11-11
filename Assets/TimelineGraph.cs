@@ -35,6 +35,8 @@ namespace DefaultNamespace
                 {
                     case AnimationTrack: output = AnimationPlayableOutput.Create(_graph, outputTrack.name, null); break;
                     case AudioTrack:     output = AudioPlayableOutput.Create(_graph, outputTrack.name, null); break;
+                    case AnimationLegacyTrack: output = ScriptPlayableOutput.Create(_graph, outputTrack.name); break;
+                    
                     
                     case ActivationTrack:output = ScriptPlayableOutput.Create(_graph, outputTrack.name); break;
                     case ControlTrack:   output = ScriptPlayableOutput.Create(_graph, outputTrack.name); break;

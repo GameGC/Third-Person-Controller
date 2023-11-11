@@ -42,7 +42,8 @@ public class HybridAnimator : MonoBehaviour
         for (var i = 1; i < stateMachines.Length+1; i++)
         {
             var stateMachine = stateMachines[i-1];
-            _playableGraph.Connect(stateMachine.ConstructPlayable(_playableGraph,gameObject), 0, _layerPlayable, i);
+            _playableGraph.Connect(stateMachine.ConstructPlayable(_playableGraph,gameObject), 
+                0, _layerPlayable, i);
             
             if(stateMachine.avatarMask)
                 _layerPlayable.SetLayerMaskFromAvatarMask((uint)i,stateMachine.avatarMask);
@@ -74,7 +75,7 @@ public class HybridAnimator : MonoBehaviour
     }
 
     private void OnDisable()
-    {
+    {   
         // Destroys all Playables and Outputs created by the graph.
         _playableGraph.Destroy();
     }
@@ -98,7 +99,7 @@ public class HybridAnimator : MonoBehaviour
 
     public void OverrideAnimClip(string clipName,AnimationClip newClip)
     {
-        MecanimOverride ??= new AnimatorOverrideController(_animator.runtimeAnimatorController);
+        MecanimOverride = MecanimOverride? MecanimOverride: new AnimatorOverrideController(_animator.runtimeAnimatorController);
 
         AddOrSetToChangeList(clipName, m_MecanimOverride[clipName]);
         m_MecanimOverride[clipName] = newClip;
@@ -106,7 +107,7 @@ public class HybridAnimator : MonoBehaviour
 
     public void OverrideAnimClip(AnimationClip clip,AnimationClip newClip)
     {
-        MecanimOverride ??= new AnimatorOverrideController(_animator.runtimeAnimatorController);
+        MecanimOverride = MecanimOverride? MecanimOverride: new AnimatorOverrideController(_animator.runtimeAnimatorController);
 
         AddOrSetToChangeList(clip, m_MecanimOverride[clip]);
         m_MecanimOverride[clip] = newClip;

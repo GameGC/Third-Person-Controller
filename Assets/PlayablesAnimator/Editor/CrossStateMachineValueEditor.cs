@@ -12,7 +12,8 @@ public class CrossStateMachineValueEditor : PropertyDrawer
 {
     private CrossStateMachineValue target;
 
-    private List<string> stateNames = new List<string>();
+    private List<string> macanimStates = new List<string>();
+    private string[] playbleStates;
 
     private int valueA;
     private int valueB;
@@ -26,8 +27,13 @@ public class CrossStateMachineValueEditor : PropertyDrawer
         else if (target.Controller is AnimatorOverrideController ov)
             controller = ov.runtimeAnimatorController as AnimatorController;
 
-        GetAllStates(controller.layers[0].stateMachine.states,stateNames);
-        GetAllStates(controller.layers[0].stateMachine.stateMachines,stateNames);
+        GetAllStates(controller.layers[0].stateMachine.states,macanimStates);
+        GetAllStates(controller.layers[0].stateMachine.stateMachines,macanimStates);
+
+        playbleStates = target.Layer.States.Keys.ToArray();
+        
+        valueA = macanimStates.IndexOf(target.mecanicState);
+        valueB = Array.IndexOf(playbleStates,target.playableState);
 
     }
 
@@ -40,15 +46,17 @@ public class CrossStateMachineValueEditor : PropertyDrawer
 
         EditorGUI.BeginChangeCheck();
         position.width /= 2;
-        valueA = EditorGUI.Popup(position, valueA, stateNames.ToArray());
+        valueA = EditorGUI.Popup(position, valueA, macanimStates.ToArray());
         position.x += position.width;
         valueB = EditorGUI.Popup(position, valueB, target.Layer.States.Keys.ToArray());
 
         if (EditorGUI.EndChangeCheck())
         {
-            property.FindPropertyRelative(nameof(CrossStateMachineValue.mecanicState)).stringValue = stateNames[valueA];
+            property.FindPropertyRelative(nameof(CrossStateMachineValue.mecanicState)).stringValue = macanimStates[valueA];
             property.FindPropertyRelative(nameof(CrossStateMachineValue.playableState)).stringValue =
                 target.Layer.States.Keys.ToArray()[valueB];
+            
+            property.serializedObject.ApplyModifiedProperties();
         }
     }
 

@@ -2376,7 +2376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachines:
-  - {fileID: 1506062241905660166}
+  - {fileID: 1506062241905660170}
   m_MecanimOverride: {fileID: 0}
 --- !u!114 &702831532 stripped
 MonoBehaviour:
@@ -2443,6 +2443,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cfb6ace341f84384b0ed165c32f4a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!320 &702831546
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702831530}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: d1c23f124764742bd96fc875181640db, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -8936638007447298343, guid: d1c23f124764742bd96fc875181640db, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5815880397005857404, guid: d1c23f124764742bd96fc875181640db, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3990078699981457954, guid: d1c23f124764742bd96fc875181640db, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7526180746464712233, guid: d1c23f124764742bd96fc875181640db, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2029653337525706663, guid: d1c23f124764742bd96fc875181640db, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &743010592 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2058272916817463284, guid: efa50c4a4e27fc842a466cf19b3e68da, type: 3}
@@ -3271,14 +3298,6 @@ PrefabInstance:
       propertyPath: ReferenceResolver
       value: 
       objectReference: {fileID: 702831532}
-    - target: {fileID: -4749421614998506116, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
-      propertyPath: managedReferences[-2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1506062241905660166, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
-      propertyPath: States._keyValuePairs.Array.data[5].Value
-      value: 
-      objectReference: {fileID: 11400000, guid: d1c23f124764742bd96fc875181640db, type: 2}
     - target: {fileID: 1506062242848116304, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3340,7 +3359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24733337f9e0a4296a93ce3cb89317cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1506062241905660166 stripped
+--- !u!114 &1506062241905660170 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1506062241905660166, guid: 864d5004d3cf810408db962e69afb7ae, type: 3}
   m_PrefabInstance: {fileID: 1506062241905660164}

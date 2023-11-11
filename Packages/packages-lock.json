@@ -17,7 +17,7 @@
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "1a2d042193421f2f09109fd720cda8072fe3986f"
+      "hash": "141a3f3cf5aebebb6fbfaf51fc196da03c0e8f0b"
     },
     "com.unity.animation.rigging": {
       "version": "1.2.1",

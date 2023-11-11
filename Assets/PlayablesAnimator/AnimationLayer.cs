@@ -69,6 +69,7 @@ public class AnimationLayer : MonoBehaviour
             Playable playable = default;
             switch (element.Value)
             {
+                case null: playable = Playable.Null; break;
                 case AnimationClip clip:            playable = AnimationClipPlayable.Create(graph, clip);break;
                 case TimelineAsset asset:
                 {
@@ -79,6 +80,7 @@ public class AnimationLayer : MonoBehaviour
                     break;
                 }
                 case AnimationValue animationValue: playable = animationValue.GetPlayable(graph, root);          break;
+                default:playable = Playable.Null; break;
             }
             graph.Connect(playable, 0, _mixerPlayable, i);
         }
