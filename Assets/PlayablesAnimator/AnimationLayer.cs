@@ -92,7 +92,7 @@ public class AnimationLayer : MonoBehaviour
     public TimelineGraph Graph;
     private void OnStateChanged()
     {
-        Graph.Stop();
+        Graph?.Stop();
         //for (int i = 1; i <  _mixerPlayable.GetGraph().GetOutputCount(); i++)
         //{
         //    _mixerPlayable.GetGraph().DestroyOutput(_mixerPlayable.GetGraph().GetOutput(i));

@@ -145,22 +145,28 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             var reorderableList = m_ReorderableList.GetValue(element) as ReorderableList;
             reorderableList.onAddCallback = list =>
             {
+                if (reorderableList.count > 0)
+                {
+                    int index = list.selectedIndices.Count > 0
+                        ? list.selectedIndices[0]
+                        : list.count - 1;
 
-                int index = list.selectedIndices.Count > 0
-                    ? list.selectedIndices[0]
-                    : list.count - 1;
+                    list.ClearSelection();
 
-                list.ClearSelection();
 
-                
-                var stateMachine = list.serializedProperty.GetPropertyParent<StateMachine.CodeStateMachine>();
-                ref var states = ref stateMachine.states;
+                    var stateMachine = list.serializedProperty.GetPropertyParent<StateMachine.CodeStateMachine>();
+                    ref var states = ref stateMachine.states;
 
-                var copy = new State(states[index]);
-                copy.Name += " (1)";
-                ArrayUtility.Insert(ref states,index+1,copy);
-                list.serializedProperty.serializedObject.Update();
-                stateMachine.OnValidate();
+                    var copy = new State(states[index]);
+                    copy.Name += " (1)";
+                    ArrayUtility.Insert(ref states, index + 1, copy);
+                    list.serializedProperty.serializedObject.Update();
+                    stateMachine.OnValidate();
+                }
+                else
+                {
+                    ReorderableList.defaultBehaviours.DoAddButton(list);
+                }
                 return;
                 //var copy = list.serializedProperty.GetArrayElementAtIndex(index).Copy();
                 //var path = copy.propertyPath.Replace($"[{index}]", $"[{index+1}]");
