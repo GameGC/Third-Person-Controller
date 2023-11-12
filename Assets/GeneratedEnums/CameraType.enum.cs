@@ -1,5 +1,6 @@
 public enum CameraType
 {
     Follow,
-    Aiming
+    Aiming,
+    AimingSniper,
 }

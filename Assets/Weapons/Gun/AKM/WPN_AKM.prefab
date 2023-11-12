@@ -328,7 +328,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5b8ae0e9f7a428b8b25509b9adbf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraType: 1
   cameraPrefab: {fileID: 8988634382487572944, guid: b73caf23ebf9c4e1fbc098a6133280e2, type: 3}
+  followAndLooksArgs:
+    value:
+      followPath: 
+      LookPath: 
+    <HasValue>k__BackingField: 0
 --- !u!114 &2998853927601559321
 MonoBehaviour:
   m_ObjectHideFlags: 0

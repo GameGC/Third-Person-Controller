@@ -169,22 +169,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
   m_PrefabInstance: {fileID: 7008781531238031057}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-4813197539070955903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7008781531238062193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0dfce26a1e144cbb8800aefe80556b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftHandLocalPosition: {x: -0.0251, y: -0.0747, z: -0.1086}
-  leftLocalRotation: {x: 0.00901949, y: -0.7015047, z: -0.30014706, w: 0.64631385}
-  rightHandLocalPosition: {x: 0.004, y: -0.052, z: -0.371}
-  rightLocalRotation: {x: -0.4975, y: 0.45139733, z: 0.51872146, w: -0.5288311}
 --- !u!114 &4981576766526416783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +192,7 @@ MonoBehaviour:
   reloadingTime: 5.3
   calcFormat: 0
   maxShootsPerMinute: 0
---- !u!114 &8518682008759918286
+--- !u!114 &6511811085590050086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,10 +201,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7008781531238062193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b5b8ae0e9f7a428b8b25509b9adbf00, type: 3}
+  m_Script: {fileID: 11500000, guid: d54dac56cf349584d981503a83467788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPrefab: {fileID: 8988634382487572944, guid: b67c6df5516444ca9a7e291f43309343, type: 3}
+  localPosition: {x: -0.06, y: 0.361, z: 0.03}
+  localRotation: {x: -0.49186552, y: 0.48857504, z: 0.5021472, w: 0.5169246}
 --- !u!114 &8917102845950160940
 MonoBehaviour:
   m_ObjectHideFlags: 0

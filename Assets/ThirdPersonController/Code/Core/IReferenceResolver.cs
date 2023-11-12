@@ -7,8 +7,10 @@ namespace ThirdPersonController.Core.DI
     {
         public bool isReady { get; }
         
+        // ReSharper disable Unity.PerformanceAnalysis
         public T GetComponent<T>();
         
+        // ReSharper disable Unity.PerformanceAnalysis
         public T GetNamedComponent<T>(string name) where T: Component;
         
         public Component GetComponent(Type componentType);
