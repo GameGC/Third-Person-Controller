@@ -44,17 +44,20 @@ public class CameraManager : MonoBehaviour
         
         float xAxisValue = 0;
         float yAxisValue = 0;
+        Pose state = new Pose();
         {
             if (prevLook is CinemachineFreeLook freeLook)
             {
                 xAxisValue = freeLook.m_XAxis.Value ;
                 yAxisValue = freeLook.m_YAxis.Value ;
+                freeLook.transform.GetLocalPositionAndRotation(out state.position,out state.rotation);
             }
-            else if (newLook is CinemachineVirtualCamera virtualC)
+            else if (prevLook is CinemachineVirtualCamera virtualC)
             {
                 var pov = virtualC.GetComponentPipeline().First(c => c is CinemachinePOV) as CinemachinePOV;
                 xAxisValue = pov.m_HorizontalAxis.Value;
                 yAxisValue = pov.m_VerticalAxis.Value;
+                virtualC.transform.GetLocalPositionAndRotation(out state.position,out state.rotation);
             }
         }
         {
@@ -62,12 +65,15 @@ public class CameraManager : MonoBehaviour
             {
                 freeLook.m_XAxis.Value = xAxisValue;
                 freeLook.m_YAxis.Value = yAxisValue;
+                freeLook.transform.SetLocalPositionAndRotation(state.position,state.rotation);
             }
             else if (newLook is CinemachineVirtualCamera virtualC)
             {
                 var pov = virtualC.GetComponentPipeline().First(c => c is CinemachinePOV) as CinemachinePOV;
                 pov.m_HorizontalAxis.Value = xAxisValue;
                 pov.m_VerticalAxis.Value = yAxisValue;
+                virtualC.transform.SetLocalPositionAndRotation(state.position,state.rotation);
+                virtualC.transform.SetLocalPositionAndRotation(state.position,state.rotation);
             }
         }
     }
@@ -98,6 +104,7 @@ public class CameraManager : MonoBehaviour
             prevLook.gameObject.SetActive(false);
 
             var newLook = Instantiate(prefab, transform);
+            newLook.name = prefab.name;
 
             PasteCustomTargets(newLook, follow, lookAt);
 
@@ -113,6 +120,7 @@ public class CameraManager : MonoBehaviour
             Array.Resize(ref cameras,cameras.Length+1);
             
             var newLook = Instantiate(prefab, transform);
+            newLook.name = prefab.name;
             PasteCustomTargets(newLook, follow, lookAt);
             CopyXAndY(newLook, cameras.First(c=>c.Value.isActiveAndEnabled).Value);
             newLook.gameObject.SetActive(false);
