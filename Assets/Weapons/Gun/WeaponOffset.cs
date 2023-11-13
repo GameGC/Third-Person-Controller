@@ -13,5 +13,13 @@ namespace Weapons
             thisTransform.localRotation = localRotation;
             thisTransform.localPosition = localPosition;
         }
+        
+#if UNITY_EDITOR
+        [ContextMenu("CopyVariables")]
+        public void CopyVariables() => transform.GetLocalPositionAndRotation(out localPosition,out localRotation);
+
+        [ContextMenu("PasteVariables")]
+        public void PasteVariables() => transform.SetLocalPositionAndRotation(localPosition,localRotation);
+#endif
     }
 }

@@ -36,4 +36,14 @@ public class TransformExtensions
             child.SetParent(transform);
         }
     }
+    
+    [MenuItem("CONTEXT/Transform/Rename By Instance Id", false)]
+    public static void RenameToInstanceID()
+    {
+        foreach (var x in Selection.gameObjects)
+        {
+            x.name = $"GameObject {x.GetInstanceID()}";
+            EditorUtility.SetDirty(x);
+        }
+    }
 }

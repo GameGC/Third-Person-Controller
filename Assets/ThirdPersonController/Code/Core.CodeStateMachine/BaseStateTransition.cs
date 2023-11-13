@@ -27,19 +27,19 @@ namespace ThirdPersonController.Core.CodeStateMachine
     
         // don't store in build
 #if UNITY_EDITOR
-        [SerializeField,HideInInspector] private string _transitionName;
+        [SerializeField] private string _transitionName;
 
-        public void SetNextState(ref State[] states, ref State state)
+        public bool SetNextState(ref State[] states, ref State state)
         {
             _transitionName = state.Name;
             // update index
-            ValidateTransition(ref states);
+            return ValidateTransition(ref states);
         }
     
         // returns is dirty
-        internal bool ValidateTransition(ref State[] states)
+        internal bool  ValidateTransition(ref State[] states)
         {
-            int nexIndex = ArrayUtility.FindIndex(states, s => s.Name == _transitionName);
+            int nexIndex = Array.FindIndex(states, s => s.Name == _transitionName);
             if (nexIndex < 0 && _transitionIndex>-1)
             {
                 _transitionName = states[_transitionIndex].Name;
@@ -48,7 +48,7 @@ namespace ThirdPersonController.Core.CodeStateMachine
 
             if (_transitionIndex < 0)
             {
-                var findStateBelongsTo = ArrayUtility.Find(states, s => ArrayUtility.Contains(s.Transitions, this));
+                var findStateBelongsTo = Array.Find(states, s => ArrayUtility.Contains(s.Transitions, this));
                 Debug.LogError("Null Transition "+GetType().Name+" at state "+findStateBelongsTo.Name);
             }
             

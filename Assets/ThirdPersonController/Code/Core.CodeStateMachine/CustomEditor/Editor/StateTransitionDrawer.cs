@@ -34,7 +34,9 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
         selected = EditorGUI.Popup(position,"Next State", selected, customData._stateMachine.states.Select(s => s.Name).ToArray());
         if (EditorGUI.EndChangeCheck())
         {
-            customData._transition.SetNextState(ref customData._stateMachine.states,ref customData._stateMachine.states[selected]);
+            bool isDirty = customData._transition.SetNextState(ref customData._stateMachine.states,ref customData._stateMachine.states[selected]);
+            if(isDirty)
+                EditorUtility.SetDirty(property.serializedObject.targetObject);
             property.serializedObject.ApplyModifiedProperties();
         }
 

@@ -1,3 +1,4 @@
+using System;
 using GameGC.Collections;
 using UnityEngine;
 using Weapons;
@@ -8,7 +9,13 @@ public class ClipPlaceModule : MonoBehaviour
     public Vector3 localPositionInLeftHand;
     public Quaternion localRotationInLeftHand;
 
-    public SNullable<Pose> initialPosition;
+    private Pose initialPosition;
+
+
+    private void Awake()
+    {
+        clipElement.GetLocalPositionAndRotation(out initialPosition.position,out initialPosition.rotation);
+    }
 
     public void AttachToLeftHand()
     {
@@ -18,14 +25,16 @@ public class ClipPlaceModule : MonoBehaviour
     
     public void AttachToRightHand()
     {
-        clipElement.SetParent(transform.root.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.RightHand));
-        if (initialPosition.HasValue)
-        {
-            clipElement.SetLocalPositionAndRotation(initialPosition.Value.position,initialPosition.Value.rotation);
-        }
-        else
-        {
-            GetComponent<WeaponOffset>().Invoke("Awake",0);
-        }
+        clipElement.SetParent(transform);
+        clipElement.SetLocalPositionAndRotation(initialPosition.position,initialPosition.rotation);
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("CopyVariables")]
+    public void CopyVariables() => clipElement.GetLocalPositionAndRotation(out localPositionInLeftHand,out localRotationInLeftHand);
+
+    [ContextMenu("PasteVariables")]
+    public void PasteVariables() => clipElement.SetLocalPositionAndRotation(localPositionInLeftHand,localRotationInLeftHand);
+#endif
+
 }

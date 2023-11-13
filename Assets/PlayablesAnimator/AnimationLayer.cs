@@ -115,10 +115,11 @@ public class AnimationLayer : MonoBehaviour
     public async Task WaitForAnimationFinish(string stateName)
     {
         await WaitForStateWeight1(stateName);
+        float timeScale = 1 / Time.timeScale;
         switch (States[stateName])
         {
-            case AnimationClip clip:            await Task.Delay((int)(clip.length * 1000));break;
-            case TimelineAsset asset:           await Task.Delay((int)(asset.duration * 1000));break;
+            case AnimationClip clip:            await Task.Delay((int)(clip.length * 1000 * timeScale));break;
+            case TimelineAsset asset:           await Task.Delay((int)(asset.duration * 1000 *timeScale));break;
         }
     }
     

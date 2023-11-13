@@ -22,7 +22,9 @@ namespace ThirdPersonController.MovementStateMachine.Features
         [SerializeField] private float stepLength;
         [SerializeField] private float smoothTime = 300;
     
-    
+#if UNITY_EDITOR
+        [SerializeField] private bool visualiseRaycast;
+#endif
 
         #region References
         private IMoveStateMachineVariables _variables;
@@ -112,8 +114,10 @@ namespace ThirdPersonController.MovementStateMachine.Features
             position += localUp * RaycastOriginY;
             position += localForward * startOffsetX;
 
-
-            Debug.DrawLine(position,position-localUp*distance,Color.white);
+#if UNITY_EDITOR
+            if(visualiseRaycast)
+                Debug.DrawLine(position,position-localUp*distance,Color.white);
+#endif
             if (!Physics.Raycast(position, -localUp, out hit, distance,_variables.GroundLayer,QueryTriggerInteraction.Ignore))
             {
                 position += localUp * _variables.GroundDistance;
@@ -140,7 +144,10 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
         private void ForwardCast(Vector3 position,Vector3 forwardDirection,ref Vector3 finalPosition)
         {
-            Debug.DrawLine(position,position+forwardDirection*stepLength,Color.yellow);
+#if UNITY_EDITOR
+            if(visualiseRaycast)
+                Debug.DrawLine(position,position+forwardDirection*stepLength,Color.yellow);
+ #endif
 
             if (Physics.Raycast(position, forwardDirection, out var hit, stepLength,_variables.GroundLayer,QueryTriggerInteraction.Ignore))
             {

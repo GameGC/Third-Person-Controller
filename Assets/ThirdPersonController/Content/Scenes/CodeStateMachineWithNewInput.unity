@@ -3369,10 +3369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameras:
-  - Key: 0
-    Value: {fileID: 1227881038}
-  - Key: 1
-    Value: {fileID: 743010603}
+  - {fileID: 1227881038}
+  - {fileID: 743010603}
+  - {fileID: 0}
   resolver: {fileID: 702831532}
 --- !u!4 &1837240329
 Transform:

@@ -12,6 +12,9 @@ namespace ThirdPersonController.MovementStateMachine.Features
         [Tooltip("Max angle to walk")]
         [Range(30, 80),SerializeField] private float slopeLimit = 45f;
 
+#if UNITY_EDITOR
+        [SerializeField] private bool visualiseRaycast;
+#endif
 
         private Transform _transform;
         private CapsuleCollider _capsuleCollider;
@@ -37,12 +40,21 @@ namespace ThirdPersonController.MovementStateMachine.Features
             
             
             Vector3 rayStart = _transform.position + Vector3.up * halfHeight;
+
+#if UNITY_EDITOR
+            if(visualiseRaycast)
+                Debug.DrawLine(rayStart, _transform.position + moveDirection * (radius + 0.2f),Color.yellow);
+#endif
             if (Physics.Linecast(rayStart, _transform.position + moveDirection * (radius + 0.2f), out var hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
             {
                 float hitAngle = Vector3.Angle(Vector3.up, hitInfo.normal);
 
                 var targetPoint = hitInfo.point + moveDirection * radius;
 
+#if UNITY_EDITOR
+                if(visualiseRaycast)
+                    Debug.DrawLine(rayStart, targetPoint,new Color(0.8f, 0.35f, 0f));
+#endif
                 if ((hitAngle > slopeLimit) && Physics.Linecast(rayStart, targetPoint, out hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
                 {
                     hitAngle = Vector3.Angle(Vector3.up, hitInfo.normal);

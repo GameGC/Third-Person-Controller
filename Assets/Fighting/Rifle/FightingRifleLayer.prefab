@@ -115,6 +115,7 @@ MonoBehaviour:
     features:
     - rid: 2369757174817882288
     - rid: 2369757174817882289
+    - rid: 8271787916682330112
     Transitions:
     - rid: 2369757174817882290
     - rid: 2369757174817882291
@@ -432,6 +433,11 @@ MonoBehaviour:
         _transitionIndex: 5
         _transitionName: Cooldown
         delayTime: 0.3
+    - rid: 8271787916682330112
+      type: {class: ReadTimelineNotificationsToGun, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[6].features.Array.data[2]
+        outputName: Signal Track
 --- !u!114 &1506062241905660166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +467,7 @@ MonoBehaviour:
     - Key: Cooldown
       Value: {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
     - Key: Reload
-      Value: {fileID: 7400000, guid: eb51a5b1ec48be04d8824319f99e9edf, type: 3}
+      Value: {fileID: 11400000, guid: 264dcb31e6563403eb74b3367a6ea768, type: 2}
     - Key: PutWeaponBackFromAim
       Value: {fileID: 100084, guid: da4d8e56ecf9c7244b1936a6ebe1fbe0, type: 3}
   defaultTransition:
@@ -478,7 +484,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5b8ae0e9f7a428b8b25509b9adbf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraType: 1
   cameraPrefab: {fileID: 8988634382487572944, guid: b73caf23ebf9c4e1fbc098a6133280e2, type: 3}
+  followAndLooksArgs:
+    value:
+      followPath: 
+      LookPath: 
+    <HasValue>k__BackingField: 0
 --- !u!114 &-2469758948940512443
 MonoBehaviour:
   m_ObjectHideFlags: 0

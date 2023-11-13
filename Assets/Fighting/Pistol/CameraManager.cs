@@ -4,39 +4,36 @@ using Cinemachine;
 using GameGC.Collections;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private SKeyValuePair<CameraType, CinemachineVirtualCameraBase>[] cameras;
-
+    /// <summary>
+    /// constant size depended on CameraType enums count
+    /// </summary>
+    [SerializeField, EnumedArray(typeof(CameraType))]
+    private CinemachineVirtualCameraBase[] cameras;
+    private CameraType _activeLook = CameraType.Follow;
+    
     public ReferenceResolver resolver;
     
     public void SetActiveCamera(CameraType type)
     {
-        CinemachineVirtualCameraBase prevLook = null;
-        CinemachineVirtualCameraBase newLook = null;
+        CinemachineVirtualCameraBase prevLook = cameras[(int) _activeLook];
+        CinemachineVirtualCameraBase newLook = cameras[(int) type];
         
-        foreach (var cam in cameras)
-        {
-            if (cam.Value.isActiveAndEnabled && type != cam.Key)
-            {
-                prevLook = cam.Value;
-            }
-            else if(!cam.Value.isActiveAndEnabled && type == cam.Key)
-            {
-                newLook = cam.Value;
-            }
-        }
-
-        if(newLook == null || prevLook == null) return;
+        
+        if(newLook == prevLook) return;
 
         CopyXAndY(newLook, prevLook);
 
+        
 
         prevLook.gameObject.SetActive(false);
         newLook.gameObject.SetActive(true);
+        _activeLook = type;
     }
 
     private void CopyXAndY(CinemachineVirtualCameraBase prevLook,CinemachineVirtualCameraBase newLook)
@@ -95,10 +92,10 @@ public class CameraManager : MonoBehaviour
     {
         prefab.gameObject.SetActive(false);
         
-        int previousIndex = Array.FindIndex(cameras, el => el.Key == type);
-        if (previousIndex > -1)
+        int previousIndex = (byte) type;
+        if (cameras[previousIndex] != null)
         {
-            var prevLook = cameras[previousIndex].Value;
+            var prevLook = cameras[previousIndex];
 
             bool wasActive = prevLook.gameObject.activeSelf;
             prevLook.gameObject.SetActive(false);
@@ -108,27 +105,66 @@ public class CameraManager : MonoBehaviour
 
             PasteCustomTargets(newLook, follow, lookAt);
 
-            CopyXAndY(newLook, prevLook);
-
-
             Destroy(prevLook.gameObject);
-            cameras[previousIndex].Value = newLook;
+            cameras[previousIndex] = newLook;
+
             newLook.gameObject.SetActive(wasActive);
         }
         else
         {
-            Array.Resize(ref cameras,cameras.Length+1);
-            
             var newLook = Instantiate(prefab, transform);
             newLook.name = prefab.name;
-            PasteCustomTargets(newLook, follow, lookAt);
-            CopyXAndY(newLook, cameras.First(c=>c.Value.isActiveAndEnabled).Value);
-            newLook.gameObject.SetActive(false);
-
             
-            cameras[^1].Key = type;
-            cameras[^1].Value = newLook;
+            PasteCustomTargets(newLook, follow, lookAt);
+            newLook.gameObject.SetActive(false);
+            cameras[(int) type] = newLook;
         }
 
+    }
+
+
+#if UNITY_EDITOR
+    private static readonly int enumNamesSize = Enum.GetValues(typeof(CameraType)).Length;
+    
+    private void OnValidate()
+    {
+        if(cameras.Length!=enumNamesSize)
+            Array.Resize(ref cameras,enumNamesSize);
+    }
+
+    private void Reset() => cameras = new CinemachineVirtualCameraBase[enumNamesSize];
+#endif
+}
+
+public class EnumedArrayAttribute : PropertyAttribute
+{
+    public Type enumType;
+
+    public EnumedArrayAttribute(Type enumType)
+    {
+        this.enumType = enumType;
+    }
+}
+
+[CustomPropertyDrawer(typeof(EnumedArrayAttribute))]
+public class EnumedArrayDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        var enumNames = (attribute as EnumedArrayAttribute).enumType.GetEnumNames();
+        
+        Rect labelRect = position;
+        labelRect.width /= 3;
+        position.x += labelRect.width+1;
+        position.width -= labelRect.width-1;
+
+        var path = property.propertyPath;
+        int index = int.Parse(path.Substring(path.LastIndexOf('[')+1, path.LastIndexOf(']') - path.LastIndexOf('[')-1));
+
+        EditorGUI.BeginDisabledGroup(true);
+        EditorGUI.LabelField(labelRect, enumNames[index], EditorStyles.popup);
+        EditorGUI.EndDisabledGroup();
+
+        EditorGUI.PropertyField(position, property, GUIContent.none);
     }
 }

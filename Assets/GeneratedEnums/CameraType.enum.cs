@@ -1,6 +1,6 @@
-public enum CameraType
+public enum CameraType : byte
 {
-    Follow,
-    Aiming,
-    AimingSniper,
+    Follow = 0,
+    Aiming = 1,
+    AimingSniper = 2,
 }

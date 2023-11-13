@@ -181,6 +181,8 @@ GameObject:
   - component: {fileID: 9217136868478848954}
   - component: {fileID: -4560132979145315442}
   - component: {fileID: 2998853927601559321}
+  - component: {fileID: 8717932829498351620}
+  - component: {fileID: -3859842466928417242}
   m_Layer: 0
   m_Name: WPN_AKM
   m_TagString: Untagged
@@ -354,6 +356,71 @@ MonoBehaviour:
   maxVelocity: {x: 4.19, y: 2.31, z: 3.17}
   minTorque: {x: -50, y: -50, z: -50}
   maxTorque: {x: 50, y: 50, z: 50}
+--- !u!114 &8717932829498351620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460542305277932983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef82e4ba95c43f38fd0dff8a9a3c24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipElement: {fileID: 460542305278290333}
+  localPositionInLeftHand: {x: -0.0347, y: 0.0505, z: 0.0315}
+  localRotationInLeftHand: {x: 0.3962264, y: -0.55647, z: 0.34157595, w: 0.64550114}
+  initialPosition:
+    value:
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+    <HasValue>k__BackingField: 0
+--- !u!114 &-3859842466928417242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460542305277932983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 465695d8ec5834e71a9a1828c668533c, type: 2}
+    - {fileID: 11400000, guid: 06522124a9d5141d9abdee42aaf80271, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8717932829498351620}
+          m_TargetAssemblyTypeName: ClipPlaceModule, Assembly-CSharp
+          m_MethodName: AttachToLeftHand
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8717932829498351620}
+          m_TargetAssemblyTypeName: ClipPlaceModule, Assembly-CSharp
+          m_MethodName: AttachToRightHand
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &460542305277932985
 GameObject:
   m_ObjectHideFlags: 0

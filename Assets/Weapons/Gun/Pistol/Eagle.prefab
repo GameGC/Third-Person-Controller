@@ -460,9 +460,6 @@ MonoBehaviour:
   reloadingTime: 2.9
   calcFormat: 0
   maxShootsPerMinute: 0
-  clipElement: {fileID: 8907101463742682132}
-  localPositionInLeftHand: {x: -0.002, y: 0.0937, z: 0.0272}
-  localRotationInLeftHand: {x: -0.04054224, y: -0.64922017, z: -0.2173118, w: -0.72776717}
 --- !u!114 &1563936919696421680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,14 +525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef82e4ba95c43f38fd0dff8a9a3c24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipElement: {fileID: 0}
-  localPositionInLeftHand: {x: 0, y: 0, z: 0}
-  localRotationInLeftHand: {x: 0, y: 0, z: 0, w: 0}
-  initialPosition:
-    value:
-      position: {x: -0.002, y: 0.0937, z: 0.0272}
-      rotation: {x: -0.04054224, y: -0.64922017, z: -0.2173118, w: -0.72776717}
-    <HasValue>k__BackingField: 1
+  clipElement: {fileID: 8907101463742682132}
+  localPositionInLeftHand: {x: 0.0131, y: 0.0826, z: 0.0307}
+  localRotationInLeftHand: {x: 0.16806236, y: -0.57010645, z: 0.120501935, w: 0.7951182}
 --- !u!114 &3574508149782771116
 MonoBehaviour:
   m_ObjectHideFlags: 0
