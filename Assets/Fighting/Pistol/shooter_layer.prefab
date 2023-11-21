@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformPathes:
+  - Hips/Spine/Spine1/Spine2/Neck/Head
   - 
-  - 
-  - 
+  - MainCamera/Sphere
   target: {fileID: 509803798478639443}
   AllPropertyCount: 3
 --- !u!1 &509803799361491588
@@ -281,9 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformPathes:
+  - Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand
   - 
-  - 
-  - 
+  - MainCamera/Sphere
   target: {fileID: 1543596926512438345}
   AllPropertyCount: 3
 --- !u!1 &7461594375708043714
@@ -462,9 +462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformPathes:
+  - Hips/Spine
   - 
-  - 
-  - 
+  - MainCamera/Sphere
   target: {fileID: 7461594376790930317}
   AllPropertyCount: 3
 --- !u!1 &8499473845136863000

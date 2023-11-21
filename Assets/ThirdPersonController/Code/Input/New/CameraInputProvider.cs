@@ -20,7 +20,6 @@ namespace ThirdPersonController.Input.New
 
         private void Awake()
         {
-            GetComponent<CinemachineFreeLook>()?.UpdateInputAxisProvider();
             _inputReader = FindObjectOfType<ThirdPersonNewInput>();
         }
 

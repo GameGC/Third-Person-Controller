@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
-using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using DefaultNamespace;
-using Fighting.Pushing;
 using GameGC.Collections;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
-using UnityEngine.Audio;
 using UnityEngine.Playables;
-using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 using Object = UnityEngine.Object;
 
@@ -20,7 +17,6 @@ public abstract class AnimationValue : ScriptableObject
 {
     public abstract Playable GetPlayable(PlayableGraph graph,GameObject root);
 }
-
 
 public class AnimationLayer : MonoBehaviour
 {
@@ -32,7 +28,10 @@ public class AnimationLayer : MonoBehaviour
 
 
     public SDictionary<string, Object> States;
-    public AnimationTransition defaultTransition;
+    
+    public AnimationTransition[] customTransitionTimes;
+    public float defaultTransitionTime = 0.02f;
+
 
     private AnimationMixerPlayable _mixerPlayable;
 
@@ -70,7 +69,21 @@ public class AnimationLayer : MonoBehaviour
             switch (element.Value)
             {
                 case null: playable = Playable.Null; break;
-                case AnimationClip clip:            playable = AnimationClipPlayable.Create(graph, clip);break;
+                
+                // for some un common cases when playables buggy blend
+                case RuntimeAnimatorController anim:
+                {
+                    playable =AnimatorControllerPlayable.Create(graph,anim); break;
+                }
+
+                case AnimationClip clip:
+                {
+                    var tempPlayable = AnimationClipPlayable.Create(graph, clip);
+                    if(avatarMask && !avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftFootIK) &&
+                       !avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftFootIK))
+                        tempPlayable.SetApplyFootIK(false);
+                    playable = tempPlayable;break;
+                }
                 case TimelineAsset asset:
                 {
                     playable = asset.CreatePlayable(graph, root);;
@@ -93,22 +106,44 @@ public class AnimationLayer : MonoBehaviour
     private void OnStateChanged()
     {
         Graph?.Stop();
-        //for (int i = 1; i <  _mixerPlayable.GetGraph().GetOutputCount(); i++)
-        //{
-        //    _mixerPlayable.GetGraph().DestroyOutput(_mixerPlayable.GetGraph().GetOutput(i));
-        //}
+
+        var prevState = CurrentState;
+        var newState = _codeStateMachine.CurrentState.Name;
+        CurrentState = newState;
         
-        if (defaultTransition.time == 0)
-            SyncedTransition();
+        int transitionTimeInd = Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(prevState,newState));
+
+        if (defaultTransitionTime == 0 && transitionTimeInd < 0 && customTransitionTimes[transitionTimeInd].time <0.001f)
+            SyncedTransition(prevState,newState);
         else
-            AsyncTransition();
+        {
+            if(tempPrevStateInd> -1)
+                _mixerPlayable.SetInputWeight(tempPrevStateInd,0);
+            if(tempCurrentStateInd> -1)
+                _mixerPlayable.SetInputWeight(tempCurrentStateInd,1);
+            
+            if(_tempAsyncTransition!=null)
+                StopCoroutine(_tempAsyncTransition);
+            _tempAsyncTransition = StartCoroutine(AsyncTransition(prevState, newState));
+        }
     }
 
+    private Coroutine _tempAsyncTransition;
+    private int tempPrevStateInd = -1;
+    private int tempCurrentStateInd = -1;
+
+
+    public async Task WaitForNextState()
+    {
+        var newIndex = Array.IndexOf(States.Keys.ToArray(), _codeStateMachine.CurrentState.Name);
+        while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex) < 1)
+            await Task.Delay(100);
+    }
 
     public async Task WaitForStateWeight1(string stateName)
     {
-        var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);
-        while ( _mixerPlayable.GetInputWeight(newIndex)<1) 
+        var newIndex=  Array.IndexOf(States.Keys.ToArray(), stateName);
+        while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex)<1) 
             await Task.Delay(100);
     }
     
@@ -127,7 +162,7 @@ public class AnimationLayer : MonoBehaviour
     {
         try
         {
-            var newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), stateName);
+            var newIndex=  Array.IndexOf(States.Keys.ToArray(), stateName);
             while ( _mixerPlayable.GetInputWeight(newIndex)>0) 
                 await Task.Delay(100);
         }
@@ -137,128 +172,89 @@ public class AnimationLayer : MonoBehaviour
         }
     }
 
-    protected virtual void SyncedTransition()
+    protected virtual void SyncedTransition(string previosState,string newState)
     {
-        CurrentState = _codeStateMachine.CurrentState.Name;
         int i = 0;
         
         foreach (var element in States)
         {
-            _mixerPlayable.SetInputWeight(i,element.Key == CurrentState?1:0);
+            _mixerPlayable.SetInputWeight(i,element.Key == newState?1:0);
             i++;
         }
     }
-    protected virtual async void AsyncTransition()
+    protected virtual IEnumerator AsyncTransition(string prevState,string newState)
     {
-        var previousIndex = ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
-        CurrentState = _codeStateMachine.CurrentState.Name;
+        var previousIndex = Array.IndexOf(States.Keys.ToArray(), prevState);
+        var newStateIndex = Array.IndexOf(States.Keys.ToArray(), newState);
 
-        int newIndex = -1;
+        tempPrevStateInd = previousIndex;
+        tempCurrentStateInd = newStateIndex;
+
         try
         {
-            newIndex=  ArrayUtility.IndexOf(States.Keys.ToArray(), CurrentState);
-            if (States[CurrentState] is AnimationClip clip && !clip.isLooping)
+            if (States[newState] is AnimationClip clip && !clip.isLooping)
             {
-                var playable = _mixerPlayable.GetInput(newIndex);
+                var playable = _mixerPlayable.GetInput(newStateIndex);
                 if (!playable.IsNull() && playable.IsValid())
                     playable.SetTime(0);
             }
-            else if(States[CurrentState] is TimelineAsset asset)
+            else if(States[newState] is TimelineAsset asset)
             {
-                var playable = _mixerPlayable.GetInput(newIndex);
+                var playable = _mixerPlayable.GetInput(newStateIndex);
                 if (!playable.IsNull() && playable.IsValid())
                     playable.SetTime(0);
 
                 Graph.Play();
-                /*
-                int index = 0;
-                bool scriptCreated = false;
-                var graph = _mixerPlayable.GetGraph();
-                foreach (var outputTrack in asset.GetOutputTracks())
-                {
-                    if (index < 1)
-                    {
-                        index++;
-                        continue;
-                    }
-                    
-                    switch (outputTrack)
-                    {
-                        case ActivationTrack activationTrack:ScriptPlayableOutput.Create(graph, outputTrack.name); break;
-                        case AnimationTrack animationTrack: AnimationPlayableOutput.Create(graph, outputTrack.name, null); break;
-                        case AudioTrack audioTrack: AudioPlayableOutput.Create(graph, outputTrack.name, null); break;
-                        case ControlTrack controlTrack: ScriptPlayableOutput.Create(graph, outputTrack.name); break;
-                        case SignalTrack signalTrack: ScriptPlayableOutput.Create(graph, outputTrack.name); break;
-                        case MarkerTrack markerTrack: ScriptPlayableOutput.Create(graph, outputTrack.name); break;
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(outputTrack));
-                    }
-
-                    index++;
-                }
-                
-                var script = (ScriptPlayableOutput) playable.GetGraph().GetOutput(1);
-                
-                var receiver = GetComponent<FightingStateMachineVariables>().weaponInstance
-                    .GetComponent<SignalReceiver>();
-                script.AddNotificationReceiver(receiver);
-
-                Debug.Log(receiver);
-                
-                script.SetSourcePlayable(playable);
-
-              */
-
-                
-         
-          //     var script = (ScriptPlayableOutput) playable.GetGraph().GetOutput(1);
-          //     script.GetSourcePlayable().SetInputWeight(0,1);
-          //     script.GetSourcePlayable().Pause();
-          //     script.GetSourcePlayable().SetTime(0);
-          //     script.GetSourcePlayable().Play();
-          //     
-          //    // (playable.GetOutput(1).GetOutput(0) as ScriptPlayable<TimeNotificationBehaviour>).GetBehaviour().
-                
-                //script.SetReferenceObject(GetComponent<FightingStateMachineVariables>().weaponInstance.GetComponent<SignalReceiver>());
-                //script.SetUserData(GetComponent<FightingStateMachineVariables>().weaponInstance.GetComponent<SignalReceiver>());
-
             }
         }
         catch (Exception e)
         {
-            Debug.LogError("Error at state: "+CurrentState);
-            Debug.LogError(newIndex);
+            Debug.LogError("Error at state: "+newStateIndex);
+            Debug.LogError(newStateIndex);
             Debug.LogError(e);
         }
-        float maxTimer = defaultTransition.time * 1000; 
+        
+        int transitionTimeInd =
+            Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(previousIndex, newStateIndex));
+
+        float maxTimer =
+            (transitionTimeInd < 0 ? defaultTransitionTime : customTransitionTimes[transitionTimeInd].time); 
         float timer = maxTimer;
-        while (timer>0)
+        
+        var wait = new WaitForEndOfFrame();
+        while (timer > 0)
         {
             _mixerPlayable.SetInputWeight(previousIndex,timer/maxTimer);
-            _mixerPlayable.SetInputWeight(newIndex,1-(timer/maxTimer));
-            await Task.Delay(10);
-            timer -= 10;
+            _mixerPlayable.SetInputWeight(newStateIndex,1-(timer/maxTimer));
+            timer -= Time.deltaTime;
+            yield return wait;
         }
         
         _mixerPlayable.SetInputWeight(previousIndex,0);
-        _mixerPlayable.SetInputWeight(newIndex,1);
+        _mixerPlayable.SetInputWeight(newStateIndex,1);
         
-        if(States[CurrentState] is TimelineAsset a)
-        {
-            var playable = _mixerPlayable.GetInput(newIndex);
-            if (!playable.IsNull() && playable.IsValid())
-                playable.SetTime(0);
-       //        
-       //    for (int j = 0; j < playable.GetGraph().GetOutputCount(); j++)
-       //    {
-       //        // (asset.GetOutputTrack(0) as SignalTrack).
-       //        //   playable.GetGraph().GetOutput(j).
-       //        var ouput = playable.GetGraph().GetOutput(j);
-       //        Debug.Log(j+" "+ playable.GetGraph().GetOutput(j).GetPlayableOutputType());
-       //    }
-        }
+        tempPrevStateInd = -1;
+        tempCurrentStateInd = -1;
     }
 
+    
+    
+    
+    
+    private void OnValidate()
+    {
+        if (customTransitionTimes != null)
+        {
+            bool isDirty = false;
+            for (var i = 0; i < customTransitionTimes.Length; i++)
+            {
+                if (customTransitionTimes[i].Validate(States.Keys.ToArray()))
+                    isDirty = true;
+            }
+            if(isDirty)
+                EditorUtility.SetDirty(this);
+        }
+    }
 
     [ContextMenu("ConvertToExtended")]
     public void ConvertToExtended()
@@ -267,7 +263,7 @@ public class AnimationLayer : MonoBehaviour
         new_.States = States;
         new_.avatarMask = avatarMask;
         new_.weight = weight;
-        new_.defaultTransition = defaultTransition;
+        new_.defaultTransitionTime = defaultTransitionTime;
         new_.isAdditive = isAdditive;
         new_.autoSyncWithOtherStateMachine = autoSyncWithOtherStateMachine;
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
@@ -9,15 +10,30 @@ public class RigFadeFeature : BaseRigFeature
 
     private float tempLerp;
 
-    public override void OnEnterState()
+    private Task _tempTask;
+    public override async void OnEnterState()
     {
-        tempLerp = 0;
         base.OnEnterState();
+        if (_animationLayer && fadeMax > 0)
+        {
+            _tempTask = _animationLayer.WaitForNextState();
+            await _tempTask;
+            if(!IsRunning) return;
+        }
+
+        tempLerp = 0;
     }
 
     public override void OnUpdateState()
     {
+        if(_tempTask!=null && !_tempTask.IsCompleted)return;
         tempLerp += deltaMultiplayer * Time.deltaTime;
         _targetLayer.rig.weight = Mathf.Lerp(0, fadeMax, tempLerp);
+    }
+
+    public override void OnExitState()
+    {
+        base.OnExitState();
+        _tempTask = null;
     }
 }

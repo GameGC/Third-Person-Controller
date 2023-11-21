@@ -17,7 +17,22 @@
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "141a3f3cf5aebebb6fbfaf51fc196da03c0e8f0b"
+      "hash": "6c66deba5d4ff7cd24a783caa2ffb854cc18356c"
+    },
+    "com.gamegc.guistylesdebug": {
+      "version": "https://github.com/GameGC/guistyles-buildin-debug.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "hash": "3bfb5aad68980e86cc6a98a01f5ca5d79a86e67f"
+    },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
     },
     "com.unity.animation.rigging": {
       "version": "1.2.1",

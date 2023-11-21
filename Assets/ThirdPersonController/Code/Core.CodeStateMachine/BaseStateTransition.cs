@@ -27,6 +27,7 @@ namespace ThirdPersonController.Core.CodeStateMachine
     
         // don't store in build
 #if UNITY_EDITOR
+        [HideInInspector]
         [SerializeField] private string _transitionName;
 
         public bool SetNextState(ref State[] states, ref State state)

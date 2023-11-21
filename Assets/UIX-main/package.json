@@ -1,0 +1,16 @@
+{
+  "name": "com.redowl.uix",
+  "version": "0.0.1",
+  "displayName": "RedOwl - UIX",
+  "description": "The Unity library for a better experience when making UIs",
+  "unity": "2019.4",
+  "dependencies": {
+    "com.unity.mathematics": ""
+  },
+  "author": {
+    "name": "RedOwl",
+    "email": "support@redowlgames.com",
+    "url": "https://redowlgames.com"
+  },
+  "type": "tool"
+}

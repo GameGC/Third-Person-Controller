@@ -190,7 +190,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8899923960682603458}
-  - component: {fileID: 1367346442738832495}
   - component: {fileID: 7499410885689271704}
   - component: {fileID: 8960849790513902427}
   m_Layer: 0
@@ -216,23 +215,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &1367346442738832495
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8903231967639380790}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 565f8e5263658b341a6250378e121a2e, type: 2}
-  - {fileID: 7400000, guid: 54e26662cbc08b641bb037bc80a6071b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!54 &7499410885689271704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -247,7 +229,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &8960849790513902427
 MonoBehaviour:

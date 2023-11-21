@@ -1,7 +1,7 @@
+using System.Collections;
 using GameGC.Collections;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ExtendedAnimationLayer : AnimationLayer
 {
@@ -28,19 +28,19 @@ public class ExtendedAnimationLayer : AnimationLayer
         }
     }
 
-    protected override void SyncedTransition()
+    protected override IEnumerator AsyncTransition(string prevState, string newState)
     {
-        OverrideClips();
-        base.SyncedTransition();
+        OverrideClips(newState);
+        return base.AsyncTransition(prevState, newState);
     }
 
-    protected override void AsyncTransition()
+    protected override void SyncedTransition(string previosState, string newState)
     {
-        OverrideClips();
-        base.AsyncTransition();
+        OverrideClips(newState);
+        base.SyncedTransition(previosState, newState);
     }
 
-    private void OverrideClips()
+    private void OverrideClips(string newState)
     {
         //discard previous
         var state = _mecanicAnimator.GetCurrentAnimatorStateInfo(0);
@@ -48,11 +48,9 @@ public class ExtendedAnimationLayer : AnimationLayer
         if (OverrideIndex > -1)
             GetComponentInParent<HybridAnimator>().DiscardAnimClip(overrideStates[OverrideIndex].Value);
 
-        var nextState= _codeStateMachine.CurrentState.Name;
-        
         //override new one
         state = _mecanicAnimator.GetCurrentAnimatorStateInfo(0);
-        OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableState == nextState && state.IsName(s.Key.mecanicState));
+        OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableState == newState && state.IsName(s.Key.mecanicState));
         if (OverrideIndex > -1)
         {
             var  lips = _mecanicAnimator.GetCurrentAnimatorClipInfo(0);

@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Header" style="flex-direction: row; align-items: flex-start; justify-content: space-between; background-color: rgb(56, 56, 56);">
+        <ui:Label name="Label" text="Label" display-tooltip-when-elided="True" style="color: rgb(196, 196, 196);" />
+        <ui:Button name="AddBtn" text="+" display-tooltip-when-elided="True" />
+    </ui:VisualElement>
+    <ui:ListView focusable="True" name="ListView" style="background-color: rgb(56, 56, 56); height: auto" />
+</ui:UXML>

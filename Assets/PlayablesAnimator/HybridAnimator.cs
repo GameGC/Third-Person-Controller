@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
-using UnityEngine.Serialization;
-using UnityEngine.Timeline;
 
 [RequireComponent(typeof(Animator))]
 public class HybridAnimator : MonoBehaviour
@@ -61,6 +59,7 @@ public class HybridAnimator : MonoBehaviour
 
     public void Rebuild(int i)
     {
+        _layerPlayable.GetInput(i).Destroy();
         _layerPlayable.DisconnectInput(i);
         
         var stateMachine = stateMachines[i-1];
@@ -170,8 +169,6 @@ public class HybridAnimator : MonoBehaviour
         else
             _overridesCache.Add(new KeyValuePair<object, AnimationClip>(clipName,newClip));
     }
-
-    public void Fuck() => Debug.LogError("fuck");
 }
 
 public static class CollectionHelpers

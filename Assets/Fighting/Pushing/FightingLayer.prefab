@@ -84,9 +84,9 @@ MonoBehaviour:
     - rid: 6167190519439425536
       type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
+        path: states.Array.data[0].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Attack
-        path: states.Array.data[0].Transitions.Array.data[0]
         isAttacking: 1
     - rid: 6167190519439425537
       type: {class: SetCooldownFeature, ns: , asm: Assembly-CSharp}
@@ -96,9 +96,9 @@ MonoBehaviour:
     - rid: 6167190519439425538
       type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
+        path: states.Array.data[1].Transitions.Array.data[0]
         _transitionIndex: 2
         _transitionName: Cooldown
-        path: states.Array.data[1].Transitions.Array.data[0]
         isCooldown: 1
     - rid: 6167190519439425539
       type: {class: ResetCooldownFeature, ns: , asm: Assembly-CSharp}
@@ -108,9 +108,9 @@ MonoBehaviour:
     - rid: 6167190519439425540
       type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
+        path: states.Array.data[2].Transitions.Array.data[0]
         _transitionIndex: 0
         _transitionName: Idle
-        path: states.Array.data[2].Transitions.Array.data[0]
         isCooldown: 0
 --- !u!114 &8129081330054931135
 MonoBehaviour:
@@ -128,14 +128,7 @@ MonoBehaviour:
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  SDictionary:
-    _keyValuePairs:
-    - Key: Idle
-      Value: {fileID: 0}
-    - Key: Attack
-      Value: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
-    - Key: Cooldown
-      Value: {fileID: 0}
-  defaultTransition:
-    time: 0
-  CurrentState: Idle
+  States:
+    _keyValuePairs: []
+  customTransitionTimes: []
+  defaultTransitionTime: 0.02

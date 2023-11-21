@@ -66,19 +66,19 @@ namespace ThirdPersonController.MovementStateMachine.Features
             // prevents the collider from slipping on ramps
             _slippyPhysics = new PhysicMaterial
             {
-                name = "maxFrictionPhysics",
-                staticFriction = 1f,
-                dynamicFriction = 1f,
-                frictionCombine = PhysicMaterialCombine.Maximum
+                name = "slippyPhysics",
+                staticFriction = 0f,
+                dynamicFriction = 0f,
+                frictionCombine = PhysicMaterialCombine.Minimum
             };
 
             // air physics 
             _maxFrictionPhysics = new PhysicMaterial
             {
-                name = "slippyPhysics",
-                staticFriction = 0f,
-                dynamicFriction = 0f,
-                frictionCombine = PhysicMaterialCombine.Minimum
+                name = "maxFrictionPhysics",
+                staticFriction = 1f,
+                dynamicFriction = 1f,
+                frictionCombine = PhysicMaterialCombine.Maximum
             };
         }
 

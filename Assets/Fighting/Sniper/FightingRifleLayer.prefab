@@ -74,6 +74,8 @@ MonoBehaviour:
     features:
     - rid: 2369757174817882259
     - rid: 2369757174817882260
+    - rid: 8271788052120862743
+    - rid: 8271788052120862741
     Transitions:
     - rid: 2369757174817882261
     - rid: 2369757174817882262
@@ -84,17 +86,21 @@ MonoBehaviour:
     - rid: 2369757174817882265
     - rid: 2369757174817882266
     - rid: 2369757174817882267
+    - rid: 8271788052120862744
+    - rid: 8271788052120862742
     Transitions:
     - rid: 2369757174817882268
     - rid: 2369757174817882269
     - rid: 2369757174817882270
-    - rid: 8271787882543316992
+    - rid: 8271788052120862754
   - Name: AimFullScreen
     features:
     - rid: 8271787882543316993
     - rid: 8271787882543316994
     - rid: 8271787882543316995
     - rid: 8271787882543316996
+    - rid: 8271788052120862746
+    - rid: 8271788052120862745
     Transitions:
     - rid: 8271787882543316997
     - rid: 8271787882543316998
@@ -105,6 +111,8 @@ MonoBehaviour:
     - rid: 2369757174817882272
     - rid: 2369757174817882273
     - rid: 2369757174817882274
+    - rid: 8271788052120862747
+    - rid: 8271788052120862748
     Transitions:
     - rid: 2369757174817882275
   - Name: ShootFullScreen
@@ -113,6 +121,8 @@ MonoBehaviour:
     - rid: 8271787898842382337
     - rid: 8271787898842382338
     - rid: 8271787898842382341
+    - rid: 8271788052120862749
+    - rid: 8271788052120862750
     Transitions:
     - rid: 8271787898842382356
     - rid: 8271787898842382340
@@ -121,9 +131,9 @@ MonoBehaviour:
     Transitions:
     - rid: 2369757174817882277
     - rid: 2369757174817882278
+    - rid: 2369757174817882281
     - rid: 2369757174817882279
     - rid: 2369757174817882280
-    - rid: 2369757174817882281
   - Name: CooldownFullScreen
     features:
     - rid: 8271787898842382354
@@ -137,8 +147,11 @@ MonoBehaviour:
     features:
     - rid: 2369757174817882288
     - rid: 2369757174817882289
+    - rid: 8271788052120862751
+    - rid: 8271788052120862752
     Transitions:
     - rid: 2369757174817882290
+    - rid: 8271788052120862759
     - rid: 2369757174817882291
     - rid: 2369757174817882292
   - Name: PutWeaponBackFromAim
@@ -246,7 +259,7 @@ MonoBehaviour:
       type: {class: ShootFeature, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[0]
-        waitForStateWeightName: Shoot
+        changeCooldownToAwait: 1
     - rid: 2369757174817882272
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -286,7 +299,7 @@ MonoBehaviour:
     - rid: 2369757174817882279
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[6].Transitions.Array.data[2]
+        path: states.Array.data[6].Transitions.Array.data[3]
         _transitionIndex: 1
         _transitionName: Idle
         Transitions:
@@ -295,7 +308,7 @@ MonoBehaviour:
     - rid: 2369757174817882280
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[6].Transitions.Array.data[3]
+        path: states.Array.data[6].Transitions.Array.data[4]
         _transitionIndex: 2
         _transitionName: Aim
         Transitions:
@@ -304,7 +317,7 @@ MonoBehaviour:
     - rid: 2369757174817882281
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[6].Transitions.Array.data[4]
+        path: states.Array.data[6].Transitions.Array.data[2]
         _transitionIndex: 4
         _transitionName: Shoot
         Transitions:
@@ -373,7 +386,7 @@ MonoBehaviour:
     - rid: 2369757174817882291
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[8].Transitions.Array.data[1]
+        path: states.Array.data[8].Transitions.Array.data[2]
         _transitionIndex: 1
         _transitionName: Idle
         Transitions:
@@ -382,7 +395,7 @@ MonoBehaviour:
     - rid: 2369757174817882292
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[8].Transitions.Array.data[2]
+        path: states.Array.data[8].Transitions.Array.data[3]
         _transitionIndex: 2
         _transitionName: Aim
         Transitions:
@@ -421,13 +434,6 @@ MonoBehaviour:
       data:
         path: states.Array.data[9].features.Array.data[0]
         delay: 2.5
-    - rid: 8271787882543316992
-      type: {class: EndPlayTransition, ns: , asm: Assembly-CSharp}
-      data:
-        path: states.Array.data[2].Transitions.Array.data[3]
-        _transitionIndex: 3
-        _transitionName: AimFullScreen
-        WaitForAnimationEnd: Aim
     - rid: 8271787882543316993
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -475,7 +481,7 @@ MonoBehaviour:
       type: {class: ShootFeature, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[0]
-        waitForStateWeightName: ShootFullScreen
+        changeCooldownToAwait: 1
     - rid: 8271787898842382337
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -617,6 +623,111 @@ MonoBehaviour:
         _transitionIndex: 0
         _transitionName: 
         isAim: 1
+    - rid: 8271788052120862741
+      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].features.Array.data[3]
+        _active: 0
+    - rid: 8271788052120862742
+      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].features.Array.data[4]
+        _active: 0
+    - rid: 8271788052120862743
+      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].features.Array.data[2]
+        _active: 0
+    - rid: 8271788052120862744
+      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].features.Array.data[3]
+        _active: 1
+    - rid: 8271788052120862745
+      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].features.Array.data[5]
+        _active: 1
+    - rid: 8271788052120862746
+      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].features.Array.data[4]
+        _active: 0
+    - rid: 8271788052120862747
+      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[4].features.Array.data[4]
+        _active: 1
+    - rid: 8271788052120862748
+      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[4].features.Array.data[5]
+        _active: 0
+    - rid: 8271788052120862749
+      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[5].features.Array.data[4]
+        _active: 0
+    - rid: 8271788052120862750
+      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[5].features.Array.data[5]
+        _active: 1
+    - rid: 8271788052120862751
+      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[8].features.Array.data[2]
+        _active: 0
+    - rid: 8271788052120862752
+      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[8].features.Array.data[3]
+        _active: 0
+    - rid: 8271788052120862754
+      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].Transitions.Array.data[3]
+        _transitionIndex: 3
+        _transitionName: AimFullScreen
+        Transitions:
+        - rid: 8271788052120862755
+        - rid: 8271788052120862756
+    - rid: 8271788052120862755
+      type: {class: Weight1Transition, ns: , asm: Assembly-CSharp}
+      data:
+        path: 
+        _transitionIndex: 0
+        _transitionName: 
+    - rid: 8271788052120862756
+      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      data:
+        path: 
+        _transitionIndex: 0
+        _transitionName: 
+        delayTime: 0.25
+    - rid: 8271788052120862759
+      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[8].Transitions.Array.data[1]
+        _transitionIndex: 4
+        _transitionName: Shoot
+        Transitions:
+        - rid: 8271788052120862761
+        - rid: 8271788052120862760
+    - rid: 8271788052120862760
+      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        path: 
+        _transitionIndex: 0
+        _transitionName: 
+        isAttacking: 1
+    - rid: 8271788052120862761
+      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      data:
+        path: 
+        _transitionIndex: 0
+        _transitionName: 
+        isReloading: 0
 --- !u!114 &1506062241905660166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,8 +762,38 @@ MonoBehaviour:
       Value: {fileID: 7400000, guid: eb51a5b1ec48be04d8824319f99e9edf, type: 3}
     - Key: PutWeaponBackFromAim
       Value: {fileID: 100084, guid: da4d8e56ecf9c7244b1936a6ebe1fbe0, type: 3}
-  defaultTransition:
-    time: 0.02
+  customTransitionTimes:
+  - stateFromIndex: 1
+    stateToIndex: 2
+    time: 0.2
+    stateFrom: Idle
+    stateTo: Aim
+  - stateFromIndex: 2
+    stateToIndex: 3
+    time: 0
+    stateFrom: Aim
+    stateTo: AimFullScreen
+  - stateFromIndex: 1
+    stateToIndex: 4
+    time: 0.2
+    stateFrom: Idle
+    stateTo: Shoot
+  - stateFromIndex: 5
+    stateToIndex: 1
+    time: 0.2
+    stateFrom: Cooldown
+    stateTo: Idle
+  - stateFromIndex: 6
+    stateToIndex: 4
+    time: 0.2
+    stateFrom: Reload
+    stateTo: Shoot
+  - stateFromIndex: 2
+    stateToIndex: 1
+    time: 0.2
+    stateFrom: Aim
+    stateTo: Idle
+  defaultTransitionTime: 0.02
 --- !u!114 &7496659491380728965
 MonoBehaviour:
   m_ObjectHideFlags: 0

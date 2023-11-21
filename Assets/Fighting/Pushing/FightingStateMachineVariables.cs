@@ -68,15 +68,17 @@ namespace Fighting.Pushing
         public override bool couldHaveTransition => shootButtonReference.action.phase == InputActionPhase.Performed;
     }
 
-    public class ShootFeature : BaseFeature
+    public class ShootFeature : BaseFeatureWithAwaiters
     {
-        public string waitForStateWeightName = "Shoot";
+        public bool changeCooldownToAwait = true;
+       // public string waitForStateWeightName = "Shoot";
         
         private IWeaponInfo _shooter;
         private IFightingStateMachineVariables _variables;
 
         private MultiAimConstraint _handAimConstaint;
-        
+
+        private bool wasCooldown;
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             _variables= variables as IFightingStateMachineVariables;
@@ -85,6 +87,7 @@ namespace Fighting.Pushing
 
         public override void OnEnterState()
         {
+            base.OnEnterState();
             _shooter ??= _variables.weaponInstance.GetComponent<IWeaponInfo>();
 
             //wait until animation apply
@@ -93,14 +96,17 @@ namespace Fighting.Pushing
 
         private async void DelayShoot()
         {
+            wasCooldown = _variables.isCooldown;
+            if(changeCooldownToAwait)
+                _variables.isCooldown = true;
             var animationController = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
-            await animationController.WaitForStateWeight1(waitForStateWeightName);
+            await animationController.WaitForNextState();
+            if(!IsRunning) return;
             _handAimConstaint.weight = 0;
+            
+            if(changeCooldownToAwait)
+                _variables.isCooldown = wasCooldown;
             _shooter.Shoot();
-        }
-
-        public override void OnExitState()
-        {
             _handAimConstaint.weight = 1;
         }
     }

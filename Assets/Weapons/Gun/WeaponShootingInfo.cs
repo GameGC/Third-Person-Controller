@@ -25,7 +25,6 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
     public bool calcFormat;
     public int maxShootsPerMinute;
     
-    private int remainingAmmo;
 
     private IFightingStateMachineVariables Variables;
     
@@ -50,9 +49,6 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
             AutoReload();
     }
 
-    public void Fired() => Debug.LogError("event fired");
-
-
     private void AutoReload()
     {
         if (totalAmmo - ammoImMagazine <= 0) return;
@@ -62,9 +58,9 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
 
     public void Shoot()
     { 
-        if(Variables.isCooldown)   throw new Exception("Wrong code execution, check conditions in executor class");
-        if(Variables.isReloading)  throw new Exception("Wrong code execution, check conditions in executor class");
-        if(!Variables.couldAttack) throw new Exception("Wrong code execution, check conditions in executor class");
+        if(Variables.isCooldown)   throw new Exception("Wrong Cooldown execution, check conditions in executor class");
+        if(Variables.isReloading)  throw new Exception("Wrong Reloading execution, check conditions in executor class");
+        if(!Variables.couldAttack) throw new Exception("Wrong CouldAttack execution, check conditions in executor class");
         
         if (remainingAmmo > 0)
         {
@@ -100,6 +96,9 @@ public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
         }
     }
 
+    public int remainingAmmo { get; private set; }
+    public int maxAmmo => ammoImMagazine;
+
     private void Reload()
     {
         totalAmmo -= ammoImMagazine;
@@ -130,6 +129,10 @@ public interface IWeaponInfo
     public void CacheReferences(IFightingStateMachineVariables variables);
 
     public void Shoot();
+    
+    public int remainingAmmo { get; }
+    public int maxAmmo { get; }
+
 }
 
 public abstract class GunModule : MonoBehaviour

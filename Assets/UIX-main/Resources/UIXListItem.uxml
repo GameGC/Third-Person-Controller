@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Row" style="flex-direction: row; justify-content: space-between;">
+        <!-- <ui:VisualElement name="Drag" /> -->
+        <ui:VisualElement name="FieldContainer" />
+        <ui:Button name="RemoveBtn" text="X" display-tooltip-when-elided="True" />
+    </ui:VisualElement>
+</ui:UXML>

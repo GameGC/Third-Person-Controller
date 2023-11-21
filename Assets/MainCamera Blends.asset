@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MainCamera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: FollowCam NewInput
-    m_To: AimCam NewInput
+  - m_From: FollowCam
+    m_To: AimCam
     m_Blend:
       m_Style: 6
       m_Time: 0.0625
@@ -24,8 +24,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: AimCam NewInput
-    m_To: FollowCam NewInput
+  - m_From: AimCam
+    m_To: FollowCam
     m_Blend:
       m_Style: 1
       m_Time: 2
@@ -35,7 +35,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: AimCam NewInput
+  - m_From: AimCam
     m_To: AimCamFPS
     m_Blend:
       m_Style: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 0
   - m_From: AimCamFPS
-    m_To: AimCam NewInput
+    m_To: AimCam
     m_Blend:
       m_Style: 0
       m_Time: 2

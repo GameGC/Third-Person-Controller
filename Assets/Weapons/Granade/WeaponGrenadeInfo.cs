@@ -18,6 +18,7 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
     public void CacheReferences(IFightingStateMachineVariables variables)
     {
         Variables = variables;
+        remainingAmmo = totalAmmo;
     }
     
     private void Start()
@@ -32,7 +33,7 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
         if(Variables.isReloading)  throw new Exception("Wrong code execution, check conditions in executor class");
         if(!Variables.couldAttack) throw new Exception("Wrong code execution, check conditions in executor class");
 
-        if (totalAmmo > 0)
+        if (remainingAmmo > 0)
         {
             var line = transform.root.Find("StateMachines").GetComponentInChildren<BallisticTrajectoryGeneratorPreview>();
             line.GenerateTrajectoryOut(out var points);
@@ -45,17 +46,20 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
             Invoke(nameof(Cooldown),cooldownTime);
         }
     }
-    
+
+    public int remainingAmmo { get; private set; }
+    public int maxAmmo => totalAmmo;
+
     private void Cooldown()
     {
-        if (totalAmmo < 1)
+        if (remainingAmmo < 1)
         {
             Variables.isCooldown = false;
             Variables.couldAttack = false;
             return;
         }
         
-        totalAmmo--;
+        remainingAmmo--;
         Instantiate(prefab,transform.position,transform.rotation, transform).enabled = false;
         Variables.isCooldown = false;
         Variables.couldAttack = true;

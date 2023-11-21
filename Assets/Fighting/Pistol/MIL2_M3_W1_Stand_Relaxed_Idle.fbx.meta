@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 6d3d9c92c8d90e948b603c60612d5bcf
 ModelImporter:
-  serializedVersion: 21202
+  serializedVersion: 21300
   internalIDToNameTable:
   - first:
       1: 100000
@@ -547,7 +547,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
       rotation in copied configuration does not match rotation in animation file:\n\t'Neck1'
-      : rotation error = 5.144678 deg\n"
+      : rotation error = 5.144677 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'MIL2_M3_W1_Stand_Relaxed_Idle' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
@@ -577,7 +577,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -1507,6 +1507,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

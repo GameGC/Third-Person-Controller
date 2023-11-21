@@ -1,8 +1,6 @@
 using System;
 using GameGC.Collections;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Playables;
 using Object = UnityEngine.Object;
 
 [Serializable]

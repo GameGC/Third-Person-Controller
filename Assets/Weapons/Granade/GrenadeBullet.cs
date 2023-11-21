@@ -21,6 +21,7 @@ public class GrenadeBullet : MonoBehaviour
     {
         this._points = points;
         var ext = GetComponentInChildren<SphereCollider>().radius;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         _size = ext;
     }
     

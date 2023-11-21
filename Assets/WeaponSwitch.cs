@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Fighting.Pushing;
 using GameGC.Collections;
+using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.StateMachine;
 using UnityEngine;
@@ -14,9 +16,16 @@ using UnityEngine.InputSystem;
 
 public class WeaponSwitch : MonoBehaviour
 {
-   public STurple<string, CodeStateMachine, Rig>[] weapons;
+   public STurple<string, CodeStateMachine, Rig,Sprite>[] weapons;
+
    public CodeStateMachine currentStateMachine;
-   
+
+   public PlayerHUD hud;
+
+   private void Awake()
+   {
+      hud.DisplayAllWeapon(weapons.Select(w=>w.Item4).ToArray(),currentStateMachine.GetComponent<IFightingStateMachineVariables>());
+   }
 
    private void Update()
    {
@@ -86,10 +95,13 @@ public class WeaponSwitch : MonoBehaviour
       }
 
       // rebuild everything
-      animator.UnbindAllStreamHandles();
-      await Task.Delay(1000);
       builder.Build();
+      animator.Rebind();
+
       animator.enabled = true;
       currentStateMachine = instance;
+      
+      hud.SetSelection(i);
+      hud.SetVariables(currentStateMachine.GetComponent<IFightingStateMachineVariables>());
    }
 }

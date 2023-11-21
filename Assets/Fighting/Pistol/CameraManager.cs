@@ -8,6 +8,13 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum CameraType : byte
+{
+    Follow = 0,
+    Aiming = 1,
+    AimingSniper = 2,
+}
+
 public class CameraManager : MonoBehaviour
 {
     /// <summary>
@@ -90,7 +97,7 @@ public class CameraManager : MonoBehaviour
     
     public void ReplaceCamera(CameraType type,CinemachineVirtualCameraBase prefab,Transform follow=null,Transform lookAt=null)
     {
-        prefab.gameObject.SetActive(false);
+        prefab.gameObject.SetActive(true);
         
         int previousIndex = (byte) type;
         if (cameras[previousIndex] != null)

@@ -201,9 +201,11 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
                 //    continue;
 
                 InsertSpaceBeforeCaps(ref actionName);
+
+                var copy = list.serializedProperty;
                 var dynamicType =
-                    new Tuple<SerializedProperty, Type, int, ReorderableList,string>(list.serializedProperty, type, list.count,
-                        list,list.serializedProperty.propertyPath);
+                    new Tuple<SerializedProperty, Type, int, ReorderableList,string>(copy, type, list.count,
+                        list,copy.propertyPath);
                 menu.AddItem(new GUIContent(actionName), false, OnAddItemFromDropdown, dynamicType);
                 
             }
@@ -216,7 +218,8 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             var element = obj as Tuple<SerializedProperty, Type, int, ReorderableList,string>;
 
             var _tempList = element.Item1;
-
+            if (_tempList.propertyPath != element.Item5)
+                _tempList = _tempList.serializedObject.FindProperty(element.Item5);
             int last = element.Item3;
 
             try
@@ -307,6 +310,7 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
      public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
      {
+         if(property.FindPropertyRelative("path") == null) return;
          property.FindPropertyRelative("path").stringValue = property.propertyPath;
          label = EditorGUIUtility.TrTextContent(GetPropertyTypeName(property));
          EditorGUI.PropertyField(position, property,label,true);
@@ -345,7 +349,20 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
              temp.height = EditorGUIUtility.singleLineHeight;
              position.height -= temp.height;
              position.y += temp.height;
-             
+
+             //if (AltCount(property)<1)
+             //{
+             //    string basePath = property.propertyPath;
+             //    property.isExpanded = false;
+             //    if (property.isExpanded)
+             //    {
+             //        property.NextVisible(true);
+             //        while (property.NextVisible(false) && property.propertyPath.StartsWith(basePath)){}
+             //    }
+//
+             //    EditorGUI.LabelField(temp,label);
+             //    return;
+             //}
              EditorGUI.PropertyField(temp, property, label, false);
              if (property.isExpanded)
              {
@@ -377,7 +394,17 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
          }
         
      }
-     
+
+     private int AltCount(SerializedProperty p)
+     {
+         int count = p.CountInProperty();
+         if (p.FindPropertyRelative("_transitionName") != null) 
+             count--;
+         if(p.FindPropertyRelative("_transitionIndex") != null)
+             count--;
+         
+         return count;
+     }
      private string GetPropertyTypeName(SerializedProperty property)
      {
          string actionName = property.managedReferenceFullTypename.Split(" ").Last();
