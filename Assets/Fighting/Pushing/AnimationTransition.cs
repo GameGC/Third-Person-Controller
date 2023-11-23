@@ -1,15 +1,8 @@
 using System;
 using System.Linq;
-using GameGC.Collections;
-using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
-using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Playables;
-using UnityEngine.Timeline;
-using Object = UnityEngine.Object;
 
 [Serializable]
 public struct AnimationTransition

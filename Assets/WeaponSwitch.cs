@@ -1,22 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Fighting.Pushing;
-using GameGC.Collections;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.StateMachine;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class WeaponSwitch : MonoBehaviour
 {
-   public STurple<string, CodeStateMachine, Rig,Sprite>[] weapons;
+   public WeaponData[] weapons;
 
    public CodeStateMachine currentStateMachine;
 
@@ -24,7 +15,7 @@ public class WeaponSwitch : MonoBehaviour
 
    private void Awake()
    {
-      hud.DisplayAllWeapon(weapons.Select(w=>w.Item4).ToArray(),currentStateMachine.GetComponent<IFightingStateMachineVariables>());
+      hud.DisplayAllWeapon(weapons,currentStateMachine.GetComponent<IFightingStateMachineVariables>());
    }
 
    private void Update()
@@ -60,17 +51,18 @@ public class WeaponSwitch : MonoBehaviour
       Destroy(currentStateMachine.gameObject);
       
       //assign new Animations      
-      var parent = transform.Find("StateMachines");
-      var instance = Instantiate(weapons[i].Item2, parent);
+      var stateMachineParent = transform.Find("StateMachines");
+      var instance = Instantiate(weapons[i].stateMachine, stateMachineParent);
       instance.GetComponent<CodeStateMachine>().ReferenceResolver = GetComponent<ReferenceResolver>();
 
       GetComponent<HybridAnimator>().stateMachines[0] = instance.GetComponent<AnimationLayer>();
       GetComponent<HybridAnimator>().Rebuild(1);
 
-      parent = transform.Find("rig_controllers");
+      stateMachineParent = transform.Find("rig_controllers");
       var builder = GetComponent<RigBuilder>();
 
       var animator = GetComponent<Animator>();
+      int prevState = animator.GetCurrentAnimatorStateInfo(0).shortNameHash;
       animator.enabled = false;
 
       // remove previous rig
@@ -78,10 +70,10 @@ public class WeaponSwitch : MonoBehaviour
          Destroy(builder.layers[0].rig.gameObject);
       
       //assign new Rig
-      if (weapons[i].Item3)
+      if (weapons[i].rigLayer)
       {
-         var rig = Instantiate(weapons[i].Item3, parent);
-         rig.name = weapons[i].Item3.name;
+         var rig = Instantiate(weapons[i].rigLayer, stateMachineParent);
+         rig.name = weapons[i].rigLayer.name;
 
          builder.Clear();
 
@@ -99,6 +91,10 @@ public class WeaponSwitch : MonoBehaviour
       animator.Rebind();
 
       animator.enabled = true;
+      if (prevState != animator.GetCurrentAnimatorStateInfo(0).shortNameHash)
+      {
+         animator.Play(prevState);
+      }
       currentStateMachine = instance;
       
       hud.SetSelection(i);

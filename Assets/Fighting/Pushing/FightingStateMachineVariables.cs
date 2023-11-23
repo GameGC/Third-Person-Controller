@@ -1,13 +1,10 @@
-﻿using System.Threading.Tasks;
-using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core;
+﻿using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 namespace Fighting.Pushing
 {

@@ -1,6 +1,5 @@
 using System;
 using ThirdPersonController.Core.DI;
-using UnityEngine;
 
 [Serializable]
 public class TestFeature : BaseMultiParamFeature<TestFeatureVariable>

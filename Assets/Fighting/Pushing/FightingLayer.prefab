@@ -129,6 +129,12 @@ MonoBehaviour:
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
   States:
-    _keyValuePairs: []
+    _keyValuePairs:
+    - Key: Idle
+      Value: {fileID: 0}
+    - Key: Attack
+      Value: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+    - Key: Cooldown
+      Value: {fileID: 0}
   customTransitionTimes: []
   defaultTransitionTime: 0.02

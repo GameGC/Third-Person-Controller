@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TypeNamespaceTree;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 public partial class FuzzyWindowC2 : EditorWindow
@@ -10,15 +12,8 @@ public partial class FuzzyWindowC2 : EditorWindow
     private CategoryTree BuildTreeHierarchy(List<Type> types)
     {
         var root = new CategoryTree("");
-        var categorys = new CategoryTree[]
-        {
-            new CategoryTree("ThirdPersonController.MovementStateMachine.Features")
-            {
-                Content = new GUIContent("Movement"), Parent = root,
-            },
-            new CategoryTree("") {Content = new GUIContent("Others"), Parent = root,}
-        };
-
+        var categorys = FuzzyGroupsPreset.instance.GetCategoryTrees(root);
+        
         foreach (var c in categorys)
         {
             if (string.IsNullOrEmpty(c.Namespace))
@@ -46,7 +41,7 @@ public partial class FuzzyWindowC2 : EditorWindow
 
     private IOptionTree[] BuildTree1d(List<Type> types)
     {
-        var root = new CategoryTree("") {Content = new GUIContent("Search")};
+        var root = new CategoryTree("") {Content = EditorGUIUtility.TrTextContent("Search")};
 
         var optionsArray = new TypeTree[types.Count];
         for (int i = 0; i < types.Count; i++)

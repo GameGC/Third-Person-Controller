@@ -1,7 +1,4 @@
-using System;
-using GameGC.Collections;
 using UnityEngine;
-using Weapons;
 
 public class ClipPlaceModule : MonoBehaviour
 {

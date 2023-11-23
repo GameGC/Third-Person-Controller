@@ -6,7 +6,6 @@ using Fighting.Pushing;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 [Serializable]

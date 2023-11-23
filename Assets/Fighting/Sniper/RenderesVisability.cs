@@ -1,4 +1,3 @@
-using System;
 using JetBrains.Annotations;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core;

@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using GameGC.Collections;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class WeaponCameraOverride : MonoBehaviour

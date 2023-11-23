@@ -49,7 +49,7 @@ namespace ThirdPersonController.Core.CodeStateMachine
         
         public string Name;
     
-        [SerializeReference,SerializeReferenceAddButton(typeof(BaseFeature))] 
+        [SerializeReference,FuzzyAddButton(typeof(BaseFeature))] 
         public BaseFeature[] features = new BaseFeature[0];
     
         [SerializeReference,SerializeReferenceAddButton(typeof(BaseStateTransition))]

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Cinemachine;
-using GameGC.Collections;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum CameraType : byte
 {

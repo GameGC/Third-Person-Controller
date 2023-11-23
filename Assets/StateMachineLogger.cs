@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using ThirdPersonController.Core.StateMachine;
 using UnityEngine;
 

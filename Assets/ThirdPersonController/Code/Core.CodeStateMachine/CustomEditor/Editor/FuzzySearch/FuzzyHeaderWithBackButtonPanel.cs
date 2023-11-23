@@ -28,6 +28,7 @@ namespace FuzzySearch
                 alignment = TextAnchor.MiddleCenter,
                 padding = new RectOffset(0, 0, 0, 0)
             };
+            
             _leftArrow = new GUIStyle("AC LeftArrow");
         }
         #endregion
@@ -39,6 +40,7 @@ namespace FuzzySearch
                 LoadStyles();
                 _stylesCached = true;
             }
+            Vector2 iconSize = EditorGUIUtility.GetIconSize();
             EditorGUIUtility.SetIconSize(Vector2.one * 16);
             
             
@@ -48,9 +50,9 @@ namespace FuzzySearch
 
             _headerWidth = _header.CalcSize(headerContent).x;
 
-            GUI.Label(headerPosition, headerContent??GUIContent.none, _header);
+            DrawLabel(headerPosition, headerContent ?? GUIContent.none);
 
-            EditorGUIUtility.SetIconSize(default(Vector2));
+            EditorGUIUtility.SetIconSize(iconSize);
         
             if (grandParent != null)
             {
@@ -61,6 +63,12 @@ namespace FuzzySearch
                     BackClicked?.Invoke();
                 }
             }
+        }
+
+        private void DrawLabel(Rect headerPosition,GUIContent headerContent)
+        {
+            if (Event.current.type == EventType.Repaint)
+                _header.Draw(headerPosition, headerContent, true, false, false, false);
         }
 
         public float GetWidth() => _headerWidth;

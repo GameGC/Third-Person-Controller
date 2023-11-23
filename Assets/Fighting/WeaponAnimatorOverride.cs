@@ -1,4 +1,3 @@
-using ThirdPersonController.Core.DI;
 using UnityEngine;
 
 public class WeaponAnimatorOverride : MonoBehaviour

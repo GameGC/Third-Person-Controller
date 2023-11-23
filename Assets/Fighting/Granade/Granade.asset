@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b52cdb37b24662bc97d1275c0ab90b, type: 3}
+  m_Name: Granade
+  m_EditorClassIdentifier: 
+  name: Granade
+  icon: {fileID: 21300000, guid: 007f44569c7e9468887252bacd1d3f24, type: 3}
+  stateMachine: {fileID: -5611037283389731989, guid: 07ca9b3c2d0a04f9ab091766fd267022, type: 3}
+  rigLayer: {fileID: 2726598440744615240, guid: de8b2b16b6e914883adca0b0e54ed914, type: 3}

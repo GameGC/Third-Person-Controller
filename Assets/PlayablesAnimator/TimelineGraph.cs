@@ -13,7 +13,7 @@ namespace DefaultNamespace
 {
     public class TimelineGraph
     {
-        PlayableGraph _graph;
+        private PlayableGraph _graph;
         public void Create(TimelineAsset asset,GameObject root,ref Playable timelinePlayable)
         {
             _graph = PlayableGraph.Create($"{asset.name}_TimelineGraph"); 

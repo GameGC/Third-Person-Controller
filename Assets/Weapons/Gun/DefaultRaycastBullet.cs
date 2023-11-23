@@ -13,9 +13,11 @@ public class DefaultRaycastBullet : MonoBehaviour
     private void Start()
     {
         transform = base.transform;
-        if (Physics.Raycast(transform.position, transform.forward,out var hit,distance))
+        if (Physics.Raycast(transform.position, transform.forward,out var hit,distance,-5,QueryTriggerInteraction.Ignore))
         {
             flyDestination = hit.point;
+            Debug.Log(hit.collider);
+            hit.transform.GetComponentInParent<HealthComponent>().OnHit(hit);
         }
         else
         {

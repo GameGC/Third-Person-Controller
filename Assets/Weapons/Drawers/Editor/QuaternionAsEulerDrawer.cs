@@ -4,7 +4,7 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(QuaternionAsEuler))]
 public class QuaternionAsEulerDrawer : PropertyDrawer
 {
-    Vector3? tempValue;
+    private Vector3? tempValue;
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         if (!tempValue.HasValue)

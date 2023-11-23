@@ -7,6 +7,11 @@ namespace FuzzySearch
 {
     public class FuzzyListPanel
     {
+        public float GetHeight()
+        {
+            return Mathf.Clamp(_list.Length,0,13) * OptionHeight;
+        }
+
         private const float OptionHeight = 20;
 
         public event Action NextClicked;

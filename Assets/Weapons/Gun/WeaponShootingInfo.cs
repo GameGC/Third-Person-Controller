@@ -1,10 +1,7 @@
 using System;
 using Cinemachine;
-using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
-using UnityEngine.Playables;
-using Weapons;
 
 public class WeaponShootingInfo : MonoBehaviour,IWeaponInfo
 {

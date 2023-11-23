@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Timers;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core;

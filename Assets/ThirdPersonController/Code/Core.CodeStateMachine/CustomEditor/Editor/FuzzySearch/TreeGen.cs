@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace TypeNamespaceTree
@@ -11,11 +12,15 @@ namespace TypeNamespaceTree
         public List<IOptionTree> Childs { get; set; }
         public CategoryTree Parent { get; set; }
 
+        public CategoryTree()
+        {
+            Childs = new List<IOptionTree>();
+        }
         public CategoryTree(string ns)
         {
             Namespace = ns;
             Childs = new List<IOptionTree>();
-            Content = new GUIContent(Namespace);
+            Content = EditorGUIUtility.TrTextContent(Namespace);
         }
 
         public GUIContent Content { get; set; }
@@ -33,7 +38,7 @@ namespace TypeNamespaceTree
         {
             Type = type;
             TypeName = type.Name;
-            Content = new GUIContent(TypeName);
+            Content = EditorGUIUtility.TrTextContent(TypeName);
         }
 
     }

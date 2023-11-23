@@ -13,7 +13,8 @@ using UnityEngine;
             if (GUILayout.Button("Bake"))
                 Bake();
         }
-        void Bake()
+
+        private void Bake()
         {
             var r = target as RampAsset;
             var t = new Texture2D(r.size, r.size, TextureFormat.ARGB32, mipChain: true);

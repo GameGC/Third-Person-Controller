@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Fighting.Pushing;
 using ThirdPersonController.Core;
 using ThirdPersonController.Core.DI;

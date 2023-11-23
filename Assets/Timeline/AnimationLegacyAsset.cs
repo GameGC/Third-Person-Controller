@@ -11,7 +11,7 @@ namespace GameGC.Timeline
         public AnimationClip clip;
         [SerializeField] private AnimationPlayableAsset.LoopMode m_Loop = AnimationPlayableAsset.LoopMode.UseSourceAsset;
 
-        ScriptPlayable<AnimationLegacyPlayable> playable;
+        private ScriptPlayable<AnimationLegacyPlayable> playable;
         public override Playable CreatePlayable (PlayableGraph graph, GameObject owner)
         {
             playable = ScriptPlayable<AnimationLegacyPlayable>.Create(graph);
