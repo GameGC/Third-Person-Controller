@@ -33,7 +33,7 @@ namespace FuzzySearch
         }
         #endregion
 
-        public void OnGUI(IOptionTree parent, Rect headerPosition)
+        public void OnGUI(IOptionTree parent, Rect headerPosition, in bool isRepaint)
         {
             if (!_stylesCached)
             {
@@ -50,7 +50,7 @@ namespace FuzzySearch
 
             _headerWidth = _header.CalcSize(headerContent).x;
 
-            DrawLabel(headerPosition, headerContent ?? GUIContent.none);
+            DrawLabel(headerPosition, headerContent ?? GUIContent.none,in isRepaint);
 
             EditorGUIUtility.SetIconSize(iconSize);
         
@@ -65,9 +65,9 @@ namespace FuzzySearch
             }
         }
 
-        private void DrawLabel(Rect headerPosition,GUIContent headerContent)
+        private void DrawLabel(Rect headerPosition,GUIContent headerContent,in bool isRepaint)
         {
-            if (Event.current.type == EventType.Repaint)
+            if (isRepaint)
                 _header.Draw(headerPosition, headerContent, true, false, false, false);
         }
 

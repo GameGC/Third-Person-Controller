@@ -17,9 +17,9 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
         public CodeStateMachine _stateMachine;
         public BaseStateTransition _transition;
     }
-    
-   
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
+
+
+    protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
     {
         // base.OnGUI(position, property, label);
         if (!customData.cached)

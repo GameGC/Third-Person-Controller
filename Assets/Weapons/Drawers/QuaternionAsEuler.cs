@@ -2,8 +2,4 @@
 
 public class QuaternionAsEuler : PropertyAttribute
 {
-    public QuaternionAsEuler()
-    {
-      
-    }
 }

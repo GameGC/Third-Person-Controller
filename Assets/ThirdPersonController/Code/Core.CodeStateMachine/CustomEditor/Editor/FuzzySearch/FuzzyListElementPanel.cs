@@ -7,7 +7,7 @@ namespace FuzzySearch
     public class FuzzyListElementPanel
     {
         public IOptionTree Tree;
-        public event Action<CategoryTree> NextClicked;
+        public event Action<IOptionTree> NextClicked;
 
         #region Styles
     
@@ -35,7 +35,7 @@ namespace FuzzySearch
         }
         #endregion
     
-        public void OnGUI(Rect optionPosition,GUIContent option, bool isSelected)
+        public void OnGUI(Rect optionPosition,GUIContent option, bool isSelected,in bool isRepaint)
         {
             if (!_stylesCached)
             {
@@ -43,7 +43,7 @@ namespace FuzzySearch
                 _stylesCached = true;
             }
         
-            if (Event.current.type == EventType.Repaint)
+            if (isRepaint)
             {
                 var optionStyle =option.image ? _optionWithIcon : _optionWithoutIcon;
                 optionStyle.Draw(optionPosition, option, false, false, isSelected,
@@ -58,10 +58,13 @@ namespace FuzzySearch
                 right -= 13;
                 var rightArrowPosition = new Rect(right, optionPosition.y + 4, 13, 13);
 
-                bool isNextClicked = GUI.Button(rightArrowPosition, GUIContent.none,_rightArrow);
-                if(isNextClicked)
-                    NextClicked?.Invoke(Tree as CategoryTree);
+                if (isRepaint)
+                    _rightArrow.Draw(rightArrowPosition, isSelected, true, true, false);
             }
+            
+            bool isNextClicked = isSelected && Event.current.clickCount > 0;
+            if(isNextClicked)
+                NextClicked?.Invoke(Tree);
         }
     }
 }

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: FuzzyGroupsPreset
   m_EditorClassIdentifier: 
   elements:
-  - Namespace: ThirdPersonController.MovementStateMachine.Features
+  - Namespace: ThirdPersonController.MovementStateMachine.Features.Move
     ContentName: Movement
-    Icon: {fileID: 2800000, guid: 2969d90b86698124696637a6df64a112, type: 3}
+    Icon: {fileID: 2800000, guid: 1ebb646dde53d4659a8af83f11edd76f, type: 3}
+  - Namespace: ThirdPersonController.MovementStateMachine.Features
+    ContentName: Movement.Gravity and extras
+    Icon: {fileID: 2800000, guid: 671e03c3f0d0b45249da99c8925c1818, type: 3}
   - Namespace: 
     ContentName: Other
     Icon: {fileID: 0}

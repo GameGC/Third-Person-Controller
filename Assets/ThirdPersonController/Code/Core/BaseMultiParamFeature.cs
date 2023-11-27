@@ -26,7 +26,7 @@ public class BaseMultiParamFeatureEditor : PropertyDrawerWithCustomData<BaseMult
         return base.GetPropertyHeight(property, label)+ 100+100;
     }
 
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, Data customData)
+    protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, Data customData)
     {
         var targetArray = property.FindPropertyRelative("_paramVariants").FindPropertyRelative("_keyValuePairs");
 

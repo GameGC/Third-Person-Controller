@@ -21,13 +21,23 @@ public class FussiTester : BaseCodeStateMachineDrawer<FuzzyAddButton>
     {
         if (UnityEngine.Event.current == null) return;
 
-        //var activatorPosition = new Rect(buttonRect.position, new Vector2(200, 100));
-        FuzzyWindowC2.Show(buttonRect,new Vector2(200, 100), attribute.BaseType);
+
+        var property = list.serializedProperty;
+        var listCopy = list;
+        
+        FuzzyWindowC2.Show(buttonRect,new Vector2(200, 100), attribute.BaseType, type =>
+        {
+            var dynamicType = new Tuple<SerializedProperty, Type, int, ReorderableList, string>(
+                property, type, listCopy.count, listCopy, property.propertyPath);
+            base.OnAddItemFromDropdown(dynamicType);
+        });
     }
 }
 
 public partial class FuzzyWindowC2 : EditorWindow
 {
+    public event Action<Type> TypeClicked;
+    
     static FuzzyWindowC2()
     {
         ShowAsDropDownFitToScreen = typeof(EditorWindow).GetMethod("ShowAsDropDownFitToScreen",
@@ -68,8 +78,16 @@ public partial class FuzzyWindowC2 : EditorWindow
         hierarchyTree = BuildTreeHierarchy(types).Childs.ToArray();
         _list.SetData(hierarchyTree);
         _list.NextClicked += EnterChild;
+        _list.TypeClicked += ListOnTypeClicked;
+        
 
         typeTree1d = BuildTree1d(types);
+    }
+
+    private void ListOnTypeClicked(Type type)
+    {
+        TypeClicked?.Invoke(type);
+        Close();
     }
 
     private void SearchPanelOnQueryChanged(string query)
@@ -111,6 +129,7 @@ public partial class FuzzyWindowC2 : EditorWindow
         var newChilds = _list.Parent.Parent.Childs;
         _list.Parent = newChilds[0].Parent;
         _list.SetData(newChilds.ToArray());
+        _list.Repaint = true;
     }
 
     private void Update()
@@ -122,7 +141,7 @@ public partial class FuzzyWindowC2 : EditorWindow
         }
     }
 
-    private void OnLevelGUI(float anim)
+    private void OnLevelGUI(float anim, in bool isRepaint)
     {
         anim = Mathf.Floor(anim) + Mathf.SmoothStep(0, 1, Mathf.Repeat(anim, 1));
 
@@ -133,24 +152,20 @@ public partial class FuzzyWindowC2 : EditorWindow
         {
             var headerPosition = GUILayoutUtility.GetRect(16, headerHeight);
 
-            _headerWithBackButtonPanel.OnGUI(_list.Parent, headerPosition);
+            _headerWithBackButtonPanel.OnGUI(_list.Parent, headerPosition,in isRepaint);
         }
 
-        OnOptionsGUI(levelPosition.height - headerHeight);
+        _list.OnGUI(in isRepaint);
 
         GUILayout.EndArea();
     }
 
-    private void OnOptionsGUI(float scrollViewHeight)
-    {
-        _list.OnGUI();
-    }
 
     private static readonly MethodInfo ShowAsDropDownFitToScreen;
 
     private static FuzzyWindowC2 instance;
 
-    public static void Show(Rect activatorPosition,Vector2 size, Type type)
+    public static void Show(Rect activatorPosition,Vector2 size, Type type,Action<Type> onClicked)
     {
         // Makes sure control exits DelayedTextFields before opening the window
         //GUIUtility.keyboardControl = 0;
@@ -170,6 +185,7 @@ public partial class FuzzyWindowC2 : EditorWindow
             instance = CreateInstance<FuzzyWindowC2>();
 
             instance.CreateWindow(activatorPosition,size);
+            instance.TypeClicked += onClicked;
         }
     }
 
@@ -191,40 +207,26 @@ public partial class FuzzyWindowC2 : EditorWindow
     {
         GUILayout.Space(7);
 
+        bool isRepaint = Event.current.type == EventType.Repaint;
+
         var searchFieldPosition = GUILayoutUtility.GetRect(10, searchFieldHeight);
         searchFieldPosition.x += 8;
         searchFieldPosition.width -= 16;
 
         _searchPanel.OnGUI(searchFieldPosition);
 
-        OnLevelGUI(anim);
+        OnLevelGUI(anim, in isRepaint);
 
-        UpdateAnimation();
-        if(Event.current.type == EventType.Repaint)
-        Rescale();
+        UpdateAnimation(in isRepaint);
+        if (isRepaint) 
+            Rescale();
     }
 
     private void Rescale()
     {
-        //var copy = position;
-        //var tempPos = EditorGUIUtility.GUIToScreenRect(new Rect(startPostion,Vector2.zero));
-        //copy.x = tempPos.x;
-        //copy.y = tempPos.y;
-        //ShowAsDropDown(tempPos,savedSize);
         var copy = position;
         copy.height = headerHeight + initialSpace + searchFieldHeight + Mathf.Max(_list.GetHeight(), 100);
         position = copy;
-        //copy.x = Event.current.mousePosition.x;
-        //copy.y = Event.current.mousePosition.y;
-        //copy = GUIUtility.GUIToScreenRect(position);
-        //var size = copy.size;
-        //copy.size = Vector2.zero;
-        // ShowAsDropDown(copy, size);
-
-        // ShowAsDropDownFitToScreen.Invoke(this,new object[]
-        // {
-        //     copy,size,null
-        // });
     }
 
     private Vector2 startPostion;

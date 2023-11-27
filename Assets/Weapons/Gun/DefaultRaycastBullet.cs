@@ -7,7 +7,7 @@ public class DefaultRaycastBullet : MonoBehaviour
     
     public int speed = 100;
     public int distance = 1000;
-    
+    public SurfaceEffect defaultImpactEffect;
     
     // Start is called before the first frame update
     private void Start()
@@ -16,8 +16,8 @@ public class DefaultRaycastBullet : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward,out var hit,distance,-5,QueryTriggerInteraction.Ignore))
         {
             flyDestination = hit.point;
-            Debug.Log(hit.collider);
-            hit.transform.GetComponentInParent<HealthComponent>().OnHit(hit);
+            SurfaceSystem.instance.OnSurfaceHit(hit,defaultImpactEffect);
+            hit.transform.GetComponentInParent<HealthComponent>()?.OnHit(hit);
         }
         else
         {

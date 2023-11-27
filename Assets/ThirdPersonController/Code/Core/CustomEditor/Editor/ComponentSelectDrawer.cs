@@ -22,7 +22,7 @@ namespace ThirdPersonController.Core.DI.CustomEditor.Editor
             public int _selected = 0;
         }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
+        protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, DataContainer customData)
         {
             if (property.objectReferenceValue)
             {

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.alexeytaranov.serializereferencedropdown": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
     "com.gamegc.animation.rigging.saver": "https://github.com/GameGC/AnimationRiggingSaver.git",
     "com.gamegc.collections": "https://github.com/GameGC/GameGC.Collections.git",
     "com.gamegc.guistylesdebug": "https://github.com/GameGC/guistyles-buildin-debug.git",
@@ -19,6 +20,7 @@
     "com.unity.modules.imgui": "1.0.0",
     "com.unity.modules.particlesystem": "1.0.0",
     "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.terrain": "1.0.0",
     "com.unity.modules.ui": "1.0.0",
     "com.unity.modules.uielements": "1.0.0",
     "com.unity.modules.umbra": "1.0.0",

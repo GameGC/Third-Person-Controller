@@ -11,7 +11,7 @@ using State = ThirdPersonController.Core.CodeStateMachine.State;
 
 public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, IReferenceAddButton
 {
-    protected bool DoesFitDrawCondition(SerializedProperty property)
+    protected bool IsFirstArrayElement(SerializedProperty property)
     {
         var path = property.propertyPath;
         var index0 = path.LastIndexOf('[');
@@ -75,8 +75,18 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
     {
         UnityEditor.Editor.finishedDefaultHeaderGUI -= OnReload;
 
-        if (!Selection.activeGameObject) return;
-        if (!Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
+        if(Selection.activeGameObject)
+        {
+            if (!Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
+        }
+        else if(Selection.activeObject)
+        {
+            if (Selection.activeObject.GetType().Name !="SurfaceEffect")
+            {
+                return;
+            }
+        }
+        else return;
 
         UnityEditor.Editor.finishedDefaultHeaderGUI += OnReload;
     }
@@ -85,18 +95,16 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
     {
         if (Event.current.type != EventType.Layout && Event.current.type != EventType.Repaint) return;
 
-        if (!Selection.activeGameObject) return;
-        if (!Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
+        //if (!Selection.activeGameObject) return;
+        //if (!Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
 
-        Debug.Log("r0");
-
-        var editor = new SerializedObject(st);
+        var editor = new SerializedObject(obj.serializedObject.targetObject);
         SerializedProperty iterator = editor.GetIterator();
         bool next = iterator.NextVisible(true);
 
         while (next)
         {
-            bool couldDraw = DoesFitDrawCondition(iterator);
+            bool couldDraw = IsFirstArrayElement(iterator);
             if (couldDraw)
             {
                 var attribute = GetAttributesForFieldF(iterator);
@@ -147,7 +155,7 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
         menu.ShowAsContext();
     }
 
-    private void OnAddItemFromDropdown(object obj)
+    protected void OnAddItemFromDropdown(object obj)
     {
         var element = obj as Tuple<SerializedProperty, Type, int, ReorderableList, string>;
 
@@ -182,7 +190,7 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
     {
         List<Type> types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(a => a.GetTypes())
-            .Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType))
+            .Where(type => !type.IsAbstract && (type.IsSubclassOf(parentType)|| type.GetInterfaces().Contains(parentType)))
             .ToList();
 
         if (sorted) types.Sort(CompareTypesNames);

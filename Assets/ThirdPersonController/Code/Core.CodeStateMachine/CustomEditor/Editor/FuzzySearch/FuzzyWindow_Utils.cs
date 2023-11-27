@@ -69,28 +69,28 @@ public partial class FuzzyWindowC2 : EditorWindow
 
 public partial class FuzzyWindowC2 : EditorWindow
 {
-    private void UpdateAnimation()
+    private void UpdateAnimation(in bool isRepaint)
     {
         if (anim < 1)
         {
-            OnLevelGUI(anim + 1);
+            OnLevelGUI(anim + 1,in isRepaint);
         }
 
-        if (isAnimating && e.type == EventType.Repaint)
+        if (isRepaint)
         {
-            anim = Mathf.MoveTowards(anim, animTarget, repaintDeltaTime * animationSpeed);
-
-            if (animTarget == 0 && anim == 0)
+            if (isAnimating)
             {
-                anim = 1;
-                animTarget = 1;
+                anim = Mathf.MoveTowards(anim, animTarget, repaintDeltaTime * animationSpeed);
+
+                if (animTarget == 0 && anim == 0)
+                {
+                    anim = 1;
+                    animTarget = 1;
+                }
+
+                _list.Repaint = true;
             }
 
-            _list.Repaint = true;
-        }
-
-        if (e.type == EventType.Repaint)
-        {
             lastRepaintTime = DateTime.Now;
         }
     }
@@ -104,6 +104,7 @@ public partial class FuzzyWindowC2 : EditorWindow
     private void EnterChild()
     {
         lastRepaintTime = DateTime.Now;
+        _list.Repaint = true;
 
         if (animTarget == 0)
         {

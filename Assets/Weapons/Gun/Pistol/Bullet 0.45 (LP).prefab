@@ -324,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   distance: 100
+  defaultImpactEffect: {fileID: 11400000, guid: 41e5a75504a504a8b80b7751283f29de, type: 2}
 --- !u!1 &172564
 GameObject:
   m_ObjectHideFlags: 0

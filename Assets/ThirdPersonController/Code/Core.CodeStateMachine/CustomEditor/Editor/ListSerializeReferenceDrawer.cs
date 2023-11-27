@@ -17,22 +17,19 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             if (!Selection.activeGameObject) return;
             if (!Selection.activeGameObject.TryGetComponent<StateMachine.CodeStateMachine>(out var st)) return;
 
-            var editor = new SerializedObject(st);
+            var editor = new SerializedObject(obj.serializedObject.targetObject);
             SerializedProperty iterator = editor.GetIterator();
             bool next = iterator.NextVisible(true);
 
             while (next)
             {
-                bool couldDraw = DoesFitDrawCondition(iterator);
+                bool couldDraw = IsFirstArrayElement(iterator);
                 if (couldDraw)
                 {
                     var attribute = GetAttributesForFieldF(iterator);
                     if (attribute != null) DoListFooter(GetTargetProperty(iterator), attribute);
                 }
-                else
-                {
-                    if (iterator.name == "states") DoStateListFooter(iterator);
-                }
+                else if (iterator.name == "states") DoStateListFooter(iterator);
 
                 next = iterator.NextVisible(true);
             }

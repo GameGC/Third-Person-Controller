@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.alexeytaranov.serializereferencedropdown": {
+      "version": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "635dba02c808e2b4881c689a57c43b60e627698f"
+    },
     "com.gamegc.animation.rigging.saver": {
       "version": "https://github.com/GameGC/AnimationRiggingSaver.git",
       "depth": 0,
@@ -17,7 +24,7 @@
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "6c66deba5d4ff7cd24a783caa2ffb854cc18356c"
+      "hash": "2d42ba51fdf6cb74c1f0a3870de2743366f1f7b0"
     },
     "com.gamegc.guistylesdebug": {
       "version": "https://github.com/GameGC/guistyles-buildin-debug.git",
@@ -186,6 +193,12 @@
       "dependencies": {}
     },
     "com.unity.modules.physics": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.terrain": {
       "version": "1.0.0",
       "depth": 0,
       "source": "builtin",

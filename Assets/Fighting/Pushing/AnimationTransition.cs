@@ -91,7 +91,7 @@ public class AnimationTransitionDrawer : PropertyDrawerWithCustomData<AnimationT
         customData.valueB = Array.IndexOf(states, customData.target.stateTo);
     }
 
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, Data customData)
+    protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, Data customData)
     {
         if (!customData.inited)
         {

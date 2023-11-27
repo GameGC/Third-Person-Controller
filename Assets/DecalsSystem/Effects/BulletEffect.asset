@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: BulletEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 4512377026111000653, guid: 399f88c1a221042a4a263d003f8c9dbd, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 5
+    <HasValue>k__BackingField: 1
+  Audio:
+    rid: 8271788176671244289
+  references:
+    version: 2
+    RefIds:
+    - rid: 8271788176671244289
+      type: {class: SurfaceEffect/AudioAtlas, ns: , asm: Assembly-CSharp}
+      data:
+        clip: {fileID: 8300000, guid: d5331af8ebcda493a9fa802b0a68531c, type: 3}
+        timings:
+        - 1.8180937
+        - 3.473245
+        - 4.9054227
+        minMaxVolume: {x: 1, y: 1}
+        minMaxPitch: {x: 1, y: 1}

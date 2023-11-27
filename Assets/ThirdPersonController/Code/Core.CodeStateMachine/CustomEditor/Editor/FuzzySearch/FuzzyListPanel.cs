@@ -15,6 +15,7 @@ namespace FuzzySearch
         private const float OptionHeight = 20;
 
         public event Action NextClicked;
+        public event Action<Type> TypeClicked;
         public IOptionTree Parent;
     
         
@@ -39,14 +40,21 @@ namespace FuzzySearch
             _selectedIndex = -1;
         }
 
-        private void ElementOnNextClicked(CategoryTree obj)
-        { 
-            NextClicked?.Invoke();
-            SetData(obj.Childs.ToArray());
+        private void ElementOnNextClicked(IOptionTree option)
+        {
+            if (option is CategoryTree categoryTree)
+            {
+                NextClicked?.Invoke();
+                SetData(categoryTree.Childs.ToArray());
+            }
+            else
+            {
+                TypeClicked?.Invoke((option as TypeTree).Type); 
+            }
         }
 
         public bool Repaint;
-        public void OnGUI()
+        public void OnGUI(in bool isRepaint)
         {
             using (var scrollViewScope = new GUILayout.ScrollViewScope(_scroll))
             {
@@ -59,7 +67,7 @@ namespace FuzzySearch
                     if (isMovingMouse) 
                         ValidateSelectionChanged(ref i, ref optionPosition, ref mousePos);
 
-                    _list[i].OnGUI(optionPosition,_list[i].Tree.Content, _selectedIndex == i);
+                    _list[i].OnGUI(optionPosition,_list[i].Tree.Content, _selectedIndex == i,in isRepaint);
                 }
 
                 _scroll = scrollViewScope.scrollPosition;

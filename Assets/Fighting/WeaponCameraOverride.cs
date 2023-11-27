@@ -59,7 +59,8 @@ public class TransformToPathDrawer : PropertyDrawerWithCustomData<TransformToPat
       public Transform root;
       public Transform target;
    }
-   public override void OnGUI(Rect position, SerializedProperty property, GUIContent label, Data customData)
+
+   protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, Data customData)
    {
       var target = property.serializedObject.targetObject as MonoBehaviour;
 
