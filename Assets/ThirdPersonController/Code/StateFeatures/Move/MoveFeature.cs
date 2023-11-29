@@ -6,6 +6,11 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
     [Serializable]
     public class MoveFeature : BaseMoveFeature
     {
+        public AudioClip walk;
+        public AudioClip run;
+        
+        private AudioSource source;
+        private IMoveStateMachineVariables _variables;
         public MoveFeature()
         {
             rotationSpeed = 16f;

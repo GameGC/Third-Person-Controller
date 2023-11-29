@@ -290,8 +290,8 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158912}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.000000023283064, y: -0.0000000027939677, z: 0.015587371}
-  m_Size: 0.031132966
+  m_LocalReferencePoint: {x: 0.000000023748726, y: -0.0000000027939677, z: 0.015566863}
+  m_Size: 0.031122468
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -322,6 +322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b03ecf9325f47540b2cf0ed441884d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 402653185
   speed: 5
   distance: 100
   defaultImpactEffect: {fileID: 11400000, guid: 41e5a75504a504a8b80b7751283f29de, type: 2}

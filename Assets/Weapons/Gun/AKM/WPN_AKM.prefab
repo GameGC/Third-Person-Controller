@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 460542305278290321}
   - component: {fileID: 460542305276963255}
   - component: {fileID: 460542305275997047}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 460542305278290323}
   - component: {fileID: 460542305276963249}
   - component: {fileID: 460542305275997041}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM_bolt_carrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2998853927601559321}
   - component: {fileID: 8717932829498351620}
   - component: {fileID: -3859842466928417242}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localPosition: {x: -0.0321, y: 0.2352, z: 0.0371}
   localRotation: {x: -0.49999997, y: 0.49999997, z: 0.49999997, w: 0.49999997}
+  applyWhen: 
 --- !u!114 &8492190204914902017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +428,7 @@ GameObject:
   - component: {fileID: 460542305278290329}
   - component: {fileID: 460542305276963263}
   - component: {fileID: 460542305275997055}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM_safetyswitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +511,7 @@ GameObject:
   - component: {fileID: 460542305278290331}
   - component: {fileID: 460542305276963257}
   - component: {fileID: 460542305275997049}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +594,7 @@ GameObject:
   - component: {fileID: 460542305278290333}
   - component: {fileID: 460542305276963251}
   - component: {fileID: 460542305275997043}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM_magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +677,7 @@ GameObject:
   - component: {fileID: 460542305278290335}
   - component: {fileID: 460542305276963261}
   - component: {fileID: 460542305275997053}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WPN_AKM_rear_sight_leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7210411419212002163}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,8 +793,16 @@ PrefabInstance:
       value: MuzzleFlash01
       objectReference: {fileID: 0}
     - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992675705445476, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_RootOrder

@@ -68,6 +68,7 @@ namespace Fighting.Pushing
     public class ShootFeature : BaseFeatureWithAwaiters
     {
         public bool changeCooldownToAwait = true;
+        public bool setAimingWeaigh0DuringShoot = true;
        // public string waitForStateWeightName = "Shoot";
         
         private IWeaponInfo _shooter;
@@ -99,12 +100,14 @@ namespace Fighting.Pushing
             var animationController = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
             await animationController.WaitForNextState();
             if(!IsRunning) return;
-            _handAimConstaint.weight = 0;
+            if(setAimingWeaigh0DuringShoot)
+                _handAimConstaint.weight = 0;
             
             if(changeCooldownToAwait)
                 _variables.isCooldown = wasCooldown;
             _shooter.Shoot();
-            _handAimConstaint.weight = 1;
+            if(setAimingWeaigh0DuringShoot)
+               _handAimConstaint.weight = 1;
         }
     }
     

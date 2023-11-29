@@ -4,10 +4,7 @@ using System.Linq;
 using GameGC.Collections;
 using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "Create SurfaceEffect", fileName = "SurfaceEffect", order = 0)]
@@ -52,10 +49,7 @@ public class SurfaceEffect : ScriptableObject
             clip = this.clip;
 
             var index = Random.Range(0,timings.Length+1);
-            Debug.Log(index);
             GetElement(index, out clip, out start, out end);
-            Debug.Log(start);
-            Debug.Log(end);
         }
 
         public float Pitch => Random.Range(minMaxPitch.x, minMaxPitch.y);

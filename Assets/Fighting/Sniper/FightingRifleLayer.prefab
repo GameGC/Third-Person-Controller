@@ -98,9 +98,9 @@ MonoBehaviour:
     - rid: 8271787882543316993
     - rid: 8271787882543316994
     - rid: 8271787882543316995
-    - rid: 8271787882543316996
     - rid: 8271788052120862746
     - rid: 8271788052120862745
+    - rid: 8271788242098716676
     Transitions:
     - rid: 8271787882543316997
     - rid: 8271787882543316998
@@ -117,12 +117,12 @@ MonoBehaviour:
     - rid: 2369757174817882275
   - Name: ShootFullScreen
     features:
-    - rid: 8271787898842382336
     - rid: 8271787898842382337
+    - rid: 8271787898842382336
     - rid: 8271787898842382338
-    - rid: 8271787898842382341
     - rid: 8271788052120862749
     - rid: 8271788052120862750
+    - rid: 8271788242098716675
     Transitions:
     - rid: 8271787898842382356
     - rid: 8271787898842382340
@@ -135,8 +135,7 @@ MonoBehaviour:
     - rid: 2369757174817882279
     - rid: 2369757174817882280
   - Name: CooldownFullScreen
-    features:
-    - rid: 8271787898842382354
+    features: []
     Transitions:
     - rid: 8271787898842382343
     - rid: 8271787898842382344
@@ -260,6 +259,7 @@ MonoBehaviour:
       data:
         path: states.Array.data[4].features.Array.data[0]
         changeCooldownToAwait: 1
+        setAimingWeaigh0DuringShoot: 0
     - rid: 2369757174817882272
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -452,11 +452,6 @@ MonoBehaviour:
       data:
         path: states.Array.data[3].features.Array.data[2]
         _cameraType: 2
-    - rid: 8271787882543316996
-      type: {class: RenderesVisability, ns: , asm: Assembly-CSharp}
-      data:
-        path: states.Array.data[3].features.Array.data[3]
-        isActiveDuringState: 0
     - rid: 8271787882543316997
       type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
@@ -480,12 +475,13 @@ MonoBehaviour:
     - rid: 8271787898842382336
       type: {class: ShootFeature, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
-        path: states.Array.data[5].features.Array.data[0]
+        path: states.Array.data[5].features.Array.data[1]
         changeCooldownToAwait: 1
+        setAimingWeaigh0DuringShoot: 0
     - rid: 8271787898842382337
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[5].features.Array.data[1]
+        path: states.Array.data[5].features.Array.data[0]
         layerName: shooter_layer
         returnPreviousValueOnExit: 0
         weight: 1
@@ -500,11 +496,6 @@ MonoBehaviour:
         _transitionIndex: 7
         _transitionName: CooldownFullScreen
         delayTime: 0.5
-    - rid: 8271787898842382341
-      type: {class: RenderesVisability, ns: , asm: Assembly-CSharp}
-      data:
-        path: states.Array.data[5].features.Array.data[3]
-        isActiveDuringState: 0
     - rid: 8271787898842382343
       type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
@@ -588,11 +579,6 @@ MonoBehaviour:
         _transitionIndex: 3
         _transitionName: Shoot
         isAttacking: 1
-    - rid: 8271787898842382354
-      type: {class: RenderesVisability, ns: , asm: Assembly-CSharp}
-      data:
-        path: states.Array.data[7].features.Array.data[0]
-        isActiveDuringState: 0
     - rid: 8271787898842382356
       type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
       data:
@@ -646,12 +632,12 @@ MonoBehaviour:
     - rid: 8271788052120862745
       type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[3].features.Array.data[5]
+        path: states.Array.data[3].features.Array.data[4]
         _active: 1
     - rid: 8271788052120862746
       type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[3].features.Array.data[4]
+        path: states.Array.data[3].features.Array.data[3]
         _active: 0
     - rid: 8271788052120862747
       type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
@@ -666,12 +652,12 @@ MonoBehaviour:
     - rid: 8271788052120862749
       type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[5].features.Array.data[4]
+        path: states.Array.data[5].features.Array.data[3]
         _active: 0
     - rid: 8271788052120862750
       type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
       data:
-        path: states.Array.data[5].features.Array.data[5]
+        path: states.Array.data[5].features.Array.data[4]
         _active: 1
     - rid: 8271788052120862751
       type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
@@ -728,6 +714,16 @@ MonoBehaviour:
         _transitionIndex: 0
         _transitionName: 
         isReloading: 0
+    - rid: 8271788242098716675
+      type: {class: WeaponOffsetApplyFeature, ns: Weapons, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[5].features.Array.data[5]
+        applyWhenName: AimScoped
+    - rid: 8271788242098716676
+      type: {class: WeaponOffsetApplyFeature, ns: Weapons, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].features.Array.data[5]
+        applyWhenName: AimScoped
 --- !u!114 &1506062241905660166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +752,11 @@ MonoBehaviour:
       Value: {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
     - Key: Shoot
       Value: {fileID: 7400000, guid: 402c2cddbd8b24fb391aa09289f2ce9a, type: 2}
+    - Key: ShootFullScreen
+      Value: {fileID: 7400000, guid: 402c2cddbd8b24fb391aa09289f2ce9a, type: 2}
     - Key: Cooldown
+      Value: {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
+    - Key: CooldownFullScreen
       Value: {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
     - Key: Reload
       Value: {fileID: 7400000, guid: eb51a5b1ec48be04d8824319f99e9edf, type: 3}
@@ -778,12 +778,12 @@ MonoBehaviour:
     time: 0.2
     stateFrom: Idle
     stateTo: Shoot
-  - stateFromIndex: 5
+  - stateFromIndex: 6
     stateToIndex: 1
     time: 0.2
     stateFrom: Cooldown
     stateTo: Idle
-  - stateFromIndex: 6
+  - stateFromIndex: 8
     stateToIndex: 4
     time: 0.2
     stateFrom: Reload

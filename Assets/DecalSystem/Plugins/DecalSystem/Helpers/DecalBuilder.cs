@@ -1,9 +1,7 @@
 ﻿#if UNITY_EDITOR
 namespace DecalSystem {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEditor;
     using UnityEngine;
 
     static class DecalBuilder {

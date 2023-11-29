@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9091097375101239536}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3953715609839299761}
   m_LocalRotation: {x: 4.0807612e-15, y: -0.000000059604638, z: -6.090298e-15, w: 1}
-  m_LocalPosition: {x: -0.00799942, y: 0.017, z: 0.527}
+  m_LocalPosition: {x: -0.0124, y: 0.0214, z: 0.5283}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5786063205755019917}
   - component: {fileID: 5786063205755019919}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,6 +117,26 @@ PrefabInstance:
     - target: {fileID: 100000, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
       propertyPath: m_Name
       value: AWP Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a551db186dc560141b8edb1e46d7029c, type: 3}
       propertyPath: m_RootOrder
@@ -206,6 +226,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localPosition: {x: -0.06, y: 0.361, z: 0.03}
   localRotation: {x: -0.49186552, y: 0.48857504, z: 0.5021472, w: 0.5169246}
+  applyWhen: 
+--- !u!114 &8469258523940987844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7008781531238062193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54dac56cf349584d981503a83467788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPosition: {x: 0, y: 0, z: 0}
+  localRotation: {x: -0.49999997, y: 0.49999997, z: 0.49999997, w: 0.49999997}
+  applyWhen: AimScoped
 --- !u!114 &8917102845950160940
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -125,4 +125,55 @@ namespace ThirdPersonController.MovementStateMachine.Features
             return (float)System.Math.Round(distance, 2);
         }
     }
+
+    public class MovementSoundsFeature : BaseFeature
+    {
+        public AudioClip walk;
+        public AudioClip run;
+        public AudioClip sprint;
+        
+        private AudioSource source;
+
+        private IMoveStateMachineVariables _variables;
+        private IBaseInputReader _input;
+        
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _variables = variables as IMoveStateMachineVariables;
+            _input = resolver.GetComponent<IBaseInputReader>();
+        }
+
+        public override void OnUpdateState()
+        {
+            if(!_variables.IsGrounded) return;
+            
+            if (_input.moveInputMagnitude < 1.01f)
+            {
+                if (_input.moveInputMagnitude < 0.501f)
+                {
+                    if (_input.isProne)
+                    {
+                        
+                    }
+                    else
+                    {
+                        //walk
+                    }
+                }
+                else
+                {
+                    //run
+                }
+            }
+            else
+            {
+                //sprint
+            }
+
+            if (_input.isJump)
+            {
+                //jump
+            }
+        }
+    }
 }

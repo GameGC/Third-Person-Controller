@@ -17,13 +17,14 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
             if (!Selection.activeGameObject) return;
             if (!Selection.activeGameObject.TryGetComponent<StateMachine.CodeStateMachine>(out var st)) return;
 
-            var editor = new SerializedObject(obj.serializedObject.targetObject);
+            var editor = new SerializedObject(st);
             SerializedProperty iterator = editor.GetIterator();
             bool next = iterator.NextVisible(true);
 
             while (next)
             {
                 bool couldDraw = IsFirstArrayElement(iterator);
+
                 if (couldDraw)
                 {
                     var attribute = GetAttributesForFieldF(iterator);

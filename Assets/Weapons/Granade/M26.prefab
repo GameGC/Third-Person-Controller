@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3755037833148906484}
   - component: {fileID: 3755037833145561934}
   - component: {fileID: 3755037833146755478}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Object001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3755037833145551514}
   - component: {fileID: 3755037833146759372}
   - component: {fileID: 6963305465643853742}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 8899923960682603458}
   - component: {fileID: 7499410885689271704}
   - component: {fileID: 8960849790513902427}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: M26
   m_TagString: Untagged
   m_Icon: {fileID: 0}

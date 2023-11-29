@@ -13,7 +13,7 @@ public class MultipleConditionTransition : BaseStateTransition
     
     
     [SerializeReference,SerializeReferenceAddButton(typeof(BaseStateTransition))]
-    public BaseStateTransition[] Transitions = new BaseStateTransition[0];
+    public BaseStateTransition[] Transitions = Array.Empty<BaseStateTransition>();
 
     public void OnValidate()
     {

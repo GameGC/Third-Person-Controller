@@ -1,5 +1,4 @@
 using GameGC.Collections;
-using ThirdPersonController.Core;
 using UnityEngine;
 
 public abstract class StateMonoBehaviorS<T> : MonoBehaviour where T : ScriptableObject

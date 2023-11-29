@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1835416645751342516}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8907175534795572036}
   - component: {fileID: 8932129642797845858}
   - component: {fileID: 8926125275289818280}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Object008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8899718051808343778}
   - component: {fileID: 8933633377354091742}
   - component: {fileID: 8925587598735589698}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Object009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 8899893430359397318}
   - component: {fileID: 8933781169946898602}
   - component: {fileID: 8924360508582887860}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Object005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 8907101463742682132}
   - component: {fileID: 8932168120377222266}
   - component: {fileID: 8925985173904745328}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Object010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 1563936919696421680}
   - component: {fileID: 1296255864080165920}
   - component: {fileID: 3574508149782771116}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Eagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,8 +585,16 @@ PrefabInstance:
       value: MuzzleFlash01
       objectReference: {fileID: 0}
     - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992675705445476, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: m_RootOrder

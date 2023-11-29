@@ -75,24 +75,14 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
     {
         UnityEditor.Editor.finishedDefaultHeaderGUI -= OnReload;
 
-        if(Selection.activeGameObject)
-        {
-            if (!Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
-        }
-        else if(Selection.activeObject)
-        {
-            if (Selection.activeObject.GetType().Name !="SurfaceEffect")
-            {
-                return;
-            }
-        }
-        else return;
+        if(Selection.activeGameObject && !Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
 
         UnityEditor.Editor.finishedDefaultHeaderGUI += OnReload;
     }
 
     protected virtual void OnReload(UnityEditor.Editor obj)
     {
+        Debug.Log("fuck");
         if (Event.current.type != EventType.Layout && Event.current.type != EventType.Repaint) return;
 
         //if (!Selection.activeGameObject) return;
@@ -117,6 +107,7 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
 
     protected void DoListFooter(SerializedProperty property, IReferenceAddButton attribute)
     {
+
         var resultID = ReorderableListWrapperRef.GetPropertyIdentifier(property);
         var listElementUnCasted = PropertyHandlerRef.s_reorderableLists[resultID];
 

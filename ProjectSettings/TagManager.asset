@@ -32,9 +32,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Character
+  - Char_Collision
+  - Effects
   - 
   - 
   m_SortingLayers:

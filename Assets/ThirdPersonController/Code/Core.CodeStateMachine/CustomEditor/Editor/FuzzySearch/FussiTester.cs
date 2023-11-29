@@ -28,7 +28,7 @@ public class FussiTester : BaseCodeStateMachineDrawer<FuzzyAddButton>
         FuzzyWindowC2.Show(buttonRect,new Vector2(200, 100), attribute.BaseType, type =>
         {
             var dynamicType = new Tuple<SerializedProperty, Type, int, ReorderableList, string>(
-                property, type, listCopy.count, listCopy, property.propertyPath);
+                property, type, property.arraySize, listCopy, property.propertyPath);
             base.OnAddItemFromDropdown(dynamicType);
         });
     }
@@ -109,10 +109,16 @@ public partial class FuzzyWindowC2 : EditorWindow
                 int score0 = 0;
                 int score1 = 0;
 
+                string contentA = a.Content.text;
+                string contentB = b.Content.text;
+                
+                if (contentA.Contains(query, StringComparison.InvariantCultureIgnoreCase)) score0 += contentA.Length;
+                if (contentB.Contains(query, StringComparison.InvariantCultureIgnoreCase)) score1 += contentA.Length;
+                
                 for (int i = 0; i < queryChars.Length; i++)
                 {
-                    if (a.Content.text.Contains(queryChars[i], StringComparison.InvariantCultureIgnoreCase)) score0++;
-                    if (b.Content.text.Contains(queryChars[i], StringComparison.InvariantCultureIgnoreCase)) score1++;
+                    if (contentA.Contains(queryChars[i], StringComparison.InvariantCultureIgnoreCase)) score0++;
+                    if (contentB.Contains(queryChars[i], StringComparison.InvariantCultureIgnoreCase)) score1++;
                 }
 
                 return score1.CompareTo(score0);

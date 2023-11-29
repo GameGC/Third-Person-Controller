@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using ThirdPersonController.Core;
+using ThirdPersonController.Core.CodeStateMachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -13,22 +12,36 @@ public class HealthComponent : MonoBehaviour
         public float damageMultiplicator;
     }
 
-    [SerializeField] private HitBox[] hitboxes;
-    [SerializeField] private int health = 100;
+    [FormerlySerializedAs("hitboxes")] [SerializeField] private HitBox[] hitBoxes;
+    [field: SerializeField] public float Health { get; private set; } = 100;
+
+    private int _hitBoxCount;
+
+    protected virtual void Awake()
+    {
+        _hitBoxCount = hitBoxes.Length;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider == hitboxes[0].Collider)
+        if (collision.collider == hitBoxes[0].Collider)
         {
             Debug.Log("hiiiiit");
         }
     }
 
-    public void OnHit(RaycastHit hit)
+    public virtual void OnHit(in RaycastHit hit,IDamageSender source)
     {
-        if (hit.collider == hitboxes[0].Collider)
+        float damage = source.damage;
+        if (_hitBoxCount > 0)
         {
-            Debug.Log("hiiiiit");
+            for (int i = 0; i < _hitBoxCount; i++)
+            {
+                if (hitBoxes[i].Collider != hit.collider) continue;
+                damage *= hitBoxes[i].damageMultiplicator;
+                break;
+            }
         }
+        Health -= damage;
     }
 }

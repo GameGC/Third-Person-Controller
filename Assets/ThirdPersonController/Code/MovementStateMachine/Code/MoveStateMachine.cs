@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using ThirdPersonController.Core;
 using ThirdPersonController.Core.StateMachine;
 using ThirdPersonController.Input;
+using UnityEditor;
 using UnityEngine;
 
 namespace ThirdPersonController.MovementStateMachine.Code
@@ -77,6 +80,27 @@ namespace ThirdPersonController.MovementStateMachine.Code
             foreach (var feature in alwaysExecutedFeatures)
             {
                 feature.OnFixedUpdateState();
+            }
+        }
+
+
+        [ContextMenu("Fix Missing")]
+        public void Fix()
+        {
+            var missingTypes = SerializationUtility.GetManagedReferencesWithMissingTypes(this);
+            var allTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes())
+                .Where(t=>t.IsClass && t.IsSubclassOf(typeof(BaseFeature))).ToList();
+            foreach (var missing in missingTypes)
+            {
+                int index = allTypes.FindIndex(t => t.Name == missing.className);
+                if (index > -1)
+                {
+                    Debug.Log(missing.serializedData);
+                    var newType = JsonUtility.FromJson(missing.serializedData, allTypes[index]);
+                    
+                        
+                    SerializationUtility.SetManagedReferenceIdForObject(this, newType, missing.referenceId);
+                }
             }
         }
     }

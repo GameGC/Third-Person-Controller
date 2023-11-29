@@ -1,14 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using GameGC.Collections;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Profiling;
-using UnityEngine.Rendering;
 using static UnityEngine.Random;
-using Debug = UnityEngine.Debug;
 
 public class SurfaceSystem : Singleton<SurfaceSystem>
 {
