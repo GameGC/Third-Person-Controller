@@ -346,6 +346,26 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
             return obj;
         }
+        
+        public static SerializedProperty GetParentProperty(this SerializedProperty property)
+        {
+            var path = property.propertyPath.Replace(".Array.data[", "[");
+            var elements = path.Split('.');
+            if (elements == null || elements.Length <2)
+            {
+                return property.serializedObject.FindProperty(path.Substring(0,path.IndexOf('[')));
+            }
+
+            Debug.Log(path);
+            Debug.Log(elements[0]);
+            foreach (var element in elements.Take(elements.Length - 1))
+            {
+                Debug.Log(element.Replace("[", ".Array.data["));
+                return property.serializedObject.FindProperty(element.Replace("[", ".Array.data["));
+            }
+
+            throw new NotImplementedException();
+        }
 
         private static object GetValue(object source, string name)
         {

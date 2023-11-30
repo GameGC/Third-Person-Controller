@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 using ThirdPersonController.Core.CodeStateMachine;
+using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
@@ -25,7 +26,7 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
         if (!customData.cached)
         {
             customData._stateMachine = property.serializedObject.targetObject as CodeStateMachine; 
-            customData._transition = GetParent(property) as BaseStateTransition;
+            customData._transition = property.GetPropertyParent<BaseStateTransition>();
             customData.cached = true;
         }
 
@@ -40,53 +41,6 @@ internal sealed class StateTransitionDrawer : PropertyDrawerWithCustomData<State
             property.serializedObject.ApplyModifiedProperties();
         }
 
-    }
-
-
-    public object GetParent(SerializedProperty prop)
-    {
-        var path = prop.propertyPath.Replace(".Array.data[", "[");
-        object obj = prop.serializedObject.targetObject;
-        var elements = path.Split('.');
-        foreach(var element in elements.Take(elements.Length-1))
-        {
-            if(element.Contains("["))
-            {
-                var elementName = element.Substring(0, element.IndexOf("["));
-                var index = Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[","").Replace("]",""));
-                obj = GetValue(obj, elementName, index);
-            }
-            else
-            {
-                obj = GetValue(obj, element);
-            }
-        }
-        return obj;
-    }
- 
-    public object GetValue(object source, string name)
-    {
-        if(source == null)
-            return null;
-        var type = source.GetType();
-        var f = type.GetField(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-        if(f == null)
-        {
-            var p = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-            if(p == null)
-                return null;
-            return p.GetValue(source, null);
-        }
-        return f.GetValue(source);
-    }
- 
-    public object GetValue(object source, string name, int index)
-    {
-        var enumerable = GetValue(source, name) as IEnumerable;
-        var enm = enumerable.GetEnumerator();
-        while(index-- >= 0)
-            enm.MoveNext();
-        return enm.Current;
     }
 }
 #endif

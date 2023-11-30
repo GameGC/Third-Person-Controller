@@ -85,7 +85,7 @@ public class AnimationTransitionDrawer : PropertyDrawerWithCustomData<AnimationT
     private void OnEnable(SerializedProperty p,Data customData)
     {
         customData.target = p.GetProperty<AnimationTransition>();
-        states = (p.serializedObject.targetObject as AnimationLayer).States.Keys.ToArray();
+        states = (p.serializedObject.targetObject as AnimationLayer).EDITOR_statesNames.ToArray();
 
         customData.valueA = Array.IndexOf(states, customData.target.stateFrom);
         customData.valueB = Array.IndexOf(states, customData.target.stateTo);

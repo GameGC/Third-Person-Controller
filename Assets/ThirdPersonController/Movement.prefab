@@ -1,0 +1,311 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &704543681813861372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 704543681813861374}
+  - component: {fileID: 6746654087554666547}
+  - component: {fileID: 704543681813861375}
+  m_Layer: 0
+  m_Name: Movement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &704543681813861374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704543681813861372}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6746654087554666547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704543681813861372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33277bdba7ce6f4ebfbb0f84402507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MovementSmooth>k__BackingField: 6
+  <GroundLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &704543681813861375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704543681813861372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fbf3aa05f6be24780438449f505aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenResolverIsReady: 1
+  ReferenceResolver: {fileID: 0}
+  states:
+  - Name: Move
+    features:
+    - rid: 8563616750158479564
+    - rid: 8563616750158479565
+    - rid: 8563616750158479572
+    Transitions:
+    - rid: 8563616750158479575
+    - rid: 8563616750158479576
+    - rid: 8563616750158479577
+    - rid: 8563616750158479578
+  - Name: Sprint
+    features:
+    - rid: 8563616750158479566
+    - rid: 8563616750158479567
+    Transitions:
+    - rid: 8563616750158479581
+    - rid: 8563616750158479580
+  - Name: Crouch
+    features:
+    - rid: 8563616750158479573
+    - rid: 8563616750158479630
+    Transitions:
+    - rid: 8563616750158479583
+    - rid: 8563616750158479584
+  - Name: Prone
+    features:
+    - rid: 8563616750158479574
+    - rid: 8563616750158479635
+    Transitions:
+    - rid: 8563616750158479590
+    - rid: 8563616750158479591
+  - Name: Air
+    features:
+    - rid: 8563616750158479569
+    Transitions:
+    - rid: 8563616750158479597
+  - Name: Air
+    features:
+    - rid: 8563616750158479569
+    Transitions:
+    - rid: 8563616750158479597
+  onStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  alwaysExecutedFeatures:
+  - rid: 8563616750158479570
+  - rid: 8563616750158479571
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8271788280194007044
+      type: {class: SurfaceEffect/AudioClips, ns: , asm: Assembly-CSharp}
+      data:
+        clipsVariants: []
+        minMaxVolume: {x: 1, y: 1}
+        minMaxPitch: {x: 1, y: 1}
+    - rid: 8271788280194007045
+      type: {class: SurfaceEffect/AudioClips, ns: , asm: Assembly-CSharp}
+      data:
+        clipsVariants: []
+        minMaxVolume: {x: 1, y: 1}
+        minMaxPitch: {x: 1, y: 1}
+    - rid: 8563616750158479564
+      type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].features.Array.data[0]
+        animationSmooth: 0.2
+        rotationSpeed: 16
+        runningSpeed: 4
+        walk:
+          rid: 8271788280194007045
+        run:
+          rid: 8271788280194007044
+    - rid: 8563616750158479565
+      type: {class: JumpFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].features.Array.data[1]
+        jumpTimer: 0.3
+        jumpHeight: 7
+    - rid: 8563616750158479566
+      type: {class: SprintFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].features.Array.data[0]
+        animationSmooth: 0.2
+        rotationSpeed: 16
+        runningSpeed: 6
+    - rid: 8563616750158479567
+      type: {class: JumpFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].features.Array.data[1]
+        jumpTimer: 0.3
+        jumpHeight: 7
+    - rid: 8563616750158479569
+      type: {class: AirFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[5].features.Array.data[0]
+        airSpeed: 5
+        airSmooth: 6
+        jumpWithRigidbodyForce: 1
+        jumpAndRotate: 1
+        rotationSpeed: 16
+        dontAddGravity: 0
+    - rid: 8563616750158479570
+      type: {class: GroundCheckFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: Assembly-CSharp}
+      data:
+        path: alwaysExecutedFeatures.Array.data[0]
+        groundMinDistance: 0.25
+        groundMaxDistance: 0.5
+        extraGravity: -10
+    - rid: 8563616750158479571
+      type: {class: CheckSlopeFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: Assembly-CSharp}
+      data:
+        path: alwaysExecutedFeatures.Array.data[1]
+        slopeLimit: 45
+        visualiseRaycast: 0
+    - rid: 8563616750158479572
+      type: {class: FootStepFeature, ns: ThirdPersonController.MovementStateMachine.Features, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].features.Array.data[2]
+        startOffsetX: -0.05
+        RaycastOriginY: 0.4
+        RaycastEndY: -0.4
+        startOffsetY: -0.08
+        stepLength: 0.18
+        smoothTime: 300
+        visualiseRaycast: 0
+    - rid: 8563616750158479573
+      type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].features.Array.data[0]
+        animationSmooth: 0.2
+        rotationSpeed: 8
+        runningSpeed: 2
+        walk:
+          rid: -2
+        run:
+          rid: -2
+    - rid: 8563616750158479574
+      type: {class: MoveFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].features.Array.data[0]
+        animationSmooth: 0.2
+        rotationSpeed: 2
+        runningSpeed: 0.5
+        walk:
+          rid: -2
+        run:
+          rid: -2
+    - rid: 8563616750158479575
+      type: {class: GroundedStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].Transitions.Array.data[0]
+        _transitionIndex: 4
+        _transitionName: Air
+        shouldBeGrounded: 0
+    - rid: 8563616750158479576
+      type: {class: SprintStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].Transitions.Array.data[1]
+        _transitionIndex: 1
+        _transitionName: Sprint
+        IsSprinting: 1
+    - rid: 8563616750158479577
+      type: {class: CrouchStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].Transitions.Array.data[2]
+        _transitionIndex: 2
+        _transitionName: Crouch
+        IsCrouching: 1
+    - rid: 8563616750158479578
+      type: {class: ProneStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[0].Transitions.Array.data[3]
+        _transitionIndex: 3
+        _transitionName: Prone
+        IsProne: 1
+    - rid: 8563616750158479580
+      type: {class: GroundedStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].Transitions.Array.data[1]
+        _transitionIndex: 4
+        _transitionName: Air
+        shouldBeGrounded: 0
+    - rid: 8563616750158479581
+      type: {class: SprintStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[1].Transitions.Array.data[0]
+        _transitionIndex: 0
+        _transitionName: Move
+        IsSprinting: 0
+    - rid: 8563616750158479583
+      type: {class: CrouchStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].Transitions.Array.data[0]
+        _transitionIndex: 0
+        _transitionName: Move
+        IsCrouching: 0
+    - rid: 8563616750158479584
+      type: {class: GroundedStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].Transitions.Array.data[1]
+        _transitionIndex: 4
+        _transitionName: Air
+        shouldBeGrounded: 0
+    - rid: 8563616750158479590
+      type: {class: ProneStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].Transitions.Array.data[0]
+        _transitionIndex: 0
+        _transitionName: Move
+        IsProne: 0
+    - rid: 8563616750158479591
+      type: {class: GroundedStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].Transitions.Array.data[1]
+        _transitionIndex: 4
+        _transitionName: Air
+        shouldBeGrounded: 0
+    - rid: 8563616750158479597
+      type: {class: GroundedStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[5].Transitions.Array.data[0]
+        _transitionIndex: 0
+        _transitionName: Move
+        shouldBeGrounded: 1
+    - rid: 8563616750158479630
+      type: {class: CrouchFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].features.Array.data[1]
+        capsuleCenter: {x: 0, y: 0.471, z: 0}
+        capsuleHeight: 0.972
+        enterTransitionTime: 0.2
+        exitTransitionTime: 0.1
+    - rid: 8563616750158479635
+      type: {class: ProneFeature, ns: ThirdPersonController.MovementStateMachine.Features.Move, asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[3].features.Array.data[1]
+        capsuleCenter: {x: -0.03330905, y: 0.21409895, z: -0.03400767}
+        capsuleHeight: 2.307009
+        capsuleRadius: 0.2306226
+        enterTransitionTime: 0.2
+        exitTransitionTime: 0.1
+        capsuleDirection: 2

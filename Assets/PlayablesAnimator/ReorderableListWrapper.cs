@@ -21,7 +21,7 @@ public class ReorderableListWrapperRef
     private static MethodInfo DrawRef;
     private static MethodInfo DrawChildredRef;
     
-    private object originalInstance;
+    public object originalInstance;
     
     static ReorderableListWrapperRef()
     {

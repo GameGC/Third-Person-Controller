@@ -2,48 +2,61 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(AnimationLayer))]
-public class AnimationLayerInspector : Editor
+[CustomEditor(typeof(AnimationLayer),true)]
+public class AnimationLayerInspector : FollowingStateMachineEditor
 {
     private AnimationLayer target;
-    private ReorderableListWrapperRef _wrapperRef;
-    private string _statesId;
+    private int prevState;
 
-    private string prevState;
-    private void OnEnable()
+    private readonly string[] ignorelist = new[]
     {
+        "m_Script",nameof(AnimationLayer.weight),nameof(AnimationLayer.avatarMask),nameof(AnimationLayer.isAdditive),
+        nameof(AnimationLayer.States), nameof(AnimationLayer.EDITOR_statesNames)
+    };
+
+    private SerializedProperty weight;
+    private SerializedProperty avatarMask;
+    private SerializedProperty isAdditive;
+
+    
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         target = base.target as AnimationLayer;
-        _statesId = ReorderableListWrapperRef.GetPropertyIdentifier(serializedObject.FindProperty("States").FindPropertyRelative("_keyValuePairs"));
-        prevState = target.CurrentState;
+        prevState = target.EDITOR_CurrentStateIndex;
+
+        weight = serializedObject.FindProperty(nameof(AnimationLayer.weight));
+        avatarMask = serializedObject.FindProperty(nameof(AnimationLayer.avatarMask));
+        isAdditive = serializedObject.FindProperty(nameof(AnimationLayer.isAdditive));
     }
 
     public override bool RequiresConstantRepaint()
     {
         if (Application.isPlaying)
-            if (prevState != target.CurrentState)
+            if (prevState != target.EDITOR_CurrentStateIndex)
                 return true;
         return base.RequiresConstantRepaint();
     }
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
-        if (prevState != target.CurrentState)
+        if (prevState != target.EDITOR_CurrentStateIndex)
         {
-            if (_wrapperRef == null)
-            {
-                var list = PropertyHandlerRef.s_reorderableLists[_statesId];
-                if (list != null)
-                    _wrapperRef = new ReorderableListWrapperRef(list);
-            }
-
+            prevState = target.EDITOR_CurrentStateIndex;
             UpdateVisualSelection();
-            prevState = target.CurrentState;
         }
+
+        EditorGUILayout.PropertyField(weight);
+        EditorGUILayout.PropertyField(avatarMask);
+        EditorGUILayout.PropertyField(isAdditive);
+
+        base.DrawStateList();
+        
+        DrawPropertiesExcluding(serializedObject,ignorelist);
     }
 
     private void UpdateVisualSelection()
     {
-        _wrapperRef.m_ReorderableList.Select(ArrayUtility.FindIndex(target.States.Keys.ToArray(),s=>s == target.CurrentState));
+        _list.Select(prevState);
     }
 }

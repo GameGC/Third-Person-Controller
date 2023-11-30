@@ -214,6 +214,7 @@ MonoBehaviour:
       data:
         path: states.Array.data[3].features.Array.data[2]
         changeCooldownToAwait: 0
+        setAimingWeaigh0DuringShoot: 1
     - rid: 8271788079842591055
       type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -331,11 +332,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ca82ab430d5d5449167695c3e58891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoSyncWithOtherStateMachine: 1
+  States:
+  - {fileID: 0}
+  - {fileID: 9100000, guid: cbd1db45c75e5b948a5befe9ecb80421, type: 2}
+  - {fileID: 5755004296087899767, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
+  - {fileID: 8436158629256463427, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
+  - {fileID: 5755004296087899767, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
+  - {fileID: 0}
+  statesNames:
+  - GetWeapon
+  - Idle
+  - Aim
+  - Shoot
+  - Cooldown
+  - PutWeaponBackFromAim
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  States:
+  states:
     _keyValuePairs:
     - Key: GetWeapon
       Value: {fileID: 0}

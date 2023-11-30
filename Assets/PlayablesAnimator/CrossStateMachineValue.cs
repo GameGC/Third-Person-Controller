@@ -10,7 +10,8 @@ public struct CrossStateMachineValue
     public RuntimeAnimatorController Controller;
     public AnimationLayer Layer;
     public string playableState;
-
+    public int playableStateIndex;
+    
     public override int GetHashCode()
     {
         return (mecanicState + "-" + playableState).GetHashCode()+base.GetHashCode();

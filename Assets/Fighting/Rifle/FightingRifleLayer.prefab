@@ -197,6 +197,7 @@ MonoBehaviour:
       data:
         path: states.Array.data[3].features.Array.data[3]
         changeCooldownToAwait: 1
+        setAimingWeaigh0DuringShoot: 1
     - rid: 2369757174817882272
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -493,11 +494,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ca82ab430d5d5449167695c3e58891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoSyncWithOtherStateMachine: 1
+  States:
+  - {fileID: 7400000, guid: 513685322f0f7c748be01524e2e82194, type: 3}
+  - {fileID: 7400000, guid: c948fdced0617b742b61e92323d561d9, type: 3}
+  - {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
+  - {fileID: 7400000, guid: 11513611d307944faa1d1bf5b844114a, type: 2}
+  - {fileID: 11400000, guid: 264dcb31e6563403eb74b3367a6ea768, type: 2}
+  - {fileID: 100084, guid: da4d8e56ecf9c7244b1936a6ebe1fbe0, type: 3}
+  statesNames:
+  - GetWeapon
+  - Idle
+  - Aim
+  - Shoot
+  - Reload
+  - PutWeaponBackFromAim
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  States:
+  states:
     _keyValuePairs:
     - Key: GetWeapon
       Value: {fileID: 7400000, guid: 513685322f0f7c748be01524e2e82194, type: 3}

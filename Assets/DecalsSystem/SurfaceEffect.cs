@@ -315,5 +315,17 @@ public class SurfaceEffect : ScriptableObject
             rect = new Rect(_position,  new Vector2(width, SingleLineHeight));
             _position += Vector2.right * width;
         }
+        
+        public void CurrentAmountLine(float height,float width, out Rect rect)
+        {
+            rect = new Rect(_position,  new Vector2(width, height));
+            _position += Vector2.right * width;
+        }
+        
+        public void CurrentAmountSingleLine(float width,out Rect rect)
+        {
+            rect = new Rect(_position,  new Vector2(width, SingleLineHeight));
+            _position += Vector2.right * width;
+        }
     }
 

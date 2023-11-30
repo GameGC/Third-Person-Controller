@@ -124,11 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ca82ab430d5d5449167695c3e58891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoSyncWithOtherStateMachine: 1
+  States:
+  - {fileID: 0}
+  - {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+  - {fileID: 0}
+  statesNames:
+  - Idle
+  - Attack
+  - Cooldown
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  States:
+  states:
     _keyValuePairs:
     - Key: Idle
       Value: {fileID: 0}

@@ -30,7 +30,7 @@ public class CrossStateMachineValueEditor : PropertyDrawer
         GetAllStates(controller.layers[0].stateMachine.states,macanimStates);
         GetAllStates(controller.layers[0].stateMachine.stateMachines,macanimStates);
 
-        playbleStates = target.Layer.States.Keys.ToArray();
+        playbleStates = target.Layer.EDITOR_statesNames.ToArray();
         
         valueA = macanimStates.IndexOf(target.mecanicState);
         valueB = Array.IndexOf(playbleStates,target.playableState);
@@ -48,13 +48,13 @@ public class CrossStateMachineValueEditor : PropertyDrawer
         position.width /= 2;
         valueA = EditorGUI.Popup(position, valueA, macanimStates.ToArray());
         position.x += position.width;
-        valueB = EditorGUI.Popup(position, valueB, target.Layer.States.Keys.ToArray());
+        valueB = EditorGUI.Popup(position, valueB, target.Layer.EDITOR_statesNames.ToArray());
 
         if (EditorGUI.EndChangeCheck())
         {
             property.FindPropertyRelative(nameof(CrossStateMachineValue.mecanicState)).stringValue = macanimStates[valueA];
             property.FindPropertyRelative(nameof(CrossStateMachineValue.playableState)).stringValue =
-                target.Layer.States.Keys.ToArray()[valueB];
+                target.Layer.EDITOR_statesNames.ToArray()[valueB];
             
             property.serializedObject.ApplyModifiedProperties();
         }

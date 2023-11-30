@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Linq;
 using System.Threading.Tasks;
 using DefaultNamespace;
-using GameGC.Collections;
-using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -17,55 +14,33 @@ public abstract class AnimationValue : ScriptableObject
     public abstract Playable GetPlayable(PlayableGraph graph,GameObject root);
 }
 
-public class AnimationLayer : MonoBehaviour
+public class AnimationLayer : FollowingStateMachine<Object>
 {
-    public bool autoSyncWithOtherStateMachine = true;
-
     public float weight;
     public AvatarMask avatarMask;
     public bool isAdditive;
 
 
-    public SDictionary<string, Object> States;
-    
     public AnimationTransition[] customTransitionTimes;
     public float defaultTransitionTime = 0.02f;
 
 
     private AnimationMixerPlayable _mixerPlayable;
 
-    public string CurrentState { get; set; }
-
-    protected CodeStateMachine _codeStateMachine;
-
-
-    protected virtual void Awake()
+    protected override void Awake()
     {
-        CurrentState = States.First().Key;
-        if (autoSyncWithOtherStateMachine)
-        {
-            _codeStateMachine = GetComponent<CodeStateMachine>();
-            _codeStateMachine.onStateChanged.AddListener(OnStateChanged);
-            
-            //if syncing state not exist in States
-            int length = _codeStateMachine.states.Length;
-            if(length > States.Count)
-                for (int i = 0; i < length; i++)
-                {
-                    if (States.ContainsKey(_codeStateMachine.states[i].Name)) continue;
-                    States.Add(_codeStateMachine.states[i].Name,null);
-                }
-        }
+        base.Awake();
+        _codeStateMachine.onStateChanged.AddListener(OnStateChanged);
     }
 
     public AnimationMixerPlayable ConstructPlayable(PlayableGraph graph,GameObject root)
     {
-        _mixerPlayable = AnimationMixerPlayable.Create(graph, States.Count);
-        for (int i = 0, length =States.Count; i < length; i++)
+        int length = States.Length;
+        _mixerPlayable = AnimationMixerPlayable.Create(graph,length);
+        for (int i = 0; i < length; i++)
         {
-            var element = States.ElementAt(i);
             Playable playable = default;
-            switch (element.Value)
+            switch (States[i])
             {
                 case null: playable = Playable.Null; break;
                 
@@ -106,14 +81,16 @@ public class AnimationLayer : MonoBehaviour
     {
         Graph?.Stop();
 
-        var prevState = CurrentState;
-        var newState = _codeStateMachine.CurrentState.Name;
-        CurrentState = newState;
+
+        var prevIndex = CurrentStateIndex;
+        var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == _codeStateMachine.CurrentState.Name);
+
+        CurrentStateIndex = newIndex;
         
-        int transitionTimeInd = Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(prevState,newState));
+        int transitionTimeInd = Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(prevIndex,newIndex));
 
         if (defaultTransitionTime == 0 && transitionTimeInd < 0 && customTransitionTimes[transitionTimeInd].time <0.001f)
-            SyncedTransition(prevState,newState);
+            SyncedTransition(prevIndex,newIndex);
         else
         {
             if(tempPrevStateInd> -1)
@@ -123,7 +100,7 @@ public class AnimationLayer : MonoBehaviour
             
             if(_tempAsyncTransition!=null)
                 StopCoroutine(_tempAsyncTransition);
-            _tempAsyncTransition = StartCoroutine(AsyncTransition(prevState, newState));
+            _tempAsyncTransition = StartCoroutine(AsyncTransition(prevIndex, newIndex));
         }
     }
 
@@ -134,14 +111,14 @@ public class AnimationLayer : MonoBehaviour
 
     public async Task WaitForNextState()
     {
-        var newIndex = Array.IndexOf(States.Keys.ToArray(), _codeStateMachine.CurrentState.Name);
+        var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == _codeStateMachine.CurrentState.Name);
         while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex) < 1)
             await Task.Delay(100);
     }
 
     public async Task WaitForStateWeight1(string stateName)
     {
-        var newIndex=  Array.IndexOf(States.Keys.ToArray(), stateName);
+        var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == stateName);
         while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex)<1) 
             await Task.Delay(100);
     }
@@ -150,7 +127,8 @@ public class AnimationLayer : MonoBehaviour
     {
         await WaitForStateWeight1(stateName);
         float timeScale = 1 / Time.timeScale;
-        switch (States[stateName])
+        var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == stateName);
+        switch (States[newIndex])
         {
             case AnimationClip clip:            await Task.Delay((int)(clip.length * 1000 * timeScale));break;
             case TimelineAsset asset:           await Task.Delay((int)(asset.duration * 1000 *timeScale));break;
@@ -161,7 +139,7 @@ public class AnimationLayer : MonoBehaviour
     {
         try
         {
-            var newIndex=  Array.IndexOf(States.Keys.ToArray(), stateName);
+            var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == stateName);
             while ( _mixerPlayable.GetInputWeight(newIndex)>0) 
                 await Task.Delay(100);
         }
@@ -171,33 +149,25 @@ public class AnimationLayer : MonoBehaviour
         }
     }
 
-    protected virtual void SyncedTransition(string previosState,string newState)
+    protected virtual void SyncedTransition(int previousStateIndex,int newStateIndex)
     {
-        int i = 0;
-        
-        foreach (var element in States)
-        {
-            _mixerPlayable.SetInputWeight(i,element.Key == newState?1:0);
-            i++;
-        }
+        _mixerPlayable.SetInputWeight(previousStateIndex,0);
+        _mixerPlayable.SetInputWeight(newStateIndex,1);
     }
-    protected virtual IEnumerator AsyncTransition(string prevState,string newState)
+    protected virtual IEnumerator AsyncTransition(int previousStateIndex,int newStateIndex)
     {
-        var previousIndex = Array.IndexOf(States.Keys.ToArray(), prevState);
-        var newStateIndex = Array.IndexOf(States.Keys.ToArray(), newState);
-
-        tempPrevStateInd = previousIndex;
+        tempPrevStateInd = previousStateIndex;
         tempCurrentStateInd = newStateIndex;
 
         try
         {
-            if (States[newState] is AnimationClip clip && !clip.isLooping)
+            if (States[newStateIndex] is AnimationClip clip && !clip.isLooping)
             {
                 var playable = _mixerPlayable.GetInput(newStateIndex);
                 if (!playable.IsNull() && playable.IsValid())
                     playable.SetTime(0);
             }
-            else if(States[newState] is TimelineAsset asset)
+            else if(States[newStateIndex] is TimelineAsset asset)
             {
                 var playable = _mixerPlayable.GetInput(newStateIndex);
                 if (!playable.IsNull() && playable.IsValid())
@@ -209,12 +179,11 @@ public class AnimationLayer : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError("Error at state: "+newStateIndex);
-            Debug.LogError(newStateIndex);
             Debug.LogError(e);
         }
         
         int transitionTimeInd =
-            Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(previousIndex, newStateIndex));
+            Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(previousStateIndex, newStateIndex));
 
         float maxTimer =
             (transitionTimeInd < 0 ? defaultTransitionTime : customTransitionTimes[transitionTimeInd].time); 
@@ -223,31 +192,31 @@ public class AnimationLayer : MonoBehaviour
         var wait = new WaitForEndOfFrame();
         while (timer > 0)
         {
-            _mixerPlayable.SetInputWeight(previousIndex,timer/maxTimer);
+            _mixerPlayable.SetInputWeight(previousStateIndex,timer/maxTimer);
             _mixerPlayable.SetInputWeight(newStateIndex,1-(timer/maxTimer));
             timer -= Time.deltaTime;
             yield return wait;
         }
         
-        _mixerPlayable.SetInputWeight(previousIndex,0);
+        _mixerPlayable.SetInputWeight(previousStateIndex,0);
         _mixerPlayable.SetInputWeight(newStateIndex,1);
         
         tempPrevStateInd = -1;
         tempCurrentStateInd = -1;
     }
 
-    
-    
-    
-    
-    private void OnValidate()
+
+    protected override void OnValidate()
     {
+        base.OnValidate();
+        //base.States = states.Values.ToArray();
+        //EditorUtility.SetDirty(this);
         if (customTransitionTimes != null)
         {
             bool isDirty = false;
             for (var i = 0; i < customTransitionTimes.Length; i++)
             {
-                if (customTransitionTimes[i].Validate(States.Keys.ToArray()))
+                if (customTransitionTimes[i].Validate(EDITOR_statesNames))
                     isDirty = true;
             }
             if(isDirty)
@@ -264,6 +233,5 @@ public class AnimationLayer : MonoBehaviour
         new_.weight = weight;
         new_.defaultTransitionTime = defaultTransitionTime;
         new_.isAdditive = isAdditive;
-        new_.autoSyncWithOtherStateMachine = autoSyncWithOtherStateMachine;
     }
 }

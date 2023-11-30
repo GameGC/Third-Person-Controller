@@ -28,29 +28,29 @@ public class ExtendedAnimationLayer : AnimationLayer
         }
     }
 
-    protected override IEnumerator AsyncTransition(string prevState, string newState)
+    protected override IEnumerator AsyncTransition(int prevStateIndex, int newStateIndex)
     {
-        OverrideClips(newState);
-        return base.AsyncTransition(prevState, newState);
+        OverrideClips(prevStateIndex,newStateIndex);
+        return base.AsyncTransition(prevStateIndex, newStateIndex);
     }
 
-    protected override void SyncedTransition(string previosState, string newState)
+    protected override void SyncedTransition(int prevStateIndex, int newStateIndex)
     {
-        OverrideClips(newState);
-        base.SyncedTransition(previosState, newState);
+        OverrideClips(prevStateIndex,newStateIndex);
+        base.SyncedTransition(prevStateIndex, newStateIndex);
     }
 
-    private void OverrideClips(string newState)
+    private void OverrideClips(int prevStateIndex, int newStateIndex)
     {
         //discard previous
         var state = _mecanicAnimator.GetCurrentAnimatorStateInfo(0);
-        int OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableState == CurrentState && state.IsName(s.Key.mecanicState));
+        int OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableStateIndex == prevStateIndex && state.IsName(s.Key.mecanicState));
         if (OverrideIndex > -1)
             GetComponentInParent<HybridAnimator>().DiscardAnimClip(overrideStates[OverrideIndex].Value);
 
         //override new one
         state = _mecanicAnimator.GetCurrentAnimatorStateInfo(0);
-        OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableState == newState && state.IsName(s.Key.mecanicState));
+        OverrideIndex = ArrayUtility.FindIndex(overrideStates,s=>s.Key.playableStateIndex == newStateIndex && state.IsName(s.Key.mecanicState));
         if (OverrideIndex > -1)
         {
             var  lips = _mecanicAnimator.GetCurrentAnimatorClipInfo(0);
