@@ -23,7 +23,7 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
         private static MethodInfo DrawRef;
         private static MethodInfo DrawChildredRef;
 
-        private object originalInstance;
+        public object originalInstance;
 
         static ReorderableListWrapperRef()
         {
@@ -57,7 +57,9 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
         public ReorderableListWrapperRef()
         {
-            originalInstance = Activator.CreateInstance(reorderableListWrapper);
+            var empty = Type.EmptyTypes;
+            var constructor = reorderableListWrapper.GetConstructor(BindingFlags.NonPublic|BindingFlags.Instance, null, empty, null);
+            originalInstance =constructor.Invoke(null);
             m_ReorderableList = m_ReorderableListRef.GetValue(originalInstance) as ReorderableList;
         }
 
@@ -69,12 +71,14 @@ namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 
         public ReorderableListWrapperRef(SerializedProperty property, GUIContent label, bool reorderable = true)
         {
-            originalInstance = Activator.CreateInstance(reorderableListWrapper);
+            var empty = Type.EmptyTypes;
+            var constructor = reorderableListWrapper.GetConstructor(BindingFlags.NonPublic|BindingFlags.Instance, null, empty, null);
+            originalInstance =constructor.Invoke(null);
             Init(reorderable, property);
             m_ReorderableList = m_ReorderableListRef.GetValue(originalInstance) as ReorderableList;
         }
 
-        private void Init(bool reorderable, SerializedProperty property)
+        public void Init(bool reorderable, SerializedProperty property)
         {
             InitRef.Invoke(originalInstance, new object[] {reorderable, property});
         }

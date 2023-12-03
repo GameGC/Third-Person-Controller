@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public class SerializeReferenceAddButton : PropertyAttribute,IReferenceAddButton
 {
     public Type BaseType { get; }
@@ -12,7 +12,7 @@ public class SerializeReferenceAddButton : PropertyAttribute,IReferenceAddButton
     }
 }
 
-[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public class FuzzyAddButton : PropertyAttribute,IReferenceAddButton
 {
     public Type BaseType { get; }
@@ -24,7 +24,18 @@ public class FuzzyAddButton : PropertyAttribute,IReferenceAddButton
 }
 
 
-public interface IReferenceAddButton
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+public class StatesAddButton : PropertyAttribute , IAddButtonAttribute
+{
+    
+}
+
+public interface IReferenceAddButton :IAddButtonAttribute
 {
     public Type BaseType { get; }
+}
+
+public interface IAddButtonAttribute
+{
+   
 }

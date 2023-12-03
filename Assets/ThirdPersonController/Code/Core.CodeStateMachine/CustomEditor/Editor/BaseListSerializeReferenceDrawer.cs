@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
-using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using State = ThirdPersonController.Core.CodeStateMachine.State;
 
-public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, IReferenceAddButton
+public static class AllTypesContainer
 {
-    protected bool IsFirstArrayElement(SerializedProperty property)
+    public static readonly List<Type> AllTypes;
+    static AllTypesContainer()
+    {
+        AllTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(t => t.GetTypes()).ToList();
+    }
+}
+
+
+[InitializeOnLoad]
+public class BaseListSerializeReferenceDrawer
+{
+    private bool IsFirstArrayElement(SerializedProperty property)
     {
         var path = property.propertyPath;
         var index0 = path.LastIndexOf('[');
@@ -27,7 +36,7 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
         }
     }
 
-    protected SerializedProperty GetTargetProperty(SerializedProperty property)
+    private SerializedProperty GetTargetProperty(SerializedProperty property)
     {
         var separated = property.propertyPath.Split('.');
         var target = separated[^3];
@@ -46,11 +55,18 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
         return property.serializedObject.FindProperty(target);
     }
 
-    protected delegate IReferenceAddButton GetAttributesForField(SerializedProperty property);
+    private delegate IAddButtonAttribute GetAttributesForField(SerializedProperty property);
+    private static GetAttributesForField GetAttributesForFieldF;
 
-    protected static GetAttributesForField GetAttributesForFieldF;
 
-    public static void Init(Type thisType)
+    private static readonly List<Type> _targetTypesToInject;
+    private static Dictionary<Type,object> _drawersImplementations;
+    
+    private List<Component> _selectionComponentList;
+
+
+
+    static BaseListSerializeReferenceDrawer()
     {
         var unityEditorCoreModule =
             Assembly.Load("UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
@@ -59,94 +75,184 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
         var getFiledInfoMethod = scriptAttributeUtil.GetMethod("GetFieldInfoAndStaticTypeFromProperty",
             BindingFlags.Static | BindingFlags.NonPublic);
 
+        var interface_ = typeof(IAddButtonAttribute);
         GetAttributesForFieldF = new GetAttributesForField(property =>
         {
             Type t = null;
             var filedInfo = getFiledInfoMethod.Invoke(null, new object[] {property, t}) as FieldInfo;
-            return filedInfo.GetCustomAttribute<T>();
+            return (IAddButtonAttribute) filedInfo?.GetCustomAttributes().FirstOrDefault(a => interface_.IsInstanceOfType(a));
         });
 
-        var instance = Activator.CreateInstance(thisType) as BaseListSerializeReferenceDrawer<T>;
+        LoadAllDrawersClasses();
+        
+
+        var instance = Activator.CreateInstance(typeof(BaseListSerializeReferenceDrawer)) as BaseListSerializeReferenceDrawer;
+        _targetTypesToInject = instance.GetFilterTypes();
+        
         Selection.selectionChanged += instance.OnSelectionChanged;
         if (Selection.activeGameObject) instance.OnSelectionChanged();
     }
 
+    #region Target Types Filter : Types with add attributes
+
+    private List<Type> GetFilterTypes()
+    {
+        var monoBehType = typeof(MonoBehaviour);
+        return AllTypesContainer.AllTypes.FindAll(t => t.IsClass && !t.IsAbstract &&
+                                                       t.IsSubclassOf(monoBehType)).FindAll(HasAddButtonAttribute);
+    }
+
+    private bool HasAddButtonAttribute(Type t)
+    {
+        var interface_ = typeof(IReferenceAddButton);
+        
+        var fields = t.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        foreach (var fieldInfo in fields)
+        {
+            if(fieldInfo.IsPrivate && fieldInfo.GetCustomAttribute<SerializeField>() == null) continue;
+            if(fieldInfo.FieldType.IsSubclassOf(typeof(UnityEngine.Object))) continue;
+            foreach (var customAttributeData in fieldInfo.GetCustomAttributesData())
+            {
+                if (interface_.IsAssignableFrom(customAttributeData.AttributeType))
+                    return true;
+            }
+            
+            var type = fieldInfo.FieldType;
+            if (!FilterByAmName(type.Assembly)) continue;
+            // Debug.Log(type.Assembly);
+            if (HasAddButtonAttribute(type))
+                return true;
+        }
+
+        var properties = t.GetProperties(
+            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.SetProperty);
+        foreach (var propertyInfo in properties)
+        {
+            if(propertyInfo.PropertyType.IsSubclassOf(typeof(UnityEngine.Object))) continue;
+            foreach (var customAttributeData in propertyInfo.GetCustomAttributesData())
+            {
+                if (interface_.IsAssignableFrom(customAttributeData.AttributeType))
+                    return true;
+            }
+            
+            var type = propertyInfo.PropertyType;
+            if (!FilterByAmName(type.Assembly)) continue;
+            if (HasAddButtonAttribute(type))
+                return true;
+        }
+
+        return false;
+    }
+    
+    private bool FilterByAmName(Assembly assembly)
+    {
+        string name = assembly.FullName;
+        if(name.StartsWith("Unity")) return  false;
+        if(name.StartsWith("System")) return false;
+        if(name.StartsWith("mscorlib")) return false;
+        if(name.StartsWith("Cinemachine")) return false;
+       
+        return true;
+    }
+    
+    #endregion
+
+    private static void LoadAllDrawersClasses()
+    {
+        var foundTypes = AllTypesContainer.AllTypes
+            .FindAll(t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute<AddHandlerForAttribute>() != null);
+        _drawersImplementations = new Dictionary<Type, object>(capacity: foundTypes.Count);
+        
+        foreach (var type in foundTypes)
+        {
+            var attribute = type.GetCustomAttribute<AddHandlerForAttribute>();
+            _drawersImplementations.Add(attribute.TargetPropertyAttribute,Activator.CreateInstance(type));
+        }
+    }
+    
     private void OnSelectionChanged()
     {
         UnityEditor.Editor.finishedDefaultHeaderGUI -= OnReload;
 
-        if(Selection.activeGameObject && !Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
+        if(!Selection.activeGameObject) return;
+        var list = new List<Component>();
+        Selection.activeGameObject.GetComponents(typeof(MonoBehaviour),list);
 
-        UnityEditor.Editor.finishedDefaultHeaderGUI += OnReload;
+        _selectionComponentList = list.FindAll(component => _targetTypesToInject.Contains(component.GetType()));
+        if(_selectionComponentList.Count > 0)
+            UnityEditor.Editor.finishedDefaultHeaderGUI += OnReload;
     }
-
-    protected virtual void OnReload(UnityEditor.Editor obj)
+    
+    private void OnReload(UnityEditor.Editor _)
     {
-        Debug.Log("fuck");
-        if (Event.current.type != EventType.Layout && Event.current.type != EventType.Repaint) return;
+        if (Event.current.type != EventType.Repaint) return;
 
-        //if (!Selection.activeGameObject) return;
-        //if (!Selection.activeGameObject.TryGetComponent<CodeStateMachine>(out var st)) return;
-
-        var editor = new SerializedObject(obj.serializedObject.targetObject);
-        SerializedProperty iterator = editor.GetIterator();
-        bool next = iterator.NextVisible(true);
-
-        while (next)
+        foreach (var component in _selectionComponentList)
         {
-            bool couldDraw = IsFirstArrayElement(iterator);
-            if (couldDraw)
+            using (var editor = new SerializedObject(component))
             {
-                var attribute = GetAttributesForFieldF(iterator);
-                if (attribute != null) DoListFooter(GetTargetProperty(iterator), attribute);
-            }
+                using (SerializedProperty iterator = editor.GetIterator().Copy())
+                {
+                    bool next = iterator.NextVisible(true);
 
-            next = iterator.NextVisible(true);
+                    while (next)
+                    {
+                        iterator.isExpanded = true;
+
+                        if (iterator.isArray)
+                        {
+                            var attribute = GetAttributesForFieldF(iterator);
+                            if (attribute != null)
+                            {
+                                InjectListFooter(iterator, attribute);
+                            }
+                        }
+
+                        next = iterator.NextVisible(true);
+                    }
+                }
+            }
         }
+        UnityEditor.Editor.finishedDefaultHeaderGUI -= OnReload;
     }
 
-    protected void DoListFooter(SerializedProperty property, IReferenceAddButton attribute)
-    {
 
+
+    private void InjectListFooter(SerializedProperty property, IAddButtonAttribute attribute)
+    {
         var resultID = ReorderableListWrapperRef.GetPropertyIdentifier(property);
         var listElementUnCasted = PropertyHandlerRef.s_reorderableLists[resultID];
 
-        if (listElementUnCasted == null) return;
-        ReorderableListWrapperRef element = new ReorderableListWrapperRef(listElementUnCasted);
 
-        element.m_ReorderableList.onAddDropdownCallback =
-            (rect, list) => OnReorderListAddDropdown(rect, list, attribute);
-    }
+        ReorderableListWrapperRef element;
 
-    protected virtual void OnReorderListAddDropdown(Rect buttonRect, ReorderableList list, IReferenceAddButton attribute)
-    {
-        var menu = new GenericMenu();
-
-        List<Type> showTypes = GetNonAbstractTypesSubclassOf(attribute.BaseType);
-
-        foreach (var type in showTypes)
+        if (listElementUnCasted == null)
         {
-            string actionName = type.Name;
-
-            // UX improvement: If no elements are available the add button should be faded out or
-            // just not visible.
-            //bool alreadyHasIt = DoesReordListHaveElementOfType(actionName,list);
-            //if (alreadyHasIt)
-            //    continue;
-
-            InsertSpaceBeforeCaps(ref actionName);
-
-            var copy = list.serializedProperty;
-            var dynamicType =
-                new Tuple<SerializedProperty, Type, int, ReorderableList, string>(copy, type, list.count, list,
-                    copy.propertyPath);
-            menu.AddItem(new GUIContent(actionName), false, OnAddItemFromDropdown, dynamicType);
+            element = new ReorderableListWrapperRef(property,EditorGUIUtility.TrTextContent(property.displayName),true);
+            var temp = PropertyHandlerRef.s_reorderableLists;
+            temp.Add(resultID,element.originalInstance);
+            PropertyHandlerRef.s_reorderableLists = temp;
+        }
+        else
+        {
+            element = new ReorderableListWrapperRef(listElementUnCasted);
         }
 
-        menu.ShowAsContext();
+
+        var handlerType = _drawersImplementations[attribute.GetType()];
+        if (handlerType is ListDropdownAddDrawer addDropdownDrawer)
+        {
+            addDropdownDrawer.OnAddItemFromDropdown = OnAddItemFromDropdown;
+            element.m_ReorderableList.onAddDropdownCallback =
+                (rect, list) => addDropdownDrawer.AddDropdown(rect, list, attribute as IReferenceAddButton);
+        }
+        else if (handlerType is ListAddDrawer addDrawer)
+        {
+            element.m_ReorderableList.onAddCallback = addDrawer.Add;
+        }
     }
 
-    protected void OnAddItemFromDropdown(object obj)
+    private void OnAddItemFromDropdown(object obj)
     {
         var element = obj as Tuple<SerializedProperty, Type, int, ReorderableList, string>;
 
@@ -160,47 +266,4 @@ public abstract class BaseListSerializeReferenceDrawer<T> where T : Attribute, I
 
         _tempList.serializedObject.ApplyModifiedProperties();
     }
-
-    #region Helper Methods
-
-    private void InsertSpaceBeforeCaps(ref string theString)
-    {
-        for (int i = 0; i < theString.Length; ++i)
-        {
-            char currChar = theString[i];
-
-            if (char.IsUpper(currChar))
-            {
-                theString = theString.Insert(i, " ");
-                ++i;
-            }
-        }
-    }
-
-    private List<Type> GetNonAbstractTypesSubclassOf(Type parentType, bool sorted = true)
-    {
-        List<Type> types = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(a => a.GetTypes())
-            .Where(type => !type.IsAbstract && (type.IsSubclassOf(parentType)|| type.GetInterfaces().Contains(parentType)))
-            .ToList();
-
-        if (sorted) types.Sort(CompareTypesNames);
-
-        return types;
-    }
-
-    private int CompareTypesNames(Type a, Type b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal);
-
-    private bool DoesReordListHaveElementOfType(string type, ReorderableList list)
-    {
-        for (int i = 0; i < list.serializedProperty.arraySize; ++i)
-        {
-            // this works but feels ugly. Type in the array element looks like "managedReference<actualStringType>"
-            if (list.serializedProperty.GetArrayElementAtIndex(i).type.Contains(type)) return true;
-        }
-
-        return false;
-    }
-
-    #endregion
 }

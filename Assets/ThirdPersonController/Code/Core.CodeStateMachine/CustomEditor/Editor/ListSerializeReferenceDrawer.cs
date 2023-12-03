@@ -3,82 +3,10 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 {
-    public abstract class BaseCodeStateMachineDrawer<T> : BaseListSerializeReferenceDrawer<T> where T : Attribute, IReferenceAddButton
-    {
-        protected override void OnReload(UnityEditor.Editor obj)
-        {
-            if (Event.current.type != EventType.Layout && Event.current.type != EventType.Repaint) return;
-
-            if (!Selection.activeGameObject) return;
-            if (!Selection.activeGameObject.TryGetComponent<StateMachine.CodeStateMachine>(out var st)) return;
-
-            var editor = new SerializedObject(st);
-            SerializedProperty iterator = editor.GetIterator();
-            bool next = iterator.NextVisible(true);
-
-            while (next)
-            {
-                bool couldDraw = IsFirstArrayElement(iterator);
-
-                if (couldDraw)
-                {
-                    var attribute = GetAttributesForFieldF(iterator);
-                    if (attribute != null) DoListFooter(GetTargetProperty(iterator), attribute);
-                }
-                else if (iterator.name == "states") DoStateListFooter(iterator);
-
-                next = iterator.NextVisible(true);
-            }
-        }
-
-        private void DoStateListFooter(SerializedProperty property)
-        {
-            var resultID = ReorderableListWrapperRef.GetPropertyIdentifier(property);
-            var listElementUnCasted = PropertyHandlerRef.s_reorderableLists[resultID];
-
-            if (listElementUnCasted == null) return;
-            ReorderableListWrapperRef element = new ReorderableListWrapperRef(listElementUnCasted);
-
-            var reorderableList = element.m_ReorderableList;
-            reorderableList.onAddCallback = list =>
-            {
-                if (reorderableList.count > 0)
-                {
-                    int index = list.selectedIndices.Count > 0 ? list.selectedIndices[0] : list.count - 1;
-
-                    list.ClearSelection();
-
-                    var stateMachine = list.serializedProperty.GetPropertyParent<StateMachine.CodeStateMachine>();
-                    ref var states = ref stateMachine.states;
-
-                    var copy = new State(states[index]);
-                    copy.Name += " (1)";
-                    ArrayUtility.Insert(ref states, index + 1, copy);
-                    list.serializedProperty.serializedObject.Update();
-                    stateMachine.OnValidate();
-                }
-                else
-                {
-                    ReorderableList.defaultBehaviours.DoAddButton(list);
-                }
-            };
-        }
-    }
-    
-    [InitializeOnLoad]
-    public class ListCustomSerializeButton : BaseCodeStateMachineDrawer<SerializeReferenceAddButton>
-    {
-        static ListCustomSerializeButton()
-        {
-            Init(typeof(ListCustomSerializeButton));
-        }
-    }
-
     [CustomPropertyDrawer(typeof(BaseFeature), true)]
     public class BaseFeatureDrawer : PropertyDrawer
     {

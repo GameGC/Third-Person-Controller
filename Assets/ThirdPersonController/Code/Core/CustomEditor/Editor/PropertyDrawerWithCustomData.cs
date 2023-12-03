@@ -12,7 +12,7 @@ public abstract class PropertyDrawerWithCustomData<T> : PropertyDrawer
 
     private bool _callSecondOnEnable;
 
-    protected virtual void OnEnable(SerializedProperty property, GUIContent label, T customData) { }
+    protected void OnEnable(SerializedProperty property, GUIContent label, T customData) { }
     protected virtual void OnEnable(Rect position, SerializedProperty property, GUIContent label, T customData) { }
 
     protected virtual float GetPropertyHeight(SerializedProperty property, GUIContent label, T customData) => 
@@ -46,14 +46,18 @@ public abstract class PropertyDrawerWithCustomData<T> : PropertyDrawer
             _collection.Add(property.propertyPath, customData);
         }
 
-        if (_callSecondOnEnable)
+        if (Event.current.type == EventType.Repaint)
         {
-            _callSecondOnEnable = false;
-            using (var copy = GetCopy(property))
+            if (_callSecondOnEnable)
             {
-                OnEnable(position, copy, label, customData);
+                _callSecondOnEnable = false;
+                using (var copy = GetCopy(property))
+                {
+                    OnEnable(position, copy, label, customData);
+                }
             }
         }
+        if(_callSecondOnEnable) return;
 
         OnGUI(position, property, label, customData);
     }

@@ -5,6 +5,7 @@ using GameGC.Collections;
 using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "Create SurfaceEffect", fileName = "SurfaceEffect", order = 0)]
@@ -18,7 +19,7 @@ public class SurfaceEffect : ScriptableObject
 
     [Header("Audio")]
     [SerializeReference] 
-    //[SerializeReferenceDropdown]
+    [SerializeReferenceDropdown]
     public IAudioType Audio;
 
     public interface IAudioType
@@ -88,9 +89,10 @@ public class SurfaceEffect : ScriptableObject
             public List<Rect> otherRects = new List<Rect>();
 
             public GUIContent timelineSignal;
-            public float[] keys;
+            public float[] keys = Array.Empty<float>();
             public int Selected = -1;
 
+            public bool recalculate;
             public float lastMouseX;
         }
         private Action<SurfaceEffect.AudioAtlas> _delayedSave;
@@ -107,6 +109,12 @@ public class SurfaceEffect : ScriptableObject
             return 0;
         }
 
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            Debug.Log("create");
+            return base.CreatePropertyGUI(property);
+        }
+
         private void LoadKeys(SerializedProperty property, Cache customData,float clipLength,float rectWidth)
         {
             customData.keys = new float[property.arraySize];
@@ -119,9 +127,15 @@ public class SurfaceEffect : ScriptableObject
 
         protected override void OnEnable(Rect position, SerializedProperty iterator, GUIContent label, Cache customData)
         {
+            string path = iterator.propertyPath;
+
             customData.target = iterator.GetProperty<SurfaceEffect.AudioAtlas>();
-            LoadKeys(iterator.FindPropertyRelative("timings"),
-                customData,customData.target.clip.length, position.width);
+            if (customData.target.clip)
+            {
+                LoadKeys(iterator.FindPropertyRelative("timings"),
+                    customData, customData.target.clip.length, position.width);
+            }
+
             customData.timelineSignal =
                 EditorGUIUtility.IconContent(
                     $"Packages/com.unity.timeline/Editor/StyleSheets/Images/Icons/TimelineSignal.png");
@@ -131,15 +145,23 @@ public class SurfaceEffect : ScriptableObject
                 
             guiScope.NextSingleLine(out var tempRect);
             customData.propertyRect = tempRect;
-                
-            guiScope.NextLine(18*4,out tempRect);
-            customData.clipDisplayRect = tempRect;
-            customData.pointerSize = new Vector2(tempRect.height / 8, tempRect.height / 4);
 
-            RecalculateOtherRects(guiScope,iterator, customData);
+            if (customData.target.clip)
+            {
+                guiScope.NextLine(18 * 4, out tempRect);
+                customData.clipDisplayRect = tempRect;
+
+                customData.pointerSize = new Vector2(tempRect.height / 8, tempRect.height / 4);
+            }
+            else
+            {
+                customData.clipDisplayRect = Rect.zero;
+            }
+
+            RecalculateOtherRects(guiScope,iterator, customData,path);
         }
 
-        private void RecalculateOtherRects(EasyGUI guiScope ,SerializedProperty iterator,Cache customData)
+        private void RecalculateOtherRects(EasyGUI guiScope ,SerializedProperty iterator,Cache customData,string path)
         {
             iterator.NextVisible(true);
             guiScope.NextLine(EditorGUI.GetPropertyHeight(iterator),out var tempRect);
@@ -147,7 +169,7 @@ public class SurfaceEffect : ScriptableObject
             if (customData.otherRects.Count > 0) 
                 customData.otherRects.Clear();
             customData.otherRects.Add(tempRect);
-            while (iterator.NextVisible(false))
+            while (iterator.NextVisible(false) && iterator.propertyPath.StartsWith(path))
             {
                 guiScope.NextLine(EditorGUI.GetPropertyHeight(iterator),out tempRect);
                 customData.otherRects.Add(tempRect);
@@ -156,6 +178,18 @@ public class SurfaceEffect : ScriptableObject
         
         protected override void OnGUI(Rect position, SerializedProperty property, GUIContent label, AudioAtlassDrawer.Cache customData)
         {
+            string path = property.propertyPath;
+
+            
+            if (customData.recalculate && Event.current.type == EventType.Repaint)
+            {
+                customData.recalculate = false;
+                OnEnable(position, property, label, customData);
+            }
+            // OnEnable(position,GetCopy(property),label,customData);
+
+            float prevWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth *= position.width/EditorGUIUtility.currentViewWidth;
             using (new EditorGUI.IndentLevelScope())
             {
                 EditorGUI.PropertyField(customData.propertyRect,property,label,false);
@@ -163,23 +197,31 @@ public class SurfaceEffect : ScriptableObject
                 {
                     if (customData.target.clip)
                     {
-                        DrawPreview(customData.clipDisplayRect, property, customData);
+                        DrawPreview(customData.clipDisplayRect, property, customData, path);
                     }
 
                     int i = 1;
                     property.NextVisible(true);
+                    EditorGUI.BeginChangeCheck();
                     EditorGUI.PropertyField(customData.otherRects[0], property);
-                
-                    while (property.NextVisible(false))
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        customData.recalculate = true;
+                    }
+                    
+                    while (property.NextVisible(false) && property.propertyPath.StartsWith(path))
                     {
                         EditorGUI.PropertyField(customData.otherRects[i], property);
                         i++;
                     }
                 }
             }
+
+            property.serializedObject.ApplyModifiedProperties();
+            EditorGUIUtility.labelWidth = prevWidth;
         }
 
-        private void DrawPreview(Rect position, SerializedProperty property,Cache cache)
+        private void DrawPreview(Rect position, SerializedProperty property,Cache cache,string path)
         { 
             Texture2D waveformTexture = AssetPreview.GetAssetPreview(cache.target.clip);
             GUI.DrawTexture(position, waveformTexture,ScaleMode.StretchToFill,true);
@@ -217,7 +259,7 @@ public class SurfaceEffect : ScriptableObject
                         cache.Selected = -1;
 
                         var newRect = new Rect(new Vector2(position.x,position.y + position.height), position.size);
-                        RecalculateOtherRects(new EasyGUI(newRect), copy,cache);
+                        RecalculateOtherRects(new EasyGUI(newRect), copy,cache,path);
                     });
                 }
                 else
@@ -235,7 +277,7 @@ public class SurfaceEffect : ScriptableObject
                         Array.Sort(cache.target.timings);
                         
                         var newRect = new Rect(new Vector2(position.x,position.y + position.height), position.size);
-                        RecalculateOtherRects(new EasyGUI(newRect), copy,cache);
+                        RecalculateOtherRects(new EasyGUI(newRect), copy,cache,path);
                     });
                     menu.AddDisabledItem(new GUIContent("Remove Split"));
                 }

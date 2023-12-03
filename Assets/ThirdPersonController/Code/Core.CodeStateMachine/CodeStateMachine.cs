@@ -17,18 +17,19 @@ namespace ThirdPersonController.Core.StateMachine
         protected IStateMachineVariables Variables;
 
 #if UNITY_EDITOR
+        [StatesAddButton]
         public
 #else
     [SerializeField] private
 #endif
             State[] states;
-
-        private State _currentState;
+        
         public State CurrentState
         {
-            get => _currentState;
-            protected set => _currentState = value;
+            get => states[CurrentStateIndex];
         }
+        
+        public int CurrentStateIndex { get; private set; }
 
         public UnityEvent onStateChanged;
 
@@ -53,8 +54,8 @@ namespace ThirdPersonController.Core.StateMachine
                     codeStateTransition.Initialise(Variables,ReferenceResolver);
                 }
             }
-        
-            _currentState = states[0];
+
+            CurrentStateIndex = 0;
         }
         
 
@@ -170,29 +171,25 @@ namespace ThirdPersonController.Core.StateMachine
                     }
                 }
         
-                _currentState = states[0];
-                
-                _currentState.OnEnterState();
-                isStarted = true;
+                CurrentStateIndex = 0;
             }
-            else
-            {
-                _currentState.OnEnterState();
-                isStarted = true;
-            }
+           
+            
+            CurrentState.OnEnterState();
+            isStarted = true;
         }
 
         protected virtual void Update()
         {
             if(!isStarted) return;
-            _currentState.OnUpdateState();
-            foreach (var transition in _currentState.Transitions)
+            CurrentState.OnUpdateState();
+            foreach (var transition in CurrentState.Transitions)
             {
                 if (transition.couldHaveTransition)
                 {
-                    _currentState.OnExitState();
-                    _currentState = transition.GetNextState(ref states);
-                    _currentState.OnEnterState();
+                    CurrentState.OnExitState();
+                    CurrentStateIndex = transition.GetNextStateIndex();
+                    CurrentState.OnEnterState();
                     onStateChanged.Invoke();
                     break;
                 }
@@ -202,7 +199,7 @@ namespace ThirdPersonController.Core.StateMachine
         protected virtual void FixedUpdate()
         {
             if(!isStarted) return;
-            _currentState.OnFixedUpdateState();
+            CurrentState.OnFixedUpdateState();
         }
     }
 }

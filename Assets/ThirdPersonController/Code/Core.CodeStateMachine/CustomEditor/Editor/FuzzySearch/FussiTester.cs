@@ -2,37 +2,10 @@ using System;
 using System.Reflection;
 using FuzzySearch;
 using ThirdPersonController.Core;
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using TypeNamespaceTree;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
-[InitializeOnLoad]
-public class FussiTester : BaseCodeStateMachineDrawer<FuzzyAddButton>
-{
-    static FussiTester()
-    {
-        BaseCodeStateMachineDrawer<FuzzyAddButton>.Init(typeof(FussiTester));
-    }
-
-    protected override void OnReorderListAddDropdown(Rect buttonRect, ReorderableList list,
-        IReferenceAddButton attribute)
-    {
-        if (UnityEngine.Event.current == null) return;
-
-
-        var property = list.serializedProperty;
-        var listCopy = list;
-        
-        FuzzyWindowC2.Show(buttonRect,new Vector2(200, 100), attribute.BaseType, type =>
-        {
-            var dynamicType = new Tuple<SerializedProperty, Type, int, ReorderableList, string>(
-                property, type, property.arraySize, listCopy, property.propertyPath);
-            base.OnAddItemFromDropdown(dynamicType);
-        });
-    }
-}
 
 public partial class FuzzyWindowC2 : EditorWindow
 {

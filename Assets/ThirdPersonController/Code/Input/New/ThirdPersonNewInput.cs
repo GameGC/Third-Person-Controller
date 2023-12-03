@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using ThirdPersonController.Input.New;
 using UnityEngine;
 using UnityEngine.InputSystem;

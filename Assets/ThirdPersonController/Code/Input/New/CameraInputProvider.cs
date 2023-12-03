@@ -1,10 +1,7 @@
 #if ENABLE_INPUT_SYSTEM
 
-using System;
 using Cinemachine;
-using ThirdPersonController.Core.DI.CustomEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace ThirdPersonController.Input.New
 {

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using TypeNamespaceTree;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
 public partial class FuzzyWindowC2 : EditorWindow
@@ -54,10 +52,8 @@ public partial class FuzzyWindowC2 : EditorWindow
 
     private List<Type> GetNonAbstractTypesSubclassOf(Type parentType, bool sorted = true)
     {
-        List<Type> types = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(a => a.GetTypes())
-            .Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType))
-            .ToList();
+        List<Type> types = AllTypesContainer.AllTypes
+            .FindAll(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType));
 
         if (sorted) types.Sort(CompareTypesNames);
 

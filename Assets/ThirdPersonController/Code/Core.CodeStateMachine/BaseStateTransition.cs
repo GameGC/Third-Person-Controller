@@ -21,6 +21,7 @@ namespace ThirdPersonController.Core.CodeStateMachine
         
 #endif
         public State GetNextState(ref State[] states) => states[_transitionIndex];
+        public int GetNextStateIndex() => _transitionIndex;
 
         [SerializeField,StateTransition] private int _transitionIndex;
 

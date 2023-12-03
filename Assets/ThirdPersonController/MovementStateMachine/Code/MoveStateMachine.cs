@@ -88,8 +88,7 @@ namespace ThirdPersonController.MovementStateMachine.Code
         public void Fix()
         {
             var missingTypes = SerializationUtility.GetManagedReferencesWithMissingTypes(this);
-            var allTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes())
-                .Where(t=>t.IsClass && t.IsSubclassOf(typeof(BaseFeature))).ToList();
+            var allTypes = AllTypesContainer.AllTypes.FindAll(t=>t.IsClass && t.IsSubclassOf(typeof(BaseFeature)));
             foreach (var missing in missingTypes)
             {
                 int index = allTypes.FindIndex(t => t.Name == missing.className);
@@ -97,7 +96,6 @@ namespace ThirdPersonController.MovementStateMachine.Code
                 {
                     Debug.Log(missing.serializedData);
                     var newType = JsonUtility.FromJson(missing.serializedData, allTypes[index]);
-                    
                         
                     SerializationUtility.SetManagedReferenceIdForObject(this, newType, missing.referenceId);
                 }
