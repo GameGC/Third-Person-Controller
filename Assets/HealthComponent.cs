@@ -1,5 +1,4 @@
 using System;
-using ThirdPersonController.Core.CodeStateMachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,13 +21,13 @@ public class HealthComponent : MonoBehaviour
         _hitBoxCount = hitBoxes.Length;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider == hitBoxes[0].Collider)
-        {
-            Debug.Log("hiiiiit");
-        }
-    }
+   //private void OnCollisionEnter(Collision collision)
+   //{
+   //    if (collision.collider == hitBoxes[0].Collider)
+   //    {
+   //        Debug.Log("hiiiiit");
+   //    }
+   //}
 
     public virtual void OnHit(in RaycastHit hit,IDamageSender source)
     {

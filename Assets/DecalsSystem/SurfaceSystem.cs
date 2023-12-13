@@ -1,19 +1,32 @@
+using System.Collections.Generic;
 using GameGC.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static UnityEngine.Random;
 
 public class SurfaceSystem : Singleton<SurfaceSystem>
 {
-   public SKeyValueReadonlyArray<Texture, SurfaceEffect> SurfaceEffects;
+   [FormerlySerializedAs("SurfaceEffects")] 
+   public SKeyValueReadonlyArray<Texture, SurfaceMaterial> surfaceMaterials;
 
-   public void OnSurfaceHit(RaycastHit hit,SurfaceEffect defaultEffect)
+   //simple caching
+   private int _colliderId = int.MaxValue;
+   private readonly List<Material> _lastRendererMaterials = new List<Material>();
+   private Mesh _lastSharedMesh;
+   
+   #region Default processing
+   public void OnSurfaceHit(in RaycastHit hit,SurfaceHitType hitType,SurfaceEffect defaultEffect)
    {
-      var filter = hit.collider.GetComponentInChildren<MeshFilter>();
-      var renderer = hit.collider.GetComponentInChildren<Renderer>();
-      int subMeshIndex = GetSubmeshIndex(hit.triangleIndex,filter.mesh);
+      //simple caching
+      GetRendererAndCollider(in hit);
+      
+      int subMeshIndex = GetSubmeshIndex(hit.triangleIndex,_lastRendererMaterials.Count,_lastSharedMesh);
 
-      SurfaceEffects.TryGetValue(renderer.materials[subMeshIndex].mainTexture, out var effect);
-      effect ??= defaultEffect;
+      SurfaceEffect effect = defaultEffect;
+      if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
+      {
+         effect = material.SurfaceEffectsForHits[(int) hitType];
+      }
       if (effect)
       {
          if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
@@ -25,13 +38,41 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       }
    }
    
-   public void OnSurfaceHit(Collision collision,SurfaceEffect defaultEffect)
+   public void OnSurfaceHit(Collision collision,SurfaceHitType hitType,SurfaceEffect defaultEffect)
    {
       var contact = collision.GetContact(0);
       collision.collider.Raycast(new Ray(contact.point, contact.normal), out var hit, contact.separation);
-      OnSurfaceHit(hit,defaultEffect);
+      OnSurfaceHit(hit,hitType,defaultEffect);
    }
+   
+   
+   #endregion
 
+   public bool OnSurfaceHitWithoutDefault(in RaycastHit hit,SurfaceHitType hitType)
+   {
+      //simple caching
+      GetRendererAndCollider(in hit);
+      
+      int subMeshIndex = GetSubmeshIndex(hit.triangleIndex,_lastRendererMaterials.Count,_lastSharedMesh);
+      
+      if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
+      {
+         var effect = material.SurfaceEffectsForHits[(int)hitType];
+         if (effect)
+         {
+            if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
+               SpawnEffect(effect, hit.point, hit.normal);
+            if (effect.Audio)
+            {
+               PlayAudio(effect, hit.point);
+               return true;
+            }
+         }
+      }
+      return false;
+   }
+   
+   
    private void SpawnEffect(SurfaceEffect effect,Vector3 position,Vector3 normal)
    {
       var prefab = effect.decalsVariant[Range(0, effect.decalsVariant.Length)];
@@ -45,21 +86,21 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
 
    private void PlayAudio(SurfaceEffect effect, Vector3 position)
    {
-      AudioClip clip = null;
       switch (effect.Audio)
       {
          case null:
             break;
-         case SurfaceEffect.AudioAtlas audioAtlas:
+         case AudioClip clip:
          {
-            audioAtlas.GetRandomElement(out clip, out var start, out var end);
-            PlayClipAtlassAtPoint(effect.name, clip, position, start, end, audioAtlas.Pitch, audioAtlas.Volume);
+            PlayClipAtPoint(effect.name,clip, position);
             break;
          }
-         case SurfaceEffect.AudioClips audioClips:
+         case IAudioType audio:
          {
-            audioClips.GetRandomClip(out clip);
-            PlayClipAtPoint(effect.name, clip, position, audioClips.Pitch, audioClips.Volume);
+            var source = GetAudioSourceAtPoint(effect.name, position);
+            float length = audio.Play(source,false);
+            if (length > 0)
+               Destroy(source.gameObject, length);
             break;
          }
       }
@@ -83,8 +124,8 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       audioSource.Play();
       Destroy(gameObject, clip.length);
    }
-   
-   private static void PlayClipAtlassAtPoint(string name,AudioClip clip, Vector3 position,float start,float end, float volume = 1f,float pitch = 1f)
+
+   private static AudioSource GetAudioSourceAtPoint(string name,Vector3 position)
    {
       GameObject gameObject = new GameObject(name)
       {
@@ -93,27 +134,40 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
             position = position
          }
       };
-      var audioSource = gameObject.AddComponent<AudioSource>();
-      audioSource.clip = clip;
-      audioSource.spatialBlend = 1f;
-      audioSource.volume = volume;
-      audioSource.pitch = pitch;
-      
-      audioSource.time = start;
-      audioSource.Play();
-      Destroy(gameObject, end-start);
+      return gameObject.AddComponent<AudioSource>();
    }
    
-   private static int GetSubmeshIndex(int triangleIndex, Mesh mesh)
+   
+   private static int GetSubmeshIndex(int triangleIndex,int materialsCount, Mesh mesh)
    {
+      if (materialsCount < 2)
+         return 0;
+      
       for (int i = 0; i < mesh.subMeshCount; i++)
       {
          var subMesh = mesh.GetSubMesh(i);
          if (subMesh.firstVertex >= triangleIndex && triangleIndex < subMesh.firstVertex + subMesh.vertexCount)
-            return i;
+            return Mathf.Clamp(i,0,materialsCount);
       }
 
       return 0;
+   }
+
+   /// <summary>
+   /// simple caching method
+   /// </summary>
+   private void GetRendererAndCollider(in RaycastHit hit)
+   {
+      if (_colliderId == hit.colliderInstanceID) return;
+      
+      var hitCollider = hit.collider;
+      var filter   = hitCollider.GetComponentInChildren<MeshFilter>();
+      var renderer = hitCollider.GetComponentInChildren<Renderer>();
+
+      _lastSharedMesh = filter.sharedMesh; 
+      renderer.GetSharedMaterials(_lastRendererMaterials);
+      
+      _colliderId = hit.colliderInstanceID;
    }
 }
 

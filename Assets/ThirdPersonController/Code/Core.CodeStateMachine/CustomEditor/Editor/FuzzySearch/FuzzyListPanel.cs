@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using TypeNamespaceTree;
+using UnityEditor;
 using UnityEngine;
 
 namespace FuzzySearch
@@ -54,8 +55,10 @@ namespace FuzzySearch
         }
 
         public bool Repaint;
+        public float Width;
         public void OnGUI(in bool isRepaint)
         {
+            Width = 0;
             using (var scrollViewScope = new GUILayout.ScrollViewScope(_scroll))
             {
                 bool isMovingMouse = Event.current.type == EventType.MouseMove;
@@ -68,8 +71,9 @@ namespace FuzzySearch
                         ValidateSelectionChanged(ref i, ref optionPosition, ref mousePos);
 
                     _list[i].OnGUI(optionPosition,_list[i].Tree.Content, _selectedIndex == i,in isRepaint);
+                    if (_list[i].Width > Width)
+                        Width = _list[i].Width;
                 }
-
                 _scroll = scrollViewScope.scrollPosition;
             }
         }

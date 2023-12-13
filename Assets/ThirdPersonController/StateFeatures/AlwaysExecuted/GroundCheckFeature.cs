@@ -86,17 +86,17 @@ namespace ThirdPersonController.MovementStateMachine.Features
         public override void OnUpdateState()
         {
             _animator.SetBool(IsGrounded, _variables.IsGrounded);
-            _animator.SetFloat(GroundDistance, _variables.GroundDistance);
+            _animator.SetFloat(GroundDistance, _variables.GroundHit.distance);
         }
 
         public override void OnFixedUpdateState()
         {
-            _variables.GroundDistance = CalculateGroundDistance(_transform,ref _capsuleCollider);
+            CalculateGroundDistance(_transform,ref _capsuleCollider);
             ControlMaterialPhysics(_variables.IsGrounded, _input.moveInputMagnitude);
             
-            _variables.IsGrounded = _variables.GroundDistance < groundMinDistance;
+            _variables.IsGrounded = _variables.GroundHit.distance < groundMinDistance;
             
-            if (_variables.JumpCounterElapsed && _variables.GroundDistance > 0.08f)
+            if (_variables.JumpCounterElapsed && _variables.GroundHit.distance> 0.08f)
                     _rigidbody.AddForce(_transform.up * (extraGravity * 2 * Time.deltaTime), ForceMode.VelocityChange);
         }
 
@@ -106,7 +106,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
             _capsuleCollider.material = isGrounded ? inputMagnitude > 0 ?  _frictionPhysics : _maxFrictionPhysics : _slippyPhysics;
         }
 
-        private float CalculateGroundDistance(Transform transform,ref CapsuleCollider capsuleCollider)
+        private void CalculateGroundDistance(Transform transform,ref CapsuleCollider capsuleCollider)
         {
             // radius of the SphereCast
             float radius = capsuleCollider.radius;
@@ -121,8 +121,9 @@ namespace ThirdPersonController.MovementStateMachine.Features
                 float newDist = groundHit.distance;
                 distance = newDist;
             }
-                
-            return (float)System.Math.Round(distance, 2);
+
+            groundHit.distance = (float) System.Math.Round(distance, 2);
+            _variables.GroundHit = groundHit;
         }
     }
 

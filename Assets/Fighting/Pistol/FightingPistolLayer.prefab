@@ -527,14 +527,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   States:
+  - {fileID: 7400000, guid: 8bfa8d2fd3e856442a31843bdc71248c, type: 3}
   - {fileID: 7400000, guid: 6d3d9c92c8d90e948b603c60612d5bcf, type: 3}
   - {fileID: 0}
   - {fileID: 7400000, guid: 108e7c021416342068a805cb977b6b2d, type: 2}
   - {fileID: 7400000, guid: 7b23c4e8d496b482b99e0e827c6e039c, type: 2}
   - {fileID: 7400000, guid: 108e7c021416342068a805cb977b6b2d, type: 2}
   - {fileID: 11400000, guid: d1c23f124764742bd96fc875181640db, type: 2}
-  - {fileID: 7400000, guid: da138b433aed1e949915b9e6b72c0c4e, type: 3}
-  - {fileID: 7400000, guid: 8bfa8d2fd3e856442a31843bdc71248c, type: 3}
+  - {fileID: 7400000, guid: 6d3d9c92c8d90e948b603c60612d5bcf, type: 3}
   EDITOR_statesNames:
   - GetWeapon
   - Idle

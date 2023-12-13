@@ -13,7 +13,7 @@ public class FussyDropdownAddDrawer : ListDropdownAddDrawer
         var property = list.serializedProperty;
         var listCopy = list;
         
-        FuzzyWindowC2.Show(buttonRect,new Vector2(200, 100), attribute.BaseType, type =>
+        FuzzyWindow.Show(buttonRect,new Vector2(200, 100), attribute.BaseType, type =>
         {
             var dynamicType = new Tuple<SerializedProperty, Type, int, ReorderableList, string>(
                 property, type, property.arraySize, listCopy, property.propertyPath);

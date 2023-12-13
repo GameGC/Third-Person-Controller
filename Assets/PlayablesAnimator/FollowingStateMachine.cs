@@ -44,7 +44,13 @@ public class FollowingStateMachineEditor : Editor
         EditorGUI.EndDisabledGroup();
         scope.CurrentAmountSingleLine(3, out tempRect);
         scope.CurrentHalfLine(rect.height,0.5f, out tempRect);
+        
+        EditorGUI.BeginChangeCheck();
         EditorGUI.PropertyField(tempRect, _list.serializedProperty.GetArrayElementAtIndex(index), GUIContent.none, true);
+        if (EditorGUI.EndChangeCheck())
+        {
+            _list.serializedProperty.serializedObject.ApplyModifiedProperties();
+        }
     }
     
     
@@ -188,7 +194,7 @@ public abstract class FollowingStateMachine<T> :MonoBehaviour
     public T[] States = Array.Empty<T>();
     
 #if UNITY_EDITOR
-    [HideInInspector]
+   //[HideInInspector]
     [FormerlySerializedAs("EDITORstatesNames")]
     [FormerlySerializedAs("statesNames")] 
     [SerializeField] public string[] EDITOR_statesNames = Array.Empty<string>();

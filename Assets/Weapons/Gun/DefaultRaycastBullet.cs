@@ -11,6 +11,7 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
     public int speed = 100;
     public int distance = 1000;
     
+    public SurfaceHitType HitType;
     public SurfaceEffect defaultImpactEffect;
 
     private RaycastHit[] hits = new RaycastHit[2];
@@ -36,7 +37,13 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
             Debug.DrawLine(transform.position,hits[0].point,Color.red);
             ref var hit = ref hits[Mathf.Min(hitsCount, 1)];
             flyDestination = hit.point;
-            SurfaceSystem.instance.OnSurfaceHit(hit,defaultImpactEffect);
+            try
+            {
+                SurfaceSystem.instance.OnSurfaceHit(hit,HitType, defaultImpactEffect);
+            }
+            catch (Exception e)
+            {
+            }
             hit.transform.GetComponentInParent<HealthComponent>()?.OnHit(in hit,this);
         }
         else

@@ -55,5 +55,10 @@ namespace FuzzySearch
                 GUIUtility.keyboardControl = 0;
             }
         }
+
+        public float GetWidth()
+        {
+            return _searchField.CalcSize(EditorGUIUtility.TrTempContent(_query)).x;
+        }
     }
 }

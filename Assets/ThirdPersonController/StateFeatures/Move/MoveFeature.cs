@@ -6,15 +6,6 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
     [Serializable]
     public class MoveFeature : BaseMoveFeature
     {
-        [SerializeReference] 
-        [SerializeReferenceDropdown]
-        public SurfaceEffect.IAudioType walk;
-
-        [SerializeReference] 
-        [SerializeReferenceDropdown]
-        public SurfaceEffect.IAudioType run;
-        
-        private AudioSource source;
         private IMoveStateMachineVariables _variables;
         public MoveFeature()
         {

@@ -19,18 +19,4 @@ MonoBehaviour:
   destroyTimer:
     value: 5
     <HasValue>k__BackingField: 1
-  Audio:
-    rid: 8271788176671244289
-  references:
-    version: 2
-    RefIds:
-    - rid: 8271788176671244289
-      type: {class: SurfaceEffect/AudioAtlas, ns: , asm: Assembly-CSharp}
-      data:
-        clip: {fileID: 8300000, guid: d5331af8ebcda493a9fa802b0a68531c, type: 3}
-        timings:
-        - 1.8180937
-        - 3.473245
-        - 4.9054227
-        minMaxVolume: {x: 1, y: 1}
-        minMaxPitch: {x: 1, y: 1}
+  Audio: {fileID: 11400000, guid: 942a1a6a07b4b4d24878058ab88d6c0a, type: 2}

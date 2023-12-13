@@ -1,13 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
 [AddHandlerFor(typeof(SerializeReferenceAddButton))]
+[CustomPropertyDrawer(typeof(SerializeReferenceAddButton))]
 public class SimpleDropdownAddDrawer : ListDropdownAddDrawer
 {
+    //private void DrawSingleGUI(Rect position, SerializedProperty property, GUIContent label)
+    //{
+    //    if (property.managedReferenceValue == null)
+    //    {
+    //        var types = GetNonAbstractTypesSubclassOf((attribute as SerializeReferenceAddButton).BaseType).Select(t=>t.Name).ToArray();
+    //        ArrayUtility.Insert(ref types,0,"null");
+    //        EditorGUI.Popup(position, 0, types);
+    //    }
+    //}
+
     public override void AddDropdown(Rect buttonRect, ReorderableList list, IReferenceAddButton attribute)
     {
         var menu = new GenericMenu();

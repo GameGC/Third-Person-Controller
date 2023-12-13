@@ -34,7 +34,9 @@ namespace FuzzySearch
         
         }
         #endregion
-    
+
+
+        public float Width;
         public void OnGUI(Rect optionPosition,GUIContent option, bool isSelected,in bool isRepaint)
         {
             if (!_stylesCached)
@@ -48,6 +50,7 @@ namespace FuzzySearch
                 var optionStyle =option.image ? _optionWithIcon : _optionWithoutIcon;
                 optionStyle.Draw(optionPosition, option, false, false, isSelected,
                     isSelected);
+                Width = optionStyle.CalcSize(option).x;
             }
 
             var right = optionPosition.xMax;

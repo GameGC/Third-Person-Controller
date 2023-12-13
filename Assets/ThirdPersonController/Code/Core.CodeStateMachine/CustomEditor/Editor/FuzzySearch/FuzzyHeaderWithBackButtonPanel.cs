@@ -56,10 +56,15 @@ namespace FuzzySearch
         
             if (grandParent != null)
             {
-                var leftArrowPosition = new Rect(headerPosition.x + 4, headerPosition.y + 7, 13, 13);
-
-                if (GUI.Button(leftArrowPosition, GUIContent.none, _leftArrow))
+                if (isRepaint)
                 {
+                    var leftArrowPosition = new Rect(headerPosition.x + 4, headerPosition.y + 7, 13, 13);
+                    _leftArrow.Draw(leftArrowPosition, GUIContent.none, false, true, true, true);
+                }
+
+                if (Event.current.clickCount > 0 && headerPosition.Contains(Event.current.mousePosition))
+                {
+                    Event.current.Use();
                     BackClicked?.Invoke();
                 }
             }

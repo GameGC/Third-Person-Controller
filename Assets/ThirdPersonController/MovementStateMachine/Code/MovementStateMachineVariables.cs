@@ -12,7 +12,7 @@ namespace ThirdPersonController.MovementStateMachine
         public LayerMask GroundLayer { get; private set; } = 1;
 
         public bool IsGrounded { get; set; }
-        public float GroundDistance { get; set; }
+        public RaycastHit GroundHit { get; set; }
         public bool IsSlopeBadForMove { get; set; }
         public float SlopeAngle { get; set; }
         public bool JumpCounterElapsed { get; set; } = true;

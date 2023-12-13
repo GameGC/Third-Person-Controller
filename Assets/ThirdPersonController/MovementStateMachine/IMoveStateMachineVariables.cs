@@ -12,7 +12,8 @@ namespace ThirdPersonController.MovementStateMachine
    
         //dynamic Variables
         public bool IsGrounded { get; set; }
-        public float GroundDistance { get; set; }
+        public RaycastHit GroundHit { get; set; }
+        
         public bool IsSlopeBadForMove { get; set; }
         public float SlopeAngle { get; set; }
    

@@ -1,8 +1,6 @@
 using System.Linq;
 using Fighting.Pushing;
-using GameGC.Collections;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 

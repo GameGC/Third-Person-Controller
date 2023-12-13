@@ -5,13 +5,6 @@ using ThirdPersonController.Core.DI;
 using UnityEditor;
 using UnityEngine;
 
-public enum CameraType : byte
-{
-    Follow = 0,
-    Aiming = 1,
-    AimingSniper = 2,
-}
-
 public class CameraManager : MonoBehaviour
 {
     /// <summary>

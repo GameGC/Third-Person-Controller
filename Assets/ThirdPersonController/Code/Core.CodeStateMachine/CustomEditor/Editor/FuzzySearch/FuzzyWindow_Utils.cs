@@ -5,7 +5,7 @@ using TypeNamespaceTree;
 using UnityEditor;
 using UnityEngine;
 
-public partial class FuzzyWindowC2 : EditorWindow
+public partial class FuzzyWindow : EditorWindow
 {
     private CategoryTree BuildTreeHierarchy(List<Type> types)
     {
@@ -63,7 +63,7 @@ public partial class FuzzyWindowC2 : EditorWindow
     private static int CompareTypesNames(Type a, Type b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal);
 }
 
-public partial class FuzzyWindowC2 : EditorWindow
+public partial class FuzzyWindow : EditorWindow
 {
     private void UpdateAnimation(in bool isRepaint)
     {
