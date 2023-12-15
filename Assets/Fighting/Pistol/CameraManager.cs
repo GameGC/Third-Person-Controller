@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Cinemachine;
+using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using ThirdPersonController.Core.DI;
 using UnityEditor;
 using UnityEngine;
@@ -149,7 +150,9 @@ public class EnumedArrayDrawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         var enumNames = (attribute as EnumedArrayAttribute).enumType.GetEnumNames();
-        
+        var parent = property.GetParentProperty();
+        parent.arraySize = enumNames.Length;
+            
         Rect labelRect = position;
         labelRect.width /= 3;
         position.x += labelRect.width+1;
@@ -161,7 +164,7 @@ public class EnumedArrayDrawer : PropertyDrawer
         EditorGUI.BeginDisabledGroup(true);
         EditorGUI.LabelField(labelRect, enumNames[index], EditorStyles.popup);
         EditorGUI.EndDisabledGroup();
-
+            
         EditorGUI.PropertyField(position, property, GUIContent.none);
     }
 }

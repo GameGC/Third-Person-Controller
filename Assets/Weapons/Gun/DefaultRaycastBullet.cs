@@ -14,7 +14,6 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
     public SurfaceHitType HitType;
     public SurfaceEffect defaultImpactEffect;
 
-    private RaycastHit[] hits = new RaycastHit[2];
     // Start is called before the first frame update
 
     private void Reset()
@@ -27,15 +26,18 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
         transform = base.transform;
         
         var ray = new Ray(transform.position, transform.forward);
-        int hitsCount = Physics.RaycastNonAlloc(ray, hits, distance, impactMask, QueryTriggerInteraction.Ignore);
-        if (hitsCount > 0)
+        if (Physics.Raycast(ray,out var hit, distance, impactMask, QueryTriggerInteraction.Ignore))
         {
             //for (int i = 0; i < hitsCount; i++)
             //{
             //    Debug.Log(i+" "+hits[i].collider);
             //}
-            Debug.DrawLine(transform.position,hits[0].point,Color.red);
-            ref var hit = ref hits[Mathf.Min(hitsCount, 1)];
+
+            Debug.Log(hit.collider.name);
+            var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
+            
+            Debug.DrawLine(transform.position,hit.point,Color.red);
+           // ref var hit = ref hits[isCharacter?Mathf.Min(hitsCount, 1):Mathf.Max(hitsCount-1, 0)];
             flyDestination = hit.point;
             try
             {
@@ -44,7 +46,19 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
             catch (Exception e)
             {
             }
-            hit.transform.GetComponentInParent<HealthComponent>()?.OnHit(in hit,this);
+
+            if (isCharacter)
+            {
+                var gameObject = hit.collider.gameObject;
+                bool isCharPart = gameObject.layer == LayerMask.NameToLayer("Char_Collision");
+                if (!isCharPart)
+                {
+                    ray.origin = hit.point;
+                    Physics.Raycast(ray, out hit, distance,
+                        LayerMask.GetMask("Char_Collision"), QueryTriggerInteraction.Ignore);
+                }
+                gameObject.GetComponentInChildren<HealthComponent>()?.OnHit(in hit, this);
+            }
         }
         else
         {

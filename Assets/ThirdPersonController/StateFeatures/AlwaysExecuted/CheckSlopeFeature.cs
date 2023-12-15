@@ -55,7 +55,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
                 if(visualiseRaycast)
                     Debug.DrawLine(rayStart, targetPoint,new Color(0.8f, 0.35f, 0f));
 #endif
-                if ((hitAngle > slopeLimit) && Physics.Linecast(rayStart, targetPoint, out hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
+                if (hitAngle > slopeLimit && Physics.Linecast(rayStart, targetPoint, out hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
                 {
                     hitAngle = Vector3.Angle(Vector3.up, hitInfo.normal);
                     _variables.SlopeAngle = hitAngle;

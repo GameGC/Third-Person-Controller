@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866b0a852d23248988faf26378e0d316, type: 3}
+  m_Name: Ceramics
+  m_EditorClassIdentifier: 
+  SurfaceEffectsForHits:
+  - {fileID: 0}
+  - {fileID: 5237195796478975368}
+--- !u!114 &5237195796478975368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: BulletEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 3780072383357949234, guid: 890842ccccd2a4d3f83cff13c63d750b, type: 3}
+  - {fileID: 1317988568829994929, guid: 56b0be10d3ca24443a51929333be5a6d, type: 3}
+  - {fileID: 8937457944950099487, guid: 512039e2d2a334476946fd16f0f921af, type: 3}
+  - {fileID: 653873370270046068, guid: 5ce198ac095d546c1bb9cef9f6d3d029, type: 3}
+  minMaxRandomScale: {x: 0.15, y: 0.35}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 0}

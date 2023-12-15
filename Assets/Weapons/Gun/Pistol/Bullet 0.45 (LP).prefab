@@ -325,8 +325,10 @@ MonoBehaviour:
   impactMask:
     serializedVersion: 2
     m_Bits: 402653185
+  <damage>k__BackingField: 10
   speed: 5
   distance: 100
+  HitType: 1
   defaultImpactEffect: {fileID: 11400000, guid: 41e5a75504a504a8b80b7751283f29de, type: 2}
 --- !u!1 &172564
 GameObject:

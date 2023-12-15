@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1067642098207422166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: BulletEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 6611828306079190306, guid: ac375af4608c8431a80115c8d918b1bb, type: 3}
+  - {fileID: 6181954254789834380, guid: dcb5d7256491243cb9149b69b782c731, type: 3}
+  - {fileID: 2061854810685454732, guid: 4c896144c0cba4a638ada89cff18203a, type: 3}
+  - {fileID: 8222196262432466486, guid: c1e28909b65544d5fa4a07c64b4e9835, type: 3}
+  minMaxRandomScale: {x: 0.15, y: 0.35}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866b0a852d23248988faf26378e0d316, type: 3}
+  m_Name: Ground
+  m_EditorClassIdentifier: 
+  SurfaceEffectsForHits:
+  - {fileID: 11400000, guid: 1307202d5b7a845149dd3cb668a6a8ba, type: 2}
+  - {fileID: -1067642098207422166}

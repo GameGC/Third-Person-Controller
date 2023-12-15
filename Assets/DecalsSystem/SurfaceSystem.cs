@@ -7,7 +7,7 @@ using static UnityEngine.Random;
 public class SurfaceSystem : Singleton<SurfaceSystem>
 {
    [FormerlySerializedAs("SurfaceEffects")] 
-   public SKeyValueReadonlyArray<Texture, SurfaceMaterial> surfaceMaterials;
+   public SKeyValueReadonlyArray<Object, SurfaceMaterial> surfaceMaterials;
 
    //simple caching
    private int _colliderId = int.MaxValue;
@@ -23,14 +23,20 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       int subMeshIndex = GetSubmeshIndex(hit.triangleIndex,_lastRendererMaterials.Count,_lastSharedMesh);
 
       SurfaceEffect effect = defaultEffect;
+
       if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
       {
          effect = material.SurfaceEffectsForHits[(int) hitType];
       }
+      else if(surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex], out material))
+      {
+         effect = material.SurfaceEffectsForHits[(int) hitType];
+      }
+
       if (effect)
       {
          if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
-            SpawnEffect(effect, hit.point, hit.normal);
+            SpawnDecalList(effect, hit.point, hit.normal);
          if (effect.Audio != null)
          {
             PlayAudio(effect, hit.point);
@@ -61,7 +67,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
          if (effect)
          {
             if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
-               SpawnEffect(effect, hit.point, hit.normal);
+               SpawnDecalList(effect, hit.point, hit.normal);
             if (effect.Audio)
             {
                PlayAudio(effect, hit.point);
@@ -73,13 +79,16 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
    }
    
    
-   private void SpawnEffect(SurfaceEffect effect,Vector3 position,Vector3 normal)
+   private void SpawnDecalList(SurfaceEffect effect,Vector3 position,Vector3 normal)
    {
       var prefab = effect.decalsVariant[Range(0, effect.decalsVariant.Length)];
-      
-      var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, Quaternion.LookRotation(normal));
+
+
+      var rotation =Quaternion.AngleAxis(Random.Range(0,360), normal) * Quaternion.LookRotation(normal);
+      var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, rotation);
       effectInstance.transform.localScale = Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y); 
       
+      Debug.Log(effectInstance.name);
       if(effect.destroyTimer.HasValue)
          Destroy(effectInstance,effect.destroyTimer.Value);
    }

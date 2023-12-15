@@ -3690,6 +3690,106 @@ PrefabInstance:
       propertyPath: ReferenceResolver
       value: 
       objectReference: {fileID: 1617079114466961500}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: states.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352]
+      value: Assembly-CSharp ThirdPersonController.MovementStateMachine.Features.FootStepFeature
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353]
+      value: Assembly-CSharp ThirdPersonController.MovementStateMachine.Features.AirFeature
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204354]
+      value: Assembly-CSharp ThirdPersonController.MovementStateMachine.Code.Transitions.GroundedStateTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].path
+      value: states.Array.data[0].features.Array.data[2]
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].path
+      value: states.Array.data[4].features.Array.data[0]
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204354].path
+      value: states.Array.data[4].Transitions.Array.data[0]
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: states.Array.data[0].features.Array.data[2]
+      value: 915123826703204352
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: states.Array.data[4].features.Array.data[0]
+      value: 915123826703204353
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].airSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: states.Array.data[4].Transitions.Array.data[0]
+      value: 915123826703204354
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].airSmooth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].smoothTime
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].stepLength
+      value: 0.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].startOffsetX
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].startOffsetY
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].raycastHeight
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].jumpAndRotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].rotationSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].dontAddGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204354]._transitionName
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].visualiseRaycast
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204354]._transitionIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204354].shouldBeGrounded
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204353].jumpWithRigidbodyForce
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
 --- !u!4 &1617079115778208684 stripped

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8777368034567855441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: BulletEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7232084888481305632, guid: cd9dee221ff464cb78c2afae404a6815, type: 3}
+  - {fileID: 8461242722570303061, guid: aa4edf239dc534ae5ab966581045f35a, type: 3}
+  - {fileID: 3567149106484297014, guid: 4c01f57db3c73481d8a11c693a07a909, type: 3}
+  - {fileID: 6409272690086176089, guid: 672a2ebb015314c2ab51fb494737d967, type: 3}
+  minMaxRandomScale: {x: 0.9, y: 1.3}
+  spawnDistance: 0.02
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866b0a852d23248988faf26378e0d316, type: 3}
+  m_Name: Glass
+  m_EditorClassIdentifier: 
+  SurfaceEffectsForHits:
+  - {fileID: 0}
+  - {fileID: -8777368034567855441}

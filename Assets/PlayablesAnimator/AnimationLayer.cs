@@ -186,14 +186,14 @@ public class AnimationLayer : FollowingStateMachine<Object>
             Array.FindIndex(customTransitionTimes, t => t.CouldBeApplyable(previousStateIndex, newStateIndex));
 
         float maxTimer =
-            (transitionTimeInd < 0 ? defaultTransitionTime : customTransitionTimes[transitionTimeInd].time); 
+            transitionTimeInd < 0 ? defaultTransitionTime : customTransitionTimes[transitionTimeInd].time; 
         float timer = maxTimer;
         
         var wait = new WaitForEndOfFrame();
         while (timer > 0)
         {
             _mixerPlayable.SetInputWeight(previousStateIndex,timer/maxTimer);
-            _mixerPlayable.SetInputWeight(newStateIndex,1-(timer/maxTimer));
+            _mixerPlayable.SetInputWeight(newStateIndex,1-timer/maxTimer);
             timer -= Time.deltaTime;
             yield return wait;
         }

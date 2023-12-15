@@ -44,7 +44,7 @@ namespace Weapons
         private Pose _previousPose;
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            _variables = (variables as IFightingStateMachineVariables);
+            _variables = variables as IFightingStateMachineVariables;
             _animationLayer = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
         }
 

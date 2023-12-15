@@ -14,9 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decalsVariant:
   - {fileID: 4512377026111000653, guid: 399f88c1a221042a4a263d003f8c9dbd, type: 3}
-  minMaxRandomScale: {x: 1, y: 1}
+  minMaxRandomScale: {x: 0.950542, y: 1.4705099}
   spawnDistance: 0.01
   destroyTimer:
     value: 5
     <HasValue>k__BackingField: 1
-  Audio: {fileID: 11400000, guid: 942a1a6a07b4b4d24878058ab88d6c0a, type: 2}
+  Audio: {fileID: 887592614808498710}
+--- !u!114 &887592614808498710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33a18b0c5d2496bb61005335c920e61, type: 3}
+  m_Name: MetalImpact
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: d5331af8ebcda493a9fa802b0a68531c, type: 3}
+  timings:
+  - 1.6437235
+  - 3.3547337
+  - 4.8446584
+  minMaxVolume: {x: 1, y: 1}
+  minMaxPitch: {x: 1, y: 1}

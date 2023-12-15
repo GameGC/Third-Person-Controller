@@ -78,8 +78,8 @@ public class WeaponSwitch : MonoBehaviour
          builder.Clear();
 
          if(builder.layers.Count<1)
-            builder.layers.Add((new RigLayer(rig, true)));
-         else builder.layers[0] = (new RigLayer(rig, true));
+            builder.layers.Add(new RigLayer(rig, true));
+         else builder.layers[0] = new RigLayer(rig, true);
       }
       else
       {

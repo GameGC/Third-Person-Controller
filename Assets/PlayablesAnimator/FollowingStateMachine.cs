@@ -34,7 +34,7 @@ public class FollowingStateMachineEditor : Editor
     }
     private void DrawElementCallback(Rect rect, int index, bool active, bool focused)
     {
-        float padding = (rect.height > 0 ? 2 : 0);
+        float padding = rect.height > 0 ? 2 : 0;
         rect.y += padding;
         rect.height -= padding;
         var scope = new EasyGUI(rect);
