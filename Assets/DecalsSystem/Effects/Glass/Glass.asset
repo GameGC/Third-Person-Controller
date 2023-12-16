@@ -37,4 +37,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SurfaceEffectsForHits:
   - {fileID: 0}
+  - {fileID: 0}
   - {fileID: -8777368034567855441}

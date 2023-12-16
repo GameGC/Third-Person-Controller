@@ -1,5 +1,6 @@
 public enum SurfaceHitType
 {
     Foot   = 0,
-    Bullet = 1
+    Jump   = 1,
+    Bullet = 2
 }

@@ -15,6 +15,7 @@ MonoBehaviour:
   SurfaceEffectsForHits:
   - {fileID: 0}
   - {fileID: 5237195796478975368}
+  - {fileID: 5237195796478975368}
 --- !u!114 &5237195796478975368
 MonoBehaviour:
   m_ObjectHideFlags: 0

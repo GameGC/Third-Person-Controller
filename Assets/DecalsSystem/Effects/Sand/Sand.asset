@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7133189975286898685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: JumpEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7317621335766553440, guid: 2d1bc4564f9eb432ab4237c5ba05bcd7, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 8300000, guid: cff0e50a53df0a94299dc5ef1863ab62, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,8 +33,29 @@ MonoBehaviour:
   m_Name: Sand
   m_EditorClassIdentifier: 
   SurfaceEffectsForHits:
-  - {fileID: 0}
+  - {fileID: 104916281997013325}
+  - {fileID: -7133189975286898685}
   - {fileID: 5114240846921818927}
+--- !u!114 &104916281997013325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: FootEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7317621335766553440, guid: 2d1bc4564f9eb432ab4237c5ba05bcd7, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 7492816664840033391}
 --- !u!114 &5114240846921818927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,3 +76,21 @@ MonoBehaviour:
     value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 8300000, guid: 7c70d952cab004c9d948fe3513bec2c9, type: 3}
+--- !u!114 &7492816664840033391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed2416aa60f43bc9b652f8f60f8eb87, type: 3}
+  m_Name: FootEffectAudioClipList
+  m_EditorClassIdentifier: 
+  clipsVariants:
+  - {fileID: 8300000, guid: f43edb311d1c4d74fa9b4b86c9157fa6, type: 3}
+  - {fileID: 8300000, guid: 17a55e09664ccf54392bb53bbf824804, type: 3}
+  - {fileID: 8300000, guid: 4ca3f7b75bbc47c45a464277174030a4, type: 3}
+  minMaxVolume: {x: 1, y: 1}
+  minMaxPitch: {x: 1, y: 1}

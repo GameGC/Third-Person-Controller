@@ -11,7 +11,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
     public class JumpFeature : BaseFeature
     {
         // animation hashes
-        private static readonly int Jump = Animator.StringToHash("Jump");
+        private static readonly int Jump = Animator.StringToHash("JumpIdle");
         private static readonly int JumpDuringMove = Animator.StringToHash("JumpMove");
         
         

@@ -18,5 +18,6 @@ MonoBehaviour:
   hasNumbers: 1
   enumNames:
   - Foot
+  - Jump
   - Bullet
   previousName: SurfaceHitType

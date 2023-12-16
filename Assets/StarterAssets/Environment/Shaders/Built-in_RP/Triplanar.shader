@@ -1,6 +1,7 @@
 ﻿Shader "Starter Assets/Triplanar" {
 Properties{
     _MainTex("Albedo (RGB)", 2D) = "white" {}
+    _Color("Color (RGB)", Color) = (1,1,1,1)
     [NoScaleOffset] _BumpMap("Normal Map", 2D) = "bump" {}
     _Glossiness("Smoothness", Range(0, 1)) = 0.5
     [Gamma] _Metallic("Metallic", Range(0, 1)) = 0
@@ -37,6 +38,7 @@ SubShader{
         }
 
         sampler2D _MainTex;
+        float4 _Color;
         float4 _MainTex_ST;
 
         sampler2D _BumpMap;
@@ -92,9 +94,9 @@ SubShader{
         #endif
 
             // albedo textures
-            fixed4 colX = tex2D(_MainTex, uvX);
-            fixed4 colY = tex2D(_MainTex, uvY);
-            fixed4 colZ = tex2D(_MainTex, uvZ);
+            fixed4 colX = tex2D(_MainTex, uvX) * _Color;
+            fixed4 colY = tex2D(_MainTex, uvY) * _Color;
+            fixed4 colZ = tex2D(_MainTex, uvZ) * _Color;
             fixed4 col = colX * triblend.x + colY * triblend.y + colZ * triblend.z;
 
             // occlusion textures

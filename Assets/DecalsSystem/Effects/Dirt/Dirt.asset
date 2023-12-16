@@ -23,6 +23,26 @@ MonoBehaviour:
     value: 10
     <HasValue>k__BackingField: 1
   Audio: {fileID: 0}
+--- !u!114 &-5779706186389545906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: FootEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7317621335766553440, guid: 209084bed26584ad89871c01ff31f68d, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 11400000, guid: 218365b1706ec438aa0077f078f6441a, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,5 +56,26 @@ MonoBehaviour:
   m_Name: Dirt
   m_EditorClassIdentifier: 
   SurfaceEffectsForHits:
-  - {fileID: 0}
+  - {fileID: -5779706186389545906}
+  - {fileID: 8146032173865731209}
   - {fileID: -6095246995880233054}
+--- !u!114 &8146032173865731209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: JumpEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7317621335766553440, guid: 209084bed26584ad89871c01ff31f68d, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 8300000, guid: 6aeefb601c305f64487cebdfacae5b6c, type: 3}

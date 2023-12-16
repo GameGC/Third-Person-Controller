@@ -58,7 +58,7 @@ public class ScriptableObjectCreateDrawer : PropertyDrawer
             if (property.objectReferenceValue == null)
             {
                 string propertyPath = property.propertyPath;
-                var turple = new STurple<string, Object, int>(propertyPath, target, 0);
+                var turple = new STurple<string, Object, int,Type>(propertyPath, target, 0,_type);
 
                 if (!_type.IsAbstract)
                 {
@@ -70,6 +70,7 @@ public class ScriptableObjectCreateDrawer : PropertyDrawer
                 foreach (var inheritedClass in GetInheritedClasses(_type))
                 {
                     _type = inheritedClass;
+                    turple.Item4 = _type;
                     menu.AddItem(EditorGUIUtility.TrTextContent($"Create {inheritedClass.Name} Nested"), false, CreateNested,turple);
                     menu.AddItem(EditorGUIUtility.TrTextContent($"Create {inheritedClass.Name} Global"), false, CreateGlobal,turple);
                 }
@@ -114,14 +115,23 @@ public class ScriptableObjectCreateDrawer : PropertyDrawer
 
     private void CreateNested(object data)
     {
-        var kv = ( STurple<string, Object,int>) data;
+        var kv = ( STurple<string, Object,int,Type>) data;
         var propertyPath = kv.Item1;
-      
-        var asset = ScriptableObject.CreateInstance(_type);
-        var index = int.Parse(propertyPath.Substring(propertyPath.IndexOf('[') + 1, 
-            propertyPath.IndexOf(']') - propertyPath.IndexOf('[') - 1));
 
-        asset.name = $"{Enum.GetNames(typeof(SurfaceHitType))[index]}Effect";
+        var _type = kv.Item4;
+        var asset = ScriptableObject.CreateInstance(kv.Item4);
+        if (_type == typeof(SurfaceEffect))
+        {
+            var index = int.Parse(propertyPath.Substring(propertyPath.IndexOf('[') + 1, 
+                propertyPath.IndexOf(']') - propertyPath.IndexOf('[') - 1));
+       
+            asset.name = $"{Enum.GetNames(typeof(SurfaceHitType))[index]}Effect";
+        }
+        else
+        {
+            Debug.Log(kv.Item2);
+            asset.name = kv.Item2.name+_type.Name;
+        }
 
         AssetDatabase.AddObjectToAsset(asset, Selection.activeObject);
         AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(Selection.activeObject),ImportAssetOptions.ForceUpdate);
@@ -135,10 +145,12 @@ public class ScriptableObjectCreateDrawer : PropertyDrawer
    
     private void CreateGlobal(object data)
     {
+        var kv = ( STurple<string, Object,int,Type>) data;
+        var _type = kv.Item4;
+
         var asset = ScriptableObject.CreateInstance(_type);
         var instanceID = asset.GetInstanceID();
       
-        lastKv = ( STurple<string, Object,int>) data;
         lastKv.Item3 = instanceID;
 
         var path = Path.GetPathRoot(AssetDatabase.GetAssetPath(Selection.activeObject));

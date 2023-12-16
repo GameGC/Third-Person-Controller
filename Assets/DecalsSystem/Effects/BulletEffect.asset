@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decalsVariant:
   - {fileID: 4512377026111000653, guid: 399f88c1a221042a4a263d003f8c9dbd, type: 3}
-  minMaxRandomScale: {x: 0.950542, y: 1.4705099}
+  minMaxRandomScale: {x: 0.9505, y: 1.4705}
   spawnDistance: 0.01
   destroyTimer:
     value: 5

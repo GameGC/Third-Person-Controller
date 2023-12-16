@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7619287493854019135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed2416aa60f43bc9b652f8f60f8eb87, type: 3}
+  m_Name: FootEffectAudioClipList
+  m_EditorClassIdentifier: 
+  clipsVariants:
+  - {fileID: 8300000, guid: 3529918bd1dd74644ba7748b90343695, type: 3}
+  - {fileID: 8300000, guid: 5cb5fe43bdf748744a0458fdffed8e70, type: 3}
+  - {fileID: 8300000, guid: 5ca9e0641870f9341a75bcbda5787159, type: 3}
+  minMaxVolume: {x: 1, y: 1}
+  minMaxPitch: {x: 1, y: 1}
+--- !u!114 &-157705806653213191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: JumpEffect
+  m_EditorClassIdentifier: 
+  decalsVariant: []
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 8300000, guid: 15af46f10b0129a499d31b23666943f9, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,8 +50,29 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   SurfaceEffectsForHits:
-  - {fileID: 0}
+  - {fileID: 6553257321799329232}
+  - {fileID: -157705806653213191}
   - {fileID: 8391392015528199461}
+--- !u!114 &6553257321799329232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: FootEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 5664013782547976124, guid: f6c9593ace7fede4ba0251e1010760b6, type: 3}
+  minMaxRandomScale: {x: 1.5901, y: 2}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: -7619287493854019135}
 --- !u!114 &8391392015528199461
 MonoBehaviour:
   m_ObjectHideFlags: 0

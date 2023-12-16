@@ -36,5 +36,46 @@ MonoBehaviour:
   m_Name: Ground
   m_EditorClassIdentifier: 
   SurfaceEffectsForHits:
-  - {fileID: 11400000, guid: 1307202d5b7a845149dd3cb668a6a8ba, type: 2}
+  - {fileID: 7991070856267759960}
+  - {fileID: 3411598143034350465}
   - {fileID: -1067642098207422166}
+--- !u!114 &3411598143034350465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: JumpEffect
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7317621335766553440, guid: a309223bf28b84a458ce4d8e9dc8799e, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 8300000, guid: 6aeefb601c305f64487cebdfacae5b6c, type: 3}
+--- !u!114 &7991070856267759960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947143192874604a76c4d63b2fe9e7f, type: 3}
+  m_Name: GroundFootstep
+  m_EditorClassIdentifier: 
+  decalsVariant:
+  - {fileID: 7317621335766553440, guid: a309223bf28b84a458ce4d8e9dc8799e, type: 3}
+  minMaxRandomScale: {x: 1, y: 1}
+  spawnDistance: 0.01
+  destroyTimer:
+    value: 10
+    <HasValue>k__BackingField: 1
+  Audio: {fileID: 11400000, guid: 218365b1706ec438aa0077f078f6441a, type: 2}

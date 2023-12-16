@@ -22,7 +22,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       
       int subMeshIndex = GetSubmeshIndex(hit.triangleIndex,_lastRendererMaterials.Count,_lastSharedMesh);
 
-      SurfaceEffect effect = defaultEffect;
+      SurfaceEffect effect = null;
 
       if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
       {
@@ -32,15 +32,24 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       {
          effect = material.SurfaceEffectsForHits[(int) hitType];
       }
+      if(!effect)
+         effect = defaultEffect;
+
 
       if (effect)
       {
+         var decals = effect.decalsVariant;
+         if (effect.decalsVariant == null || effect.decalsVariant.Length < 1)
+            decals = defaultEffect.decalsVariant;
+         
          if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
-            SpawnDecalList(effect, hit.point, hit.normal);
-         if (effect.Audio != null)
-         {
+            SpawnDecalList(decals,effect, hit.point, hit.normal);
+
+         var audio = effect.Audio;
+         if (!audio)
+            audio = defaultEffect.Audio;
+         if (audio) 
             PlayAudio(effect, hit.point);
-         }
       }
    }
    
@@ -66,48 +75,77 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
          var effect = material.SurfaceEffectsForHits[(int)hitType];
          if (effect)
          {
+            bool allValid = true;
+            
             if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
-               SpawnDecalList(effect, hit.point, hit.normal);
+               SpawnDecalList(effect.decalsVariant,effect, hit.point, hit.normal);
+            else
+               allValid = false;
+            
             if (effect.Audio)
-            {
-               PlayAudio(effect, hit.point);
-               return true;
-            }
+               PlayAudio(effect.Audio, hit.point);
+            else
+               allValid = false;
+
+            return allValid;
          }
       }
       return false;
    }
    
-   
-   private void SpawnDecalList(SurfaceEffect effect,Vector3 position,Vector3 normal)
+   /// <returns>decal and sound</returns>
+   public SurfaceEffect GetSurfaceHitEffect(in RaycastHit hit,SurfaceHitType hitType,SurfaceEffect defaultEffect = null)
    {
-      var prefab = effect.decalsVariant[Range(0, effect.decalsVariant.Length)];
+      //simple caching
+      GetRendererAndCollider(in hit);
+      
+      int subMeshIndex = GetSubmeshIndex(hit.triangleIndex,_lastRendererMaterials.Count,_lastSharedMesh);
+
+      SurfaceEffect effect = null;
+
+      if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
+      {
+         effect = material.SurfaceEffectsForHits[(int) hitType];
+      }
+      else if(surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex], out material))
+      {
+         effect = material.SurfaceEffectsForHits[(int) hitType];
+      }
+
+      if(!effect)
+         effect = defaultEffect;
+
+      return effect;
+   }
+   
+   private void SpawnDecalList(GameObject[] decals,SurfaceEffect effect,Vector3 position,Vector3 normal)
+   {
+      var prefab = decals[Range(0, decals.Length)];
 
 
       var rotation =Quaternion.AngleAxis(Random.Range(0,360), normal) * Quaternion.LookRotation(normal);
       var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, rotation);
       effectInstance.transform.localScale = Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y); 
       
-      Debug.Log(effectInstance.name);
       if(effect.destroyTimer.HasValue)
          Destroy(effectInstance,effect.destroyTimer.Value);
    }
 
-   private void PlayAudio(SurfaceEffect effect, Vector3 position)
+   private void PlayAudio(Object audio, Vector3 position)
    {
-      switch (effect.Audio)
+      switch (audio)
       {
          case null:
             break;
          case AudioClip clip:
          {
-            PlayClipAtPoint(effect.name,clip, position);
+            PlayClipAtPoint(audio.name,clip, position);
             break;
          }
-         case IAudioType audio:
+         case IAudioType audioType:
          {
-            var source = GetAudioSourceAtPoint(effect.name, position);
-            float length = audio.Play(source,false);
+            var source = GetAudioSourceAtPoint(audio.name, position);
+            float length = audioType.Play(source,false);
             if (length > 0)
                Destroy(source.gameObject, length);
             break;
