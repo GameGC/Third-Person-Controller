@@ -4,7 +4,8 @@
     "references": [
         "Unity.InputSystem",
         "Cinemachine",
-        "GameGC.Collections"
+        "GameGC.Collections",
+        "CommonEditorUtils"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

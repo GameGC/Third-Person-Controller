@@ -75,7 +75,7 @@ internal class EasyEnum : ScriptableObject
       string nameSpaceFormat = hasNamespace ? $"namespace {nameSpace}\n{{\n":"";
 
       string flagsString = flags ? "[System.Flags]\n" : "";
-      string format =$"{nameSpaceFormat}{flagsString}{extraIndent}public enum {this.name}{GetBaseTypeString()}"+
+      string format =$"{nameSpaceFormat}{flagsString}{extraIndent}public enum {name}{GetBaseTypeString()}"+
                      "\n"+extraIndent+"{"
                      +$"\n{extraIndent}{result}"
                      +"\n"+extraIndent+"}";
@@ -113,7 +113,7 @@ public class EasyEnumRuntime
       {
          values[i] = i;
       }
-      this.values = values;
+      values = values;
    }
 }
 

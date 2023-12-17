@@ -22,14 +22,6 @@ public class HealthComponent : MonoBehaviour
         _hitBoxCount = hitBoxes.Length;
     }
 
-   //private void OnCollisionEnter(Collision collision)
-   //{
-   //    if (collision.collider == hitBoxes[0].Collider)
-   //    {
-   //        Debug.Log("hiiiiit");
-   //    }
-   //}
-
     public virtual void OnHit(in RaycastHit hit,IDamageSender source)
     {
         float damage = source.damage;

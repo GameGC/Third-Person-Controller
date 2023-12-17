@@ -7,15 +7,6 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-public static class AllTypesContainer
-{
-    public static readonly List<Type> AllTypes;
-    static AllTypesContainer()
-    {
-        AllTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(t => t.GetTypes()).ToList();
-    }
-}
-
 
 [InitializeOnLoad]
 public class BaseListSerializeReferenceDrawer

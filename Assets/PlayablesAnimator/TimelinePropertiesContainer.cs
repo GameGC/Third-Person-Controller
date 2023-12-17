@@ -19,11 +19,11 @@ public class TimelinePropertiesContainer:AnimationValue
         {
             var transform = ((Component) value).transform;
             path = AnimationUtility.CalculateTransformPath(transform, root);
-            this.Type = value.GetType().AssemblyQualifiedName;
+            Type = value.GetType().AssemblyQualifiedName;
         }
         public Object GetValue(Transform root)
         {
-            var type = System.Type.GetType(this.Type);
+            var type = System.Type.GetType(Type);
             return string.IsNullOrEmpty(path) ? root.GetComponent(type) : root.Find(path).GetComponent(type);
         }
     }

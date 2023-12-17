@@ -19,7 +19,7 @@ public class GrenadeBullet : MonoBehaviour
     
     public void Init(Vector3[] points)
     {
-        this._points = points;
+        _points = points;
         var ext = GetComponentInChildren<SphereCollider>().radius;
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         _size = ext;

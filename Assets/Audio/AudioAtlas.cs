@@ -130,7 +130,7 @@ public class AudioAtlasEditor : Editor
         var rect = GUILayoutUtility.GetRect(1, 18 * 4, GUILayout.ExpandWidth(true));
         if (keys.Length < 1 && Event.current.type == EventType.Repaint)
         {
-            var target = base.target as AudioAtlas;
+            var target = this.target as AudioAtlas;
             LoadKeys(serializedObject.FindProperty("timings"), target.clip.length, rect.width);
         }
         
@@ -149,7 +149,7 @@ public class AudioAtlasEditor : Editor
             lastMouseX = pos.x;
         }
 
-        var target = base.target as AudioAtlas;
+        var target = this.target as AudioAtlas;
         if (Event.current.type is EventType.MouseUp)
         {
             if (Selected > -1)

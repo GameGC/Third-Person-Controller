@@ -1,0 +1,16 @@
+{
+    "name": "CommonEditorUtils",
+    "rootNamespace": "",
+    "references": [
+        "GUID:67484b43d2f174f13a0f76bd25d17ee6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

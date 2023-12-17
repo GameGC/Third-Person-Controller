@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Cinemachine;
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using ThirdPersonController.Core.DI;
-using UnityEditor;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -11,7 +9,7 @@ public class CameraManager : MonoBehaviour
     /// <summary>
     /// constant size depended on CameraType enums count
     /// </summary>
-    [SerializeField, EnumedArray(typeof(CameraType))]
+    [SerializeField, EnumArray(typeof(CameraType))]
     private CinemachineVirtualCameraBase[] cameras;
     private CameraType _activeLook = CameraType.Follow;
     
@@ -132,39 +130,4 @@ public class CameraManager : MonoBehaviour
 
     private void Reset() => cameras = new CinemachineVirtualCameraBase[enumNamesSize];
 #endif
-}
-
-public class EnumedArrayAttribute : PropertyAttribute
-{
-    public Type enumType;
-
-    public EnumedArrayAttribute(Type enumType)
-    {
-        this.enumType = enumType;
-    }
-}
-
-[CustomPropertyDrawer(typeof(EnumedArrayAttribute))]
-public class EnumedArrayDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        var enumNames = (attribute as EnumedArrayAttribute).enumType.GetEnumNames();
-        var parent = property.GetParentProperty();
-        parent.arraySize = enumNames.Length;
-            
-        Rect labelRect = position;
-        labelRect.width /= 3;
-        position.x += labelRect.width+1;
-        position.width -= labelRect.width-1;
-
-        var path = property.propertyPath;
-        int index = int.Parse(path.Substring(path.LastIndexOf('[')+1, path.LastIndexOf(']') - path.LastIndexOf('[')-1));
-
-        EditorGUI.BeginDisabledGroup(true);
-        EditorGUI.LabelField(labelRect, enumNames[index], EditorStyles.popup);
-        EditorGUI.EndDisabledGroup();
-            
-        EditorGUI.PropertyField(position, property, GUIContent.none);
-    }
 }

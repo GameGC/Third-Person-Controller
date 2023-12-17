@@ -14,9 +14,10 @@ public class ExtendedAnimationLayer : AnimationLayer
         base.Awake();
         _mecanicAnimator = GetComponentInParent<Animator>();
     }
-    
-    private void OnValidate()
+
+    protected override void OnValidate()
     {
+        base.OnValidate();
         if(!_mecanicAnimator)
             _mecanicAnimator = GetComponentInParent<Animator>();
 

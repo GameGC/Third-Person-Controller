@@ -61,8 +61,6 @@ namespace ThirdPersonController.ModuleInformation.Editor
 
             if (systemInputValue != input)
             {
-                Debug.Log(systemInputValue);
-                Debug.Log(this.GetInstanceID());
               //  Selection.activeObject = this;
                 return;
                 ImportTargetPackages(systemInputValue, scriptingType);

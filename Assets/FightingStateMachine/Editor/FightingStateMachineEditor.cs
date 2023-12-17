@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using GameGC.Collections;
-using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;

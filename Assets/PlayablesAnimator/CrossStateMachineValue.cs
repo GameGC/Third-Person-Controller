@@ -17,11 +17,3 @@ public struct CrossStateMachineValue
         return (mecanicState + "-" + playableState).GetHashCode()+base.GetHashCode();
     }
 }
-
-public class TransitionDependedStateMachineValue : ScriptableObject
-{
-    /// <summary>
-    /// string: playableState transition is from
-    /// </summary>
-    public SKeyValuePair<string, Object> states;
-}

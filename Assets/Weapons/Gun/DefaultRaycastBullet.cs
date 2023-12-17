@@ -32,16 +32,9 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
         var ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray,out var hit, distance, impactMask, QueryTriggerInteraction.Ignore))
         {
-            //for (int i = 0; i < hitsCount; i++)
-            //{
-            //    Debug.Log(i+" "+hits[i].collider);
-            //}
-
-            Debug.Log(hit.collider.name);
             var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
             
             Debug.DrawLine(transform.position,hit.point,Color.red);
-           // ref var hit = ref hits[isCharacter?Mathf.Min(hitsCount, 1):Mathf.Max(hitsCount-1, 0)];
             flyDestination = hit.point;
             try
             {
@@ -94,4 +87,3 @@ public interface IDamageSender
     public float damage { get; }
     public SurfaceHitType HitType { get; }
 }
-//public class BulletEventArgs : Eve

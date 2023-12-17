@@ -10,7 +10,7 @@ public class InvisibleLayers : CinemachineExtension
 
     protected override void OnEnable()
     {
-        var brain = CinemachineCore.Instance.FindPotentialTargetBrain(this.VirtualCamera);
+        var brain = CinemachineCore.Instance.FindPotentialTargetBrain(VirtualCamera);
         _camera = brain.OutputCamera;
         _previousLayerMask = _camera.cullingMask;
     }

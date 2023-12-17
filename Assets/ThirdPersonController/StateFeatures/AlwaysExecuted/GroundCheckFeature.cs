@@ -122,7 +122,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
                 distance = newDist;
             }
 
-            groundHit.distance = (float) System.Math.Round(distance, 2);
+            groundHit.distance = (float) Math.Round(distance, 2);
             _variables.GroundHit = groundHit;
         }
     }
