@@ -72,6 +72,19 @@ public class CharacterHealthComponent : HealthComponent
             onHitFeature.OnEnterState();
             onHitFeature.OnExitState();
         }
+        
+        if (Health < 0.01f)
+        {
+            Debug.Log(Health);
+            foreach (var onDeathFeature in OnDeathFeatures)
+            {
+                onDeathFeature.OnEnterState();
+                onDeathFeature.OnExitState();
+            }
+
+            Debug.Log("destroy");
+            Destroy(GetComponentInParent<ReferenceResolver>().gameObject);
+        }
     }
 
     private void Update()

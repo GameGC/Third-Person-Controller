@@ -20,7 +20,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
         [Header("Cast Forward properties")]
         [FormerlySerializedAs("wfdCast2Offset")] public float startOffsetY = -0.1f;
         [SerializeField] private float stepLength;
-        [SerializeField] private float smoothTime = 300;
+        [SerializeField] private float minDiffToAdjustBodyPos =  0.15f;
     
 #if UNITY_EDITOR
         [SerializeField] private bool visualiseRaycast;
@@ -35,6 +35,9 @@ namespace ThirdPersonController.MovementStateMachine.Features
         #region Temp Variables
         private Transform _leftFoot;
         private Transform _rightFoot;
+        
+        private Transform _leftLeg;
+        private Transform _rightLeg;
 
         private float _leftFeetBottomHeight;
         private float _rightFeetBottomHeight;
@@ -50,6 +53,9 @@ namespace ThirdPersonController.MovementStateMachine.Features
             _leftFoot = _animator.GetBoneTransform(HumanBodyBones.LeftFoot);
             _rightFoot = _animator.GetBoneTransform(HumanBodyBones.RightFoot);
 
+            _leftLeg  = _animator.GetBoneTransform(HumanBodyBones.LeftUpperLeg);
+            _rightLeg = _animator.GetBoneTransform(HumanBodyBones.RightUpperLeg);
+            
             _leftFeetBottomHeight = _animator.leftFeetBottomHeight;
             _rightFeetBottomHeight = _animator.rightFeetBottomHeight;
         }
@@ -65,8 +71,8 @@ namespace ThirdPersonController.MovementStateMachine.Features
             float leftFootWeight = _animator.GetFloat(LeftFootIkProperty);
             float rightFootWeight = _animator.GetFloat(RightFootIkProperty);
 
-            UpdateRays(_leftLegData,AvatarIKGoal.LeftFoot,_leftFoot, _animator.GetBoneTransform(HumanBodyBones.LeftUpperLeg));
-            UpdateRays(_rightLegData,AvatarIKGoal.RightFoot,_rightFoot, _animator.GetBoneTransform(HumanBodyBones.RightUpperLeg));
+            UpdateRays(_leftLegData,AvatarIKGoal.LeftFoot,_leftFoot,    _leftLeg);
+            UpdateRays(_rightLegData,AvatarIKGoal.RightFoot,_rightFoot, _rightLeg);
             
             DoRaycasts(_leftLegData);
             DoRaycasts(_rightLegData);
@@ -78,13 +84,12 @@ namespace ThirdPersonController.MovementStateMachine.Features
             float distance1 = hit1.collider ? hit1.point.y + _rightFeetBottomHeight - _rightFoot.position.y : 0;
 
             float diffDistance = Mathf.Abs(distance0 * leftFootWeight + distance1 * rightFootWeight);
-            if (diffDistance > 0.08f)
+            if (diffDistance > minDiffToAdjustBodyPos)
                 _animator.bodyPosition -= Vector3.up * diffDistance;
             // high slope surface support 
             else if (_variables.SlopeAngle > 15f) _animator.bodyPosition -= Vector3.up * diffDistance;
         }
 
-        public float wfdCast2Offset = -0.1f;
 
 
         private LegData _leftLegData = new LegData();
@@ -121,7 +126,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
             
             //forward cast ray first
             data.ForwardInitialRay = 
-                new Ray(footPosition + localForward * startOffsetX + localUp * wfdCast2Offset, localForward);
+                new Ray(footPosition + localForward * startOffsetX + localUp * startOffsetY, localForward);
             
             //middle height cast
             var midCastPoint = footPosition + localForward * stepLength / 2;
@@ -251,7 +256,7 @@ namespace ThirdPersonController.MovementStateMachine.Features
         private void ForwardCastFromHitPoint(out RaycastHit forwardCastFromSecondHit, 
             in Vector3 origin, in Vector3 localUp, in Vector3 localForward)
         {
-            var ray = new Ray(origin + localUp * -wfdCast2Offset, localForward);
+            var ray = new Ray(origin + localUp * -startOffsetY, localForward);
             bool raycast = Physics.Raycast(ray, out forwardCastFromSecondHit,stepLength,
                 _variables.GroundLayer, QueryTriggerInteraction.Ignore);
                        

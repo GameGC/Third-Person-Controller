@@ -3823,6 +3823,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
+      propertyPath: managedReferences[915123826703204352].minDiffToAdjustBodyPos
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 704543681813861375, guid: 77c519b773a084932aaf1689d91eff3e, type: 3}
       propertyPath: managedReferences[915123826703204353].jumpWithRigidbodyForce
       value: 1
       objectReference: {fileID: 0}

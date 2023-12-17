@@ -14,8 +14,11 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
    private readonly List<Material> _lastRendererMaterials = new List<Material>();
    private Mesh _lastSharedMesh;
    
+   private bool _isSkinnedMesh;
+   private Transform[] _skinnedBones;
+   
    #region Default processing
-   public void OnSurfaceHit(in RaycastHit hit,SurfaceHitType hitType,SurfaceEffect defaultEffect)
+   public void OnSurfaceHit(RaycastHit hit,SurfaceHitType hitType,SurfaceEffect defaultEffect)
    {
       //simple caching
       GetRendererAndCollider(in hit);
@@ -41,9 +44,25 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
          var decals = effect.decalsVariant;
          if (effect.decalsVariant == null || effect.decalsVariant.Length < 1)
             decals = defaultEffect.decalsVariant;
-         
-         if(effect.decalsVariant != null && effect.decalsVariant.Length>0)
-            SpawnDecalList(decals,effect, hit.point, hit.normal);
+
+         if (effect.decalsVariant != null && effect.decalsVariant.Length > 0)
+         {
+            Transform parent = hit.collider.transform;
+            if (_isSkinnedMesh)
+            {
+               float closestDistance = int.MaxValue;
+               foreach (var t in _skinnedBones)
+               {
+                  var newDistance = Vector3.Distance(hit.point, t.position);
+                  if (closestDistance > newDistance)
+                  {
+                     closestDistance = newDistance;
+                     parent = t;
+                  }
+               }
+            }
+            SpawnDecalList(decals, effect, hit.point, hit.normal,parent);
+         }
 
          var audio = effect.Audio;
          if (!audio)
@@ -118,14 +137,21 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       return effect;
    }
    
-   private void SpawnDecalList(GameObject[] decals,SurfaceEffect effect,Vector3 position,Vector3 normal)
+   private void SpawnDecalList(GameObject[] decals,SurfaceEffect effect,Vector3 position,Vector3 normal,Transform parent = null)
    {
       var prefab = decals[Range(0, decals.Length)];
 
 
       var rotation =Quaternion.AngleAxis(Random.Range(0,360), normal) * Quaternion.LookRotation(normal);
-      var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, rotation);
-      effectInstance.transform.localScale = Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y); 
+      var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, rotation,parent);
+      if (parent)
+      {
+         effectInstance.transform.localScale = effectInstance.transform.TransformVector(Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y)); 
+      }
+      else
+      {
+         effectInstance.transform.localScale = Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y); 
+      }
       
       if(effect.destroyTimer.HasValue)
          Destroy(effectInstance,effect.destroyTimer.Value);
@@ -208,12 +234,20 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       if (_colliderId == hit.colliderInstanceID) return;
       
       var hitCollider = hit.collider;
-      var filter   = hitCollider.GetComponentInChildren<MeshFilter>();
       var renderer = hitCollider.GetComponentInChildren<Renderer>();
-
-      _lastSharedMesh = filter.sharedMesh; 
-      renderer.GetSharedMaterials(_lastRendererMaterials);
+      if (renderer is MeshRenderer mesh)
+      {
+         var filter = hitCollider.GetComponentInChildren<MeshFilter>();
+         _lastSharedMesh = filter.sharedMesh;
+      }
+      else if(renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+      {
+         _lastSharedMesh = skinnedMeshRenderer.sharedMesh;
+         _skinnedBones = skinnedMeshRenderer.bones;
+         _isSkinnedMesh = true;
+      }
       
+      renderer.GetSharedMaterials(_lastRendererMaterials);
       _colliderId = hit.colliderInstanceID;
    }
 }

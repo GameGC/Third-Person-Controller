@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
 {
@@ -8,10 +9,13 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
 
     public LayerMask impactMask;
     [field: SerializeField] public float damage { get; private set; } = 10;
+
+    [field: SerializeField, FormerlySerializedAs("HitType")]
+    public SurfaceHitType HitType { get; } = SurfaceHitType.Bullet;
+    
     public int speed = 100;
     public int distance = 1000;
     
-    public SurfaceHitType HitType;
     public SurfaceEffect defaultImpactEffect;
 
     // Start is called before the first frame update
@@ -54,10 +58,14 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
                 if (!isCharPart)
                 {
                     ray.origin = hit.point;
-                    Physics.Raycast(ray, out hit, distance,
-                        LayerMask.GetMask("Char_Collision"), QueryTriggerInteraction.Ignore);
+                    if (Physics.Raycast(ray, out var newHit, distance,
+                            LayerMask.GetMask("Char_Collision"), QueryTriggerInteraction.Ignore))
+                    {
+                        hit = newHit;
+                    }
                 }
-                gameObject.GetComponentInChildren<HealthComponent>()?.OnHit(in hit, this);
+
+                gameObject.GetComponentInChildren<HealthComponent>().OnHit(in hit, this);
             }
         }
         else
@@ -84,5 +92,6 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
 public interface IDamageSender
 {
     public float damage { get; }
+    public SurfaceHitType HitType { get; }
 }
 //public class BulletEventArgs : Eve

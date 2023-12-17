@@ -10,7 +10,7 @@ public class FussyDropdownAddDrawer : ListDropdownAddDrawer
     {
         if (UnityEngine.Event.current == null) return;
 
-        var property = list.serializedProperty;
+        var property = list.serializedProperty.Copy();
         var listCopy = list;
         
         FuzzyWindow.Show(buttonRect,new Vector2(200, 100), attribute.BaseType, type =>

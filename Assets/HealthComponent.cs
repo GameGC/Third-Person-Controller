@@ -11,8 +11,9 @@ public class HealthComponent : MonoBehaviour
         public float damageMultiplicator;
     }
 
-    [FormerlySerializedAs("hitboxes")] [SerializeField] private HitBox[] hitBoxes;
+    [SerializeField] private HitBox[] hitBoxes;
     [field: SerializeField] public float Health { get; private set; } = 100;
+    [FormerlySerializedAs("hitEffect")] public SurfaceEffect defaultHitEffect;
 
     private int _hitBoxCount;
 
@@ -42,5 +43,6 @@ public class HealthComponent : MonoBehaviour
             }
         }
         Health -= damage;
+        SurfaceSystem.instance.OnSurfaceHit(hit,source.HitType,defaultHitEffect);
     }
 }
