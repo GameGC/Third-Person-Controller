@@ -7,9 +7,9 @@ public class AudioClipList : ScriptableObject, IAudioType
 {
     public AudioClip[] clipsVariants;
 
-    public Vector2 minMaxVolume = Vector2.one;
-    public Vector2 minMaxPitch = Vector2.one;
-    
+    [MinMax(0.1f,5)] public Vector2 minMaxVolume = Vector2.one;
+    [MinMax(0.1f,2)] public Vector2 minMaxPitch = Vector2.one;
+   
     private void GetRandomClip(out AudioClip clip) => clip = clipsVariants[Random.Range(0, clipsVariants.Length)];
 
     //for sequence play

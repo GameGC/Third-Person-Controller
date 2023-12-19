@@ -37,6 +37,7 @@ public partial class FuzzyWindow : EditorWindow
     private IOptionTree[] hierarchyTree;
     private IOptionTree[] typeTree1d;
 
+    private static Type _baseType;
     private void OnEnable()
     {
         _searchPanel = new FuzzySearchPanel();
@@ -46,7 +47,7 @@ public partial class FuzzyWindow : EditorWindow
         _headerWithBackButtonPanel.BackClicked += OnHeaderBackClicked;
         _list = new FuzzyListPanel();
 
-        var types = GetNonAbstractTypesSubclassOf(typeof(BaseFeature));
+        var types = GetNonAbstractTypesSubclassOf(_baseType);
 
         hierarchyTree = BuildTreeHierarchy(types).Childs.ToArray();
         _list.SetData(hierarchyTree);
@@ -149,6 +150,8 @@ public partial class FuzzyWindow : EditorWindow
         // Makes sure control exits DelayedTextFields before opening the window
         //GUIUtility.keyboardControl = 0;
 
+        _baseType = type;
+
         if (instance != null)
         {
             try
@@ -161,6 +164,7 @@ public partial class FuzzyWindow : EditorWindow
         }
 
         {
+            
             instance = CreateInstance<FuzzyWindow>();
 
             instance.CreateWindow(activatorPosition,size);

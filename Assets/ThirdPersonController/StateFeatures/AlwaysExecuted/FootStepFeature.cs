@@ -1,6 +1,7 @@
 using System;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core;
+using ThirdPersonController.Input;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -33,6 +34,9 @@ namespace ThirdPersonController.MovementStateMachine.Features
         #endregion
 
         #region Temp Variables
+
+        private IBaseInputReader _inputReader;
+        
         private Transform _leftFoot;
         private Transform _rightFoot;
         
@@ -47,7 +51,8 @@ namespace ThirdPersonController.MovementStateMachine.Features
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             _variables = variables as IMoveStateMachineVariables;
-
+            
+            _inputReader = resolver.GetComponent<IBaseInputReader>();
             _animator = resolver.GetComponent<Animator>();
         
             _leftFoot = _animator.GetBoneTransform(HumanBodyBones.LeftFoot);
@@ -68,6 +73,14 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
         private void OnStateIK()
         {
+            float fps = 1.0f / Time.smoothDeltaTime;
+            //make sure fps is greater than 2
+            //on 2 fps system will not work fine
+            if (_inputReader.moveInputMagnitude > 0 && fps < 3)
+            {
+                return;
+            }
+            
             float leftFootWeight = _animator.GetFloat(LeftFootIkProperty);
             float rightFootWeight = _animator.GetFloat(RightFootIkProperty);
 
@@ -79,6 +92,15 @@ namespace ThirdPersonController.MovementStateMachine.Features
             
             PlaceIK(_leftLegData, AvatarIKGoal.LeftFoot, in leftFootWeight, in _leftFeetBottomHeight, out var hit0);
             PlaceIK(_rightLegData, AvatarIKGoal.RightFoot, in rightFootWeight, in _rightFeetBottomHeight, out var hit1);
+            
+            //this code executes when fps is 15 or less
+            if ((!hit0.collider ||!hit1.collider) && _inputReader.moveInputMagnitude > 0.5f && fps < 16)
+            {
+                if (!hit0.collider)
+                    hit0 = _variables.GroundHit;
+                if (!hit1.collider) 
+                    hit1 = _variables.GroundHit;
+            }
             
             float distance0 = hit0.collider ? hit0.point.y + _leftFeetBottomHeight - _leftFoot.position.y : 0;
             float distance1 = hit1.collider ? hit1.point.y + _rightFeetBottomHeight - _rightFoot.position.y : 0;

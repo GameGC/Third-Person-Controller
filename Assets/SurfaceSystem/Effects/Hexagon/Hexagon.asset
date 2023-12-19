@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Foot
   m_EditorClassIdentifier: 
   decalsVariant:
-  - {fileID: 7317621335766553440, guid: ae7444f41690144dca2b6f54fdc44760, type: 3}
+  - {fileID: 960647859798395278, guid: ae7444f41690144dca2b6f54fdc44760, type: 3}
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 0}
 --- !u!114 &11400000

@@ -17,7 +17,7 @@ MonoBehaviour:
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 3598386474882370983}
 --- !u!114 &-1582706065237907690
@@ -37,7 +37,7 @@ MonoBehaviour:
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 8300000, guid: d4ce8205a3ae9ab4181dbc190b1a837e, type: 3}
 --- !u!114 &11400000

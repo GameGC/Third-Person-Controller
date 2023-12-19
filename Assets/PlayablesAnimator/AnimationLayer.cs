@@ -9,18 +9,15 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using Object = UnityEngine.Object;
 
-public abstract class AnimationValue : ScriptableObject
-{
-    public abstract Playable GetPlayable(PlayableGraph graph,GameObject root);
-}
-
 public class AnimationLayer : FollowingStateMachine<Object>
 {
     public float weight;
     public AvatarMask avatarMask;
     public bool isAdditive;
 
-
+    // [field:SerializeField][ValidateBaseType(typeof(AnimationClip),typeof(AnimationClip))]
+    // public override Object[] States { get; protected set; }
+    
     public AnimationTransition[] customTransitionTimes;
     public float defaultTransitionTime = 0.02f;
 
@@ -108,13 +105,45 @@ public class AnimationLayer : FollowingStateMachine<Object>
     private int tempPrevStateInd = -1;
     private int tempCurrentStateInd = -1;
 
+    #region New Awaiters
 
     public async Task WaitForNextState()
     {
-        var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == _codeStateMachine.CurrentState.Name);
-        while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex) < 1)
+        var newIndex = _codeStateMachine.CurrentStateIndex;
+        while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex) < 1) await Task.Delay(100);
+    }
+
+    public async Task WaitForStateWeight0(int stateIndex)
+    {
+        while (Application.isPlaying && _mixerPlayable.GetInputWeight(stateIndex) > 0) 
             await Task.Delay(100);
     }
+
+    public async Task WaitForStateWeight1(int stateIndex)
+    {
+        while (Application.isPlaying && _mixerPlayable.GetInputWeight(stateIndex) < 1) 
+            await Task.Delay(100);
+    }
+
+    public async Task WaitForFirstStateFinish() => await WaitForAnimationFinish(0);
+    public async Task WaitForLastStateFinish() => await WaitForAnimationFinish(States.Length - 1);
+
+    public async Task WaitForAnimationFinish(int stateIndex)
+    {
+        if (_mixerPlayable.GetInputWeight(stateIndex) < 1)
+            await WaitForStateWeight1(stateIndex);
+        float timeScale = 1 / Time.timeScale;
+        switch (States[stateIndex])
+        {
+            case AnimationClip clip: await Task.Delay((int) (clip.length * 1000 * timeScale)); break;
+            case TimelineAsset asset: await Task.Delay((int) (asset.duration * 1000 * timeScale)); break;
+        }
+    }
+    
+    #endregion
+    
+
+    #region Old Awaiters (not recomend to use)
 
     public async Task WaitForStateWeight1(string stateName)
     {
@@ -134,7 +163,6 @@ public class AnimationLayer : FollowingStateMachine<Object>
             case TimelineAsset asset:           await Task.Delay((int)(asset.duration * 1000 *timeScale));break;
         }
     }
-    
     public async Task WaitForStateWeight0(string stateName)
     {
         try
@@ -148,11 +176,16 @@ public class AnimationLayer : FollowingStateMachine<Object>
             Debug.LogError("Error at state: "+stateName);
         }
     }
+    
+    #endregion
 
     protected virtual void SyncedTransition(int previousStateIndex,int newStateIndex)
     {
         _mixerPlayable.SetInputWeight(previousStateIndex,0);
+        TryExecuteAnimationValueSetWeight(previousStateIndex, 0);
+        
         _mixerPlayable.SetInputWeight(newStateIndex,1);
+        TryExecuteAnimationValueSetWeight(newStateIndex, 1);
     }
     protected virtual IEnumerator AsyncTransition(int previousStateIndex,int newStateIndex)
     {
@@ -199,13 +232,23 @@ public class AnimationLayer : FollowingStateMachine<Object>
         }
         
         _mixerPlayable.SetInputWeight(previousStateIndex,0);
+        TryExecuteAnimationValueSetWeight(previousStateIndex, 0);
+
         _mixerPlayable.SetInputWeight(newStateIndex,1);
+        TryExecuteAnimationValueSetWeight(newStateIndex, 1);
         
         tempPrevStateInd = -1;
         tempCurrentStateInd = -1;
     }
 
 
+    private void TryExecuteAnimationValueSetWeight(int index, int weight)
+    {
+        if (States[index] is AnimationValue value) 
+            value.OnSetWeight(_mixerPlayable.GetInput(index), weight);
+    }
+
+#if UNITY_EDITOR
     protected override void OnValidate()
     {
         base.OnValidate();
@@ -234,4 +277,6 @@ public class AnimationLayer : FollowingStateMachine<Object>
         new_.defaultTransitionTime = defaultTransitionTime;
         new_.isAdditive = isAdditive;
     }
+#endif
+
 }

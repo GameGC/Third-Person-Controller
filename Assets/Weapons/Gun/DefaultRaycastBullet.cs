@@ -34,7 +34,7 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
         {
             var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
             
-            Debug.DrawLine(transform.position,hit.point,Color.red);
+            Debug.DrawLine(transform.position,hit.point,Color.red,100);
             flyDestination = hit.point;
             try
             {

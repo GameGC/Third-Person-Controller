@@ -1,6 +1,5 @@
 using GameGC.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 [CreateAssetMenu(menuName = "Surface/Effect", fileName = "SurfaceEffect", order = 0)]

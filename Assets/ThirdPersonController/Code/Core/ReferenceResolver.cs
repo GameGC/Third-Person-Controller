@@ -95,7 +95,7 @@ namespace ThirdPersonController.Core.DI
                     return casted;
             }
             
-            throw new NullReferenceException("No component with such key");
+            throw new NullReferenceException("No component with such key:" + name);
         }
     }
 }

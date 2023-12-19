@@ -2281,17 +2281,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   releaseMemoryOnStart: 0
   namedReferences:
-    _keyValuePairs:
-    - Key: TargetLook
-      Value: {fileID: 0}
-    - Key: CameraManager
-      Value: {fileID: 0}
-    - Key: HandAim
-      Value: {fileID: 0}
-    - Key: HeadLookAt
-      Value: {fileID: 0}
-    - Key: PlayerHUD
-      Value: {fileID: 0}
+    _keyValuePairs: []
 --- !u!136 &3963826882175844335
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2318,19 +2308,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686a091ca4814b688cb441dad52ba744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBoxes: []
   <Health>k__BackingField: 100
+  defaultHitEffect: {fileID: 306238344874129161, guid: 1382a107bcf4344a4a77f401e23d250a, type: 2}
+  hitBoxes: []
   startWhenResolverIsReady: 1
   ReferenceResolver: {fileID: 3963826882175844321}
-  aliveFeatures: []
   OnHitFeatures: []
   OnDeathFeatures:
-  - rid: 915123910654296065
+  - rid: 915123958233956373
   references:
     version: 2
     RefIds:
-    - rid: 915123910654296065
-      type: {class: DeathFeature, ns: , asm: Assembly-CSharp}
+    - rid: 915123958233956373
+      type: {class: DeathWithReplaceFeature, ns: , asm: Assembly-CSharp}
       data:
         path: OnDeathFeatures.Array.data[0]
         deathPrefab: {fileID: 849586260392363212, guid: 8149c4d947f2346679909699faf35234, type: 3}

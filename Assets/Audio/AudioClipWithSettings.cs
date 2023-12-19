@@ -4,9 +4,9 @@ using UnityEngine;
 public class AudioClipWithSettings : ScriptableObject ,IAudioType
 {
     public AudioClip Clip;
-    [field:SerializeField]
+    [field:SerializeField][field:Range(0.1f,2)]
     public float Pitch { get; }
-    [field:SerializeField]
+    [field:SerializeField][field:Range(0.1f,5)]
     public float Volume { get; }
 
     public float Play(AudioSource source, bool autoStop = true)

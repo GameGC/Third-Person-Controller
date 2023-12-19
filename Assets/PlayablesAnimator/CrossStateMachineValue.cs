@@ -1,7 +1,5 @@
 using System;
-using GameGC.Collections;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 [Serializable]
 public struct CrossStateMachineValue

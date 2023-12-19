@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Name: JumpEffect
   m_EditorClassIdentifier: 
   decalsVariant:
-  - {fileID: 7317621335766553440, guid: a309223bf28b84a458ce4d8e9dc8799e, type: 3}
+  - {fileID: 4288749272998648671, guid: a309223bf28b84a458ce4d8e9dc8799e, type: 3}
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 8300000, guid: 6aeefb601c305f64487cebdfacae5b6c, type: 3}
 --- !u!114 &7991070856267759960
@@ -72,10 +72,10 @@ MonoBehaviour:
   m_Name: GroundFootstep
   m_EditorClassIdentifier: 
   decalsVariant:
-  - {fileID: 7317621335766553440, guid: a309223bf28b84a458ce4d8e9dc8799e, type: 3}
+  - {fileID: 4288749272998648671, guid: a309223bf28b84a458ce4d8e9dc8799e, type: 3}
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 11400000, guid: 218365b1706ec438aa0077f078f6441a, type: 2}

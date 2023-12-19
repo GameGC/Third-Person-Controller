@@ -20,7 +20,7 @@ MonoBehaviour:
   minMaxRandomScale: {x: 0.15, y: 0.35}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 0}
 --- !u!114 &-5779706186389545906
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Name: FootEffect
   m_EditorClassIdentifier: 
   decalsVariant:
-  - {fileID: 7317621335766553440, guid: 209084bed26584ad89871c01ff31f68d, type: 3}
+  - {fileID: 5690238551891372516, guid: 209084bed26584ad89871c01ff31f68d, type: 3}
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
@@ -72,10 +72,10 @@ MonoBehaviour:
   m_Name: JumpEffect
   m_EditorClassIdentifier: 
   decalsVariant:
-  - {fileID: 7317621335766553440, guid: 209084bed26584ad89871c01ff31f68d, type: 3}
+  - {fileID: 5690238551891372516, guid: 209084bed26584ad89871c01ff31f68d, type: 3}
   minMaxRandomScale: {x: 1, y: 1}
   spawnDistance: 0.01
   destroyTimer:
-    value: 10
+    value: 5
     <HasValue>k__BackingField: 1
   Audio: {fileID: 8300000, guid: 6aeefb601c305f64487cebdfacae5b6c, type: 3}

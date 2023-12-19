@@ -147,16 +147,12 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
 
 
       var rotation =Quaternion.AngleAxis(Range(0,360), normal) * Quaternion.LookRotation(normal);
-      var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, rotation,parent);
-      if (parent)
-      {
-         effectInstance.transform.localScale = effectInstance.transform.TransformVector(Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y)); 
-      }
-      else
-      {
-         effectInstance.transform.localScale = Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y); 
-      }
+      var effectInstance = Instantiate(prefab, position + normal * effect.spawnDistance, rotation);
       
+      effectInstance.transform.localScale = Vector3.one * Range(effect.minMaxRandomScale.x,effect.minMaxRandomScale.y); 
+      if (parent) 
+         effectInstance.transform.SetParent(parent);
+
       if(effect.destroyTimer.HasValue)
          Destroy(effectInstance,effect.destroyTimer.Value);
    }
@@ -243,6 +239,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       {
          var filter = hitCollider.GetComponentInChildren<MeshFilter>();
          _lastSharedMesh = filter.sharedMesh;
+         _isSkinnedMesh = false;
       }
       else if(renderer is SkinnedMeshRenderer skinnedMeshRenderer)
       {
@@ -251,7 +248,8 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
          _isSkinnedMesh = true;
       }
       
-      renderer.GetSharedMaterials(_lastRendererMaterials);
+      if(renderer)
+         renderer.GetSharedMaterials(_lastRendererMaterials);
       _colliderId = hit.colliderInstanceID;
       _lastCollider = hitCollider;
    }

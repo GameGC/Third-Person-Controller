@@ -92,7 +92,7 @@ MonoBehaviour:
       type: {class: SetCooldownFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[0]
-        clip: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+        clip: {fileID: 11400000, guid: 0789c7d01d75c4e1492649d102a21f3d, type: 2}
     - rid: 6167190519439425538
       type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
@@ -126,22 +126,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   States:
   - {fileID: 0}
-  - {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+  - {fileID: 11400000, guid: 0789c7d01d75c4e1492649d102a21f3d, type: 2}
   - {fileID: 0}
-  statesNames:
+  EDITOR_statesNames:
   - Idle
   - Attack
   - Cooldown
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  states:
-    _keyValuePairs:
-    - Key: Idle
-      Value: {fileID: 0}
-    - Key: Attack
-      Value: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
-    - Key: Cooldown
-      Value: {fileID: 0}
   customTransitionTimes: []
   defaultTransitionTime: 0.02

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ec6203c9d034cb2b3445131cd079e9, type: 3}
+  m_Name: PushingAnimations
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
+  - {fileID: 7400000, guid: e56bb9d4c070c05408965238c12e59c8, type: 3}

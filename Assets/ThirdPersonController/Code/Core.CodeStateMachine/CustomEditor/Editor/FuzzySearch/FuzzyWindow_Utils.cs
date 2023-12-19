@@ -32,7 +32,7 @@ public partial class FuzzyWindow : EditorWindow
             }
         }
 
-        root.Childs = new List<IOptionTree>(categorys.ToList());
+        root.Childs = new List<IOptionTree>(categorys.Where(c=>c.Childs.Count > 0).ToList());
 
         return root;
     }

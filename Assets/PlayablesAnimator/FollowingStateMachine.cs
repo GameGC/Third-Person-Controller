@@ -7,9 +7,8 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 
-public abstract class FollowingStateMachineManaged<T> :MonoBehaviour
+public abstract class FollowingStateMachineAbstract<T> :MonoBehaviour
 {
-    [field: SerializeReference]
     public abstract T[] States { get; protected set; }
     
 #if UNITY_EDITOR

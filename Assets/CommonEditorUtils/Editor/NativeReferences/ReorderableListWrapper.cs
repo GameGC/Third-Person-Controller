@@ -64,8 +64,10 @@ public class ReorderableListWrapperRef
 
     public ReorderableListWrapperRef(SerializedProperty property, GUIContent label, bool reorderable = true)
     {
-        originalInstance = Activator.CreateInstance(reorderableListWrapper);
-        Init(reorderable,property);
+        var empty = Type.EmptyTypes;
+        var constructor = reorderableListWrapper.GetConstructor(BindingFlags.NonPublic|BindingFlags.Instance, null, empty, null);
+        originalInstance =constructor.Invoke(null);
+        Init(reorderable, property);
         m_ReorderableList = m_ReorderableListRef.GetValue(originalInstance) as ReorderableList;
     }
 

@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 732306296120041fa8d65921867f9cfb
 ShaderImporter:
   externalObjects: {}
-  defaultTextures: []
+  defaultTextures:
+  - _MainTex: {fileID: 2800000, guid: a1b31775c1f584781ba26a04e442c579, type: 3}
+  - _MetallicGlossMap: {instanceID: 0}
+  - _BumpMap: {instanceID: 0}
+  - _DetailAlbedoMap: {fileID: 2800000, guid: a1b31775c1f584781ba26a04e442c579, type: 3}
+  - _DetailNormalMap: {instanceID: 0}
   nonModifiableTextures: []
   preprocessorOverride: 0
   userData: 
