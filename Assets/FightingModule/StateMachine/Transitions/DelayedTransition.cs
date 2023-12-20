@@ -1,7 +1,5 @@
 using System;
-using System.Threading.Tasks;
 using System.Timers;
-using Fighting.Pushing;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
@@ -9,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public class DelayedTransition : BaseStateTransition
 {
-    [SerializeField,ClipToSecondsAttribute] private float delayTime;
+    [SerializeField,ClipToSeconds] private float delayTime;
 
     private bool _wasStarted;
     private bool _wasTimeFinished;
@@ -47,78 +45,6 @@ public class DelayedTransition : BaseStateTransition
                 return true;
             }
 
-            return false;
-        }
-    }
-    
-    
-}
-
-public class EndPlayTransition : BaseStateTransition
-{
-    private AnimationLayer _layer;
-    private bool _wasStarted;
-
-    private Task waitTask;
-    
-    public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
-    {
-        _layer = (variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
-    }
-
-    
-    public override bool couldHaveTransition
-    {
-        get
-        {
-            if (!_wasStarted)
-            {
-                waitTask = _layer.WaitForLastStateFinish();
-                _wasStarted = true;
-            }
-
-            if (waitTask.IsCompleted)
-            {
-                waitTask = null;
-                _wasStarted = false;
-                return true;
-            }
-            return false;
-        }
-    }
-    
-    
-}
-
-public class Weight1Transition : BaseStateTransition
-{
-    private AnimationLayer _layer;
-    private bool _wasStarted;
-
-    private Task waitTask;
-    
-    public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
-    {
-        _layer = (variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
-    }
-
-    
-    public override bool couldHaveTransition
-    {
-        get
-        {
-            if (!_wasStarted)
-            {
-                waitTask = _layer.WaitForNextState();
-                _wasStarted = true;
-            }
-
-            if (waitTask.IsCompleted)
-            {
-                waitTask = null;
-                _wasStarted = false;
-                return true;
-            }
             return false;
         }
     }

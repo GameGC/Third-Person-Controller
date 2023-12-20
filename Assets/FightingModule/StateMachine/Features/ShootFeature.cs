@@ -47,7 +47,7 @@ namespace Fighting.Pushing
             wasCooldown = _variables.isCooldown;
             if(changeCooldownToAwait)
                 _variables.isCooldown = true;
-            var animationController = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
+            var animationController = _variables.AnimationLayer;
             await animationController.WaitForNextState();
 
             //immediate shoot fix bug

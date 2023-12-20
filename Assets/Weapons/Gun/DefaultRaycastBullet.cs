@@ -38,7 +38,7 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
             flyDestination = hit.point;
             try
             {
-                SurfaceSystem.instance.OnSurfaceHit(hit,HitType, defaultImpactEffect);
+                SurfaceSystem.instance.OnSurfaceHit(hit,(int) HitType, defaultImpactEffect);
             }
             catch (Exception e)
             {

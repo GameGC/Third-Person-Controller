@@ -1,5 +1,4 @@
 using System.Linq;
-using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
@@ -19,7 +18,7 @@ namespace Weapons
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             _variables = variables as IFightingStateMachineVariables;
-            _animationLayer = (_variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
+            _animationLayer = _variables.AnimationLayer;
         }
 
         public override async void OnEnterState()

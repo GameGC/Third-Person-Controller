@@ -7,7 +7,7 @@ using static UnityEngine.Random;
 public class SurfaceSystem : Singleton<SurfaceSystem>
 {
    [FormerlySerializedAs("SurfaceEffects")] 
-   public SKeyValueReadonlyArray<Object, SurfaceMaterial> surfaceMaterials;
+   public SKeyValueReadonlyArray<Object, BaseSurfaceMaterial> surfaceMaterials;
 
    //simple caching
    private int _colliderId = int.MaxValue;
@@ -19,7 +19,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
    private Transform[] _skinnedBones;
    
    #region Default processing
-   public void OnSurfaceHit(RaycastHit hit,SurfaceHitType hitType,SurfaceEffect defaultEffect)
+   public void OnSurfaceHit(RaycastHit hit,int hitType,SurfaceEffect defaultEffect)
    {
       //simple caching
       GetRendererAndCollider(in hit);
@@ -32,11 +32,11 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
 
          //textures support
          if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
-            effect = material.SurfaceEffectsForHits[(int) hitType];
+            effect = material.SurfaceEffectsForHits[hitType];
          
          //materials support
          else if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex], out material))
-            effect = material.SurfaceEffectsForHits[(int) hitType];
+            effect = material.SurfaceEffectsForHits[hitType];
       }
 
       if(!effect)
@@ -76,17 +76,55 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       }
    }
    
-   public void OnSurfaceHit(Collision collision,SurfaceHitType hitType,SurfaceEffect defaultEffect)
+   public void OnSurfaceHit(Collision collision,int hitType,SurfaceEffect defaultEffect)
    {
       var contact = collision.GetContact(0);
       collision.collider.Raycast(new Ray(contact.point, contact.normal), out var hit, contact.separation);
       OnSurfaceHit(hit,hitType,defaultEffect);
    }
    
+   /// <summary>
+   /// note: this method not support hit - material detections
+   /// it use effect that provided
+   /// used when character pushing 
+   /// </summary>
+   public void OnSurfaceHit(Collider hitCollider,Collider rootCollider,in Vector3 hitPoint,in Vector3 hitNormal,SurfaceEffect effect)
+   {
+      //simple caching
+      GetRendererAndCollider(hitCollider);
+      
+      if (effect)
+      {
+         var decals = effect.decalsVariant;
+
+         if (effect.decalsVariant != null && effect.decalsVariant.Length > 0)
+         {
+            Transform parent = hitCollider.transform;
+            if (_isSkinnedMesh && hitCollider == rootCollider)
+            {
+               float closestDistance = int.MaxValue;
+               foreach (var t in _skinnedBones)
+               {
+                  var newDistance = Vector3.Distance(hitPoint, t.position);
+                  if (closestDistance > newDistance)
+                  {
+                     closestDistance = newDistance;
+                     parent = t;
+                  }
+               }
+            }
+            SpawnDecalList(decals, effect, hitPoint,hitNormal,parent);
+         }
+
+         if (effect.Audio) 
+            PlayAudio(effect, hitPoint);
+      }
+   }
+   
    
    #endregion
 
-   public bool OnSurfaceHitWithoutDefault(in RaycastHit hit,SurfaceHitType hitType)
+   public bool OnSurfaceHitWithoutDefault(in RaycastHit hit,int hitType)
    {
       //simple caching
       GetRendererAndCollider(in hit);
@@ -95,7 +133,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       
       if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
       {
-         var effect = material.SurfaceEffectsForHits[(int)hitType];
+         var effect = material.SurfaceEffectsForHits[hitType];
          if (effect)
          {
             bool allValid = true;
@@ -117,7 +155,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
    }
    
    /// <returns>decal and sound</returns>
-   public SurfaceEffect GetSurfaceHitEffect(in RaycastHit hit,SurfaceHitType hitType,SurfaceEffect defaultEffect = null)
+   public SurfaceEffect GetSurfaceHitEffect(in RaycastHit hit,int hitType,SurfaceEffect defaultEffect = null)
    {
       //simple caching
       GetRendererAndCollider(in hit);
@@ -128,11 +166,11 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
 
       if (surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex].mainTexture, out var material))
       {
-         effect = material.SurfaceEffectsForHits[(int) hitType];
+         effect = material.SurfaceEffectsForHits[hitType];
       }
       else if(surfaceMaterials.TryGetValue(_lastRendererMaterials[subMeshIndex], out material))
       {
-         effect = material.SurfaceEffectsForHits[(int) hitType];
+         effect = material.SurfaceEffectsForHits[hitType];
       }
 
       if(!effect)
@@ -141,7 +179,7 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       return effect;
    }
    
-   private void SpawnDecalList(GameObject[] decals,SurfaceEffect effect,Vector3 position,Vector3 normal,Transform parent = null)
+   private void SpawnDecalList(GameObject[] decals,SurfaceEffect effect, in Vector3 position,in Vector3 normal,Transform parent = null)
    {
       var prefab = decals[Range(0, decals.Length)];
 
@@ -251,6 +289,33 @@ public class SurfaceSystem : Singleton<SurfaceSystem>
       if(renderer)
          renderer.GetSharedMaterials(_lastRendererMaterials);
       _colliderId = hit.colliderInstanceID;
+      _lastCollider = hitCollider;
+   }
+   
+   /// <summary>
+   /// simple caching method
+   /// </summary>
+   private void GetRendererAndCollider(Collider hitCollider)
+   {
+      if (_colliderId == hitCollider.GetInstanceID()) return;
+      
+      var renderer = hitCollider.GetComponentInChildren<Renderer>();
+      if (renderer is MeshRenderer mesh)
+      {
+         var filter = hitCollider.GetComponentInChildren<MeshFilter>();
+         _lastSharedMesh = filter.sharedMesh;
+         _isSkinnedMesh = false;
+      }
+      else if(renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+      {
+         _lastSharedMesh = skinnedMeshRenderer.sharedMesh;
+         _skinnedBones = skinnedMeshRenderer.bones;
+         _isSkinnedMesh = true;
+      }
+      
+      if(renderer)
+         renderer.GetSharedMaterials(_lastRendererMaterials);
+      _colliderId = hitCollider.GetInstanceID();
       _lastCollider = hitCollider;
    }
 }

@@ -70,8 +70,18 @@ namespace DefaultNamespace
             {
                 var outPut =  _graph.GetOutput(i);
                 if(outPut.GetEditorName() != outputName) continue;
-                outPut.SetUserData(value);
-                outPut.SetReferenceObject(value);
+                
+                var outPutType = outPut.GetPlayableOutputType();
+
+                if (outPutType == typeof(AnimationPlayableOutput))
+                    ((AnimationPlayableOutput) outPut).SetTarget(value as Animator);
+                else if (outPutType == typeof(AudioTrack))
+                    ((AudioPlayableOutput) outPut).SetTarget(value as AudioSource);
+                else
+                {
+                    outPut.SetUserData(value);
+                    outPut.SetReferenceObject(value);
+                }
             }
         }
         

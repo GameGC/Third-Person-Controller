@@ -1,10 +1,8 @@
-using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core;
 using ThirdPersonController.Core.DI;
 using UnityEngine.Playables;
 
-public class ReadTimelineNotificationsToGun : BaseFeature
+public class ReadTimelineNotificationsToGun : BaseFeatureWithAwaiters
 {
     public string outputName ="Signal Track";
     private INotificationReceiver _receiver;
@@ -14,18 +12,22 @@ public class ReadTimelineNotificationsToGun : BaseFeature
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         _variables = variables as IFightingStateMachineVariables;
-        layer = (variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
+        layer = _variables.AnimationLayer;
     }
 
-    public override void OnEnterState()
+    public override async void OnEnterState()
     {
+        base.OnEnterState();
+        await layer.WaitForNextState();
+        if(!IsRunning) return;
         if(_receiver == null)
             _receiver = _variables.weaponInstance.GetComponent<INotificationReceiver>();
-        layer.Graph.SubscribeNotification(outputName,_receiver);
+        layer.CurrentGraph.SubscribeNotification(outputName,_receiver);
     }
 
     public override void OnExitState()
     {
-        layer.Graph.UnSubscribeNotification(outputName,_receiver);
+        base.OnExitState();
+        layer.CurrentGraph.UnSubscribeNotification(outputName,_receiver);
     }
 }

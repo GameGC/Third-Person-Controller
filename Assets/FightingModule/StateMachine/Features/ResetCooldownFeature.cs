@@ -7,7 +7,7 @@ using ThirdPersonController.Core.DI;
 [Serializable]
 public class ResetCooldownFeature : BaseFeature
 {
-    public float cooldownTimer = 3;
+    [ClipToSeconds] public float cooldownTimer = 3;
 
 
     private IFightingStateMachineVariables _variables;

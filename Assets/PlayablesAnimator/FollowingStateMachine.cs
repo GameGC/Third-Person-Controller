@@ -149,6 +149,7 @@ public abstract class FollowingStateMachine<T> :MonoBehaviour
         if(Application.isPlaying) return;
         _codeStateMachine ??= GetComponent<CodeStateMachine>();
 
+        if (_codeStateMachine == null) return;
         int sourceLength = _codeStateMachine.states.Length;
         int currentLength = States.Length;
 

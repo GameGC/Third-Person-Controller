@@ -7,7 +7,7 @@ public abstract class BaseHealthFeature
 {
     public abstract void CacheReferences(IHealthVariable variables,IReferenceResolver resolver);
 
-    public virtual void OnHit(in float previousHealth,in float newHealth, in RaycastHit hit,IDamageSender damageSender) { }
+    public virtual void OnHit(in float previousHealth,in float newHealth, in Vector3 hitPoint, in Vector3 hitDirection,IDamageSender damageSender) { }
 
     public Action<bool> SetActive;
     public Action Destroy;

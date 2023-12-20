@@ -9,6 +9,6 @@ public class HealthComponent : MonoBehaviour , IHealthVariable
     public virtual void OnHit(in RaycastHit hit,IDamageSender source)
     {
         Health = source.damage;
-        SurfaceSystem.instance.OnSurfaceHit(hit,source.HitType,defaultHitEffect);
+        SurfaceSystem.instance.OnSurfaceHit(hit, (int) source.HitType, defaultHitEffect);
     }
 }

@@ -20,5 +20,9 @@ public class DestroyWeaponAtHand : BaseFeature
     public override void OnEnterState()
     {
         Object.Destroy(_variables.weaponInstance,delay);
+        
+        //if weapon is 2 handed
+        if(_variables.secondaryWeaponInstance)
+            Object.Destroy(_variables.secondaryWeaponInstance,delay);
     }
 }

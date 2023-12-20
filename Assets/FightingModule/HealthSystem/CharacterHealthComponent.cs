@@ -90,17 +90,48 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
             }
         }
         Health -= damage;
-        SurfaceSystem.instance.OnSurfaceHit(hit,source.HitType,defaultHitEffect);
-        
-        foreach (var onHitFeature in OnHitFeatures) 
-            onHitFeature.OnHit(Health + damage, Health, hit, source);
+        SurfaceSystem.instance.OnSurfaceHit(hit,(int) source.HitType,defaultHitEffect);
 
-        if (Health < 0.01f)
-        {
-            foreach (var onDeathFeature in OnDeathFeatures) 
-                onDeathFeature.OnHit(Health + damage, Health, hit, source);
-        }
+        CallHitFeatures(Health + damage, Health, hit.point, hit.normal, source);
     }
+
+    public void OnHit(Vector3 hitPointOrigin,Collider hitCollider,Collider rootCollider, IDamageSender source)
+    {
+        float damage = source.damage;
+        
+        if (hitCollider != rootCollider && _hitBoxCount > 0)
+        {
+            for (int i = 0; i < _hitBoxCount; i++)
+            {
+                if (hitBoxes[i].Collider != hitCollider) continue;
+                damage *= hitBoxes[i].damageMultiplicator;
+                break;
+            }
+        }
+        
+        Health -= damage;
+
+        
+        var hitPointClosest = hitCollider.ClosestPoint(hitPointOrigin);
+        var hitNormal = (hitPointClosest - hitPointOrigin).normalized;
+        
+        
+        SurfaceSystem.instance.OnSurfaceHit(hitCollider,rootCollider,hitPointClosest,hitNormal,defaultHitEffect);
+
+        CallHitFeatures(Health + damage, Health, in hitPointClosest,in hitNormal, source);
+    }
+
+    private void CallHitFeatures(in float previousHealth,in float newHealth, in Vector3 hitPoint, in Vector3 hitDirection,IDamageSender damageSender)
+    {
+        foreach (var onHitFeature in OnHitFeatures) 
+            onHitFeature.OnHit(in previousHealth, in newHealth, in hitPoint,in hitDirection, damageSender);
+
+        if (newHealth > 0.01f) return;
+        foreach (var onDeathFeature in OnDeathFeatures) 
+            onDeathFeature.OnHit(in previousHealth, in newHealth, in hitPoint,in hitDirection, damageSender);
+    }
+    
+    
 
     private void Destroy() => Destroy(ReferenceResolver.gameObject);
     private void Destroy(float delay) => Destroy(ReferenceResolver.gameObject,delay);

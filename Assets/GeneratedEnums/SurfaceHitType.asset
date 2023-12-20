@@ -20,4 +20,5 @@ MonoBehaviour:
   - Foot
   - Jump
   - Bullet
+  - Hand
   previousName: SurfaceHitType

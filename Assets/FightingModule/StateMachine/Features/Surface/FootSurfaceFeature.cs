@@ -50,7 +50,7 @@ public class FootSurfaceFeature : StepDecalFeature
         if (_inputReader.isJump)
         {
             var hitReaction =
-                SurfaceSystem.instance.GetSurfaceHitEffect(moveVariables.GroundHit, SurfaceHitType.Jump, defaultJump);
+                SurfaceSystem.instance.GetSurfaceHitEffect(moveVariables.GroundHit, (int) SurfaceHitType.Jump, defaultJump);
             
             SetBothCountersTo0();
 
@@ -64,7 +64,7 @@ public class FootSurfaceFeature : StepDecalFeature
             if (_inputReader.moveInputMagnitude > 0)
             {
                 var hitReaction =
-                    SurfaceSystem.instance.GetSurfaceHitEffect(moveVariables.GroundHit, SurfaceHitType.Foot, defaultEffect);
+                    SurfaceSystem.instance.GetSurfaceHitEffect(moveVariables.GroundHit, (int) SurfaceHitType.Foot, defaultEffect);
                 
                 Object audio = hitReaction.Audio ? hitReaction.Audio : defaultEffect.Audio;
                 PlaySound(audio, _inputReader.moveInputMagnitude * movementPitchMultiplier);

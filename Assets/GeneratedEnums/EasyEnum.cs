@@ -64,7 +64,6 @@ internal class EasyEnum : ScriptableObject
 
             result = $"{result},\n{extraIndent+GetWhiteSpace(defaultLength)}" +
                      $"{enumName +GetWhiteSpace(maxChars-enumName.Length) + (hasNumbers ? $" = {index}" : "")}";
-            Debug.Log(result);
             if (flags)
                index *= 2;
             else
@@ -98,7 +97,7 @@ internal class EasyEnum : ScriptableObject
 }
 
 #endif
-
+/*
 public class EasyEnumRuntime
 {
    public string[] enumNames;
@@ -150,4 +149,4 @@ public class EasyEnumRuntimeRef
    {
       return new EasyEnumRuntimeRef(a.enum_, a.GetFlagsIndex() & b.GetFlagsIndex());
    }
-}
+}*/

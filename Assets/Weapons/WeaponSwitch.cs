@@ -106,12 +106,13 @@ public class WeaponSwitch : MonoBehaviour
 
    public void SwitchImmediateEditor(int i)
    {
-      DestroyImmediate(currentStateMachine.gameObject);
+      if(currentStateMachine)
+         DestroyImmediate(currentStateMachine.gameObject);
       
       //assign new Animations      
       var stateMachineParent = transform.Find("StateMachines");
-      var instance = Instantiate(weapons[i].stateMachine, stateMachineParent);
-      instance.GetComponent<CodeStateMachine>().ReferenceResolver = GetComponent<ReferenceResolver>();
+      var instance = PrefabUtility.InstantiatePrefab(weapons[i].stateMachine, stateMachineParent) as CodeStateMachine;
+      instance.ReferenceResolver = GetComponent<ReferenceResolver>();
 
       GetComponent<HybridAnimator>().stateMachines[0] = instance.GetComponent<AnimationLayer>();
 
@@ -119,13 +120,13 @@ public class WeaponSwitch : MonoBehaviour
       var builder = GetComponent<RigBuilder>();
 
       // remove previous rig
-      if(builder.layers.Count>0)
+      if(builder.layers.Count>0 && builder.layers[0].rig)
          DestroyImmediate(builder.layers[0].rig.gameObject);
       
       //assign new Rig
       if (weapons[i].rigLayer)
       {
-         var rig = Instantiate(weapons[i].rigLayer, stateMachineParent);
+         var rig = PrefabUtility.InstantiatePrefab(weapons[i].rigLayer, stateMachineParent) as Rig;
          rig.name = weapons[i].rigLayer.name;
 
          builder.Clear();

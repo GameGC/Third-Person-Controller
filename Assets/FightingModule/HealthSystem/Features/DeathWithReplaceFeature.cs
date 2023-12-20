@@ -21,7 +21,7 @@ public class DeathWithReplaceFeature : BaseHealthFeature
         _transform = resolver.GetComponent<Transform>();
     }
 
-    public override void OnHit(in float previousHealth, in float newHealth, in RaycastHit hit, IDamageSender damageSender)
+    public override void OnHit(in float previousHealth, in float newHealth, in Vector3 hitPoint, in Vector3 hitNormal, IDamageSender damageSender)
     {
         var instance = Object.Instantiate(deathPrefab, _transform.position, _transform.rotation);
         foreach (var value in BoneValues)

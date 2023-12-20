@@ -26,8 +26,9 @@ namespace GameGC.Timeline
         public override void OnBehaviourPlay(Playable playable, FrameData info)
         {
             _component = info.output.GetUserData() as Animation;
-        
-            Debug.Log(info.evaluationType);
+            if (!_component)
+                _component = info.output.GetReferenceObject() as Animation;
+                
             if (ValidateCanPlay(info))
             {
                 if (!_component.enabled)
@@ -60,6 +61,28 @@ namespace GameGC.Timeline
         }
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
+            if (!_component && Application.isPlaying)
+            {
+                _component = info.output.GetUserData() as Animation;
+                if (!_component)
+                    _component = info.output.GetReferenceObject() as Animation;
+                
+                if(!_component) return;
+                
+                if (easeInDuration > 0)
+                {
+                    if(isBlendIn)
+                        _component.Blend(clip.name,1,easeInDuration);
+                    else 
+                        _component.CrossFade(clip.name,easeInDuration);
+                }
+                else
+                {
+                    _component.Play(clip.name);
+                }
+                _component[clip.name].time = (float) playable.GetTime();
+            }
+
 #if UNITY_EDITOR
             if (!ValidateCanPlay(info))
             {

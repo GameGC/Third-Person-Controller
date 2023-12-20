@@ -1,0 +1,17 @@
+{
+    "name": "SurfaceSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b3ef0eb44fc56495e81d17c21b33b513",
+        "GUID:67484b43d2f174f13a0f76bd25d17ee6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

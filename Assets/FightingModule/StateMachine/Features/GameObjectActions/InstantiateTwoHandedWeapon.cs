@@ -1,0 +1,45 @@
+using System;
+using ThirdPersonController.Code.AnimatedStateMachine;
+using ThirdPersonController.Core;
+using ThirdPersonController.Core.DI;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+[Serializable]
+public class InstantiateTwoHandedWeapon : BaseFeature
+{
+    [SerializeField] private GameObject leftPrefab;
+    [SerializeField] private GameObject rightPrefab;
+    
+    private Transform _leftHand;
+    private Transform _rightHand;
+
+    
+    private IFightingStateMachineVariables _variables;
+    
+    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    {
+        var animator = resolver.GetComponent<Animator>();
+        _leftHand = animator.GetBoneTransform(HumanBodyBones.LeftHand);
+        _rightHand = animator.GetBoneTransform(HumanBodyBones.RightHand);
+        
+        _variables = variables as IFightingStateMachineVariables;
+    }
+
+    public override void OnEnterState()
+    {
+        IWeaponInfo info;
+        
+        var instance = Object.Instantiate(leftPrefab, _leftHand,false);
+        _variables.secondaryWeaponInstance = instance;
+        
+        if (instance.TryGetComponent(out info)) 
+            info.CacheReferences(_variables);
+        
+        instance = Object.Instantiate(rightPrefab, _rightHand,false);
+        _variables.weaponInstance = instance;
+        
+        if (instance.TryGetComponent(out info)) 
+            info.CacheReferences(_variables);
+    }
+}

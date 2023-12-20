@@ -11,19 +11,24 @@ using Object = UnityEngine.Object;
 
 public class AnimationLayer : FollowingStateMachine<Object>
 {
+    public TimelineGraph CurrentGraph => _graphs[CurrentStateIndex];
+    
     public float weight;
     public AvatarMask avatarMask;
     public bool isAdditive;
 
-    // [field:SerializeField][ValidateBaseType(typeof(AnimationClip),typeof(AnimationClip))]
-    // public override Object[] States { get; protected set; }
-    
-    public AnimationTransition[] customTransitionTimes;
-    public float defaultTransitionTime = 0.02f;
+    [SerializeField] private AnimationTransition[] customTransitionTimes;
+    [SerializeField] private float defaultTransitionTime = 0.02f;
 
 
     private AnimationMixerPlayable _mixerPlayable;
+    private Coroutine _tempAsyncTransition;
+    
+    private int _tempPrevStateInd = -1;
+    private int _tempCurrentStateInd = -1;
 
+    private TimelineGraph[] _graphs;
+    
     protected override void Awake()
     {
         base.Awake();
@@ -33,7 +38,10 @@ public class AnimationLayer : FollowingStateMachine<Object>
     public AnimationMixerPlayable ConstructPlayable(PlayableGraph graph,GameObject root)
     {
         int length = States.Length;
+        
+        _graphs = new TimelineGraph[length];
         _mixerPlayable = AnimationMixerPlayable.Create(graph,length);
+        
         for (int i = 0; i < length; i++)
         {
             Playable playable = default;
@@ -57,10 +65,10 @@ public class AnimationLayer : FollowingStateMachine<Object>
                 }
                 case TimelineAsset asset:
                 {
-                    playable = asset.CreatePlayable(graph, root);;
-                    Graph = new TimelineGraph();
-                    Graph.Create(asset, root, ref playable);
-                    //playable = asset.CreatePlayable(graph, root);
+                    playable = asset.CreatePlayable(graph, root);
+                    var newGraph = new TimelineGraph();
+                    newGraph.Create(asset, root, ref playable);
+                    _graphs[i] = newGraph;
                     break;
                 }
                 case AnimationValue animationValue: playable = animationValue.GetPlayable(graph, root);          break;
@@ -72,11 +80,10 @@ public class AnimationLayer : FollowingStateMachine<Object>
 
         return _mixerPlayable;
     }
-
-    public TimelineGraph Graph;
+    
     private void OnStateChanged()
     {
-        Graph?.Stop();
+        CurrentGraph?.Stop();
 
 
         var prevIndex = CurrentStateIndex;
@@ -90,10 +97,10 @@ public class AnimationLayer : FollowingStateMachine<Object>
             SyncedTransition(prevIndex,newIndex);
         else
         {
-            if(tempPrevStateInd> -1)
-                _mixerPlayable.SetInputWeight(tempPrevStateInd,0);
-            if(tempCurrentStateInd> -1)
-                _mixerPlayable.SetInputWeight(tempCurrentStateInd,1);
+            if(_tempPrevStateInd> -1)
+                _mixerPlayable.SetInputWeight(_tempPrevStateInd,0);
+            if(_tempCurrentStateInd> -1)
+                _mixerPlayable.SetInputWeight(_tempCurrentStateInd,1);
             
             if(_tempAsyncTransition!=null)
                 StopCoroutine(_tempAsyncTransition);
@@ -101,9 +108,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
         }
     }
 
-    private Coroutine _tempAsyncTransition;
-    private int tempPrevStateInd = -1;
-    private int tempCurrentStateInd = -1;
+   
 
     #region New Awaiters
 
@@ -189,8 +194,8 @@ public class AnimationLayer : FollowingStateMachine<Object>
     }
     protected virtual IEnumerator AsyncTransition(int previousStateIndex,int newStateIndex)
     {
-        tempPrevStateInd = previousStateIndex;
-        tempCurrentStateInd = newStateIndex;
+        _tempPrevStateInd = previousStateIndex;
+        _tempCurrentStateInd = newStateIndex;
 
         try
         {
@@ -206,7 +211,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
                 if (!playable.IsNull() && playable.IsValid())
                     playable.SetTime(0);
 
-                Graph.Play();
+                CurrentGraph.Play();
             }
         }
         catch (Exception e)
@@ -237,8 +242,8 @@ public class AnimationLayer : FollowingStateMachine<Object>
         _mixerPlayable.SetInputWeight(newStateIndex,1);
         TryExecuteAnimationValueSetWeight(newStateIndex, 1);
         
-        tempPrevStateInd = -1;
-        tempCurrentStateInd = -1;
+        _tempPrevStateInd = -1;
+        _tempCurrentStateInd = -1;
     }
 
 

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Fighting.Pushing;
+using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -19,7 +19,7 @@ public abstract class BaseRigFeature : BaseFeatureWithAwaiters
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         //if (!string.IsNullOrEmpty(waitForStateWeight))
-        _animationLayer = (variables as FightingStateMachineVariables).GetComponent<AnimationLayer>();
+        _animationLayer = (variables as IFightingStateMachineVariables).AnimationLayer;
 
         _targetLayer = resolver.GetComponent<RigBuilder>().layers.
             FirstOrDefault(l => l.name == layerName);

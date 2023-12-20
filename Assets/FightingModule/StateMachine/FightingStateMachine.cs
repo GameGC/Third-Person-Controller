@@ -18,8 +18,10 @@ public class FightingStateMachine : CodeStateMachine
       var variables = Variables as IFightingStateMachineVariables;
       variables.RequestedHolsterWeapon = true;
       
-      await GetComponent<AnimationLayer>().WaitForLastStateFinish();
+      await variables.AnimationLayer.WaitForLastStateFinish();
    }
+
+#if UNITY_EDITOR
    
    [ContextMenu("ConvertToFighting")]
    public void ConvertToFighting()
@@ -40,10 +42,9 @@ public class FightingStateMachine : CodeStateMachine
       var componentIndex = Array.IndexOf(allComponents, sourceScript);
       if(componentIndex< allComponents.Length)
          for (int i = 0; i < allComponents.Length  -1 -componentIndex; i++)
-         {
             ComponentUtility.MoveComponentUp(fighting);
-         }
-      
+
       DestroyImmediate(sourceScript,true);
    }
+#endif
 }
