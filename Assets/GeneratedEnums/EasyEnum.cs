@@ -1,10 +1,10 @@
-using System;
+#if UNITY_EDITOR
+
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 
 [CreateAssetMenu(menuName = "EasyEnum")]
 internal class EasyEnum : ScriptableObject
@@ -96,7 +96,6 @@ internal class EasyEnum : ScriptableObject
    }
 }
 
-#endif
 /*
 public class EasyEnumRuntime
 {
@@ -150,3 +149,5 @@ public class EasyEnumRuntimeRef
       return new EasyEnumRuntimeRef(a.enum_, a.GetFlagsIndex() & b.GetFlagsIndex());
    }
 }*/
+
+#endif

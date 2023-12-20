@@ -35,6 +35,15 @@
       },
       "hash": "3bfb5aad68980e86cc6a98a01f5ca5d79a86e67f"
     },
+    "com.gamegc.timeline.legacy-animation": {
+      "version": "https://github.com/GameGC/TimelineLegacyAnimation.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.timeline": "1.7.5"
+      },
+      "hash": "ab81c9a6ef3ee14025a439205c66599c74bdbca3"
+    },
     "com.singularitygroup.hotreload": {
       "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.9",
       "depth": 0,
@@ -137,8 +146,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.7.1",
-      "depth": 0,
+      "version": "1.7.5",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.director": "1.0.0",
