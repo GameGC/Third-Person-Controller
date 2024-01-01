@@ -255,6 +255,7 @@ public class FightingStateMachineEditor : Editor
     
     private void UpdateVisualSelection()
     {
+        if(_wrapperRef == null || _wrapperRef.m_ReorderableList == null) return;
         _wrapperRef.m_ReorderableList.Select(ArrayUtility.FindIndex(target.states,s=>s == target.CurrentState));
     }
 }

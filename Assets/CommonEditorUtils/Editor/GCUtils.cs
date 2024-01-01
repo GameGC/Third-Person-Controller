@@ -3,10 +3,125 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor
 {
+    public static class GCUIElementsUtils
+    {
+        private static PropertyInfo inspectorModeField = typeof(UnityEditor.Editor).GetProperty("inspectorMode",
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        
+        /// <summary>
+        ///        <para>
+        /// Adds default inspector property fields under a container VisualElement
+        /// </para>
+        ///      </summary>
+        /// <param name="container">The parent VisualElement</param>
+        /// <param name="serializedObject">The SerializedObject to inspect</param>
+        /// <param name="editor">The editor currently used</param>
+        public static void FillDefaultInspectorWithExclude(
+            VisualElement container,
+            SerializedObject serializedObject,
+            UnityEditor.Editor editor,params string[] excludeNames)
+        {
+            if (serializedObject == null)
+                return;
+            bool isPartOfPrefabInstance = (UnityEngine.Object) editor != (UnityEngine.Object) null &&
+                                          IsAnyMonoBehaviourTargetPartOfPrefabInstance(editor);
+            SerializedProperty iterator = serializedObject.GetIterator();
+            if (iterator.NextVisible(true))
+            {
+                
+                var inspectorMode = (InspectorMode) inspectorModeField.GetValue(editor);
+
+                
+                do
+                {
+                    if(Array.IndexOf(excludeNames,iterator.name) > -1) continue;
+                    
+                    PropertyField propertyField = new PropertyField(iterator)
+                    {
+                        name = "PropertyField:" + iterator.propertyPath
+                    };
+                    PropertyField child = propertyField;
+                    
+                    if (iterator.propertyPath == "m_Script" &&
+                        (!((UnityEngine.Object) editor != (UnityEngine.Object) null) ||
+                         inspectorMode != InspectorMode.Debug &&
+                         inspectorMode != InspectorMode.DebugInternal) &&
+                        ((serializedObject.targetObject != (UnityEngine.Object) null
+                             ? 1
+                             : (iterator.objectReferenceValue != (UnityEngine.Object) null ? 1 : 0)) |
+                         (isPartOfPrefabInstance ? 1 : 0)) != 0)
+                        
+                        
+                        
+                        child.SetEnabled(false);
+                    container.Add((VisualElement) child);
+                }
+                while (iterator.NextVisible(false));
+            }
+        }
+        
+        public static void FillDefaultInspectorWithIncludeByCount(
+            VisualElement container,
+            SerializedObject serializedObject,
+            UnityEditor.Editor editor,int count)
+        {
+            if (serializedObject == null)
+                return;
+            bool isPartOfPrefabInstance = (UnityEngine.Object) editor != (UnityEngine.Object) null &&
+                                          IsAnyMonoBehaviourTargetPartOfPrefabInstance(editor);
+            SerializedProperty iterator = serializedObject.GetIterator();
+            if (iterator.NextVisible(true))
+            {
+                
+                var inspectorMode = (InspectorMode) inspectorModeField.GetValue(editor);
+
+                int i = 0;
+                do
+                {
+                    PropertyField propertyField = new PropertyField(iterator)
+                    {
+                        name = "PropertyField:" + iterator.propertyPath
+                    };
+                    PropertyField child = propertyField;
+                    
+                    if (iterator.propertyPath == "m_Script" &&
+                        (!((UnityEngine.Object) editor != (UnityEngine.Object) null) ||
+                         inspectorMode != InspectorMode.Debug &&
+                         inspectorMode != InspectorMode.DebugInternal) &&
+                        ((serializedObject.targetObject != (UnityEngine.Object) null
+                             ? 1
+                             : (iterator.objectReferenceValue != (UnityEngine.Object) null ? 1 : 0)) |
+                         (isPartOfPrefabInstance ? 1 : 0)) != 0)
+                        
+                        
+                        
+                        child.SetEnabled(false);
+                    container.Add((VisualElement) child);
+                    i++;
+                }
+                while (iterator.NextVisible(false) && i < count);
+            }
+        }
+
+        
+        private static bool IsAnyMonoBehaviourTargetPartOfPrefabInstance(UnityEditor.Editor editor)
+        {
+            if (!(editor.target is MonoBehaviour))
+                return false;
+            foreach (UnityEngine.Object target in editor.targets)
+            {
+                if (PrefabUtility.IsPartOfNonAssetPrefabInstance(target))
+                    return true;
+            }
+            return false;
+        }
+    }
     public static class GCUtils
     {
         public static int CountChildProperties(this SerializedProperty property)

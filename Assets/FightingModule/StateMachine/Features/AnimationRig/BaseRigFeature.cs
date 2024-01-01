@@ -7,7 +7,7 @@ using UnityEngine.Animations.Rigging;
 public abstract class BaseRigFeature : BaseFeatureWithAwaiters
 {
     //[SerializeField] protected string waitForStateWeight;
-    [SerializeField] private string layerName;
+    [SerializeField] private RigTypes layerType = RigTypes.Fighting;
     [SerializeField] private bool returnPreviousValueOnExit = true;
     
     protected RigLayer _targetLayer;
@@ -19,10 +19,12 @@ public abstract class BaseRigFeature : BaseFeatureWithAwaiters
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         //if (!string.IsNullOrEmpty(waitForStateWeight))
-        _animationLayer = (variables as IFightingStateMachineVariables).AnimationLayer;
+        if (variables is IFightingStateMachineVariables fighting)
+            _animationLayer = fighting.AnimationLayer;
+        else if(variables is ICollectStateMachineVariables collect) 
+            _animationLayer = collect.AnimationLayer;
 
-        _targetLayer = resolver.GetComponent<RigBuilder>().layers.
-            FirstOrDefault(l => l.name == layerName);
+        _targetLayer = resolver.GetComponent<RigBuilder>().layers[(int) layerType];
     }
 
     public override void OnEnterState()

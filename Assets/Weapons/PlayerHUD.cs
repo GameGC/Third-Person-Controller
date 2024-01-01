@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 
@@ -31,15 +32,18 @@ public class PlayerHUD : MonoBehaviour
         weaponDisplayParent.gameObject.SetActive(!active);
     }
 
-    public void DisplayAllWeapon(WeaponData[] weaponDatas,IFightingStateMachineVariables variables)
+    public void DisplayAllWeapon(List<BaseItemData> weaponDatas,IFightingStateMachineVariables variables)
     {
-        _itemDisplays = new WeaponItemDisplay[weaponDatas.Length];
+        _itemDisplays = new WeaponItemDisplay[weaponDatas.Count];
         _variables = variables;
-        for (int i = 0; i < weaponDatas.Length; i++)
+        for (int i = 0; i < weaponDatas.Count; i++)
         {
-            _itemDisplays[i] = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
-            _itemDisplays[i].Init(weaponDatas[i].icon);
-            _itemDisplays[i].SetCounteCounterActive(false);
+            if (weaponDatas[i] is WeaponData)
+            {
+                _itemDisplays[i] = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
+                _itemDisplays[i].Init(weaponDatas[i].icon);
+                _itemDisplays[i].SetCounteCounterActive(false);
+            }
         }
         
         _itemDisplays[0].SetSelection(true);

@@ -1,8 +1,10 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace Weapons
 {
-    public class WeaponOffset : MonoBehaviour
+    [ToolBarDisplayGroup("SpawnOffset")]
+    public class WeaponOffset : BaseWeaponExtension
     {
         public Vector3 localPosition;
         [QuaternionAsEuler] public Quaternion localRotation;
@@ -26,5 +28,26 @@ namespace Weapons
         [ContextMenu("PasteVariables")]
         public void PasteVariables() => transform.SetLocalPositionAndRotation(localPosition,localRotation);
 #endif
+    }
+
+    [CustomEditor(typeof(WeaponOffset))]
+    public class WeaponOffsetEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            GUI.enabled = false;
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
+            GUI.enabled = true;
+
+            using (new GUILayout.VerticalScope(GUI.skin.box))
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("localPosition"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("localRotation"));
+            }
+            GUILayout.Space(9f);
+            
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("applyWhen"));
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 }

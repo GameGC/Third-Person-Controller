@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using FuzzySearch;
-using ThirdPersonController.Core;
 using TypeNamespaceTree;
 using UnityEditor;
 using UnityEngine;

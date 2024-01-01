@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ThirdPersonController.Input
 {
@@ -29,5 +32,9 @@ namespace ThirdPersonController.Input
         
         public bool IsAttack { get; set; }
         public bool IsAim  { get; set; }
+
+        public delegate Task MoveToPointDelegate(Vector3 point);
+        
+        public MoveToPointDelegate MoveToPoint { get; set; }
     }
 }

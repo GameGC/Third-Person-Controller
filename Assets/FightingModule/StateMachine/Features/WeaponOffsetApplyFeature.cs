@@ -25,7 +25,7 @@ namespace Weapons
         {
             base.OnEnterState();
             targetOffset ??= 
-                _variables.weaponInstance.GetComponents<WeaponOffset>().First(o => o.applyWhen == applyWhenName);
+                _variables.weaponInstance.GetComponents<WeaponOffset>().FirstOrDefault(o => o.applyWhen == applyWhenName);
             if (waitForStateWeight1)
             {
                 await _animationLayer.WaitForNextState();

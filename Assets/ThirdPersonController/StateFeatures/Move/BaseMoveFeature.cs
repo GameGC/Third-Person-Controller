@@ -60,5 +60,10 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
         {
             _animator.SetFloat(InputMagnitude, stopMove ? 0f : Input.moveInputMagnitude, animationSmooth, Time.deltaTime);
         }
+        
+        protected void UpdateAnimation(bool stopMove,float moveInput)
+        {
+            _animator.SetFloat(InputMagnitude, stopMove ? 0f : moveInput, animationSmooth, Time.deltaTime);
+        }
     }
 }

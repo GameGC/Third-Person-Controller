@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506062242848116311}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1506062242848116306
 MonoBehaviour:
@@ -501,7 +501,7 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 11513611d307944faa1d1bf5b844114a, type: 2}
   - {fileID: 11400000, guid: 264dcb31e6563403eb74b3367a6ea768, type: 2}
   - {fileID: 100084, guid: da4d8e56ecf9c7244b1936a6ebe1fbe0, type: 3}
-  statesNames:
+  EDITOR_statesNames:
   - GetWeapon
   - Idle
   - Aim
@@ -511,20 +511,6 @@ MonoBehaviour:
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  states:
-    _keyValuePairs:
-    - Key: GetWeapon
-      Value: {fileID: 7400000, guid: 513685322f0f7c748be01524e2e82194, type: 3}
-    - Key: Idle
-      Value: {fileID: 7400000, guid: c948fdced0617b742b61e92323d561d9, type: 3}
-    - Key: Aim
-      Value: {fileID: 7400000, guid: 3b26f2c6dbc12468f80ba2d5c82c28f6, type: 2}
-    - Key: Shoot
-      Value: {fileID: 7400000, guid: 11513611d307944faa1d1bf5b844114a, type: 2}
-    - Key: Reload
-      Value: {fileID: 11400000, guid: 264dcb31e6563403eb74b3367a6ea768, type: 2}
-    - Key: PutWeaponBackFromAim
-      Value: {fileID: 100084, guid: da4d8e56ecf9c7244b1936a6ebe1fbe0, type: 3}
   customTransitionTimes:
   - stateFromIndex: 2
     stateToIndex: 1

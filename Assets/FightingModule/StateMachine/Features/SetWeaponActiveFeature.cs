@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core;
 using ThirdPersonController.Core.DI;
-using UnityEngine;
 
 public class SetWeaponActiveFeature : BaseFeature
 {

@@ -102,6 +102,8 @@ namespace ThirdPersonController.MovementStateMachine.Features
                     hit1 = _variables.GroundHit;
             }
             
+            if(!hit0.collider || !hit1.collider) return;
+            
             float distance0 = hit0.collider ? hit0.point.y + _leftFeetBottomHeight - _leftFoot.position.y : 0;
             float distance1 = hit1.collider ? hit1.point.y + _rightFeetBottomHeight - _rightFoot.position.y : 0;
 

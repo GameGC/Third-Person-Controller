@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -27,6 +28,9 @@ public class FollowingStateMachineEditor : Editor
         if(isProperty)
             _list.elementHeightCallback = index => EditorGUI.GetPropertyHeight(property.GetArrayElementAtIndex(index))+2;
     }
+
+    private void OnValidate() => OnEnable();
+
     private void DrawElementCallback(Rect rect, int index, bool active, bool focused)
     {
         float padding = rect.height > 0 ? 2 : 0;
@@ -47,8 +51,18 @@ public class FollowingStateMachineEditor : Editor
             _list.serializedProperty.serializedObject.ApplyModifiedProperties();
         }
     }
-    
-    
+
+    //public override VisualElement CreateInspectorGUI()
+    //{
+    //    var root = new VisualElement();
+    //    GCUIElementsUtils.FillDefaultInspectorWithIncludeByCount(root,serializedObject,this,3);
+    //    //var t2 = new MultiColumnListView();
+    //    var list = (VisualElement)new PropertyField(serializedObject.FindProperty("States")) as ListView;
+    //    //list.bindItem += (element, i) => 
+    //    return root;
+    //}
+
+
     protected void DrawStateList()
     {
         _list.DoLayoutList();
@@ -58,5 +72,6 @@ public class FollowingStateMachineEditor : Editor
     {
         DrawStateList();
         DrawPropertiesExcluding(serializedObject,StatesName,"m_Script");
+        serializedObject.ApplyModifiedProperties();
     }
 }

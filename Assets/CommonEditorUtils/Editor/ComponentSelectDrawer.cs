@@ -11,6 +11,7 @@ using static ThirdPersonController.Core.DI.CustomEditor.Editor.ComponentSelectDr
 
 namespace ThirdPersonController.Core.DI.CustomEditor.Editor
 {
+    
     [CustomPropertyDrawer(typeof(ComponentSelectAttribute))]
     internal sealed class ComponentSelectDrawer : PropertyDrawerWithCustomData<DataContainer>
     {
@@ -44,7 +45,7 @@ namespace ThirdPersonController.Core.DI.CustomEditor.Editor
             
                 EditorGUI.BeginChangeCheck();
                 position.width /= 2;
-                EditorGUI.PropertyField(position, property, label);
+                EditorGUI.PropertyField(position, property,GUIContent.none);
                 if (EditorGUI.EndChangeCheck())
                 {
                     EditorGUIUtility.labelWidth *= 2;

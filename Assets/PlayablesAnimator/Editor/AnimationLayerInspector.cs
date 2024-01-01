@@ -9,7 +9,7 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
 
     private readonly string[] ignorelist = new[]
     {
-        "m_Script",nameof(AnimationLayer.weight),nameof(AnimationLayer.avatarMask),nameof(AnimationLayer.isAdditive),
+        "m_Script","weight","avatarMask","isAdditive",
         nameof(AnimationLayer.States), nameof(AnimationLayer.EDITOR_statesNames)
     };
 
@@ -22,26 +22,26 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
     {
         base.OnEnable();
         target = base.target as AnimationLayer;
-        prevState = target.EDITOR_CurrentStateIndex;
+        prevState = target.CurrentStateIndex;
 
-        weight = serializedObject.FindProperty(nameof(AnimationLayer.weight));
-        avatarMask = serializedObject.FindProperty(nameof(AnimationLayer.avatarMask));
-        isAdditive = serializedObject.FindProperty(nameof(AnimationLayer.isAdditive));
+        weight = serializedObject.FindProperty("weight");
+        avatarMask = serializedObject.FindProperty("avatarMask");
+        isAdditive = serializedObject.FindProperty("isAdditive");
     }
 
     public override bool RequiresConstantRepaint()
     {
         if (Application.isPlaying)
-            if (prevState != target.EDITOR_CurrentStateIndex)
+            if (prevState != target.CurrentStateIndex)
                 return true;
         return base.RequiresConstantRepaint();
     }
 
     public override void OnInspectorGUI()
     {
-        if (prevState != target.EDITOR_CurrentStateIndex)
+        if (prevState != target.CurrentStateIndex)
         {
-            prevState = target.EDITOR_CurrentStateIndex;
+            prevState = target.CurrentStateIndex;
             UpdateVisualSelection();
         }
 
@@ -52,6 +52,7 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
         base.DrawStateList();
         
         DrawPropertiesExcluding(serializedObject,ignorelist);
+        serializedObject.ApplyModifiedProperties();
     }
 
     private void UpdateVisualSelection()

@@ -2,21 +2,60 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using DefaultNamespace;
+using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using UnityEngine.Serialization;
 using UnityEngine.Timeline;
 using Object = UnityEngine.Object;
 
+[ExecuteAlways]
 public class AnimationLayer : FollowingStateMachine<Object>
 {
+    #region Propertys
     public TimelineGraph CurrentGraph => _graphs[CurrentStateIndex];
-    
-    public float weight;
-    public AvatarMask avatarMask;
-    public bool isAdditive;
 
+    public float Weight
+    {
+        get => weight;
+        set
+        {
+            weight = value;
+            OnWeightChanged.Invoke(value);
+        }
+    }
+    public AvatarMask AvatarMask
+    {
+        get => avatarMask;
+        set
+        {
+            avatarMask = value;
+            OnMaskChanged.Invoke(value);
+        }
+    }
+    public bool IsAdditive
+    {
+        get => isAdditive;
+        set
+        {
+            isAdditive = value;
+            OnAdditiveChanged.Invoke(value);
+        }
+    }
+    #endregion
+
+    internal event Action<float> OnWeightChanged;
+    internal event Action<AvatarMask> OnMaskChanged;
+    internal event Action<bool> OnAdditiveChanged;
+
+    [SerializeField] private float weight;
+    [SerializeField] private AvatarMask avatarMask;
+    [SerializeField] private bool isAdditive;
+
+    
+    
     [SerializeField] private AnimationTransition[] customTransitionTimes;
     [SerializeField] private float defaultTransitionTime = 0.02f;
 
@@ -31,10 +70,18 @@ public class AnimationLayer : FollowingStateMachine<Object>
     
     protected override void Awake()
     {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            _codeStateMachine ??= GetComponent<CodeStateMachine>();
+            _codeStateMachine.EDITOR_OnValidate += OnValidate;
+            return;
+        }
+#endif
         base.Awake();
         _codeStateMachine.onStateChanged.AddListener(OnStateChanged);
     }
-
+    
     public AnimationMixerPlayable ConstructPlayable(PlayableGraph graph,GameObject root)
     {
         int length = States.Length;
@@ -80,7 +127,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
 
         return _mixerPlayable;
     }
-    
+
     private void OnStateChanged()
     {
         CurrentGraph?.Stop();
@@ -109,7 +156,6 @@ public class AnimationLayer : FollowingStateMachine<Object>
     }
 
    
-
     #region New Awaiters
 
     public async Task WaitForNextState()
@@ -133,16 +179,44 @@ public class AnimationLayer : FollowingStateMachine<Object>
     public async Task WaitForFirstStateFinish() => await WaitForAnimationFinish(0);
     public async Task WaitForLastStateFinish() => await WaitForAnimationFinish(States.Length - 1);
 
-    public async Task WaitForAnimationFinish(int stateIndex)
+    public async Task WaitForAnimationFinish(int stateIndex,float percent = 1)
     {
         if (_mixerPlayable.GetInputWeight(stateIndex) < 1)
             await WaitForStateWeight1(stateIndex);
         float timeScale = 1 / Time.timeScale;
         switch (States[stateIndex])
         {
-            case AnimationClip clip: await Task.Delay((int) (clip.length * 1000 * timeScale)); break;
-            case TimelineAsset asset: await Task.Delay((int) (asset.duration * 1000 * timeScale)); break;
+            case AnimationClip clip: await Task.Delay((int) (clip.length * 1000 * percent * timeScale)); break;
+            case TimelineAsset asset: await Task.Delay((int) (asset.duration * 1000 * percent * timeScale)); break;
+            case AnimationValue value: await Task.Delay((int) (value.MaxLength * 1000 * percent * timeScale)); break;
         }
+    }
+
+    
+    private void GetAnimationValuePlayableRemainingTime(Playable playable,out float time)
+    {
+        for (int i = 0; i < playable.GetInputCount(); i++)
+        {
+            if (playable.GetInputWeight(i) > 0.5f)
+            {
+                var currentPlayble = playable.GetInput(i);
+                Debug.Log(currentPlayble.GetLeadTime());
+                Debug.Log(currentPlayble.GetPreviousTime());
+
+                float duration = (float) currentPlayble.GetDuration();
+                if (duration == Mathf.Infinity)
+                {
+                    GetAnimationValuePlayableRemainingTime(currentPlayble, out time);
+                    return;
+                }
+                    
+                float currentTime = (float) currentPlayble.GetTime();
+                time = duration - currentTime;
+                return;
+            }
+        }
+
+        time = 0;
     }
     
     #endregion
@@ -252,6 +326,19 @@ public class AnimationLayer : FollowingStateMachine<Object>
         if (States[index] is AnimationValue value) 
             value.OnSetWeight(_mixerPlayable.GetInput(index), weight);
     }
+    
+    public void SetCustomVariables<T0>(int index, T0 arg0) => 
+        ((AnimationValue) States[index]).SetCustomVariables(_mixerPlayable.GetInput(index),arg0);
+
+    public void SetCustomVariables<T0, T1>(int index, T0 arg0, T1 arg1) => 
+        ((AnimationValue) States[index]).SetCustomVariables(_mixerPlayable.GetInput(index),arg0,arg1);
+
+    public void SetCustomVariables<T0, T1, T2>(int index, T0 arg0, T1 arg1, T2 arg2) => 
+        ((AnimationValue) States[index]).SetCustomVariables(_mixerPlayable.GetInput(index),arg0,arg1,arg2);
+
+    public void SetCustomVariables<T0, T1, T2, T3>(int index, T0 arg0, T1 arg1, T2 arg2, T3 arg3) =>
+        ((AnimationValue) States[index]).SetCustomVariables(_mixerPlayable.GetInput(index),arg0,arg1,arg2,arg3);
+    
 
 #if UNITY_EDITOR
     protected override void OnValidate()
@@ -278,7 +365,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
         var new_ = gameObject.AddComponent<ExtendedAnimationLayer>();
         new_.States = States;
         new_.avatarMask = avatarMask;
-        new_.weight = weight;
+        new_.Weight = Weight;
         new_.defaultTransitionTime = defaultTransitionTime;
         new_.isAdditive = isAdditive;
     }

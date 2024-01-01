@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Reflection;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.CodeStateMachine;
 #if UNITY_EDITOR
@@ -22,7 +23,7 @@ namespace ThirdPersonController.Core.StateMachine
 #else
     [SerializeField] private
 #endif
-            State[] states;
+            State[] states = Array.Empty<State>();
         
         public State CurrentState
         {
@@ -60,6 +61,8 @@ namespace ThirdPersonController.Core.StateMachine
         
 
 #if UNITY_EDITOR
+        public event Action EDITOR_OnValidate;
+        
         public void OnValidate()
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode) return;
@@ -104,8 +107,10 @@ namespace ThirdPersonController.Core.StateMachine
 
             statesProp.serializedObject.ApplyModifiedPropertiesWithoutUndo();
 
-            if(isDirty)
+            if (isDirty) 
                 EditorUtility.SetDirty(this);
+            
+            EDITOR_OnValidate?.Invoke();
         }
 
         /// <summary>
@@ -190,7 +195,7 @@ namespace ThirdPersonController.Core.StateMachine
                     CurrentState.OnExitState();
                     CurrentStateIndex = transition.GetNextStateIndex();
                     CurrentState.OnEnterState();
-                    onStateChanged.Invoke();
+                    onStateChanged?.Invoke();
                     break;
                 }
             }

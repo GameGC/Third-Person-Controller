@@ -3,7 +3,6 @@ using RedOwl.UIX.Engine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Object = UnityEngine.Object;
 
 namespace RedOwl.UIX.Editor
 {

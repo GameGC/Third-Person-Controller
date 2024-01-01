@@ -24,7 +24,7 @@
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "2d42ba51fdf6cb74c1f0a3870de2743366f1f7b0"
+      "hash": "c7854675e88ac9a22858936a8ba6a97d91672b94"
     },
     "com.gamegc.guistylesdebug": {
       "version": "https://github.com/GameGC/guistyles-buildin-debug.git",

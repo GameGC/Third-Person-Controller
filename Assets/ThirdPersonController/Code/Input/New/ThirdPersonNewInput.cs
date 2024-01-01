@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using ThirdPersonController.Input.New;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -205,7 +206,8 @@ namespace ThirdPersonController.Input
         
         [field:SerializeField]
         public bool IsAim  { get; set; }
-        
+        public IBaseInputReader.MoveToPointDelegate MoveToPoint { get; set; }
+
         [field: SerializeField] public float movementSmooth { get; set; } = 6;
 
         

@@ -6,7 +6,6 @@ namespace ThirdPersonController.MovementStateMachine.Features.Move
     [Serializable]
     public class MoveFeature : BaseMoveFeature
     {
-        private IMoveStateMachineVariables _variables;
         public MoveFeature()
         {
             rotationSpeed = 16f;

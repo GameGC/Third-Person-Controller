@@ -5,6 +5,7 @@ public class CameraTargetPlacer : MonoBehaviour
     private Transform _transform;
     [SerializeField] private Transform targetTransform;
 
+    public Transform Target => targetTransform;
     private void Awake() => _transform = transform;
 
    // private void OnEnable() => RaycastManager.SubscribeRaycastCalls(this);

@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095070348527172489}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2095070348527172492
 MonoBehaviour:
@@ -339,7 +339,7 @@ MonoBehaviour:
   - {fileID: 8436158629256463427, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
   - {fileID: 5755004296087899767, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
   - {fileID: 0}
-  statesNames:
+  EDITOR_statesNames:
   - GetWeapon
   - Idle
   - Aim
@@ -349,20 +349,6 @@ MonoBehaviour:
   weight: 1
   avatarMask: {fileID: 31900000, guid: d7e0e0b42ada9c44d96b830d4e2d60b7, type: 2}
   isAdditive: 0
-  states:
-    _keyValuePairs:
-    - Key: GetWeapon
-      Value: {fileID: 0}
-    - Key: Idle
-      Value: {fileID: 9100000, guid: cbd1db45c75e5b948a5befe9ecb80421, type: 2}
-    - Key: Aim
-      Value: {fileID: 5755004296087899767, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
-    - Key: Shoot
-      Value: {fileID: 8436158629256463427, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
-    - Key: Cooldown
-      Value: {fileID: 5755004296087899767, guid: f01f7551306ee4d6eabbfa7cd6698179, type: 3}
-    - Key: PutWeaponBackFromAim
-      Value: {fileID: 0}
   customTransitionTimes:
   - stateFromIndex: 1
     stateToIndex: 3
@@ -406,6 +392,7 @@ MonoBehaviour:
     <HasValue>k__BackingField: 0
 --- !u!120 &7532023491509594240
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -491,16 +478,20 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!114 &-6952241663362289916
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,12 +1,6 @@
 using System;
-using System.Collections;
 using System.Reflection;
-using RedOwl.UIX.Engine;
-using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
-using Object = UnityEngine.Object;
 
 namespace RedOwl.UIX.Editor
 {

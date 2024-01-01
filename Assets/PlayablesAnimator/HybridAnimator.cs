@@ -43,11 +43,13 @@ public class HybridAnimator : MonoBehaviour
             _playableGraph.Connect(stateMachine.ConstructPlayable(_playableGraph,gameObject), 
                 0, _layerPlayable, i);
             
-            if(stateMachine.avatarMask)
-                _layerPlayable.SetLayerMaskFromAvatarMask((uint)i,stateMachine.avatarMask);
+            if(stateMachine.AvatarMask)
+                _layerPlayable.SetLayerMaskFromAvatarMask((uint)i,stateMachine.AvatarMask);
             
-            _layerPlayable.SetLayerAdditive((uint) i,stateMachine.isAdditive);
-            _layerPlayable.SetInputWeight(i,stateMachine.weight);
+            _layerPlayable.SetLayerAdditive((uint) i,stateMachine.IsAdditive);
+            _layerPlayable.SetInputWeight(i,stateMachine.Weight);
+
+            SubscribeCallbacks(i, stateMachine);
         }
 
 
@@ -66,13 +68,38 @@ public class HybridAnimator : MonoBehaviour
         if(!stateMachine) return;
         _playableGraph.Connect(stateMachine.ConstructPlayable(_playableGraph,gameObject), 0, _layerPlayable, i);
             
-        if(stateMachine.avatarMask)
-            _layerPlayable.SetLayerMaskFromAvatarMask((uint)i,stateMachine.avatarMask);
+        if(stateMachine.AvatarMask)
+            _layerPlayable.SetLayerMaskFromAvatarMask((uint)i,stateMachine.AvatarMask);
             
-        _layerPlayable.SetLayerAdditive((uint) i,stateMachine.isAdditive);
-        _layerPlayable.SetInputWeight(i,stateMachine.weight);
+        _layerPlayable.SetLayerAdditive((uint) i,stateMachine.IsAdditive);
+        _layerPlayable.SetInputWeight(i,stateMachine.Weight);
+        
+        SubscribeCallbacks(i, stateMachine);
     }
 
+    private void SubscribeCallbacks(int index,AnimationLayer layer)
+    {
+        int iCopy = index;
+        layer.OnWeightChanged += weight => SetLayerWeight(iCopy, weight);
+        layer.OnMaskChanged += mask => SetAvatarMask(iCopy, mask);
+        layer.OnAdditiveChanged += isAdditive => SetAdditive(iCopy, isAdditive);
+    }
+
+    private void SetLayerWeight(int layerIndex, float weight)
+    {
+        _layerPlayable.SetInputWeight(layerIndex,weight);
+    }
+    
+    private void SetAvatarMask(int layerIndex, AvatarMask mask)
+    {
+        Rebuild(layerIndex);
+    }
+    
+    private void SetAdditive(int layerIndex, bool isAdditive)
+    {
+        _layerPlayable.SetLayerAdditive((uint) layerIndex,isAdditive);
+    }
+    
     private void OnDisable()
     {   
         // Destroys all Playables and Outputs created by the graph.

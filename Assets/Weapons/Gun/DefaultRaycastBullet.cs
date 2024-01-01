@@ -25,16 +25,16 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
         impactMask = LayerMask.GetMask("Default","Character","Char_Collision");
     }
 
+    private void Awake() => transform = base.transform;
+
     private void Start()
     {
-        transform = base.transform;
-        
         var ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray,out var hit, distance, impactMask, QueryTriggerInteraction.Ignore))
         {
             var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
             
-            Debug.DrawLine(transform.position,hit.point,Color.red,100);
+           // Debug.DrawLine(transform.position,hit.point,Color.red,100);
             flyDestination = hit.point;
             try
             {

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 
+[ExecuteAlways]
 public abstract class FollowingStateMachineAbstract<T> :MonoBehaviour
 {
     public abstract T[] States { get; protected set; }
@@ -120,7 +121,7 @@ public abstract class FollowingStateMachineAbstract<T> :MonoBehaviour
 }
 
 
-
+[ExecuteInEditMode]
 public abstract class FollowingStateMachine<T> :MonoBehaviour
 {
     //[DrawerAsDictionaryStates]
@@ -131,19 +132,38 @@ public abstract class FollowingStateMachine<T> :MonoBehaviour
     [FormerlySerializedAs("EDITORstatesNames")]
     [FormerlySerializedAs("statesNames")] 
     [SerializeField] public string[] EDITOR_statesNames = Array.Empty<string>();
-
-    public int EDITOR_CurrentStateIndex => CurrentStateIndex;
 #endif
-    protected int CurrentStateIndex;
+    
+    public int CurrentStateIndex { get; protected set; }
 
     protected CodeStateMachine _codeStateMachine;
-
     protected virtual void Awake()
     {
         _codeStateMachine = GetComponent<CodeStateMachine>();
     }
 
     protected virtual void Reset() => OnValidate();
+
+    private void Update() => OnValidate();
+
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        if (!Application.isPlaying)
+        {
+            _codeStateMachine ??= GetComponent<CodeStateMachine>();
+            _codeStateMachine.EDITOR_OnValidate += OnValidate;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (!Application.isPlaying)
+        {
+            _codeStateMachine ??= GetComponent<CodeStateMachine>();
+            _codeStateMachine.EDITOR_OnValidate -= OnValidate;
+        }
+    }
     protected virtual void OnValidate()
     {
         if(Application.isPlaying) return;
@@ -166,11 +186,11 @@ public abstract class FollowingStateMachine<T> :MonoBehaviour
             {
                 var tempStateNames= new List<string>(EDITOR_statesNames)
                 {
-                    Capacity = sourceLength
+                    Capacity = Mathf.Max(EDITOR_statesNames.Length,sourceLength)
                 };
                 var tempStateList = new List<T>(States)
                 {
-                    Capacity = sourceLength
+                    Capacity = Mathf.Max(EDITOR_statesNames.Length,sourceLength)
                 };
 
                 for (int i = 0; i < sourceLength; i++)
@@ -218,12 +238,22 @@ public abstract class FollowingStateMachine<T> :MonoBehaviour
                 if (EDITOR_statesNames[i] == _codeStateMachine.states[i].Name) continue;
                 isDirty = true;
                 int reorderIndex = Array.FindIndex(_codeStateMachine.states, s => s.Name == EDITOR_statesNames[i]);
-                (EDITOR_statesNames[reorderIndex], EDITOR_statesNames[i]) = (EDITOR_statesNames[i], EDITOR_statesNames[reorderIndex]);
-                (States[reorderIndex], States[i]) = (States[i], States[reorderIndex]);
+                if (reorderIndex > -1)
+                {
+                    (EDITOR_statesNames[reorderIndex], EDITOR_statesNames[i]) =
+                        (EDITOR_statesNames[i], EDITOR_statesNames[reorderIndex]);
+                    (States[reorderIndex], States[i]) = (States[i], States[reorderIndex]);
+                }
+                else
+                {
+                    EDITOR_statesNames[i] = _codeStateMachine.states[i].Name;
+                }
             }
         }
         
         if(isDirty)
             EditorUtility.SetDirty(this);
     }
+#endif
+
 }

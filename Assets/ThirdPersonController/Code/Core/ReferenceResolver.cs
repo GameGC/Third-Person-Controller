@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameGC.Collections;
 using ThirdPersonController.Core.DI.CustomEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace ThirdPersonController.Core.DI
@@ -97,5 +98,11 @@ namespace ThirdPersonController.Core.DI
             
             throw new NullReferenceException("No component with such key:" + name);
         }
+    }
+
+    [UnityEditor.CustomEditor(typeof(ReferenceResolver))]
+    public class ReferenceResolverEditor : Editor
+    {
+        public override void OnInspectorGUI() => DrawDefaultInspector();
     }
 }

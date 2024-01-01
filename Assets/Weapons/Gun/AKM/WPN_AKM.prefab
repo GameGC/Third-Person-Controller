@@ -179,7 +179,6 @@ GameObject:
   - component: {fileID: 8795139821492085440}
   - component: {fileID: 8492190204914902017}
   - component: {fileID: 9217136868478848954}
-  - component: {fileID: -4560132979145315442}
   - component: {fileID: 2998853927601559321}
   - component: {fileID: 8717932829498351620}
   - component: {fileID: -3859842466928417242}
@@ -319,25 +318,6 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: 0, z: -0.1}
---- !u!114 &-4560132979145315442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 460542305277932983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b5b8ae0e9f7a428b8b25509b9adbf00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraType: 1
-  cameraPrefab: {fileID: 8988634382487572944, guid: b73caf23ebf9c4e1fbc098a6133280e2, type: 3}
-  followAndLooksArgs:
-    value:
-      followPath: 
-      LookPath: 
-    <HasValue>k__BackingField: 0
 --- !u!114 &2998853927601559321
 MonoBehaviour:
   m_ObjectHideFlags: 0

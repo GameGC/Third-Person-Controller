@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

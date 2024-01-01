@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ShellDispancer : MonoBehaviour
+public class ShellDispancer : BaseWeaponExtension
 {
     public Rigidbody shell;
     public float shellLifeTime;
@@ -13,7 +13,7 @@ public class ShellDispancer : MonoBehaviour
 
     public Vector3 minTorque;
     public Vector3 maxTorque;
-    public void OnShoot()
+    public override void OnShoot()
     {
         var shell = Instantiate(this.shell, transform.TransformPoint(relativePoint), Quaternion.identity, null);
         shell.AddForce(transform.TransformDirection(GetRandomVector(minVelocity,maxVelocity)),ForceMode.Impulse);

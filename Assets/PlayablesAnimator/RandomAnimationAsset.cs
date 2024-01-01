@@ -33,6 +33,9 @@ public class RandomAnimationAsset : AnimationValue
             break;
         }
 
-        playable.SetInputWeight(Random.Range(0, length - 1),1);
+        int newIndex = Random.Range(0, length - 1);
+        if (!clips[newIndex].isLooping) 
+            playable.GetInput(newIndex).SetTime(0);
+        playable.SetInputWeight(newIndex,1);
     }
 }

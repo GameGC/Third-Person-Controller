@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine.Animations.Rigging;
@@ -52,6 +53,7 @@ namespace Fighting.Pushing
 
             //immediate shoot fix bug
             _rigBuilder.Evaluate(0);
+            await Task.Yield();
 
             if(!IsRunning) return;
             if(setAimingWeaigh0DuringShoot)

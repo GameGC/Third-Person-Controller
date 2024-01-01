@@ -18,15 +18,7 @@ public class SetCooldownFeature : BaseFeature
 
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
-        float length = 0;
-        switch (clip)
-        {
-            case AnimationClip clip: length = clip.length; break;
-            case TimelineAsset timeline: length = (float) timeline.duration; break;
-            case AnimationValue value: length = value.MaxLength; break;
-        }
-
-        _timer = new Timer(length * 1000);
+        _timer = new Timer();
         _timer.AutoReset = false;
         _timer.Elapsed += TimerOnElapsed;
         _variables = variables as IFightingStateMachineVariables;
@@ -34,6 +26,15 @@ public class SetCooldownFeature : BaseFeature
 
     public override void OnEnterState()
     {
+        float length = 0;
+        switch (clip)
+        {
+            case AnimationClip clip: length = clip.length; break;
+            case TimelineAsset timeline: length = (float) timeline.duration; break;
+            case AnimationValue value: length = value.MaxLength; break;
+        }
+        
+        _timer.Interval = length;
         _timer.Enabled = true;
         _timer.Start();
     }

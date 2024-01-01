@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095070348527172489}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2095070348527172492
 MonoBehaviour:
@@ -109,7 +109,7 @@ MonoBehaviour:
       type: {class: SetCooldownFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[0]
-        clip: {fileID: 11400000, guid: 0789c7d01d75c4e1492649d102a21f3d, type: 2}
+        clip: {fileID: -203655887218126122, guid: a34e422d64948e940ac6b9bf2b25d163, type: 3}
     - rid: 915123986997706756
       type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
@@ -121,7 +121,7 @@ MonoBehaviour:
       type: {class: ResetCooldownFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[0]
-        cooldownTimer: 3
+        cooldownTimer: 0.5
     - rid: 915123986997706758
       type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
       data:
