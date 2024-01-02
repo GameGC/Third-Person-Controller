@@ -29,7 +29,6 @@ public class AimForceLookFeature : BaseFeature
             return;
         }
         
-        _bodyTransform.rotation.ToEuler();
         _bodyTransform.rotation = Quaternion.AngleAxis(_targetLookTransform.eulerAngles.y,_bodyTransform.up);
     }
 }

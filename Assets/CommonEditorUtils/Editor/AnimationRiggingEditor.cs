@@ -4,30 +4,35 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.UIElements;
 
 [CustomEditor(typeof(RigBuilder),true,isFallback = false)]
-public class AnimationRiggingEditor : Editor
+internal class AnimationRiggingEditor : Editor
 {
-    private const string typeName =
-        "UnityEditor.Animations.Rigging.RigBuilderEditor, Unity.Animation.Rigging.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
+    private const string TypeName = "UnityEditor.Animations.Rigging.RigBuilderEditor, " +
+                                    "Unity.Animation.Rigging.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
+
+    private Editor _editor;
     public override VisualElement CreateInspectorGUI()
     {
         var root = new VisualElement();
         
         var button = new Button(OnRebuildClick)
         {
-            text = "Rebuild Rig"
+            text = "Rebuild Rig",
+            style =
+            {
+                display = EditorApplication.isPlayingOrWillChangePlaymode ? DisplayStyle.Flex : DisplayStyle.None
+            }
         };
-        button.style.display = EditorApplication.isPlayingOrWillChangePlaymode ? DisplayStyle.Flex : DisplayStyle.None;
         EditorApplication.playModeStateChanged += OnPlaymodeChange;
 
         root.Add(button);
-        var type = System.Type.GetType(typeName);
-        var editor = CreateEditor(target, type);
+        var type = System.Type.GetType(TypeName);
+        _editor = CreateEditor(target, type);
         
         VisualElement element;
-        if((element = editor.CreateInspectorGUI()) != null)
+        if((element = _editor.CreateInspectorGUI()) != null)
             root.Add(element);
         else
-            root.Add(new IMGUIContainer(editor.OnInspectorGUI));
+            root.Add(new IMGUIContainer(_editor.OnInspectorGUI));
 
         return root;
         
@@ -60,5 +65,17 @@ public class AnimationRiggingEditor : Editor
         animator.enabled = true;
         if (prevState != animator.GetCurrentAnimatorStateInfo(0).shortNameHash) 
             animator.Play(prevState);
+    }
+
+    private void OnDestroy()
+    {
+        if(_editor)
+            DestroyImmediate(_editor);
+    }
+
+    private void OnDisable()
+    {
+        if(_editor)
+            DestroyImmediate(_editor);
     }
 }

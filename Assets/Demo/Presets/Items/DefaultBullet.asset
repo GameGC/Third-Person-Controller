@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85fc8c7b8453434abb85c93ac9ff200e, type: 3}
+  m_Name: DefaultBullet
+  m_EditorClassIdentifier: 
+  name: DefaultAmmo
+  icon: {fileID: 0}
+  bulletPrefab: {fileID: 158912, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
+  <MaxItemCount>k__BackingField: 2147483647

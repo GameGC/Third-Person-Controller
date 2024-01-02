@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ThirdPersonController.Code.AnimatedStateMachine;
+﻿using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;

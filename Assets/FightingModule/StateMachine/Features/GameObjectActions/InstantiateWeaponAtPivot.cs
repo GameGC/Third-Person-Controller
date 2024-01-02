@@ -13,12 +13,15 @@ public class InstantiateWeaponAtPivot : BaseFeature
 
     private RigLayer _targetLayer;
     private IFightingStateMachineVariables _variables;
+    private IReferenceResolver _resolver;
     
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         _targetLayer = resolver.GetComponent<RigBuilder>().layers.
             FirstOrDefault(l => l.name == layerName);
+        
         _variables = variables as IFightingStateMachineVariables;
+        _resolver = resolver;
     }
 
     public override void OnEnterState()
@@ -27,6 +30,6 @@ public class InstantiateWeaponAtPivot : BaseFeature
         _variables.weaponInstance = instance;
         
         if (instance.TryGetComponent<IWeaponInfo>(out var info)) 
-            info.CacheReferences(_variables);
+            info.CacheReferences(_variables,_resolver);
     }
 }

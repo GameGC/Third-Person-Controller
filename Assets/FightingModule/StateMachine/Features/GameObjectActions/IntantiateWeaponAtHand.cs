@@ -12,11 +12,13 @@ public class IntantiateWeaponAtHand : BaseFeature
     
     private Animator _animator;
     private IFightingStateMachineVariables _variables;
-    
+    private IReferenceResolver _resolver;
+
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         _animator = resolver.GetComponent<Animator>();
         _variables = variables as IFightingStateMachineVariables;
+        _resolver = resolver;
     }
 
     public override void OnEnterState()
@@ -25,6 +27,6 @@ public class IntantiateWeaponAtHand : BaseFeature
         _variables.weaponInstance = instance;
         
         if (instance.TryGetComponent<IWeaponInfo>(out var info)) 
-            info.CacheReferences(_variables);
+            info.CacheReferences(_variables,_resolver);
     }
 }

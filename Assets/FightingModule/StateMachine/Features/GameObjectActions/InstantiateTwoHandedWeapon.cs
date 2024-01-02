@@ -16,7 +16,8 @@ public class InstantiateTwoHandedWeapon : BaseFeature
 
     
     private IFightingStateMachineVariables _variables;
-    
+    private IReferenceResolver _resolver;
+
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         var animator = resolver.GetComponent<Animator>();
@@ -24,6 +25,7 @@ public class InstantiateTwoHandedWeapon : BaseFeature
         _rightHand = animator.GetBoneTransform(HumanBodyBones.RightHand);
         
         _variables = variables as IFightingStateMachineVariables;
+        _resolver = resolver;
     }
 
     public override void OnEnterState()
@@ -34,12 +36,12 @@ public class InstantiateTwoHandedWeapon : BaseFeature
         _variables.secondaryWeaponInstance = instance;
         
         if (instance.TryGetComponent(out info)) 
-            info.CacheReferences(_variables);
+            info.CacheReferences(_variables,_resolver);
         
         instance = Object.Instantiate(rightPrefab, _rightHand,false);
         _variables.weaponInstance = instance;
         
         if (instance.TryGetComponent(out info)) 
-            info.CacheReferences(_variables);
+            info.CacheReferences(_variables,_resolver);
     }
 }
