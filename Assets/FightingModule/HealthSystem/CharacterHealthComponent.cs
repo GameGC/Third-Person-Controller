@@ -27,7 +27,6 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
     public BaseHealthFeature[] OnDeathFeatures = Array.Empty<BaseHealthFeature>();
 
 
-    private bool _isStarted;
     private int _hitBoxCount;
 
     protected virtual void Awake()
@@ -51,8 +50,6 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
             
             CacheReferences();
         }
-        
-        _isStarted = true;
     }
 
     private void CacheReferences()

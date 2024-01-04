@@ -4,8 +4,8 @@ using UnityEngine;
 [CustomEditor(typeof(AnimationLayer),true)]
 public class AnimationLayerInspector : FollowingStateMachineEditor
 {
-    private AnimationLayer target;
-    private int prevState;
+    private new AnimationLayer target;
+    private int _prevState;
 
     private readonly string[] ignorelist = new[]
     {
@@ -22,7 +22,7 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
     {
         base.OnEnable();
         target = base.target as AnimationLayer;
-        prevState = target.CurrentStateIndex;
+        _prevState = target.CurrentStateIndex;
 
         weight = serializedObject.FindProperty("weight");
         avatarMask = serializedObject.FindProperty("avatarMask");
@@ -32,16 +32,16 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
     public override bool RequiresConstantRepaint()
     {
         if (Application.isPlaying)
-            if (prevState != target.CurrentStateIndex)
+            if (_prevState != target.CurrentStateIndex)
                 return true;
         return base.RequiresConstantRepaint();
     }
 
     public override void OnInspectorGUI()
     {
-        if (prevState != target.CurrentStateIndex)
+        if (_prevState != target.CurrentStateIndex)
         {
-            prevState = target.CurrentStateIndex;
+            _prevState = target.CurrentStateIndex;
             UpdateVisualSelection();
         }
 
@@ -57,6 +57,6 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
 
     private void UpdateVisualSelection()
     {
-        _list.Select(prevState);
+        _list.Select(_prevState);
     }
 }

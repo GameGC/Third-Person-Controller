@@ -40,8 +40,7 @@ internal class EasyEnum : ScriptableObject
       bool hasNamespace = !string.IsNullOrEmpty(nameSpace);
 
       var defaultLength = 4;
-      var defaultStartLength = 2;
-      
+
       string extraIndent = hasNamespace ? GetWhiteSpace(4) : "";
       
       if (enumNames != null && enumNames.Length > 0)

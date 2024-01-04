@@ -1,15 +1,21 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public GameObject scope;
-    public GameObject fullScreenScope;
+    [SerializeField] private Inventory dataSource;
     
-    public WeaponItemDisplay weaponDisplayPrefab;
-    public Transform weaponDisplayParent;
+    [SerializeField] private GameObject scope;
+    [SerializeField] private GameObject fullScreenScope;
+    
+    [SerializeField] private WeaponItemDisplay weaponDisplayPrefab;
+    [SerializeField] private Transform weaponDisplayParent;
+    
     private WeaponItemDisplay[] _itemDisplays;
+    private WeaponData[] _displayedWeapons;
 
     private IFightingStateMachineVariables _variables;
     private IWeaponInfo _weaponInfo;
@@ -19,6 +25,20 @@ public class PlayerHUD : MonoBehaviour
             scope.SetActive(false);
         if(fullScreenScope)
             fullScreenScope.SetActive(false);
+        dataSource.onItemEquiped.AddListener(OnItemEquiped);
+    }
+
+    private void OnItemEquiped(BaseItemData arg0)
+    {
+        _variables = dataSource.FightingStateMachine.GetComponent<IFightingStateMachineVariables>();
+        SetSelection(Array.IndexOf(_displayedWeapons, arg0));
+    }
+
+    private void Start()
+    {
+        _displayedWeapons = dataSource.AllItems.Where(i => i.Key is WeaponData)
+            .Select(w=>w.Key as WeaponData).ToArray();
+        DisplayAllWeapon(_displayedWeapons);
     }
 
     public void SetScopeActive(bool active)
@@ -32,11 +52,10 @@ public class PlayerHUD : MonoBehaviour
         weaponDisplayParent.gameObject.SetActive(!active);
     }
 
-    public void DisplayAllWeapon(List<BaseItemData> weaponDatas,IFightingStateMachineVariables variables)
+    private void DisplayAllWeapon(BaseItemData[] weaponDatas)
     {
-        _itemDisplays = new WeaponItemDisplay[weaponDatas.Count];
-        _variables = variables;
-        for (int i = 0; i < weaponDatas.Count; i++)
+        _itemDisplays = new WeaponItemDisplay[weaponDatas.Length];
+        for (int i = 0; i < weaponDatas.Length; i++)
         {
             if (weaponDatas[i] is WeaponData)
             {
@@ -50,18 +69,13 @@ public class PlayerHUD : MonoBehaviour
     }
 
     private int prevSelection = 0;
-    public void SetSelection(int index)
+    private void SetSelection(int index)
     {
         _itemDisplays[index].SetSelection(true);
         _itemDisplays[prevSelection].SetSelection(false);
         _itemDisplays[prevSelection].SetCounteCounterActive(false);
         _weaponInfo = null;
         prevSelection = index;
-    }
-    
-    public void SetVariables(IFightingStateMachineVariables variables)
-    {
-        _variables = variables;
     }
 
     private void Update()
@@ -77,5 +91,10 @@ public class PlayerHUD : MonoBehaviour
             if(_weaponInfo != null)
                 _itemDisplays[prevSelection].UpdateAmmoInfo(_weaponInfo.remainingAmmo,_weaponInfo.maxAmmo);
         }
+    }
+
+    private void OnDestroy()
+    {
+        dataSource.onItemEquiped.RemoveListener(OnItemEquiped);
     }
 }

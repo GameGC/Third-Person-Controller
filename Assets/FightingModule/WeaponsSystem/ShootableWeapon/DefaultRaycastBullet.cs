@@ -4,8 +4,8 @@ using UnityEngine.Serialization;
 
 public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
 {
-    private Transform transform;
-    private Vector3 flyDestination;
+    private new Transform transform;
+    private Vector3 _flyDestination;
 
     public LayerMask impactMask;
     [field: SerializeField] public float damage { get; private set; } = 10;
@@ -35,13 +35,14 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
             var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
             
            // Debug.DrawLine(transform.position,hit.point,Color.red,100);
-            flyDestination = hit.point;
+            _flyDestination = hit.point;
             try
             {
                 SurfaceSystem.instance.OnSurfaceHit(hit,(int) HitType, defaultImpactEffect);
             }
-            catch (Exception e)
+            catch (Exception)
             {
+                // ignored
             }
 
             if (isCharacter)
@@ -63,20 +64,20 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
         }
         else
         {
-            flyDestination = transform.position + transform.forward * distance;
+            _flyDestination = transform.position + transform.forward * distance;
         }
     }
 
     public void Init(Vector3 flyDestination)
     {
-        this.flyDestination = flyDestination;
+        this._flyDestination = flyDestination;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, flyDestination, Time.deltaTime * speed);
-        if(Vector3.Distance(transform.position,flyDestination)<0.1f)
+        transform.position = Vector3.MoveTowards(transform.position, _flyDestination, Time.deltaTime * speed);
+        if(Vector3.Distance(transform.position,_flyDestination)<0.1f)
             Destroy(gameObject);
     }
 

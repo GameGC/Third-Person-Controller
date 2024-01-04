@@ -37,6 +37,7 @@ public class WeaponShootingInfoEditor : Editor
         var target = this.target as ShootingWeapon;
         useMinified = EditorPrefs.GetBool("useWeaponMinifiedEditor", true);
         
+        _tabs.Add(new Tab("Shooting"));
         list = new List<MonoBehaviour>(target.extensions);
         for (var i = 0; i < list.Count; i++)
         {
@@ -65,7 +66,7 @@ public class WeaponShootingInfoEditor : Editor
 
 
         _editorNames = EditorGUIUtility.TrTempContent(_tabs.Select(l => l.name).ToArray());
-        ArrayUtility.Insert(ref _editorNames,0,new GUIContent("Shooting"));
+   //     ArrayUtility.Insert(ref _editorNames,0,new GUIContent("Shooting"));
         
         _selectedTab = Mathf.Clamp(EditorPrefs.GetInt("weaponTabSelected"),0,_tabs.Count);
         
@@ -119,10 +120,15 @@ public class WeaponShootingInfoEditor : Editor
         if (_selectedTab == 0)
         {
             DrawPropertiesExcluding(serializedObject,"m_Script");
+            foreach (var editor in _tabs[_selectedTab].editors)
+            {
+                GUILayout.Space(18f);
+                editor.OnInspectorGUI();
+            }
         }
         else
         {
-            foreach (var editor in _tabs[_selectedTab-1].editors)
+            foreach (var editor in _tabs[_selectedTab].editors)
             {
                 editor.OnInspectorGUI();
                 GUILayout.Space(18f);

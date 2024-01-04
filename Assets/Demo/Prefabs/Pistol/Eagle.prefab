@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 1563936919696421680}
   - component: {fileID: 1296255864080165920}
   - component: {fileID: 7425509515305298029}
+  - component: {fileID: -8409616223905821114}
   - component: {fileID: 3574508149782771116}
   - component: {fileID: 4961223984954400771}
   m_Layer: 29
@@ -498,12 +499,11 @@ MonoBehaviour:
   - {fileID: -6232933178388690382}
   - {fileID: 1296255864080165920}
   - {fileID: 7425509515305298029}
-  prefab: {fileID: 122534689024825775, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
+  - {fileID: -8409616223905821114}
   spawnPoint: {fileID: 1835416645751342516}
   muzzle: {fileID: 1841766752692672142}
   muzzleTime: 0.25
   hasAutoReloadOnStart: 1
-  totalAmmo: 1000
   ammoImMagazine: 5
   cooldownTime: 2
   reloadingTime: 2.9
@@ -596,6 +596,20 @@ MonoBehaviour:
   maxVelocity: {x: 3, y: 0.5, z: 1}
   minTorque: {x: -50, y: -50, z: -50}
   maxTorque: {x: 50, y: 50, z: 50}
+--- !u!114 &-8409616223905821114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903231967639380790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad45670aee44023af62ab4f14c95684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzle: {fileID: 1841766752692672142}
+  muzzleTime: 0.25
 --- !u!114 &3574508149782771116
 MonoBehaviour:
   m_ObjectHideFlags: 0

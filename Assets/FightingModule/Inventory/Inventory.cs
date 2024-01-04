@@ -18,24 +18,22 @@ public class Inventory : BaseInventory
 {
    public UnityEvent<BaseItemData> onItemEquiped;
    public BaseItemData EquipedItemData => equipedItemData;
+   public CodeStateMachine FightingStateMachine => fightingStateMachine;
+
    
    [SerializeField][FormerlySerializedAs("equipedItemdData")] private BaseItemData equipedItemData;
    [SerializeField] private CodeStateMachine fightingStateMachine;
-   
+
+
    private HybridAnimator _hybridAnimator;
    private Animator _animator;
    private RigBuilderFixed _rigBuilder;
-
-
-   public PlayerHUD hud;
 
    private void Awake()
    {
       _hybridAnimator = GetComponent<HybridAnimator>();
       _animator = GetComponent<Animator>();
       _rigBuilder = GetComponent<RigBuilderFixed>();
-
-      hud.DisplayAllWeapon(items.KeysArray,fightingStateMachine.GetComponent<IFightingStateMachineVariables>());
    }
 
    private void Update()
@@ -62,6 +60,7 @@ public class Inventory : BaseInventory
       }
    }
 
+#pragma warning disable CS4014
    public override bool AddItem(BaseItemData itemData, int count = 1)
    {
       var bool_ = base.AddItem(itemData, count);
@@ -85,9 +84,9 @@ public class Inventory : BaseInventory
    {
       if(data is WeaponData weaponData)
          Equip(weaponData);
-      
-      onItemEquiped.Invoke(data);
    }
+#pragma warning restore CS4014
+
    
    public async Task Equip(WeaponData weaponData)
    {
@@ -143,8 +142,7 @@ public class Inventory : BaseInventory
 
       equipedItemData = weaponData;
       
-      hud.SetSelection(items.KeysArray.IndexOf(weaponData));
-      hud.SetVariables(fightingStateMachine.GetComponent<IFightingStateMachineVariables>());
+      onItemEquiped.Invoke(weaponData);
    }
 
    public void EquipImmediateEditor(int i)

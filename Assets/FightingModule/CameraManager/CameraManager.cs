@@ -48,11 +48,6 @@ public class CameraManager : MonoBehaviour
         float xAxisInput = 0;
         float yAxisInput = 0;
 
-        AxisState xAxis = default;
-        AxisState yAxis = default;
-
-        Transform prevLookAt = null;
-        
         Pose mainPose = new Pose();
         {
             if (prevLook is CinemachineFreeLook freeLook)
@@ -63,8 +58,13 @@ public class CameraManager : MonoBehaviour
                 xAxisInput = freeLook.m_XAxis.m_InputAxisValue;
                 yAxisInput = freeLook.m_YAxis.m_InputAxisValue;
 
-                prevLookAt = freeLook.m_LookAt;
                 freeLook.transform.GetLocalPositionAndRotation(out mainPose.position,out mainPose.rotation);
+                var offsets = freeLook.GetComponents<CinemachineCameraOffset>();
+                foreach (var off in offsets)
+                {
+                    mainPose.position -= mainPose.rotation * off.m_Offset;
+                }
+
             }
             else if (prevLook is CinemachineVirtualCamera virtualC)
             {
@@ -74,9 +74,9 @@ public class CameraManager : MonoBehaviour
                 
                 xAxisInput = pov.m_HorizontalAxis.m_InputAxisValue;
                 yAxisInput = pov.m_VerticalAxis.m_InputAxisValue;
-                
-                prevLookAt = virtualC.m_LookAt;
+
                 virtualC.transform.GetLocalPositionAndRotation(out mainPose.position,out mainPose.rotation);
+                
             }
         }
         {

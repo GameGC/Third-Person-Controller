@@ -22,7 +22,8 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
         _inventory = resolver.GetComponent<Inventory>();
         _currentAmmoType = ((WeaponData) _inventory.EquipedItemData).ammoItem;
         
-        remainingAmmo = _inventory.AllItems[_currentAmmoType];
+        if (_inventory.AllItems.TryGetValue(_currentAmmoType, out var value)) 
+            remainingAmmo = value;
     }
     
     private void Start()

@@ -4,14 +4,14 @@ using UnityEngine;
 [CustomEditor(typeof(ShellDispancer))]
 public class ShellDispancerEditor : Editor
 {
-    private ShellDispancer target;
+    private new ShellDispancer target;
 
-    private Vector3 worldPosition;
+    private Vector3 _worldPosition;
     private void OnEnable()
     {
         if(base.target == null) return;
         target = base.target as ShellDispancer;
-        worldPosition = target.transform.TransformPoint(target.relativePoint);
+        _worldPosition = target.transform.TransformPoint(target.relativePoint);
     }
     
     public override void OnInspectorGUI()
@@ -50,34 +50,34 @@ public class ShellDispancerEditor : Editor
         {
             if (EditorUtility.IsDirty(target.transform))
             {
-                worldPosition = target.transform.TransformPoint(target.relativePoint);
+                _worldPosition = target.transform.TransformPoint(target.relativePoint);
                 EditorUtility.ClearDirty(target.transform);
             }
 
             Handles.color = Color.magenta;
 
             EditorGUI.BeginChangeCheck();
-            var newPos = Handles.PositionHandle(worldPosition, Quaternion.LookRotation(mid));
+            var newPos = Handles.PositionHandle(_worldPosition, Quaternion.LookRotation(mid));
             if (EditorGUI.EndChangeCheck())
             {
-                worldPosition = newPos;
+                _worldPosition = newPos;
                 target.relativePoint = target.transform.InverseTransformPoint(newPos);
             }
         }
         else
         {
-            worldPosition = target.transform.TransformPoint(target.relativePoint);
-            Handles.PositionHandle(worldPosition, Quaternion.LookRotation(mid));
+            _worldPosition = target.transform.TransformPoint(target.relativePoint);
+            Handles.PositionHandle(_worldPosition, Quaternion.LookRotation(mid));
         }
 
         var dirMin = target.transform.TransformDirection(target.minVelocity);
         Handles.color = Color.green;
-        Handles.ArrowHandleCap(-1, worldPosition, Quaternion.LookRotation(dirMin),
-            HandleUtility.GetHandleSize(worldPosition) * dirMin.magnitude, EventType.Repaint);
+        Handles.ArrowHandleCap(-1, _worldPosition, Quaternion.LookRotation(dirMin),
+            HandleUtility.GetHandleSize(_worldPosition) * dirMin.magnitude, EventType.Repaint);
 
         var dirMax = target.transform.TransformDirection(target.maxVelocity);
         Handles.color = Color.red;
-        Handles.ArrowHandleCap(-1, worldPosition, Quaternion.LookRotation(dirMax),
-            HandleUtility.GetHandleSize(worldPosition) * dirMax.magnitude, EventType.Repaint);
+        Handles.ArrowHandleCap(-1, _worldPosition, Quaternion.LookRotation(dirMax),
+            HandleUtility.GetHandleSize(_worldPosition) * dirMax.magnitude, EventType.Repaint);
     }
 }

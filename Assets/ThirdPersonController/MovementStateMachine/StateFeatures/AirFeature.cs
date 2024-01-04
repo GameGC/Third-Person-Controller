@@ -22,8 +22,8 @@ namespace ThirdPersonController.MovementStateMachine.Features
         [Tooltip("Rotation speed of the character")]
         [SerializeField] private float rotationSpeed = 16f;
 
-        [Tooltip("Rotation speed of the character")]
-        [SerializeField] private bool dontAddGravity = false;
+        //[Tooltip("Rotation speed of the character")]
+        //[SerializeField] private bool dontAddGravity = false;
 
         private Transform _transform;
         private Rigidbody _rigidbody;

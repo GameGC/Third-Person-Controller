@@ -10,7 +10,6 @@ namespace Fighting.Pushing
     {
         public bool changeCooldownToAwait = true;
         public bool setAimingWeaigh0DuringShoot = true;
-        // public string waitForStateWeightName = "Shoot";
         
         private IWeaponInfo _shooter;
         private IFightingStateMachineVariables _variables;
@@ -18,8 +17,7 @@ namespace Fighting.Pushing
         private MultiAimConstraint _handAimConstaint;
         private RigBuilder _rigBuilder;
 
-        private bool wasCooldown;
-        private bool firstShoot = true;
+        private bool _wasCooldown;
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             _variables= variables as IFightingStateMachineVariables;
@@ -45,7 +43,7 @@ namespace Fighting.Pushing
 
         private async void DelayShoot()
         {
-            wasCooldown = _variables.isCooldown;
+            _wasCooldown = _variables.isCooldown;
             if(changeCooldownToAwait)
                 _variables.isCooldown = true;
             var animationController = _variables.AnimationLayer;
@@ -60,7 +58,7 @@ namespace Fighting.Pushing
                 _handAimConstaint.weight = 0;
             
             if(changeCooldownToAwait)
-                _variables.isCooldown = wasCooldown;
+                _variables.isCooldown = _wasCooldown;
             _shooter.Shoot();
             if(setAimingWeaigh0DuringShoot)
                 _handAimConstaint.weight = 1;

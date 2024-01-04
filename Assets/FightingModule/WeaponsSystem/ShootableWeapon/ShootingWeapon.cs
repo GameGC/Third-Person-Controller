@@ -8,9 +8,6 @@ public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
 {
     public Transform spawnPoint;
     
-    public GameObject muzzle;
-    public float muzzleTime = 1;
-
     public bool hasAutoReloadOnStart = true;
     public int ammoImMagazine = 5;
     
@@ -71,20 +68,13 @@ public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
             Execute_OnShootExtensions();
 
             _impulseSource?.GenerateImpulse();
-            
-            
-            if (muzzle)
-            {
-                muzzle.SetActive(true);
-                Invoke(nameof(DisableMuzzle),muzzleTime);
-            }
         }
         
 
         //reload
         if (remainingAmmo < 1)
-        {
-            if (_inventory.AllItems[_currentAmmoType] - ammoImMagazine <= 0) return;
+        {  
+            if (_inventory.AllItems.TryGetValue(_currentAmmoType, out var totalAmmo) && totalAmmo - ammoImMagazine <= 0) return; 
             Variables.isReloading = true;
             
             Execute_BeginReloadExtensions();
@@ -117,9 +107,6 @@ public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
         Variables.isCooldown = false;
         Execute_EndCooldownExtensions();
     }
-
-    private void DisableMuzzle() =>muzzle.SetActive(false);
-
 
     private void OnDrawGizmos() => Gizmos.DrawRay(spawnPoint.position,spawnPoint.forward*100);
 

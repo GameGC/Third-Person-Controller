@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 2998853927601559321}
   - component: {fileID: 8717932829498351620}
   - component: {fileID: -3859842466928417242}
+  - component: {fileID: 2837380765048829520}
   m_Layer: 2
   m_Name: WPN_AKM
   m_TagString: Untagged
@@ -254,12 +255,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d7cf4a45ead7a448e24e2ea1a5028a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 122534689024825775, guid: 2886c2507a2653e4cb8025eb9a73533b, type: 3}
+  extensions:
+  - {fileID: 8795139821492085440}
+  - {fileID: 2998853927601559321}
+  - {fileID: 8717932829498351620}
+  - {fileID: 2837380765048829520}
   spawnPoint: {fileID: 7210411419212002163}
   muzzle: {fileID: 1412079853349416998}
   muzzleTime: 0.25
   hasAutoReloadOnStart: 1
-  totalAmmo: 1000
   ammoImMagazine: 30
   cooldownTime: 0.25
   reloadingTime: 5.3
@@ -397,6 +401,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2837380765048829520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460542305277932983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad45670aee44023af62ab4f14c95684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzle: {fileID: 1412079853349416998}
+  muzzleTime: 0.25
 --- !u!1 &460542305277932985
 GameObject:
   m_ObjectHideFlags: 0

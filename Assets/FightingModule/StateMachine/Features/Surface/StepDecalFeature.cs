@@ -99,7 +99,6 @@ public class StepDecalFeature : BaseFeature
         if(effect.decalsVariant == null || effect.decalsVariant.Length < 1)return;
 
         _lastEffect = effect;
-        GameObject prefab = null;
         if (_leftFootCounter < 0.01f)
         {
             _leftFootCounter = footStepPlaceInterval;

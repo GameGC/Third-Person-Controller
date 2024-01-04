@@ -249,7 +249,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
             while ( _mixerPlayable.GetInputWeight(newIndex)>0) 
                 await Task.Delay(100);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             Debug.LogError("Error at state: "+stateName);
         }
