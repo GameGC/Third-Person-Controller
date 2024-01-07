@@ -3,6 +3,8 @@ using System.Collections;
 using System.Linq;
 using Cinemachine;
 using ThirdPersonController.Core.DI;
+using ThirdPersonController.Input;
+using ThirdPersonController.Input.New;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -160,18 +162,26 @@ public class CameraManager : MonoBehaviour
         
     }
     
-    private void PasteTargets(ICinemachineCamera newLook)
+    private void PasteTargets(CinemachineVirtualCameraBase newLook)
     {
         newLook.Follow = resolver.GetComponent<Transform>();
         newLook.LookAt = resolver.GetNamedComponent<Transform>("HeadLookAt");
+        newLook.GetComponent<CameraInputProvider>()._inputReader = resolver.GetComponent<IBaseInputReader>();
     }
     
-    private void PasteCustomTargets(ICinemachineCamera newLook,Transform follow,Transform lookAt)
+    private void PasteCustomTargets(CinemachineVirtualCameraBase newLook,Transform follow,Transform lookAt)
     {
         newLook.Follow = follow ? follow : resolver.GetComponent<Transform>();
         newLook.LookAt = lookAt ? lookAt : resolver.GetNamedComponent<Transform>("HeadLookAt");
+        newLook.GetComponent<CameraInputProvider>()._inputReader = resolver.GetComponent<IBaseInputReader>();
     }
-    
+
+    public void UpdateTargets()
+    {
+        foreach (var camera in cameras) 
+            if(camera)
+                PasteTargets(camera);
+    }
     
     public void ReplaceCamera(CameraType type,CinemachineVirtualCameraBase prefab,Transform follow=null,Transform lookAt=null)
     {
@@ -209,6 +219,8 @@ public class CameraManager : MonoBehaviour
 
 
 #if UNITY_EDITOR
+    public GameObject EDITOR_currentCamera => cameras[(int) _activeLook].gameObject;
+    
     private static readonly int enumNamesSize = Enum.GetValues(typeof(CameraType)).Length;
     
     private void OnValidate()

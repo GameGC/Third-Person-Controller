@@ -10,7 +10,6 @@ namespace ThirdPersonController.Core.DI
     public class ReferenceResolver : MonoBehaviour , IReferenceResolver
     {
         [SerializeField,ComponentSelect] private List<Component> cachedComponents;
-        [SerializeField] private Transform cameraTransform;
         [SerializeField] private bool releaseMemoryOnStart = true;
 
 
@@ -76,27 +75,57 @@ namespace ThirdPersonController.Core.DI
             }
         }
 
-      //public Transform GetPlayerTransform()
-      //{
-      //    return _playerTransform??= transform;
-      //}
+        public void AddComponent<T>() where T : Component => cachedComponents.Add(gameObject.AddComponent<T>());
 
-      //public BaseInputReader GetInput()
-      //{
-      //    return input;
-      //}
+        public void AddCachedComponent<T>(T component)  where T : Component
+        {
+            if (cachedComponents.Count > 0)
+            {
+                for (var i = 0; i < cachedComponents.Count; i++)
+                {
+                    var tempComponent = cachedComponents[i];
+                    if (tempComponent is T)
+                    {
+                        cachedComponents[i] = component;
+                        return;
+                    }
+                }
 
-        public Transform GetCamera() => cameraTransform;
+                cachedComponents.Add(component);
+            }
+            else
+            {
+                cachedComponents.Add(component);
+            }
+        }
 
-        public T GetNamedComponent<T>(string name) where T : Component
+        
+
+        public T GetNamedComponent<T>(string componentName) where T : Component
         {
             foreach (var (key, component) in namedReferences)
             {
-                if (key == name && component is T casted)
-                    return casted;
+                if (key == componentName && component is T casted) return casted;
             }
-            
-            throw new NullReferenceException("No component with such key:" + name);
+
+            Debug.LogError(new NullReferenceException("No component with such key:" + componentName));
+            return null;
+        }
+
+        public T AddNamedComponent<T>(string componentName) where T : Component
+        {
+            var component = gameObject.AddComponent<T>();
+            namedReferences.Add(componentName, component);
+            return component;
+        }
+        
+        public void AddNamedCachedComponent<T>(string componentName ,T component) where T : Component
+        {
+            if (namedReferences.TryGetValue(componentName,out _))
+            {
+                namedReferences[componentName] = component;
+            }
+            else namedReferences.Add(componentName,component);
         }
     }
 

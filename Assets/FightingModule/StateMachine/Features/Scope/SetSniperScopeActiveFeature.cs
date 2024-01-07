@@ -14,6 +14,7 @@ public class SetSniperScopeActiveFeature : BaseFeature
 
     public override void OnEnterState()
     {
-        _hud.SetFullScreenScopeActive(_active);
+        if(_hud)
+            _hud.SetFullScreenScopeActive(_active);
     }
 }

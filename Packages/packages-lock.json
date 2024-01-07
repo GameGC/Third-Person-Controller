@@ -8,41 +8,50 @@
       "hash": "635dba02c808e2b4881c689a57c43b60e627698f"
     },
     "com.gamegc.animation.rigging.saver": {
-      "version": "https://github.com/GameGC/AnimationRiggingSaver.git",
+      "version": "1.0.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.animation.rigging": "1.2.1"
       },
-      "hash": "010abccbe70f51ac30c0a963af82d8031f2c8a1b"
+      "url": "http://registry.npmjs.com"
     },
     "com.gamegc.collections": {
-      "version": "https://github.com/GameGC/GameGC.Collections.git",
+      "version": "1.0.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       },
-      "hash": "c7854675e88ac9a22858936a8ba6a97d91672b94"
+      "url": "http://registry.npmjs.com"
     },
-    "com.gamegc.guistylesdebug": {
-      "version": "https://github.com/GameGC/guistyles-buildin-debug.git",
+    "com.gamegc.common-editor-utils": {
+      "version": "1.0.3",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {
-        "com.unity.modules.imgui": "1.0.0"
+        "com.gamegc.collections": "1.0.0"
       },
-      "hash": "3bfb5aad68980e86cc6a98a01f5ca5d79a86e67f"
+      "url": "http://registry.npmjs.com"
+    },
+    "com.gamegc.surfacesystem": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.gamegc.collections": "1.0.0"
+      },
+      "url": "http://registry.npmjs.com"
     },
     "com.gamegc.timeline.legacy-animation": {
-      "version": "https://github.com/GameGC/TimelineLegacyAnimation.git",
+      "version": "1.0.0",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
       "dependencies": {
         "com.unity.timeline": "1.7.5"
       },
-      "hash": "ab81c9a6ef3ee14025a439205c66599c74bdbca3"
+      "url": "http://registry.npmjs.com"
     },
     "com.singularitygroup.hotreload": {
       "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.9",

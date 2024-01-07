@@ -14,6 +14,7 @@ public class SetScopeActiveFeature : BaseFeature
 
     public override void OnEnterState()
     {
-        _hud.SetScopeActive(_active);
+        if(_hud)
+            _hud.SetScopeActive(_active);
     }
 }

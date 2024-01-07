@@ -60,6 +60,7 @@ namespace ThirdPersonController.Core.StateMachine
         
 
 #if UNITY_EDITOR
+        public void EDITORSetStateIndex(int i) => CurrentStateIndex = i;
         public event Action EDITOR_OnValidate;
         
         public void OnValidate()

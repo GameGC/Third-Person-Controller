@@ -17,7 +17,8 @@ public abstract class BaseInventory  : MonoBehaviour
 
     public virtual bool AddItem(BaseItemData itemData,int count = 1)
     {
-        int prevCount = items[itemData];
+        if (items.TryGetValue(itemData,out int prevCount) && itemData is WeaponData)
+            return false;
         if (itemData.MaxItemCount > prevCount + count)
         {
             items[itemData] += count;

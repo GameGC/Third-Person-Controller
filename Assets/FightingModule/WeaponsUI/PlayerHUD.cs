@@ -25,7 +25,15 @@ public class PlayerHUD : MonoBehaviour
             scope.SetActive(false);
         if(fullScreenScope)
             fullScreenScope.SetActive(false);
+        if(dataSource)
+            dataSource.onItemEquiped.AddListener(OnItemEquiped);
+    }
+
+    public void AddInventory(Inventory inventory)
+    {
+        dataSource = inventory;
         dataSource.onItemEquiped.AddListener(OnItemEquiped);
+        Start();
     }
 
     private void OnItemEquiped(BaseItemData arg0)
@@ -36,6 +44,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void Start()
     {
+        if(!dataSource) return;
         _displayedWeapons = dataSource.AllItems.Where(i => i.Key is WeaponData)
             .Select(w=>w.Key as WeaponData).ToArray();
         DisplayAllWeapon(_displayedWeapons);

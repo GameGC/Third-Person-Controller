@@ -13,20 +13,35 @@ namespace ThirdPersonController.Core.DI
         /// </summary>
         public T GetComponent<T>();
         
-        // ReSharper disable Unity.PerformanceAnalysis
-        /// <summary>
-        /// get component cached
-        /// </summary>
-        public T GetNamedComponent<T>(string name) where T: Component;
-        
         /// <summary>
         /// get component cached
         /// </summary>
         public Component GetComponent(Type componentType);
 
-      
-        public Transform GetCamera();
+        /// <summary>
+        /// add component cached
+        /// </summary>
+        public void AddComponent<T>() where T : Component;
         
+        /// <summary>
+        /// add existing component cached
+        /// </summary>
+        public void AddCachedComponent<T>(T component) where T : Component;
         
+        // ReSharper disable Unity.PerformanceAnalysis
+        /// <summary>
+        /// get component cached
+        /// </summary>
+        public T GetNamedComponent<T>(string componentName) where T: Component;
+        
+        /// <summary>
+        /// add component cached
+        /// </summary>
+        public T AddNamedComponent<T>(string componentName) where T: Component;
+
+        /// <summary>
+        /// add existing component cached
+        /// </summary>
+        public void AddNamedCachedComponent<T>(string componentName,T component) where T: Component;
     }
 }

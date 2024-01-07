@@ -68,6 +68,11 @@ public class Inventory : BaseInventory
          Equip(weaponData);
       return bool_;
    }
+   
+   public bool AddItemNonEqip(BaseItemData itemData, int count = 1)
+   {
+      return base.AddItem(itemData, count);
+   }
 
    private void Equip(int i)
    {
@@ -154,31 +159,39 @@ public class Inventory : BaseInventory
          index++;
       }
       weaponData = items.KeysArray[index] as WeaponData;
-      
-      if(fightingStateMachine)
+      EquipImmediateEditor(weaponData);
+   }
+   public void EquipImmediateEditor(WeaponData weaponData)
+   {
+      if (fightingStateMachine)
+      {
+         if (PrefabUtility.IsAnyPrefabInstanceRoot(gameObject))
+            PrefabUtility.UnpackPrefabInstance(gameObject, PrefabUnpackMode.OutermostRoot,
+               InteractionMode.AutomatedAction);
          DestroyImmediate(fightingStateMachine.gameObject);
+      }
+      _hybridAnimator = GetComponent<HybridAnimator>();
+      _animator = GetComponent<Animator>();
+      _rigBuilder = GetComponent<RigBuilderFixed>();
       
       //assign new Animations      
       var stateMachineParent = transform.Find("StateMachines");
       var instance = PrefabUtility.InstantiatePrefab(weaponData.stateMachine, stateMachineParent) as CodeStateMachine;
       instance.ReferenceResolver = GetComponent<ReferenceResolver>();
 
-      GetComponent<HybridAnimator>().stateMachines[0] = instance.GetComponent<AnimationLayer>();
+      _hybridAnimator.stateMachines[0] = instance.GetComponent<AnimationLayer>();
 
       stateMachineParent = transform.Find("rig_controllers");
-      var builder = GetComponent<RigBuilder>();
 
       // remove previous rig
-      if(builder.layers.Count>0 && builder.layers[0].rig)
-         DestroyImmediate(builder.layers[0].rig.gameObject);
+      if(_rigBuilder.layers.Count>0 && _rigBuilder.layers[(int)RigTypes.Fighting].rig)
+         DestroyImmediate(_rigBuilder.layers[(int)RigTypes.Fighting].rig.gameObject);
       
       //assign new Rig
       if (weaponData.rigLayer)
       {
          var rig = PrefabUtility.InstantiatePrefab(weaponData.rigLayer, stateMachineParent) as Rig;
          rig.name = weaponData.rigLayer.name;
-
-         _rigBuilder.Clear();
 
          _rigBuilder.layers[(int)RigTypes.Fighting] = new RigLayer(rig);
       }
