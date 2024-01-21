@@ -172,11 +172,6 @@ namespace RedOwl.UIX.Editor
 
         public static void DrawInto<T>(T instance, VisualElement element)
         {
-#if ODIN_INSPECTOR
-            var tree = Sirenix.OdinInspector.Editor.PropertyTree.Create(instance);
-            var useUndo = instance is Object;
-            element.Add(new IMGUIContainer(() => tree.Draw(useUndo)) { name = "OdinTree"});
-#else
             foreach (var info in instance.GetType().GetFields())
             {
                 var field = new UIXBuilder().For(instance, info).WithLabel(ObjectNames.NicifyVariableName(info.Name));
@@ -184,7 +179,6 @@ namespace RedOwl.UIX.Editor
             }
             // TODO: GetProperties with "ShowInInspector" or "field: SerializeField" and CreateField for them
             // TODO: GetMethods with "Button" and CreateButton for them - if method has args then create fields for them
-#endif
         }
     }
 }

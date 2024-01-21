@@ -10,7 +10,7 @@ namespace RedOwl.UIX.Engine
 	    private string id;
 	    
 	    private Type _type;	
-	    public Type Type => (_type == null) ? _type = Type.GetType(id) : _type;
+	    public Type Type => _type == null ? _type = Type.GetType(id) : _type;
 
 	    public BetterType(Type type)
 	    {
@@ -36,7 +36,7 @@ namespace RedOwl.UIX.Engine
 		    return ReferenceEquals(this, obj) || obj is BetterType other && Equals(other);
 	    }
 
-	    public override int GetHashCode() => (id != null ? id.GetHashCode() : 0);
+	    public override int GetHashCode() => id != null ? id.GetHashCode() : 0;
 
 	    public static bool operator ==(BetterType left, BetterType right) => Equals(left, right);
 	    
