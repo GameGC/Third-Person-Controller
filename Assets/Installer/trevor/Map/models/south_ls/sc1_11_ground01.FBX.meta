@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: 96384c2791b49484195c22ce56aa9f38
+timeCreated: 1525389612
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: _sc1_11_ground01SC1_RSN_NS_ground_0010
+    2100002: _sc1_11_ground01IM_Concrete05
+    2100004: _sc1_11_ground01SC1_RSN_NS_ground_0003
+    2100006: _sc1_11_ground01im_grass13bdeep
+    2100008: _sc1_11_ground01SC1_27_RSN_NS_Ground_0001
+    2100010: _sc1_11_ground01IM_FloorTiles13
+    2100012: _sc1_11_ground01IM_Concrete17
+    2100014: _sc1_11_ground01ck_metal_drain
+    2100016: _sc1_11_ground01im_ground_bricks04
+    2100018: _sc1_11_ground01im_ground_bricks04_edge
+    2100020: _sc1_11_ground01SC1_RSN_NS_ground_0005
+    2100022: _sc1_11_ground01DC_Parking_Objects_01
+    2100024: _sc1_11_ground01sc1_21_detail_tpage_0001
+    2100026: _sc1_11_ground01OS_RNBJ_BVwalloverlay_0002
+    2100028: _sc1_11_ground01im_drains01
+    2100030: _sc1_11_ground01im_grasstall_03im_grasstall_03_a
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: default
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01DC_Parking_Objects_01
+    second: {fileID: 2100000, guid: 19496e526c525b4468c8816937dc8287, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01IM_Concrete05
+    second: {fileID: 2100000, guid: 21878e184d6ac50498eae592443912fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01IM_Concrete17
+    second: {fileID: 2100000, guid: 9fe1e29b56e4f604aa9827f99ad62fab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01IM_FloorTiles13
+    second: {fileID: 2100000, guid: 10653952febbe2440aecc5310ee931c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01OS_RNBJ_BVwalloverlay_0002
+    second: {fileID: 2100000, guid: 458f19586ad0f804484d3aae624d8176, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01SC1_27_RSN_NS_Ground_0001
+    second: {fileID: 2100000, guid: c1ecc221a2d9574418482fbd6b3076f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01SC1_RSN_NS_ground_0003
+    second: {fileID: 2100000, guid: e6bcd44bf1c1b9d44b5198709fe9d7d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01SC1_RSN_NS_ground_0005
+    second: {fileID: 2100000, guid: 643ae2c4ed6501044904eb9c7cd1d150, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01SC1_RSN_NS_ground_0010
+    second: {fileID: 2100000, guid: 348c9297bd94b544281f6f9bb74a0c5f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01ck_metal_drain
+    second: {fileID: 2100000, guid: 37a25a97a89f65940bd7a958418337c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01im_drains01
+    second: {fileID: 2100000, guid: b1be864df99903549b94eeda2a64e8db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01im_grass13bdeep
+    second: {fileID: 2100000, guid: 5ddeb7f662aef6f41a68d144d5f53327, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01im_grasstall_03im_grasstall_03_a
+    second: {fileID: 2100000, guid: 5f2802f25ada6ea44b6b5f43dfec12b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01im_ground_bricks04
+    second: {fileID: 2100000, guid: 980264582583b4e44afb5586dafcc7e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01im_ground_bricks04_edge
+    second: {fileID: 2100000, guid: 0c5bca4ac16382d4b9e1ed46acd63e1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_ground01sc1_21_detail_tpage_0001
+    second: {fileID: 2100000, guid: c194435d68fa50343a40025f280a3f33, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

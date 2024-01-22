@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: 56aa5a227734bca47aac7045e579aa01
+timeCreated: 1525453298
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: _house_fraSC1_21_RSN_NS_Walls_0002
+    2100002: _house_fraSC1_30_RSN_NS_roof_0001
+    2100004: _house_fraIM_Tarp001
+    2100006: _house_fraIM_Woodwall_01
+    2100008: _house_fraIM_Roof02
+    2100010: _house_fraSC1_21_RSN_NS_TPage_0002
+    2100012: _house_fraSC1_Res_TPage_Windows
+    2100014: _house_fraSC1_21_RSN_NS_TPage_0001
+    2100016: _house_frarsn_ns_teracottatile_0001
+    2100018: _house_fragz_v_fh_door06
+    2100020: _house_fraim_concrete05
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: default
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraIM_Roof02
+    second: {fileID: 2100000, guid: f33e103eafa1a0245993bdf9cefd93c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraIM_Tarp001
+    second: {fileID: 2100000, guid: 5bd6dfc187d73c944a9adc1a960a8bc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraIM_Woodwall_01
+    second: {fileID: 2100000, guid: e300057f2351888409e70a2fbc8be3f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraSC1_21_RSN_NS_TPage_0001
+    second: {fileID: 2100000, guid: 39ea20703771e21409aca19113ade616, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraSC1_21_RSN_NS_TPage_0002
+    second: {fileID: 2100000, guid: a000ffeebb012cd429a16d7f8a15029a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraSC1_21_RSN_NS_Walls_0002
+    second: {fileID: 2100000, guid: 9a2964c68a3cee34c96971f391e9217d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraSC1_30_RSN_NS_roof_0001
+    second: {fileID: 2100000, guid: cc5057738f11ae846b93dd31da9cad31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraSC1_Res_TPage_Windows
+    second: {fileID: 2100000, guid: 39962b80ad6ff704ea0a4a691b905002, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fragz_v_fh_door06
+    second: {fileID: 2100000, guid: cedc2fc871db7e5498dbc53d0d4c22c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_fraim_concrete05
+    second: {fileID: 2100000, guid: c3ed44c97b6967743b5da7ad49cfb6d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _house_frarsn_ns_teracottatile_0001
+    second: {fileID: 2100000, guid: c98e00136da73ba44a4050e2cc8b8b94, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

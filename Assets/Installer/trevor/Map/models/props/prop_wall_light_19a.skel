@@ -1,0 +1,24 @@
+Version 165 30
+{
+	DataCRC 318884284
+	NumBones 2
+	Bone Prop_Wall_Light_19a 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone Light_19a_bulb 15010
+			{
+				MirrorBoneId 15010
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00003100 -0.17423500 -0.04303800
+				Scale 1.00000000 1.00000000 1.00000000
+			}
+		}
+	}
+}

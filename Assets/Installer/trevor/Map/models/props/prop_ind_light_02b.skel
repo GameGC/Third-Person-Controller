@@ -1,0 +1,125 @@
+Version 165 30
+{
+	DataCRC 1838551475
+	NumBones 12
+	Bone Root_Prop_Ind_light_02b_frag_ 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone Main_Prop_Ind_light_02b_frag_ 49457
+			{
+				MirrorBoneId 49457
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000000 0.00000000 0.00000000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone Prop_Ind_light_02b_frag_ 22277
+					{
+						MirrorBoneId 22277
+						Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00000000 0.00000000 0.00000000
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone Ind_light_02b_pole 11110
+							{
+								MirrorBoneId 11110
+								Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.00000000 0.00000000 0.16952300
+								Scale 1.00000000 1.00000000 1.00000000
+								Children 4
+								{
+									Bone indlight2b_bulb1 41014
+									{
+										MirrorBoneId 41014
+										Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset 0.36636400 0.35904400 15.06661000
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone indlight2b_glass2 64457
+											{
+												MirrorBoneId 64457
+												Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset 0.03530100 0.03945900 -0.03894400
+												Scale 1.00000000 1.00000000 1.00000000
+											}
+										}
+									}
+									Bone indlight2b_bulb2 41015
+									{
+										MirrorBoneId 41015
+										Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset 0.36428800 -0.36139000 15.06661000
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone indlight2b_glass1 64456
+											{
+												MirrorBoneId 64456
+												Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset 0.03945900 -0.03529900 -0.03894400
+												Scale 1.00000000 1.00000000 1.00000000
+											}
+										}
+									}
+									Bone indlight2a_bulb3 11719
+									{
+										MirrorBoneId 11719
+										Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset -0.36111500 -0.36139000 15.06661000
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone indlight2b_glass4 64459
+											{
+												MirrorBoneId 64459
+												Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset -0.03530100 -0.03945900 -0.03894400
+												Scale 1.00000000 1.00000000 1.00000000
+											}
+										}
+									}
+									Bone indlight2b_bulb4 41017
+									{
+										MirrorBoneId 41017
+										Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset -0.35903900 0.35904400 15.06661000
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone indlight2b_glass3 64458
+											{
+												MirrorBoneId 64458
+												Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset -0.03945900 0.03529900 -0.03894400
+												Scale 1.00000000 1.00000000 1.00000000
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

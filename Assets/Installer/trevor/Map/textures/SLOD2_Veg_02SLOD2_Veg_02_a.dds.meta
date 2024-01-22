@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f550cf3352d68e642b4a6dd1c239cbc2
+timeCreated: 1525248519
+licenseType: Free
+IHVImageFormatImporter:
+  externalObjects: {}
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  isReadable: 0
+  sRGBTexture: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

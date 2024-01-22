@@ -1,0 +1,92 @@
+Version 165 30
+{
+	DataCRC 4067147933
+	NumBones 9
+	Bone Prop_Traffic_Rail_2 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 4
+		{
+			Bone light_right_0 46888
+			{
+				MirrorBoneId 46888
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.45018000 -0.49548700 4.34209300
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone railway_light_right_0 63814
+					{
+						MirrorBoneId 63814
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.00001500 0.02295600 -0.00028100
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+			Bone light_left_0 12830
+			{
+				MirrorBoneId 12830
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -0.48295600 -0.49548700 4.34209300
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone railway_light_left_0 17838
+					{
+						MirrorBoneId 17838
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.00009200 0.02295600 -0.00028100
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+			Bone light_right_1 46889
+			{
+				MirrorBoneId 46889
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -3.49253800 -0.81735800 6.00411000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone railway_light_right_1 63815
+					{
+						MirrorBoneId 63815
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00015300 0.01613600 -0.00331600
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+			Bone light_left_1 12831
+			{
+				MirrorBoneId 12831
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -4.29103100 -0.81735890 6.00411000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone railway_light_left_1 17839
+					{
+						MirrorBoneId 17839
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.00022900 0.01613600 -0.00331600
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+		}
+	}
+}

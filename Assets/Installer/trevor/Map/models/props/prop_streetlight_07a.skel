@@ -1,0 +1,68 @@
+Version 165 30
+{
+	DataCRC 926091444
+	NumBones 6
+	Bone Root_Prop_StreetLight_07a_frag_ 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone Main_Prop_StreetLight_07a_frag_ 11505
+			{
+				MirrorBoneId 11505
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000000 0.00000000 0.00000000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone Prop_StreetLight_07a_frag_ 52527
+					{
+						MirrorBoneId 52527
+						Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00000000 0.00000000 0.00000000
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone Lamp_base 44171
+							{
+								MirrorBoneId 44171
+								Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset -0.00923900 0.00000000 0.04021100
+								Scale 1.00000000 1.00000000 1.00000000
+								Children 1
+								{
+									Bone Main_Pole 53661
+									{
+										MirrorBoneId 53661
+										Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset 0.00000000 0.00000000 0.69196800
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone Bulb_Glass 29567
+											{
+												MirrorBoneId 29567
+												Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset 0.00755700 -0.48451400 2.52403700
+												Scale 1.00000000 1.00000000 1.00000000
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

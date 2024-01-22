@@ -1,0 +1,62 @@
+Version 165 30
+{
+	DataCRC 492403002
+	NumBones 6
+	Bone Root_Prop_Wall_Light_15a_frag_ 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone Main_Prop_Wall_Light_15a_frag_ 21608
+			{
+				MirrorBoneId 21608
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000000 0.00000000 0.00000000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone Prop_Wall_Light_15a_frag_ 33389
+					{
+						MirrorBoneId 33389
+						Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00000000 0.00000000 0.00000000
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 3
+						{
+							Bone Glass3 19626
+							{
+								MirrorBoneId 19626
+								Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset -1.00491300 -0.14334100 0.85309300
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+							Bone Glass2 19625
+							{
+								MirrorBoneId 19625
+								Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.00515700 -0.13164400 0.85390800
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+							Bone Glass1 19624
+							{
+								MirrorBoneId 19624
+								Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 1.01292400 -0.14377500 0.85390800
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

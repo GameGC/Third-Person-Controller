@@ -1,0 +1,35 @@
+Version 165 30
+{
+	DataCRC 2989897564
+	NumBones 3
+	Bone Prop_recycle_light 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone light_1c_bulb 31826
+			{
+				MirrorBoneId 31826
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000000 0.00000000 -0.26385600
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone oldlight_1c_bulb_dam001 3733
+					{
+						MirrorBoneId 3733
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00000000 0.00000000 0.00000000
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+		}
+	}
+}

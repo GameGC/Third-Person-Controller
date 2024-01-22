@@ -1,0 +1,46 @@
+Version 165 30
+{
+	DataCRC 17147664
+	NumBones 4
+	Bone Prop_StreetLight_12b 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone light12b_pole 28222
+			{
+				MirrorBoneId 28222
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000000 0.00000000 0.00000000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone light12b_glass 12139
+					{
+						MirrorBoneId 12139
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.23756800 0.00000000 2.62332300
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone Light12b_glass_DAM 12685
+							{
+								MirrorBoneId 12685
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.00000000 0.00000000 0.06999900
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

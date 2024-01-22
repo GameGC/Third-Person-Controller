@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &844363179969622778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -55.69399
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.357
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.55200005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7004963542280619241, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 74752b012c9b2450d8d1f7f2dfdecf0a, type: 2}
+    - target: {fileID: 919132149155446097, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Name
+      value: trevor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333807432572815719, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 82f78782f22d34783b86b05a751c79df, type: 2}
+    - target: {fileID: 2606963112497583700, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 82f78782f22d34783b86b05a751c79df, type: 2}
+    - target: {fileID: 4411566511298503457, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 15d871ab249f247a7bdce34457bf6809, type: 2}
+    - target: {fileID: 4462282706997617057, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1783bc19e6705462aaab5f7524f9d645, type: 2}
+    - target: {fileID: 4536019522001894957, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0692a12b1d5f74145b2bcf09eb1f14fb, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c9e5e6a1e4a3c41b680310fc46c35ce6, type: 3}

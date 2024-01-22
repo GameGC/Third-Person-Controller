@@ -1,0 +1,64 @@
+Version 165 32
+{
+	Shaders
+	{
+		trees_normal_spec.sps
+		{
+			DiffuseSampler prop_weeds_nxg03\nxg_grass_01.otx
+			SpecSampler prop_weeds_nxg03\nxg_grass_01_s.otx
+			BumpSampler prop_weeds_nxg03\nxg_grass_01_n.otx
+			ShadowFalloff 0.00000000
+			AlphaTest 0.60000000
+			AlphaScale 0.70000000
+			SelfShadowing 1.00000000
+			WindGlobalParams 1.00000000 5.00000000 5.00000000 1.00000000
+			umGlobalParams 0.02500000 0.02000000 1.02000000 0.50000000
+			Bumpiness 1.00000000
+			SpecMapIntMask 1.00000000 0.00000000 0.00000000
+			SpecularIntensityMult 0.10000000
+			SpecularFalloffMult 12.00000000
+			SpecularFresnel 0.20000000
+		}
+		trees_normal_spec.sps
+		{
+			DiffuseSampler prop_weeds_nxg03\nxg_im_weeds_01.otx
+			SpecSampler prop_weeds_nxg03\nxg_im_weeds_01_s.otx
+			BumpSampler prop_weeds_nxg03\nxg_im_weeds_01_n.otx
+			ShadowFalloff 0.00000000
+			AlphaTest 0.70000000
+			AlphaScale 0.80000000
+			SelfShadowing 1.00000000
+			WindGlobalParams 1.00000000 5.00000000 5.00000000 1.00000000
+			umGlobalParams 0.02500000 0.02000000 1.04000000 0.50000000
+			Bumpiness 1.00000000
+			SpecMapIntMask 1.00000000 0.00000000 0.00000000
+			SpecularIntensityMult 0.20000000
+			SpecularFalloffMult 20.00000000
+			SpecularFresnel 0.90000000
+		}
+	}
+	Skeleton null
+	LodGroup
+	{
+		Center 0.25632500 0.17864600 0.28334200
+		Radius 5.55360000
+		AABBMin -4.93076300 -1.64920800 -0.48837100
+		AABBMax 5.44341300 2.00650000 1.05505500
+		High 55.00000000
+		{
+			prop_weeds_nxg03\prop_weeds_nxg03_high.mesh 0
+		}
+		Med 110.00000000
+		{
+			prop_weeds_nxg03\prop_weeds_nxg03_med.mesh 0
+		}
+		Low 9998.00000000
+		{
+			prop_weeds_nxg03\prop_weeds_nxg03_low.mesh 0
+		}
+		Vlow 9998.00000000
+	}
+	Joints null
+	Light null
+	Bound null
+}

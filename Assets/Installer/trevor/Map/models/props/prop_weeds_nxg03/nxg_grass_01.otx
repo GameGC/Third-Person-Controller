@@ -1,0 +1,10 @@
+Version 13 30
+{
+	Image nxg_grass_01.dds
+	Type Regular
+	PixelFormat DXT5
+	Levels 10
+	Usage SKIPPROCESSING
+	UsageFlags -
+	ExtraFlags 0
+}

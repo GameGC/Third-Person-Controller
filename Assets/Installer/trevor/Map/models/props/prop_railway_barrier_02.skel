@@ -1,0 +1,136 @@
+Version 165 30
+{
+	DataCRC 3276408390
+	NumBones 13
+	Bone Prop_railway_barrier_02 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone chunk1 9877
+			{
+				MirrorBoneId 9877
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -0.27342200 0.00104400 1.52180800
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 2
+				{
+					Bone chunk_2 37863
+					{
+						MirrorBoneId 37863
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.00001500 0.00000000 1.75801600
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 2
+						{
+							Bone chunk_3 37864
+							{
+								MirrorBoneId 37864
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.00000000 0.00000000 2.08481600
+								Scale 1.00000000 1.00000000 1.00000000
+								Children 2
+								{
+									Bone chunk_4 37865
+									{
+										MirrorBoneId 37865
+										Flags ROT_X ROT_Y ROT_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset 0.00000000 0.00000000 2.05821400
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone light_3 6768
+											{
+												MirrorBoneId 6768
+												Flags ROT_X ROT_Y ROT_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset 0.00000000 0.00000000 0.00000000
+												Scale 1.00000000 1.00000000 1.00000000
+												Children 1
+												{
+													Bone railway_light_3 17721
+													{
+														MirrorBoneId 17721
+														Flags ROT_X ROT_Y ROT_Z
+														RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+														LocalOffset 0.07067900 -0.02667300 0.06228800
+														Scale 1.00000000 1.00000000 1.00000000
+													}
+												}
+											}
+										}
+									}
+									Bone light_2 6767
+									{
+										MirrorBoneId 6767
+										Flags ROT_X ROT_Y ROT_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset 0.00000000 0.00000000 0.00000000
+										Scale 1.00000000 1.00000000 1.00000000
+										Children 1
+										{
+											Bone railway_light_2 17720
+											{
+												MirrorBoneId 17720
+												Flags ROT_X ROT_Y ROT_Z
+												RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+												LocalOffset 0.07067900 -0.02667300 0.30537800
+												Scale 1.00000000 1.00000000 1.00000000
+											}
+										}
+									}
+								}
+							}
+							Bone light_1 6766
+							{
+								MirrorBoneId 6766
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.00000000 0.00000000 0.00000000
+								Scale 1.00000000 1.00000000 1.00000000
+								Children 1
+								{
+									Bone railway_light_1 17719
+									{
+										MirrorBoneId 17719
+										Flags ROT_X ROT_Y ROT_Z
+										RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+										LocalOffset 0.07067900 -0.02667300 0.44824700
+										Scale 1.00000000 1.00000000 1.00000000
+									}
+								}
+							}
+						}
+					}
+					Bone light_0 6765
+					{
+						MirrorBoneId 6765
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00000000 0.00000000 0.00000000
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone railway_light_0 17718
+							{
+								MirrorBoneId 17718
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.07066300 -0.02667300 0.19103400
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

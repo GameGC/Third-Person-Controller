@@ -1,0 +1,65 @@
+Version 165 30
+{
+	DataCRC 4284290533
+	NumBones 6
+	Bone Prop_Traffic_03a 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone MainPole 57408
+			{
+				MirrorBoneId 57408
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000400 0.00000000 0.04298800
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 2
+				{
+					Bone lightbox_0 55719
+					{
+						MirrorBoneId 55719
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.26752900 -0.10006800 3.28019900
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone traffic_light_0 16665
+							{
+								MirrorBoneId 16665
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset -0.08729900 0.00007200 0.04318600
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+					Bone walksignbox 10884
+					{
+						MirrorBoneId 10884
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.10146000 0.25333200 2.22468700
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone Ped_Walk_Box 35588
+							{
+								MirrorBoneId 35588
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset -0.13212000 0.09166000 0.04077100
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

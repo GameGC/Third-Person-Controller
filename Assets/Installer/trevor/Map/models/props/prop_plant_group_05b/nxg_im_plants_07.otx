@@ -1,0 +1,10 @@
+Version 13 30
+{
+	Image nxg_im_plants_07.dds
+	Type Regular
+	PixelFormat DXT5
+	Levels 10
+	Usage DIFFUSE
+	UsageFlags NOT_HALF HD_SPLIT
+	ExtraFlags 0
+}

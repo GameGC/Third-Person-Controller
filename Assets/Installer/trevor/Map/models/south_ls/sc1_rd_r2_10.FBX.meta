@@ -1,0 +1,285 @@
+fileFormatVersion: 2
+guid: 50d6c2d08ed9a5041b0deba4ec573dfe
+timeCreated: 1525383011
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: _sc1_rd_r2_10IM_Road_007
+    2100002: _sc1_rd_r2_10IM_Kerbs03
+    2100004: _sc1_rd_r2_10IM_Sidewalk003
+    2100006: _sc1_rd_r2_10IM_Road_edge_002
+    2100008: _sc1_rd_r2_10IM_Sidewalk012
+    2100010: _sc1_rd_r2_10im_roadmarkings02
+    2100012: _sc1_rd_r2_10IM_RoadBlends002
+    2100014: _sc1_rd_r2_10IM_RoadBlends001
+    2100016: _sc1_rd_r2_10IM_Drains02
+    2100018: _sc1_rd_r2_10DC_Road_Damage_Dirt_001
+    2100020: _sc1_rd_r2_10DC_Road_Damage_Dirt_002
+    2100022: _sc1_rd_r2_10im_roadmarkings07
+    2100024: _sc1_rd_r2_10IM_Road_Damage_002
+    2100026: _sc1_rd_r2_10IM_Road_Damage_03
+    2100028: _sc1_rd_r2_10im_sidewalk_blend_001
+    2100030: _sc1_rd_r2_10IM_Road_Damage_05
+    2100032: _sc1_rd_r2_10IM_Road_017
+    2100034: _sc1_rd_r2_10IM_Treehole003
+    2100036: _sc1_rd_r2_10DC_Sidewalk004
+    2100038: _sc1_rd_r2_10IM_Road_edge_001
+    2100040: _sc1_rd_r2_10IM_Sidewalk010
+    2100042: _sc1_rd_r2_10IM_Kerbs04
+    2100044: _sc1_rd_r2_10im_grass07b
+    2100046: _sc1_rd_r2_10IM_Ground_Overlay0001
+    2100048: _sc1_rd_r2_10IM_Ground_Dirt001
+    2100050: _sc1_rd_r2_10DC_Road_Crossing_002
+    2100052: _sc1_rd_r2_10IM_Sidewalk009
+    2100054: _sc1_rd_r2_10IM_Road_001
+    2100056: _sc1_rd_r2_10IM_Road_002
+    2100058: _sc1_rd_r2_10IM_Road_004
+    2100060: _sc1_rd_r2_10DC_Tram_001
+    2100062: _sc1_rd_r2_10DC_Road_Crossing_001b
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: default
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10DC_Road_Crossing_001b
+    second: {fileID: 2100000, guid: dd8fedab5fca5c74c89e51d44b0a5b53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10DC_Road_Crossing_002
+    second: {fileID: 2100000, guid: 87de0a23d75d2f94191ed72e340c79d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10DC_Road_Damage_Dirt_001
+    second: {fileID: 2100000, guid: 78868b0d3d668da44b02d2f04c16d7e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10DC_Road_Damage_Dirt_002
+    second: {fileID: 2100000, guid: c72b3dadfd455ee46b74108899930241, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10DC_Sidewalk004
+    second: {fileID: 2100000, guid: 10cc8604f69085646a8c84296ec40a51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10DC_Tram_001
+    second: {fileID: 2100000, guid: b2b181a5b866bfc409673cf8e4ea7ff9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Drains02
+    second: {fileID: 2100000, guid: 54dbca936a01b2942b5ee4add63387a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Ground_Dirt001
+    second: {fileID: 2100000, guid: d1fc44cbd4f28914db8fc61ce12a4377, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Ground_Overlay0001
+    second: {fileID: 2100000, guid: 2dbc5f945e06e4f4a81ad28c31be74c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Kerbs03
+    second: {fileID: 2100000, guid: 4e5daa0bd0e0de748baea8fa2d75b1be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Kerbs04
+    second: {fileID: 2100000, guid: bf724db06d069794eb72643c9d23a954, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_RoadBlends001
+    second: {fileID: 2100000, guid: 8fc3a3d5fef0f7d48805d013b6742163, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_RoadBlends002
+    second: {fileID: 2100000, guid: cc6767c4a3437bd46a3daed1b4312198, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_001
+    second: {fileID: 2100000, guid: 768594b75b26229459c53af98c00b123, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_002
+    second: {fileID: 2100000, guid: 5e4665fad8440cb4f8830ad1a669ddef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_004
+    second: {fileID: 2100000, guid: a1ad7cd6fe072d947a08e6c4df7c61d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_007
+    second: {fileID: 2100000, guid: 10e8f4be106f64647865809c7410b10d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_017
+    second: {fileID: 2100000, guid: fcf226f012422f540965cb0824890000, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_Damage_002
+    second: {fileID: 2100000, guid: 2adf5d05f1d5d1847aed4582b26c1f1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_Damage_03
+    second: {fileID: 2100000, guid: 0b8dddf96d51ad0459ff67aa462c6336, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_Damage_05
+    second: {fileID: 2100000, guid: 91252b803a050ff4fb2f885824b66e92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_edge_001
+    second: {fileID: 2100000, guid: ae3f8f477d710d94182b6a1ed1a99500, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Road_edge_002
+    second: {fileID: 2100000, guid: 7d41f94eefec6d442bf30ce0b252fd49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Sidewalk003
+    second: {fileID: 2100000, guid: 3dc98af0d38528b41bbcf43a3accb4d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Sidewalk009
+    second: {fileID: 2100000, guid: 9660a1e6892eb2247a3d7f6b8d646bc4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Sidewalk010
+    second: {fileID: 2100000, guid: 0d570ccd789f0834b9031102e7f2e748, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Sidewalk012
+    second: {fileID: 2100000, guid: c91b2364dfa0e1d499bec635fb3646db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10IM_Treehole003
+    second: {fileID: 2100000, guid: 8bcee252f96876c468cc2ec86fec902a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10im_grass07b
+    second: {fileID: 2100000, guid: baa1e4b58ae923e4685b4d85ee549f08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10im_roadmarkings02
+    second: {fileID: 2100000, guid: d8ecec369364bb84496d8db2152b92dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10im_roadmarkings07
+    second: {fileID: 2100000, guid: 5cf7299c952c4074aa99dec797b0cf3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_rd_r2_10im_sidewalk_blend_001
+    second: {fileID: 2100000, guid: 6ecf9731544ce4e42b18a8672da48bb4, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

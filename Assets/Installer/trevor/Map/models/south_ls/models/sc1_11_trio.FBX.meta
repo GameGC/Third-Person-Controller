@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: 7b09a82c4d7e58144ba0a4e01eed8020
+timeCreated: 1525380614
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: _sc1_11_trioIM_Roof04
+    2100002: _sc1_11_trioSC1_11_RSN_billboard1
+    2100004: _sc1_11_trioIM_Wall12
+    2100006: _sc1_11_triosjm_metalroof1
+    2100008: _sc1_11_trioSC1_11_tpage9
+    2100010: _sc1_11_trioSC1_11_tpage7
+    2100012: _sc1_11_trioSC1_11_tpage6
+    2100014: _sc1_11_triosc1_11_tpage2
+    2100016: _sc1_11_trioSC1_11_tpage1
+    2100018: _sc1_11_trioSC1_11_tpage5
+    2100020: _sc1_11_triosc1_11_rsd_leroysb
+    2100022: _sc1_11_triosc1_11_signs_mix
+    2100024: _sc1_11_trioSC1_11_RSN_NS_Walls_0002
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: default
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioIM_Roof04
+    second: {fileID: 2100000, guid: c6f4fd7c67583854cb3c4e146305ba68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioIM_Wall12
+    second: {fileID: 2100000, guid: 3e2e73dcdb728304381802c1b4ce9121, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_RSN_NS_Walls_0002
+    second: {fileID: 2100000, guid: 0e54b0f4cbf971543b6cd1db187ec618, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_RSN_billboard1
+    second: {fileID: 2100000, guid: ac9fc49f6d35e564d882c7d26a8b466b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_tpage1
+    second: {fileID: 2100000, guid: 6337614c3d989474ea6e5a8013355058, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_tpage5
+    second: {fileID: 2100000, guid: a1279aac6d8a8c440aa593c54d0d790b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_tpage6
+    second: {fileID: 2100000, guid: 0f3bea4587d7cef43936ccbe2d9744bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_tpage7
+    second: {fileID: 2100000, guid: 690c680d030d2744c9142fc428429ceb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_trioSC1_11_tpage9
+    second: {fileID: 2100000, guid: 5ba655b4da74f3244b31bc7659f5d2cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_triosc1_11_rsd_leroysb
+    second: {fileID: 2100000, guid: 1c8e07c60dee94441800b072f1ba3ac5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_triosc1_11_signs_mix
+    second: {fileID: 2100000, guid: 2bd00e8a6767eeb4190e157c130b9c3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_triosc1_11_tpage2
+    second: {fileID: 2100000, guid: e6d0b045773ecc64687a4d4ba7166928, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_11_triosjm_metalroof1
+    second: {fileID: 2100000, guid: 1643fb871d3600648953910926ecce8e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

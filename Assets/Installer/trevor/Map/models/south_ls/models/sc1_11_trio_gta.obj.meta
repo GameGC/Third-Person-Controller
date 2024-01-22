@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 46aabea16882f6945b641fdd46c78861
+timeCreated: 1525263259
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: default
+    100002: //RootNode
+    100004: sc1_11_trio_gta_root
+    400000: default
+    400002: //RootNode
+    400004: sc1_11_trio_gta_root
+    2100000: IM_Roof04
+    2100002: SC1_11_RSN_billboard1
+    2100004: IM_Wall12
+    2100006: sjm_metalroof1
+    2100008: SC1_11_tpage9
+    2100010: SC1_11_tpage7
+    2100012: SC1_11_tpage6
+    2100014: sc1_11_tpage2
+    2100016: SC1_11_tpage1
+    2100018: SC1_11_tpage5
+    2100020: sc1_11_rsd_leroysb
+    2100022: sc1_11_signs_mix
+    2100024: SC1_11_RSN_NS_Walls_0002
+    2300000: default
+    3300000: default
+    4300000: default
+    6400000: default
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: IM_Roof04
+    second: {fileID: 2100000, guid: 03b71baac33a85c47b830ca3bae4a1a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: IM_Wall12
+    second: {fileID: 2100000, guid: 5746500dcc31a4a48ac221b6a7ab0823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_RSN_NS_Walls_0002
+    second: {fileID: 2100000, guid: 0458f164562660947b3439ae22809e39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_RSN_billboard1
+    second: {fileID: 2100000, guid: a699d2ff215bd6f449b5082d99ca7ecb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_tpage1
+    second: {fileID: 2100000, guid: 61315f5c171885e4d9de57a5b688a31c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_tpage5
+    second: {fileID: 2100000, guid: 19224871ed1cb1440bb58af835c9c6f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_tpage6
+    second: {fileID: 2100000, guid: 6e77a116dd490df4eb8d71ca023f71c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_tpage7
+    second: {fileID: 2100000, guid: 4b091bc6793594e4e87c1e3d659ca95c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SC1_11_tpage9
+    second: {fileID: 2100000, guid: f2234b3779efa284a9f743af3fab125d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sc1_11_rsd_leroysb
+    second: {fileID: 2100000, guid: 0282ef58e76e0534d9cc3b053e80d9e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sc1_11_signs_mix
+    second: {fileID: 2100000, guid: ea1ab506a28e83948b24bf01e4dec9cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sc1_11_tpage2
+    second: {fileID: 2100000, guid: 9073e0f23af373449838a72e8864f6e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sjm_metalroof1
+    second: {fileID: 2100000, guid: a923ba121c0e9e7408300609a8518e40, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 1
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 1
+    swapUVChannels: 1
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 1
+    weldVertices: 1
+    preserveHierarchy: 1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

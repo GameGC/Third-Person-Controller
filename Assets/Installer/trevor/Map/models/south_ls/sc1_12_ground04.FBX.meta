@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: ee500d448b1284843a133409dd428e74
+timeCreated: 1525409944
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: _sc1_12_ground04DC_Parking_Tarmac_03
+    2100002: _sc1_12_ground04im_roof08
+    2100004: _sc1_12_ground04IM_Kerbs03
+    2100006: _sc1_12_ground04im_wall_small_02
+    2100008: _sc1_12_ground04SC1_RSN_NS_ground_0005
+    2100010: _sc1_12_ground04dc_parking_tarmac_02
+    2100012: _sc1_12_ground04IM_Concrete17
+    2100014: _sc1_12_ground04SC1_27_RSN_NS_Ground_0001
+    2100016: _sc1_12_ground04IM_Grass04
+    2100018: _sc1_12_ground04im_grass13b
+    2100020: _sc1_12_ground04SC1_RSN_NS_ground_0003
+    2100022: _sc1_12_ground04SC1_12_RSN_NS_Tpage_0001
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: default
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04DC_Parking_Tarmac_03
+    second: {fileID: 2100000, guid: 3f274caef2b705f49bc2d893f3adff29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04IM_Concrete17
+    second: {fileID: 2100000, guid: 0ad6c25ce0021d141bbf9d7542310ad5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04IM_Grass04
+    second: {fileID: 2100000, guid: f329fce1e71926e4aa31cc490ee5b0dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04IM_Kerbs03
+    second: {fileID: 2100000, guid: 36bcfc7a62de65e47974f86578439ab7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04SC1_12_RSN_NS_Tpage_0001
+    second: {fileID: 2100000, guid: d0657efb3c2862640b6abb05b8da481b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04SC1_27_RSN_NS_Ground_0001
+    second: {fileID: 2100000, guid: d5b6cbec21d79d7408cee8f8a448e2f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04SC1_RSN_NS_ground_0003
+    second: {fileID: 2100000, guid: d3159c9ee2c6d7046a68dc81dd134ef4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04SC1_RSN_NS_ground_0005
+    second: {fileID: 2100000, guid: 0f4ddae324b7da847b7b78ede6824d19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04dc_parking_tarmac_02
+    second: {fileID: 2100000, guid: 0c91a4191878f584b8bac25d49a2a6dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04im_grass13b
+    second: {fileID: 2100000, guid: abcaa3693b3a86c4ba2c16b8b0745864, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04im_roof08
+    second: {fileID: 2100000, guid: 30c4e6a0541b8244f93f5a615c6fb09c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_ground04im_wall_small_02
+    second: {fileID: 2100000, guid: 609348f3f2d09dd4c8e723a3ffa342c2, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

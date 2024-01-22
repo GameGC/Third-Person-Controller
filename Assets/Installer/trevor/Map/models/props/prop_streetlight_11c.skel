@@ -1,0 +1,65 @@
+Version 165 30
+{
+	DataCRC 4243302212
+	NumBones 6
+	Bone Prop_StreetLight_11c 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone light11c_pole 34572
+			{
+				MirrorBoneId 34572
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -0.00337600 0.00000000 1.87646700
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 2
+				{
+					Bone light11c_bulbhead1 59132
+					{
+						MirrorBoneId 59132
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.07288700 0.00000000 3.99339800
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone light11c_bulb1 28101
+							{
+								MirrorBoneId 28101
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset -0.36746200 0.00000000 -0.06635100
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+					Bone light11c_bulbhead2 59133
+					{
+						MirrorBoneId 59133
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.07944100 0.00000000 3.99339800
+						Scale 1.00000000 1.00000000 1.00000000
+						Children 1
+						{
+							Bone light11c_bulb2 28102
+							{
+								MirrorBoneId 28102
+								Flags ROT_X ROT_Y ROT_Z
+								RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+								LocalOffset 0.35371600 0.00000000 -0.06635100
+								Scale 1.00000000 1.00000000 1.00000000
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,78 @@
+Version 165 32
+{
+	Shaders
+	{
+		trees_normal_spec.sps
+		{
+			DiffuseSampler prop_plant_group_05b\nxg_im_plants_04b.otx
+			SpecSampler prop_plant_group_05b\nxg_im_plants_04_s.otx
+			BumpSampler prop_plant_group_05b\nxg_im_plants_04_n.otx
+			AlphaTest 0.40000000
+			SelfShadowing 0.50000000
+			WindGlobalParams 1.00000000 10.00000000 10.00000000 1.00000000
+			umGlobalParams 0.02500000 0.02000000 1.00000000 0.50000000
+			Bumpiness 1.00000000
+			SpecMapIntMask 1.00000000 0.00000000 0.00000000
+			SpecularIntensityMult 0.30000000
+			SpecularFalloffMult 15.00000000
+			SpecularFresnel 0.97000000
+		}
+		trees_normal.sps
+		{
+			DiffuseSampler prop_plant_group_05b\nxg_im_plants_07.otx
+			BumpSampler prop_plant_group_05b\nxg_im_plants_07_n.otx
+			AlphaTest 0.40000000
+			SelfShadowing 1.00000000
+			WindGlobalParams 1.00000000 10.00000000 10.00000000 1.00000000
+			umGlobalParams 0.02500000 0.02000000 1.00000000 0.50000000
+			Bumpiness 1.00000000
+		}
+		trees_normal_spec.sps
+		{
+			DiffuseSampler prop_plant_group_05b\nxg_im_plants_04b.otx
+			SpecSampler prop_plant_group_05b\nxg_im_plants_04_s.otx
+			BumpSampler prop_plant_group_05b\nxg_im_plants_04_n.otx
+			ShadowFalloff 0.00000000
+			AlphaTest 0.40000000
+			SelfShadowing 0.70000000
+			WindGlobalParams 1.00000000 10.00000000 10.00000000 1.00000000
+			umGlobalParams 0.02500000 0.02000000 1.03000000 0.50000000
+			Bumpiness 1.00000000
+			SpecMapIntMask 1.00000000 0.00000000 0.00000000
+			SpecularIntensityMult 0.30000000
+			SpecularFalloffMult 15.00000000
+			SpecularFresnel 0.97000000
+		}
+		trees_lod.sps
+		{
+			DiffuseSampler prop_plant_group_05b\slod_prop_plant_group_05b.otx
+			AlphaTest 0.40000000
+			SelfShadowing 0.80000000
+			UseTreeNormals 0.11000000
+		}
+	}
+	Skeleton null
+	LodGroup
+	{
+		Center 0.03125800 0.01024100 0.00000000
+		Radius 5.08707000
+		AABBMin -4.12814300 -2.32721300 -1.76464700
+		AABBMax 4.19065900 2.34769400 1.76464700
+		High 75.00000000
+		{
+			prop_plant_group_05b\prop_plant_group_05b_high.mesh 0
+		}
+		Med 160.00000000
+		{
+			prop_plant_group_05b\prop_plant_group_05b_med.mesh 0
+		}
+		Low 9998.00000000
+		{
+			prop_plant_group_05b\prop_plant_group_05b_low.mesh 0
+		}
+		Vlow 9998.00000000
+	}
+	Joints null
+	Light null
+	Bound prop_plant_group_05b\prop_plant_group_05b.bound
+}

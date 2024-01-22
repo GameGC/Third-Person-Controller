@@ -1,0 +1,92 @@
+Version 165 30
+{
+	DataCRC 299263496
+	NumBones 9
+	Bone Prop_Ind_light_02a 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 4
+		{
+			Bone indlight2a_bulb4 11720
+			{
+				MirrorBoneId 11720
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -0.36111500 -0.36139000 15.23614000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone indlight2a_glass4 64251
+					{
+						MirrorBoneId 64251
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.03530100 -0.03945900 -0.03894400
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+			Bone indlight2a_bulb3 11719
+			{
+				MirrorBoneId 11719
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset -0.35903900 0.35904400 15.23614000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone indlight2a_glass3 64250
+					{
+						MirrorBoneId 64250
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset -0.03945900 0.03529900 -0.03894400
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+			Bone indlight2a_bulb2 11718
+			{
+				MirrorBoneId 11718
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.36636400 0.35904400 15.23614000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone indlight2a_glass2 64249
+					{
+						MirrorBoneId 64249
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.03530100 0.03945900 -0.03894400
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+			Bone indlight2a_bulb1 11717
+			{
+				MirrorBoneId 11717
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.36428800 -0.36139000 15.23614000
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone indlight2a_glass1 64248
+					{
+						MirrorBoneId 64248
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.03945900 -0.03529900 -0.03894400
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+		}
+	}
+}

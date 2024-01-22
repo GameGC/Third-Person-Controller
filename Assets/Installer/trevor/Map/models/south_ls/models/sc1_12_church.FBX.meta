@@ -1,0 +1,177 @@
+fileFormatVersion: 2
+guid: 8014f7f28ecfbfc4b8c3893bd3876ab3
+timeCreated: 1525386853
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    400000: //RootNode
+    2100000: _sc1_12_churchim_roof02
+    2100002: _sc1_12_churchsc1_12_rsn_ns_tpage_0001
+    2100004: _sc1_12_churchsc1_27_rsn_ns_ground_0001
+    2100006: _sc1_12_churchsc1_12_rsn_ns_tpage_0006
+    2100008: _sc1_12_churchSC1_12_RSN_NS_Walls_0007
+    2100010: _sc1_12_churchsc01_rnad_ch_door_0001
+    2100012: _sc1_12_churchsc1_10_rsn_ns_walls_0001
+    2100014: _sc1_12_churchsc1_10_rsn_ns_railings_0002
+    2100016: _sc1_12_churchsc1_12_rsn_ns_signs_0001
+    2100018: _sc1_12_churchsc1_12_rsn_ns_walls_0006
+    2100020: _sc1_12_churchsc1_12_churchwin
+    2100022: _sc1_12_churchrsn_am_hedge_02
+    2100024: _sc1_12_churchim_wall_small_05
+    2100026: _sc1_12_churchhw1_25_churchwall
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: default
+    6400000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchSC1_12_RSN_NS_Walls_0007
+    second: {fileID: 2100000, guid: a381861195025dc4a994f39c2aeaac0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchhw1_25_churchwall
+    second: {fileID: 2100000, guid: 7d5cb0ebd07f1b640aad7baeff2d5817, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchim_roof02
+    second: {fileID: 2100000, guid: 8e95940b6afcf374ca313c11a22fb87d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchim_wall_small_05
+    second: {fileID: 2100000, guid: 6394ff546e2b33d479f401956bc1b550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchrsn_am_hedge_02
+    second: {fileID: 2100000, guid: cc21b194e7ed92d4da48f364a4bf681b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc01_rnad_ch_door_0001
+    second: {fileID: 2100000, guid: 95b4e823bc8abce439f9c79b71c1ce03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_10_rsn_ns_railings_0002
+    second: {fileID: 2100000, guid: b9103aa1e3ebc8946bf4e133e254af15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_10_rsn_ns_walls_0001
+    second: {fileID: 2100000, guid: 8db99072870050f40af636b486bfde2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_12_churchwin
+    second: {fileID: 2100000, guid: 91e1f56cbc57fbd43b4ff50175550447, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_12_rsn_ns_signs_0001
+    second: {fileID: 2100000, guid: 8dd907ae5a4f1fe43be29643c6d5bfbe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_12_rsn_ns_tpage_0001
+    second: {fileID: 2100000, guid: c8d9c21a1e5ce6a4ebba766e9b515d11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_12_rsn_ns_tpage_0006
+    second: {fileID: 2100000, guid: 77179c33e43b80d408b835dcf15a3d8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_12_rsn_ns_walls_0006
+    second: {fileID: 2100000, guid: 04a255e97a0dbb745aca3e95cea79054, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _sc1_12_churchsc1_27_rsn_ns_ground_0001
+    second: {fileID: 2100000, guid: 3191cdf8808e2864eb446702ca5f5241, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

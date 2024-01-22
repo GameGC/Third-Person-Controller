@@ -1,0 +1,35 @@
+Version 165 30
+{
+	DataCRC 3381247984
+	NumBones 3
+	Bone Prop_BareBulb_01 0
+	{
+		MirrorBoneId 0
+		Flags ROT_X ROT_Y ROT_Z TRANS_X TRANS_Y TRANS_Z
+		RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+		LocalOffset 0.00000000 0.00000000 0.00000000
+		Scale 1.00000000 1.00000000 1.00000000
+		Children 1
+		{
+			Bone cord 35736
+			{
+				MirrorBoneId 35736
+				Flags ROT_X ROT_Y ROT_Z
+				RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+				LocalOffset 0.00000000 -0.02791300 0.84302300
+				Scale 1.00000000 1.00000000 1.00000000
+				Children 1
+				{
+					Bone Barebulb 51748
+					{
+						MirrorBoneId 51748
+						Flags ROT_X ROT_Y ROT_Z
+						RotationQuaternion 0.00000000 0.00000000 0.00000000 1.00000000
+						LocalOffset 0.00000000 0.00126500 -0.16321400
+						Scale 1.00000000 1.00000000 1.00000000
+					}
+				}
+			}
+		}
+	}
+}

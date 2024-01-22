@@ -1,0 +1,10 @@
+Version 13 30
+{
+	Image slod_prop_plant_group_05b.dds
+	Type Regular
+	PixelFormat DXT5
+	Levels 4
+	Usage DIFFUSE
+	UsageFlags -
+	ExtraFlags 0
+}

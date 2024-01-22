@@ -14,7 +14,15 @@ using Object = UnityEngine.Object;
 public class AnimationLayer : FollowingStateMachine<Object>
 {
     #region Propertys
-    public TimelineGraph CurrentGraph => _graphs[CurrentStateIndex];
+    public TimelineGraph CurrentGraph
+    {
+        get
+        {
+            if (_graphs != null && _graphs.Length > CurrentStateIndex)
+                return _graphs[CurrentStateIndex];
+            return null;
+        }
+    }
 
     public float Weight
     {
@@ -303,9 +311,19 @@ public class AnimationLayer : FollowingStateMachine<Object>
         var wait = new WaitForEndOfFrame();
         while (timer > 0)
         {
-            _mixerPlayable.SetInputWeight(previousStateIndex,timer/maxTimer);
-            _mixerPlayable.SetInputWeight(newStateIndex,1-timer/maxTimer);
-            timer -= Time.deltaTime;
+            try
+            {
+                _mixerPlayable.SetInputWeight(previousStateIndex,timer/maxTimer);
+                _mixerPlayable.SetInputWeight(newStateIndex,1-timer/maxTimer);
+                timer -= Time.deltaTime; 
+            }
+            catch (Exception)
+            {
+                Debug.LogError(name);
+                Debug.LogError(previousStateIndex);
+                Debug.LogError(newStateIndex);
+
+            }
             yield return wait;
         }
         
@@ -337,8 +355,18 @@ public class AnimationLayer : FollowingStateMachine<Object>
 
     public void SetCustomVariables<T0, T1, T2, T3>(int index, T0 arg0, T1 arg1, T2 arg2, T3 arg3) =>
         ((AnimationValue) States[index]).SetCustomVariables(_mixerPlayable.GetInput(index),arg0,arg1,arg2,arg3);
-    
 
+
+    private void OnDestroy()
+    {
+        if (_graphs != null && _graphs.Length > 0)
+        {
+            foreach (var timelineGraph in _graphs)
+            {
+                timelineGraph?.Destroy();
+            }
+        }
+    }
 #if UNITY_EDITOR
     protected override void OnValidate()
     {
