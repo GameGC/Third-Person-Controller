@@ -21,7 +21,7 @@ public class AdjustmentEditor : Editor
         set => EditorPrefs.SetBool("AdjustmentEditor_selectedTab2", value == 1);
     }
 
-    private AdjustmentBehavior target;
+    private new AdjustmentBehavior target;
     ReorderableList characterList;
     ReorderableList weapontList;
 

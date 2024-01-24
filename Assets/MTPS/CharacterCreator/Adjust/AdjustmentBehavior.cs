@@ -111,7 +111,9 @@ public class AdjustmentBehavior : MonoBehaviour
       var inventory = _currentCharacter.gameObject.GetComponent<Inventory>();
       if (Application.isPlaying)
       {
+#pragma warning disable CS4014
          inventory.Equip(weapons[i]);
+#pragma warning restore CS4014
       }
       else 
          inventory.EquipImmediateEditor(weapons[i]);

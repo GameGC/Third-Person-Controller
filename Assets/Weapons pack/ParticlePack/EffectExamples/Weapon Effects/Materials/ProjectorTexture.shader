@@ -18,11 +18,14 @@ Shader "Projector/Projector Texture" {
 		ColorMask RGB
 		Blend SrcAlpha OneMinusSrcAlpha // Traditional transparency
 		Offset -1, -1
-    	Tags {"Queue" = "AlphaTest" "RenderType" = "TransparentCutout" "IgnoreProjector"="False" }
+    	Tags {"Queue" = "AlphaTest" "RenderType" = "TransparentCutout" "IgnoreProjector"="False" "LightMode"="ForwardBase" }
 
     	
         CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows vertex:fProjUVs alpha:fade
+        #pragma surface surf Standard vertex:fProjUVs alpha:fade
+		#pragma surface surf NoLighting noambient noshadow novertexlights nolightmap noforwardadd nometa
+ 
+		
         
         #include "UnityCG.cginc"
 
@@ -39,10 +42,11 @@ Shader "Projector/Projector Texture" {
         half _DetailNormalMapScale;
         
         uniform float4x4 unity_Projector;
-
+        
         struct Input {
             float2 uv_MainTex;
             float4 posProj : TEXCOORD0; // position in projector space
+        	float4 uvFalloff : TEXCOORD1;
         };
 
         void fProjUVs (inout appdata_full v, out Input o) {
@@ -50,6 +54,10 @@ Shader "Projector/Projector Texture" {
             o.posProj = mul(unity_Projector, v.vertex);
         }
 
+        fixed4 NoLighting(SurfaceOutput s, fixed3 lightDir, fixed atten) {
+			return fixed4(s.Albedo, s.Alpha);
+		}
+        
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             if (IN.posProj.x < -0) discard;

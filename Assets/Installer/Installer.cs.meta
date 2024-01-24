@@ -7,6 +7,7 @@ MonoImporter:
   - m_ViewDataDictionary: {instanceID: 0}
   - startTex: {fileID: 2800000, guid: 9a8c202985f144f2e8d8b993a4e63f0a, type: 3}
   - otherTex: {fileID: 2800000, guid: d4429f1a7d95c43deac333857e743433, type: 3}
+  - manifestFile: {fileID: 4900000, guid: fdb8a2858b52428d99bd9b1c3e9153e9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -39,7 +39,6 @@ internal static class CustomWebClient
                 throw new Exception();
             }
 
-            Debug.Log((await content.ReadAsStringAsync()));
             return await content.ReadAsStringAsync();
         }
     }

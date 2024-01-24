@@ -1,29 +1,22 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
-using AmplifyShaderEditor;
+using System.Linq;
+using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.UI;
+using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class Installer : EditorWindow
 {
     public Texture2D startTex;
     public Texture2D otherTex;
+    
+    public TextAsset manifestFile;
     private const string Version = "0.01_PRO";
 
-    private string[] packageList = {
-        "com.gamegc.common-editor-utils",
-        "com.gamegc.timeline.legacy-animation",
-        "com.gamegc.collections",
-        "com.gamegc.animation.rigging.saver",
-        "com.gamegc.surfacesystem"
-    };
 
     [MenuItem("Tools/Installer")]
     public static void Create()
@@ -50,7 +43,49 @@ public class Installer : EditorWindow
 
     private int stage = 0;
 
+    
+    
     private bool _multipleDownloads = true;
+    private DownloaderItem[] _downloaderItems;
+    private ReorderableList _downloadsDisplay;
+
+    private void OnEnable()
+    {
+        var packageList = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifestFile.text);
+        
+        
+        _downloaderItems = new DownloaderItem[packageList.Count];
+        
+        int i = 0;
+        foreach (var package in packageList)
+        {
+            _downloaderItems[i] = new DownloaderItem(package.Key,package.Value);
+            i++;
+        }
+
+        _downloadsDisplay = new ReorderableList(_downloaderItems, typeof(DownloaderItem), false, true, false, false);
+        _downloadsDisplay.drawHeaderCallback += rect =>
+        {
+            rect.width /= 2;
+            EditorGUI.LabelField(rect, EditorGUIUtility.TrTextContent("Package"));
+            rect.x += rect.width;
+            var editorLabel = new GUIStyle(EditorStyles.label);
+            editorLabel.alignment = TextAnchor.MiddleRight;
+            EditorGUI.LabelField(rect, EditorGUIUtility.TrTextContent("Progress"),editorLabel);
+        };
+        _downloadsDisplay.drawElementCallback += (rect, index, active, focused) =>
+        {
+            var tempRectWidth = rect.width;
+            rect.width *= 0.75F; 
+            EditorGUI.LabelField(rect, _downloaderItems[index].PackageName);
+            rect.x += rect.width;
+            rect.width = tempRectWidth - rect.width;
+            var editorLabel = new GUIStyle(EditorStyles.label);
+            editorLabel.alignment = TextAnchor.MiddleRight;
+            EditorGUI.LabelField(rect,$"{_downloaderItems[index].Progress}%",editorLabel);
+        };
+    }
+
     private void OnGUI()
     {
         if (stage == 0)
@@ -165,16 +200,25 @@ public class Installer : EditorWindow
             var rect = new Rect(position.width * 0.2f, position.height - position.height * 0.05f, position.width * 0.6f,
                 position.height * 0.05f);
 
+            _downloadsDisplay.DoList(new Rect(position.width *0.1f, position.height / 2f, position.width * 0.8f, position.height * 0.5f));
             
             if (GUI.Button(rect, "Download packages", button))
             {
-                foreach (var package in packageList)
+                if (_multipleDownloads)
                 {
-                    SendPackageRequest(package);
+                    for (var i = 0; i < _downloaderItems.Length; i++)
+                    {
+                        SendPackageRequest(i);
+                    }
+                }
+                else
+                {
+                    DownloadSynchronous(0);
                 }
 
-                stage = 3;
             }
+            if(_downloaderItems.All(d=>d.Progress == 100))
+                stage = 3;
         }
 
         if (stage == 3)
@@ -203,6 +247,13 @@ public class Installer : EditorWindow
             }
         }
     }
+
+    private void DownloadSynchronous(int index)
+    {
+        _downloaderItems[index].DownloadClient.DownloadFileCompleted += (sender, args) => DownloadSynchronous(index);
+        SendPackageRequest(index);
+        index++;
+    }
     
     private async void SendValidateRequest()
     {
@@ -218,8 +269,10 @@ public class Installer : EditorWindow
         }
     }
 
-    private async void SendPackageRequest(string package)
+
+    private async void SendPackageRequest(int i)
     {
+        var package = _downloaderItems[i].PackageName;
         var result = await CustomWebClient.Get("http://cvhelpers.byethost7.com/Backend/getfile.php?key=" + invoice+"&url="+package);
 
         //hacker protection 
@@ -232,10 +285,7 @@ public class Installer : EditorWindow
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
         
-        var downloader = new HttpWebRequestDownload();
-        downloader.DownloadProgressChanged += (sender, args) => Debug.Log(args.TransferredPercents);
-        downloader.DownloadFile(result,path);
-       
+        _downloaderItems[i].DownloadClient.DownloadFile(result,path);
     }
 
     private void Update()

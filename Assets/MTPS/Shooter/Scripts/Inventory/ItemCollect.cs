@@ -1,11 +1,13 @@
+using GameGC.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UTPS.Inventory.ItemTypes;
 
 namespace UTPS.Inventory
 {
     public abstract class ItemCollect : MonoBehaviour
     {
-        public BaseItemData WeaponData;
+        [SerializeField] private SKeyValuePair<BaseItemData,int>[] items;
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -16,7 +18,8 @@ namespace UTPS.Inventory
 
         public virtual void Collect(Inventory receiver)
         {
-            receiver.AddItem(WeaponData);
+            foreach (var item in items) 
+                receiver.AddItem(item.Key, item.Value);
             Destroy(gameObject);
         }
     }

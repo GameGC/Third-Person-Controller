@@ -1,0 +1,7 @@
+{
+  "com.gamegc.common-editor-utils"       : "1.0.3",
+  "com.gamegc.timeline.legacy-animation" : "1.0.0",
+  "com.gamegc.collections"               : "1.0.0",
+  "com.gamegc.animation.rigging.saver"   : "1.0.0",
+  "com.gamegc.surfacesystem"             : "1.0.0"
+}
