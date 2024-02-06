@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using GameGC.SurfaceSystem;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariable
 { 
     [Serializable]
@@ -75,48 +77,68 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
     }
     
 
-    public override void OnHit(in RaycastHit hit, IDamageSender source)
+    public override async void OnHit(RaycastHit hit, IDamageSender source)
     {
+        bool alivePreviously = Health > 0;
         float damage = source.damage;
-        if (_hitBoxCount > 0)
+
+        if (alivePreviously)
         {
-            for (int i = 0; i < _hitBoxCount; i++)
+            if (_hitBoxCount > 0)
             {
-                if (hitBoxes[i].Collider != hit.collider) continue;
-                damage *= hitBoxes[i].damageMultiplicator;
-                break;
+                for (int i = 0; i < _hitBoxCount; i++)
+                {
+                    if (hitBoxes[i].Collider != hit.collider) continue;
+                    damage *= hitBoxes[i].damageMultiplicator;
+                    break;
+                }
             }
+
+            Health -= damage;
         }
-        Health -= damage;
+
         SurfaceSystem.instance.OnSurfaceHit(hit,(int) source.HitType,defaultHitEffect);
 
-        CallHitFeatures(Health + damage, Health, hit.point, hit.normal, source);
+        if (alivePreviously)
+        {
+            //delay for realistic velocity copy to rigidbody
+            await Task.Yield();
+            CallHitFeatures(Health + damage, Health, hit.point, hit.normal, source);
+        }
     }
 
-    public void OnHit(Vector3 hitPointOrigin,Collider hitCollider,Collider rootCollider, IDamageSender source)
+    public async void OnHit(Vector3 hitPointOrigin,Collider hitCollider,Collider rootCollider, IDamageSender source)
     {
+        bool alivePreviously = Health > 0;
         float damage = source.damage;
-        
-        if (hitCollider != rootCollider && _hitBoxCount > 0)
-        {
-            for (int i = 0; i < _hitBoxCount; i++)
-            {
-                if (hitBoxes[i].Collider != hitCollider) continue;
-                damage *= hitBoxes[i].damageMultiplicator;
-                break;
-            }
-        }
-        
-        Health -= damage;
 
-        
+        if (alivePreviously)
+        {
+            if (hitCollider != rootCollider && _hitBoxCount > 0)
+            {
+                for (int i = 0; i < _hitBoxCount; i++)
+                {
+                    if (hitBoxes[i].Collider != hitCollider) continue;
+                    damage *= hitBoxes[i].damageMultiplicator;
+                    break;
+                }
+            }
+
+            Health -= damage;
+        }
+
         var hitPointClosest = hitCollider.ClosestPoint(hitPointOrigin);
         var hitNormal = (hitPointClosest - hitPointOrigin).normalized;
         
         
         SurfaceSystem.instance.OnSurfaceHit(hitCollider,rootCollider,hitPointClosest,hitNormal,defaultHitEffect);
 
-        CallHitFeatures(Health + damage, Health, in hitPointClosest,in hitNormal, source);
+        if (alivePreviously)
+        {
+            //delay for realistic velocity copy to rigidbody
+            await Task.Yield();
+            CallHitFeatures(Health + damage, Health, in hitPointClosest, in hitNormal, source);
+        }
     }
 
     private void CallHitFeatures(in float previousHealth,in float newHealth, in Vector3 hitPoint, in Vector3 hitDirection,IDamageSender damageSender)

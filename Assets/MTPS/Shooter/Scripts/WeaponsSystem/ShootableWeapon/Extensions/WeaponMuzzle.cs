@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Weapons
 {
-    [ToolBarDisplayGroup("Shooting")]
+    [ToolBarDisplayGroup("Shooting"),DisallowMultipleComponent]
     public class WeaponMuzzle : BaseWeaponExtension
     {
         public GameObject muzzle;
@@ -18,12 +18,27 @@ namespace Weapons
         private void DisableMuzzle() =>muzzle.SetActive(false);
     }
 
+    public class BaseWeaponExtensionEditor : Editor
+    {
+        protected GUIStyle box => GUI.skin.box;
+        
+        protected void DrawScriptHeader()
+        {
+            GUI.enabled = false;
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
+            GUI.enabled = true;
+        }
+        
+    }
+
     [CustomEditor(typeof(WeaponMuzzle))]
-    public class WeaponMuzzleEditor : Editor
+    public class WeaponExtensionMuzzleEditor : BaseWeaponExtensionEditor
     {
         public override void OnInspectorGUI()
         {
-            using (new GUILayout.VerticalScope(GUI.skin.box))
+            DrawScriptHeader();
+            
+            using (new GUILayout.VerticalScope(box))
             {
                 DrawPropertiesExcluding(serializedObject, "m_Script");
             }

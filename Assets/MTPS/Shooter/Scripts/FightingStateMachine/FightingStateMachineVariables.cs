@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Fighting.Pushing
 {
+    [DisallowMultipleComponent]
     public class FightingStateMachineVariables : MonoBehaviour,IFightingStateMachineVariables
     {
         public GameObject weaponInstance { get; set; }
@@ -18,7 +19,9 @@ namespace Fighting.Pushing
         public bool isCooldown { get; set; }
         public bool isReloading { get; set; }
         public bool RequestedHolsterWeapon  { get; set; }
-
+        
+        [field:SerializeField,Tooltip("Min distance from wall to aim")]
+        public float MinAimingDistance { get; private set; } = Mathf.Infinity;
         private void Awake() => AnimationLayer = GetComponent<AnimationLayer>();
     }
 }

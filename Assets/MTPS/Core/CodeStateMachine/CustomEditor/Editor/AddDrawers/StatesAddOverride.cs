@@ -1,4 +1,4 @@
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
+using GameGC.CommonEditorUtils.Editor;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;

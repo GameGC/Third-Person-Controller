@@ -94,7 +94,7 @@ namespace ThirdPersonController.CharacterCreator.Editor
             GUILayout.Label("State Machines Presets:");
             foreach (var key in stateMachinesPresets.Keys.ToArray())
             {
-                stateMachinesPresets[key] = EditorGUILayout.ObjectField(key, stateMachinesPresets[key], typeof(Preset)) as Preset;
+                stateMachinesPresets[key] = EditorGUILayout.ObjectField(key, stateMachinesPresets[key], typeof(Preset), false) as Preset;
             }
            
             

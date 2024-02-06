@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -13,8 +14,10 @@ public abstract class AnimationValue : ScriptableObject
     /// </summary>
     public virtual void OnSetWeight(Playable playable,float weight){ }
     
-    public virtual void SetCustomVariables<T>(Playable p,T arg0){}
-    public virtual void SetCustomVariables<T0,T1>(Playable p,T0 arg0,T1 arg1){}
-    public virtual void SetCustomVariables<T0,T1,T2>(Playable p,T0 arg0,T1 arg1,T2 arg2){}
-    public virtual void SetCustomVariables<T0,T1,T2,T3>(Playable p,T0 arg0,T1 arg1,T2 arg2,T3 arg3){}
+    public virtual void SetCustomVariables<T>(Playable p,T arg0){ }
+    public virtual void SetCustomVariables<T0,T1>(Playable p,T0 arg0,T1 arg1){ }
+    public virtual void SetCustomVariables<T0,T1,T2>(Playable p,T0 arg0,T1 arg1,T2 arg2){ }
+    public virtual void SetCustomVariables<T0,T1,T2,T3>(Playable p,T0 arg0,T1 arg1,T2 arg2,T3 arg3){ }
+
+    public virtual void OnDestroyPlayable(Playable playable){ }
 }

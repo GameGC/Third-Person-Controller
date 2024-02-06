@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+[DisallowMultipleComponent]
 public class CollectStateMachineVariables : MonoBehaviour, ICollectStateMachineVariables
 {
     public bool IsCollecting { get; set; }

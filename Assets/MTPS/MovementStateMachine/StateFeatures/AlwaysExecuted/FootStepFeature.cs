@@ -45,7 +45,10 @@ namespace ThirdPersonController.MovementStateMachine.Features
 
         private float _leftFeetBottomHeight;
         private float _rightFeetBottomHeight;
-    
+
+        private int _lastLeftPoseID = -1;
+        private int _lastRightPoseID = -1;
+
         #endregion
 
         public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
@@ -90,8 +93,8 @@ namespace ThirdPersonController.MovementStateMachine.Features
             DoRaycasts(_leftLegData);
             DoRaycasts(_rightLegData);
             
-            PlaceIK(_leftLegData, AvatarIKGoal.LeftFoot, in leftFootWeight, in _leftFeetBottomHeight, out var hit0);
-            PlaceIK(_rightLegData, AvatarIKGoal.RightFoot, in rightFootWeight, in _rightFeetBottomHeight, out var hit1);
+            ChooseIK(_leftLegData, AvatarIKGoal.LeftFoot,ref _lastLeftPoseID, in leftFootWeight, in _leftFeetBottomHeight, out var hit0);
+            ChooseIK(_rightLegData, AvatarIKGoal.RightFoot,ref _lastRightPoseID, in rightFootWeight, in _rightFeetBottomHeight, out var hit1);
             
             //this code executes when fps is 15 or less
             if ((!hit0.collider ||!hit1.collider) && _inputReader.moveInputMagnitude > 0.5f && fps < 16)
@@ -192,13 +195,15 @@ namespace ThirdPersonController.MovementStateMachine.Features
         /// <summary>
         /// this function choose footstep position from 4 variants
         /// </summary>
-        private void PlaceIK(LegData legData, AvatarIKGoal goal,in float weight, in float footBottomHeight,out RaycastHit chosenHit) 
+        private void ChooseIK(LegData legData, AvatarIKGoal goal,ref int prevLegId,in float weight, in float footBottomHeight,out RaycastHit chosenHit) 
         {
            _animator.SetIKPositionWeight(goal,weight);
            _animator.SetIKRotationWeight(goal,weight);
+           chosenHit = default;
+           
            if (weight == 0)
            {
-               chosenHit = default;
+               prevLegId =- 1;
                return;
            }
 
@@ -213,60 +218,146 @@ namespace ThirdPersonController.MovementStateMachine.Features
            
            if (!legData.HeightCastHit.collider)
            {
-               chosenHit = default;
+               prevLegId =- 1;
                return;
            }
 
            RaycastHit forwardInitialHit = legData.ForwardCastHit;
            RaycastHit heightHitInitial = legData.HeightCastHit;
   
-           Vector3 goalPosition;
-           if (_variables.SlopeAngle < 15)
+           Vector3 goalPosition = Vector3.zero;
+           bool recalculate = false;
+           
+           if (prevLegId > -1)
            {
-               float yOffset = forwardInitialHit.point.y - _variables.GroundHit.point.y;
-               var newYHeight = heightHitInitial.point.y + yOffset;
-               
-               //if height cast and forward cast start points match
-               if (forwardInitialHit.collider && Math.Abs(legData.ForwardInitialRay.origin.y - newYHeight) < 0.0001)
+               if (_variables.SlopeAngle > 15 && prevLegId < 4)
                {
-                   goalPosition = legData.ForwardInitialRay.origin - localForward * OffsetFwd(forwardInitialHit.distance);
-                   goalPosition.y = newYHeight;
-                   chosenHit = forwardInitialHit;
+                   recalculate = true;
+                   goto recalculate;
                }
-               else
-               { 
-                   ForwardCastFromHitPoint(out var forwardCastFromSecondHit, heightHitInitial.point,in localUp, in localForward);
-
-                   if (forwardCastFromSecondHit.collider)
+               switch (prevLegId)
+               {
+                   case 0:
                    {
-                       float forwardOffset = OffsetFwd(forwardCastFromSecondHit.distance);
-                       goalPosition = heightHitInitial.point - localForward * (startOffsetX + forwardOffset) + localUp * footBottomHeight;
-                       chosenHit = forwardCastFromSecondHit;
+                       float yOffset = forwardInitialHit.point.y - _variables.GroundHit.point.y;
+                       var newYHeight = heightHitInitial.point.y + yOffset;
+
+                       //if height cast and forward cast start points match
+                       if (forwardInitialHit.collider && Math.Abs(legData.ForwardInitialRay.origin.y - newYHeight) < 0.0001)
+                       {
+                           PlaceIK(prevLegId, in rotation, legData, in footBottomHeight, out goalPosition);
+                           chosenHit = forwardInitialHit;
+                       }
+                       else recalculate = true;
+                       break;
                    }
-                   else
+                   case 1:
+                   {
+                       ForwardCastFromHitPoint(out var forwardCastFromSecondHit, heightHitInitial.point, in localUp,
+                           in localForward);
+
+                       if (forwardCastFromSecondHit.collider)
+                       {
+                           PlaceIK(prevLegId, in rotation, legData, in footBottomHeight, out goalPosition,
+                               forwardCastFromSecondHit);
+                           chosenHit = forwardCastFromSecondHit;
+                       }
+                       else recalculate = true;
+                       break;
+                   }
+                   case 2:
                    {
                        float diff = Mathf.Abs(heightHitInitial.point.y - legData.MidCastHit.point.y);
                        if (legData.MidCastHit.collider && diff > 0.02f)
                        {
-                           goalPosition = legData.MidCastHit.point + localUp * footBottomHeight + localForward * stepLength / 2;
+                           PlaceIK(prevLegId, in rotation, legData, in footBottomHeight, out goalPosition);
                            chosenHit = legData.MidCastHit;
                        }
-                       else
+                       else recalculate = true;
+                       break;
+                   }
+                   case 3:
+                   {
+                       float diff = Mathf.Abs(heightHitInitial.point.y - legData.MidCastHit.point.y);
+                       if (!(legData.MidCastHit.collider && diff > 0.02f))
                        {
-                           goalPosition = heightHitInitial.point - localForward * startOffsetX + localUp * footBottomHeight;
+                           PlaceIK(prevLegId, in rotation, legData, in footBottomHeight, out goalPosition);
+                           chosenHit = legData.MidCastHit;
+                       }
+                       else recalculate = true;
+                       break;
+                   }
+                   case 4:
+                   {
+                       if (_variables.SlopeAngle > 14.99999f)
+                       {
+                           PlaceIK(prevLegId, in rotation, legData, in footBottomHeight, out goalPosition);
                            chosenHit = heightHitInitial;
                        }
+                       else recalculate = true;
+                       break;
                    }
                }
            }
-           // for high slope simplified algorithm used
-           else
+           else recalculate = true;
+
+           recalculate:
            {
-               float forwardOffset = forwardInitialHit.collider ? OffsetFwd(forwardInitialHit.distance) : 0;
-               goalPosition = heightHitInitial.point - localForward * (startOffsetX + forwardOffset) + localUp * footBottomHeight;
-               chosenHit = heightHitInitial;
+               if (recalculate)
+               {
+                   if (_variables.SlopeAngle < 15)
+                   {
+                       float yOffset = forwardInitialHit.point.y - _variables.GroundHit.point.y;
+                       var newYHeight = heightHitInitial.point.y + yOffset;
+
+                       //if height cast and forward cast start points match
+                       if (forwardInitialHit.collider &&
+                           Math.Abs(legData.ForwardInitialRay.origin.y - newYHeight) < 0.0001)
+                       {
+                           PlaceIK(0, in rotation, legData, in footBottomHeight, out goalPosition);
+                           prevLegId = 0;
+                           chosenHit = forwardInitialHit;
+                       }
+                       else
+                       {
+                           ForwardCastFromHitPoint(out var forwardCastFromSecondHit, heightHitInitial.point, in localUp,
+                               in localForward);
+
+                           if (forwardCastFromSecondHit.collider)
+                           {
+                               PlaceIK(1, in rotation, legData, in footBottomHeight, out goalPosition,
+                                   forwardCastFromSecondHit);
+                               prevLegId = 1;
+                               chosenHit = forwardCastFromSecondHit;
+                           }
+                           else
+                           {
+                               float diff = Mathf.Abs(heightHitInitial.point.y - legData.MidCastHit.point.y);
+                               if (legData.MidCastHit.collider && diff > 0.02f)
+                               {
+                                   PlaceIK(2, in rotation, legData, in footBottomHeight, out goalPosition);
+                                   prevLegId = 2;
+                                   chosenHit = legData.MidCastHit;
+                               }
+                               else
+                               {
+                                   PlaceIK(3, in rotation, legData, in footBottomHeight, out goalPosition);
+                                   prevLegId = 3;
+                                   chosenHit = heightHitInitial;
+                               }
+                           }
+                       }
+                   }
+                   // for high slope simplified algorithm used
+                   else
+                   {
+                       PlaceIK(4, in rotation, legData, in footBottomHeight, out goalPosition);
+                       prevLegId = 4;
+                       chosenHit = heightHitInitial;
+                   }
+               }
            }
-           
+
            _animator.SetIKPosition(goal,goalPosition);
            
            // Use the hit normal to calculate the desired rotation.
@@ -277,6 +368,54 @@ namespace ThirdPersonController.MovementStateMachine.Features
            _animator.SetIKRotation(goal, rotation);
        }
 
+        private void PlaceIK(int id,in Quaternion rotation,LegData legData,in float footBottomHeight,out Vector3 goalPosition,in RaycastHit forwardCastFromSecondHit = default)
+        {
+            // Get the local up direction of the foot.
+            var localUp = rotation * Vector3.up;
+            var localForward = rotation * Vector3.forward;
+            
+            ref var heightHitInitial = ref legData.HeightCastHit;
+            
+            switch (id)
+            {
+                case 0:
+                {
+                    ref var forwardInitialHit = ref legData.ForwardCastHit;
+                    
+                    float yOffset = legData.ForwardCastHit.point.y - _variables.GroundHit.point.y;
+                    var newYHeight = legData.ForwardCastHit.point.y + yOffset;
+                    
+                    goalPosition = legData.ForwardInitialRay.origin - localForward * OffsetFwd(forwardInitialHit.distance);
+                    goalPosition.y = newYHeight;
+                    return;
+                }
+                case 1:
+                {
+                    float forwardOffset = OffsetFwd(forwardCastFromSecondHit.distance);
+                    goalPosition = heightHitInitial.point - localForward * (startOffsetX + forwardOffset) + localUp * footBottomHeight;
+                    return;
+                }
+                case 2:
+                {
+                    goalPosition = legData.MidCastHit.point + localUp * footBottomHeight + localForward * stepLength / 2;
+                    return;
+                }
+                case 3:
+                {
+                    goalPosition = heightHitInitial.point - localForward * startOffsetX + localUp * footBottomHeight;
+                    return;
+                }
+                case 4:
+                {
+                    ref var forwardInitialHit = ref legData.ForwardCastHit;
+                    float forwardOffset = forwardInitialHit.collider ? OffsetFwd(forwardInitialHit.distance) : 0;
+                    goalPosition = heightHitInitial.point - localForward * (startOffsetX + forwardOffset) + localUp * footBottomHeight;
+                    return;
+                }
+            }
+            throw new Exception("invalid id"+id);
+        }
+        
         private void ForwardCastFromHitPoint(out RaycastHit forwardCastFromSecondHit, 
             in Vector3 origin, in Vector3 localUp, in Vector3 localForward)
         {

@@ -6,9 +6,20 @@ namespace UTPS.FightingStateMachine.Extras
     {
         public AnimatorOverrideController Controller;
 
+        private HybridAnimator _hybridAnimator;
         private void Awake()
         {
-            GetComponentInParent<HybridAnimator>().MecanimOverride = Controller;
+            _hybridAnimator = GetComponentInParent<HybridAnimator>();
+        }
+
+        private void OnEnable()
+        {
+            _hybridAnimator.MecanimOverride = Controller;
+        }
+
+        private void OnDisable()
+        {
+            _hybridAnimator.MecanimOverride = null;
         }
     }
 }

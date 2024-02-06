@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
+using GameGC.CommonEditorUtils.Editor;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditorInternal;
@@ -185,22 +187,27 @@ public class Installer : EditorWindow
         if (stage == 2)
         {
             EditorGUI.DrawPreviewTexture(new Rect(0,0,position.width,position.height),otherTex,null,ScaleMode.StretchToFill);
-            _multipleDownloads = ToggleDrawer.CustomToggle(new Rect(position.width *0.25f, position.height / 2.5f, position.width * 0.5f, position.height * 0.1f), _multipleDownloads, new GUIContent("Multiple Downloads?"));
+            var customLabel = new GUIStyle(EditorStyles.whiteLabel);
+            customLabel.fontSize = GetFontSize(18f);
+            customLabel.alignment = TextAnchor.MiddleCenter;
+            customLabel.fontStyle = FontStyle.Bold;
+            
+            _multipleDownloads = ToggleDrawer.CustomToggle(new Rect(position.width *0.25f, position.height *0.2f, position.width * 0.5f, 16), _multipleDownloads,
+                EditorGUIUtility.TrTempContent("Multiple Downloads?"),customLabel);
 
             
             var button = new GUIStyle(GUI.skin.button);
             button.fontStyle = FontStyle.Bold;
-            button.fontSize *= 2;
+            button.fontSize = GetFontSize(19);
             button.normal.textColor = Color.white;
             button.active.textColor = Color.white;
             button.hover.textColor = new Color(0.85f, 0.85f, 0.85f);
 
             GUI.backgroundColor = new Color32(210, 88, 247, 255);
 
-            var rect = new Rect(position.width * 0.2f, position.height - position.height * 0.05f, position.width * 0.6f,
-                position.height * 0.05f);
+            var rect = new Rect(position.width *0.1f, position.height * 0.52f, (position.width * 0.4f)-1.5f, position.height * 0.05f);
 
-            _downloadsDisplay.DoList(new Rect(position.width *0.1f, position.height / 2f, position.width * 0.8f, position.height * 0.5f));
+            _downloadsDisplay.DoList(new Rect(position.width *0.1f, position.height *0.25f, position.width * 0.8f, position.height * 0.5f));
             
             if (GUI.Button(rect, "Download packages", button))
             {
@@ -208,7 +215,8 @@ public class Installer : EditorWindow
                 {
                     for (var i = 0; i < _downloaderItems.Length; i++)
                     {
-                        SendPackageRequest(i);
+                        if(_downloaderItems[i].DownloadClient != null)
+                            SendPackageRequest(i);
                     }
                 }
                 else
@@ -217,42 +225,62 @@ public class Installer : EditorWindow
                 }
 
             }
-            if(_downloaderItems.All(d=>d.Progress == 100))
-                stage = 3;
+
+            EditorGUI.BeginDisabledGroup(_downloaderItems.Any(d => d.Progress < 100));
+            GUI.backgroundColor = new Color32(210, 88, 247, 255);
+
+            rect = new Rect((position.width * 0.5f) + 1.5f, position.height * 0.52f, (position.width * 0.4f) - 1.5f,
+                position.height * 0.05f);
+
+
+            if (GUI.Button(rect, "Install packages", button))
+            {
+                InstallPackages();
+            }
+            EditorGUI.EndDisabledGroup();
         }
 
         if (stage == 3)
         {
             EditorGUI.DrawPreviewTexture(new Rect(0,0,position.width,position.height),otherTex,null,ScaleMode.StretchToFill);
-            var button = new GUIStyle(GUI.skin.button);
-            button.fontStyle = FontStyle.Bold;
-            button.fontSize *= 2;
-            button.normal.textColor = Color.white;
-            button.active.textColor = Color.white;
-            button.hover.textColor = new Color(0.85f, 0.85f, 0.85f);
-            
-            GUI.backgroundColor = new Color32(210, 88, 247, 255);
-            
-            var rect = new Rect(position.width *0.25f, position.height / 2.5f, position.width * 0.5f, position.height * 0.1f);
-
-
-            if (GUI.Button(rect, "Install packages", button))
-            {
-                var path = Application.dataPath.Replace("/Assets","") + "/Packages/Local/GameGC/com.gamegc.surfacesystem/com.gamegc.surfacesystem-1.0.0.tgz";
-
-                path =
-                    "/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.0.tgz";
-                
-                path = path.Substring(path.IndexOf("/Local")+1); Client.Add("file:"+path);
-            }
+            //var button = new GUIStyle(GUI.skin.button);
+            //button.fontStyle = FontStyle.Bold;
+            //button.fontSize *= 2;
+            //button.normal.textColor = Color.white;
+            //button.active.textColor = Color.white;
+            //button.hover.textColor = new Color(0.85f, 0.85f, 0.85f);
+            //
+            //GUI.backgroundColor = new Color32(210, 88, 247, 255);
+            //
+            //var rect = new Rect(position.width *0.25f, position.height / 2.5f, position.width * 0.5f, position.height * 0.1f);
+//
+//
+            //if (GUI.Button(rect, "Install packages", button))
+            //{
+            //    var path = Application.dataPath.Replace("/Assets","") + "/Packages/Local/GameGC/com.gamegc.surfacesystem/com.gamegc.surfacesystem-1.0.0.tgz";
+//
+            //    path =
+            //        "/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.0.tgz";
+            //    
+            //    path = path.Substring(path.IndexOf("/Local")+1); Client.Add("file:"+path);
+            //}
         }
     }
 
     private void DownloadSynchronous(int index)
     {
-        _downloaderItems[index].DownloadClient.DownloadFileCompleted += (sender, args) => DownloadSynchronous(index);
-        SendPackageRequest(index);
-        index++;
+        if (_downloaderItems[index].DownloadClient != null)
+        {
+            _downloaderItems[index].DownloadClient.DownloadFileCompleted +=
+                (_, _) => DownloadSynchronous(index);
+            SendPackageRequest(index);
+            index++;
+        }
+        else
+        {
+            index++;
+            DownloadSynchronous(index);
+        }
     }
     
     private async void SendValidateRequest()
@@ -288,6 +316,25 @@ public class Installer : EditorWindow
         _downloaderItems[i].DownloadClient.DownloadFile(result,path);
     }
 
+    private void InstallPackages()
+    {
+        const string manifestPath = "Packages/manifest.json";
+        if (!File.Exists(manifestPath))
+            throw new Exception("No manifest file");
+
+        string jsonText = File.ReadAllText(manifestPath);
+        var json = JObject.Parse(jsonText);
+        var values = json["dependencies"]!.ToObject<Dictionary<string, string>>();
+        
+        var pathes = _downloaderItems.Where(d => !d.IsInstalled(values)).Select(p => "file:" + p.DownloadPath).ToArray();
+        if(pathes.Length > 0)
+            Client.AddAndRemove(pathes);
+        else
+        {
+            Debug.Log("All packages up to date");
+        }
+    }
+
     private void Update()
     {
         if (stage == 1)
@@ -297,7 +344,10 @@ public class Installer : EditorWindow
 
         if (stage == 2)
         {
-            Repaint();
+            if (DownloaderItem.ChangedSinceRepaint)
+                Repaint();
+            else if (ToggleDrawer.NeedRepaint(EditorGUIUtility.TrTempContent("Multiple Downloads?"))) 
+                Repaint();
         } 
     }
 

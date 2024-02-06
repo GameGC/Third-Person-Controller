@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameGC.CommonEditorUtils.Editor;
 using TypeNamespaceTree;
 using UnityEditor;
 using UnityEngine;
@@ -67,48 +68,48 @@ public partial class FuzzyWindow : EditorWindow
 {
     private void UpdateAnimation(in bool isRepaint)
     {
-        if (anim < 1)
+        if (_anim < 1)
         {
-            OnLevelGUI(anim + 1,in isRepaint);
+            OnLevelGUI(_anim + 1,in isRepaint);
         }
 
         if (isRepaint)
         {
-            if (isAnimating)
+            if (IsAnimating)
             {
-                anim = Mathf.MoveTowards(anim, animTarget, repaintDeltaTime * animationSpeed);
+                _anim = Mathf.MoveTowards(_anim, _animTarget, RepaintDeltaTime * _animationSpeed);
 
-                if (animTarget == 0 && anim == 0)
+                if (_animTarget == 0 && _anim == 0)
                 {
-                    anim = 1;
-                    animTarget = 1;
+                    _anim = 1;
+                    _animTarget = 1;
                 }
 
                 _list.Repaint = true;
             }
 
-            lastRepaintTime = DateTime.Now;
+            _lastRepaintTime = DateTime.Now;
         }
     }
     
     private void EnterParent()
     {
-        animTarget = 0;
-        lastRepaintTime = DateTime.Now;
+        _animTarget = 0;
+        _lastRepaintTime = DateTime.Now;
     }
 
     private void EnterChild()
     {
-        lastRepaintTime = DateTime.Now;
+        _lastRepaintTime = DateTime.Now;
         _list.Repaint = true;
 
-        if (animTarget == 0)
+        if (_animTarget == 0)
         {
-            animTarget = 1;
+            _animTarget = 1;
         }
-        else if (anim == 1)
+        else if (_anim == 1)
         {
-            anim = 0;
+            _anim = 0;
         }
     }
 }

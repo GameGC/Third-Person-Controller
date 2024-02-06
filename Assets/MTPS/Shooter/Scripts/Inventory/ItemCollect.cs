@@ -5,7 +5,7 @@ using UTPS.Inventory.ItemTypes;
 
 namespace UTPS.Inventory
 {
-    public abstract class ItemCollect : MonoBehaviour
+    public class ItemCollect : MonoBehaviour
     {
         [SerializeField] private SKeyValuePair<BaseItemData,int>[] items;
 

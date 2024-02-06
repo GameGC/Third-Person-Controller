@@ -1,11 +1,13 @@
 using System;
+using GameGC.CommonEditorUtils.Attributes;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UTPS.Inventory;
 using UTPS.Inventory.ItemTypes;
 
-public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
+[DisallowMultipleComponent]
+public class WeaponGrenadeInfo : BaseWeaponWithExtensions,IWeaponInfo
 {
     public bool hasAutoReloadOnStart = true;
     
@@ -22,7 +24,7 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
         Variables = variables;
         
         _inventory = resolver.GetComponent<Inventory>();
-        _currentAmmoType = ((WeaponData) _inventory.EquipedItemData).ammoItem;
+        _currentAmmoType = ((WeaponData) _inventory.EquippedItemData).ammoItem;
         
         if (_inventory.AllItems.TryGetValue(_currentAmmoType, out var value)) 
             remainingAmmo = value;
@@ -49,21 +51,25 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
             _tempGranade.Init(points);
             _tempGranade.transform.SetParent(null);
             
+            Execute_OnShootExtensions();
+            
             Variables.isCooldown = true;
             Variables.couldAttack = false;
             Invoke(nameof(Cooldown),cooldownTime);
+            Execute_BeginCooldownExtensions();
         }
     }
 
     public int remainingAmmo { get; private set; }
     public int maxAmmo => _inventory.AllItems[_currentAmmoType];
-
+    public float reloadingOrCooldownTime => cooldownTime;
     private void Cooldown()
     {
         if (remainingAmmo < 1)
         {
             Variables.isCooldown = false;
             Variables.couldAttack = false;
+            Execute_EndCooldownExtensions();
             return;
         }
         
@@ -74,5 +80,6 @@ public class WeaponGrenadeInfo : MonoBehaviour,IWeaponInfo
         
         Variables.isCooldown = false;
         Variables.couldAttack = true;
+        Execute_EndCooldownExtensions();
     }
 }

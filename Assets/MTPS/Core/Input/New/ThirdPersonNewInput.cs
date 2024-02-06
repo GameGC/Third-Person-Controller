@@ -183,22 +183,22 @@ namespace ThirdPersonController.Input
             }
 
         }
-        public Vector2 lookInput { get; protected set; }
+        public Vector2 lookInput { get; private set; }
 
         public Quaternion cameraRotation => _cameraMain.rotation;
 
-        public Vector2 moveInput { get; protected set; }
-        public Vector2 moveInputSmooth { get; protected set; }
+        public Vector2 moveInput { get; private set; }
+        public Vector2 moveInputSmooth { get; private set; }
 
         public float moveInputMagnitude { get; set; }
-        public Vector3 moveDirection { get; protected set; }
+        public Vector3 moveDirection { get; private set; }
 
-        public bool isSprinting { get; protected set; }
-        public bool isJump { get; protected set; }
+        public bool isSprinting { get; private set; }
+        public bool isJump { get; private set; }
 
-        public bool isCrouch { get; protected set; }
-        public bool isProne { get; protected set; }
-        public bool isRoll { get; protected set; }
+        public bool isCrouch { get; private set; }
+        public bool isProne { get; private set; }
+        public bool isRoll { get; }
 
         [field:SerializeField]
         public bool IsAttack { get; set; }

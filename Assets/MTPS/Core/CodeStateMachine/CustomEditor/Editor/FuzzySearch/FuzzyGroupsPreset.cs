@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Create FuzzyGroupsPreset", fileName = "FuzzyGroupsPreset", order = 0),
- FilePath("Assets/UTPS/Code/Core.CodeStateMachine/CustomEditor/Editor/FuzzySearch/FuzzyGroupsPreset.asset",FilePathAttribute.Location.ProjectFolder)]
+ FilePath("Assets/MTPS/Core/CodeStateMachine/CustomEditor/Editor/FuzzySearch/FuzzyGroupsPreset.asset",FilePathAttribute.Location.ProjectFolder)]
 public class FuzzyGroupsPreset : ScriptableSingleton<FuzzyGroupsPreset>
 {
     [Serializable] 

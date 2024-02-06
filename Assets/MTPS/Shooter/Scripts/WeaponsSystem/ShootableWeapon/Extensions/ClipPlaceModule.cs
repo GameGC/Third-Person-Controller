@@ -1,6 +1,9 @@
+using System;
 using UnityEditor;
 using UnityEngine;
+using Weapons;
 
+[ToolBarDisplayGroup("Reloading"),DisallowMultipleComponent]
 public class ClipPlaceModule : BaseWeaponExtension
 {
     public Transform clipElement;
@@ -27,6 +30,12 @@ public class ClipPlaceModule : BaseWeaponExtension
         clipElement.SetLocalPositionAndRotation(_initialPosition.position,_initialPosition.rotation);
     }
 
+    private void OnDestroy()
+    {
+        if(clipElement.parent != transform)
+            Destroy(clipElement.gameObject);
+    }
+
 #if UNITY_EDITOR
     [ContextMenu("CopyVariables")]
     public void CopyVariables() => clipElement.GetLocalPositionAndRotation(out localPositionInLeftHand,out localRotationInLeftHand);
@@ -38,18 +47,16 @@ public class ClipPlaceModule : BaseWeaponExtension
 }
 
 [CustomEditor(typeof(ClipPlaceModule))]
-public class ClipPlaceModuleEditor : Editor
+public class ClipPlaceModuleExtensionEditor : BaseWeaponExtensionEditor
 {
     public override void OnInspectorGUI()
     {
-        GUI.enabled = false;
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
-        GUI.enabled = true;
+        DrawScriptHeader();
         
         EditorGUILayout.PropertyField(serializedObject.FindProperty("clipElement"));
         GUILayout.Space(9f);
 
-        using (new GUILayout.VerticalScope(GUI.skin.box))
+        using (new GUILayout.VerticalScope(box))
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("localPositionInLeftHand"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("localRotationInLeftHand"));

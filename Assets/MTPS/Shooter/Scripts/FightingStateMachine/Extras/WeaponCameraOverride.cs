@@ -1,6 +1,7 @@
 using System;
 using Cinemachine;
 using GameGC.Collections;
+using GameGC.CommonEditorUtils.Attributes;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 

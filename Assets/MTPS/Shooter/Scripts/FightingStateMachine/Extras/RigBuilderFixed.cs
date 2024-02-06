@@ -1,5 +1,9 @@
+#if UNITY_EDITOR
 using System;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.Animations.Rigging;
+#endif
 
 namespace UTPS.FightingStateMachine.Extras
 {
@@ -8,7 +12,8 @@ namespace UTPS.FightingStateMachine.Extras
    /// </summary>
    public class RigBuilderFixed : RigBuilder
    {
-      private void OnValidate()
+#if UNITY_EDITOR
+      public void OnValidate()
       {
          int counts = Enum.GetValues(typeof(RigTypes)).Length;
          if (layers.Count != counts)
@@ -18,9 +23,12 @@ namespace UTPS.FightingStateMachine.Extras
 
             while (layers.Count > counts)
                layers.RemoveAt(layers.Count - 1);
+            
+            EditorUtility.SetDirty(this);
          }
       }
 
       private void Reset() => OnValidate();
+#endif
    }
 }

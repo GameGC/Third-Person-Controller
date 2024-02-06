@@ -1,3 +1,4 @@
+using GameGC.CommonEditorUtils.Editor.NativeReferences;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;

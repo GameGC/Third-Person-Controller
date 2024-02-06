@@ -1,15 +1,19 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GameGC.CommonEditorUtils.Attributes;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
+using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
 namespace Fighting.Pushing
 {
     public class ShootFeature : BaseFeatureWithAwaiters
     {
-        public bool changeCooldownToAwait = true;
-        public bool setAimingWeaigh0DuringShoot = true;
+        [SerializeField] private bool changeCooldownToAwait = true;
+        
+        [SerializeField] private bool setAimingWeaigh0DuringShoot = true;
+        [SerializeField,ClipToSeconds] private float shootAnimationLength;
         
         private IWeaponInfo _shooter;
         private IFightingStateMachineVariables _variables;
@@ -38,6 +42,12 @@ namespace Fighting.Pushing
             {
                 var constraints = _rigBuilder.layers[(int) RigTypes.Fighting].constraints;
                 if (constraints == null || constraints.Length < 1) return;
+                //foreach (var rigConstraint in constraints)
+                //{
+                //    if(rigConstraint is MultiAimConstraint) 
+                //        if(rigConstraint.component.name ==  "HandAim") 
+                //        Debug.Log((rigConstraint as Component).name);
+                //}
                 var handAim = constraints.FirstOrDefault(
                     c => (c.component is MultiAimConstraint) && c.component.name == "HandAim");
                 if (handAim != null)
@@ -62,15 +72,28 @@ namespace Fighting.Pushing
 
             if(!IsRunning) return;
             if(setAimingWeaigh0DuringShoot)
-                if(_handAimConstaint)
+                if (_handAimConstaint)
+                {
                     _handAimConstaint.weight = 0;
-            
+#pragma warning disable CS4014
+                    Task.Delay((int) (shootAnimationLength * 1000)).ContinueWith(ResetWeight);
+#pragma warning restore CS4014
+                }
+
             if(changeCooldownToAwait)
                 _variables.isCooldown = _wasCooldown;
             _shooter.Shoot();
-            if(setAimingWeaigh0DuringShoot)
-                if(_handAimConstaint)
-                    _handAimConstaint.weight = 1;
+            //if(setAimingWeaigh0DuringShoot)
+            //    if (_handAimConstaint)
+            //    {
+            //        await Task.Yield();
+            //        _handAimConstaint.weight = 1;
+            //    }
+        }
+
+        private void ResetWeight(Task task)
+        {
+            _handAimConstaint.weight = 1;
         }
     }
 }

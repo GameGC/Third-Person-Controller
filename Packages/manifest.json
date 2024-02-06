@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "com.alexeytaranov.serializereferencedropdown": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
-    "com.gamegc.animation.rigging.saver": "1.0.0",
-    "com.gamegc.collections": "1.0.0",
-    "com.gamegc.common-editor-utils": "file:Local/GameGC/com.gamegc.common-editor-utilsf/com.gamegc.common-editor-utils-1.0.3.tgz",
-    "com.gamegc.surfacesystem": "file:Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.0.tgz",
-    "com.gamegc.timeline.legacy-animation": "1.0.0",
+    "com.gamegc.animation.rigging.saver": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.animation.rigging.saverf/com.gamegc.animation.rigging.saver-1.0.0.tgz",
+    "com.gamegc.collections": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.collectionsf/com.gamegc.collections-1.0.0.tgz",
+    "com.gamegc.common-editor-utils": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.common-editor-utilsf/com.gamegc.common-editor-utils-1.0.5.tgz",
+    "com.gamegc.surfacesystem": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.1.tgz",
+    "com.gamegc.timeline.legacy-animation": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.timeline.legacy-animationf/com.gamegc.timeline.legacy-animation-1.0.0.tgz",
     "com.singularitygroup.hotreload": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.9",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.animation.rigging": "1.1.1",

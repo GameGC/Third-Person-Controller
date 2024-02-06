@@ -1,4 +1,6 @@
-   using System.Threading.Tasks;
+using System.Threading.Tasks;
+using GameGC.CommonEditorUtils.Attributes;
+using GameGC.SurfaceSystem.Audio;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
@@ -8,32 +10,40 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UTPS.FightingStateMachine.Extras;
-   using UTPS.Inventory.ItemTypes;
+using UTPS.Inventory.ItemTypes;
 
-   namespace UTPS.Inventory
+namespace UTPS.Inventory
 {
+   [DisallowMultipleComponent]
    public class Inventory : BaseInventory
    {
       public UnityEvent<BaseItemData> onItemEquiped;
-      public BaseItemData EquipedItemData => equipedItemData;
+      public BaseItemData EquippedItemData => equippedItemData;
       public CodeStateMachine FightingStateMachine => fightingStateMachine;
 
 
-      [SerializeField] [FormerlySerializedAs("equipedItemdData")]
-      private BaseItemData equipedItemData;
+      [FormerlySerializedAs("equipedItemData")] [SerializeField] [FormerlySerializedAs("equipedItemdData")]
+      private BaseItemData equippedItemData;
 
       [SerializeField] private CodeStateMachine fightingStateMachine;
 
+      [SerializeField,ValidateBaseType(typeof(AudioClip),typeof(IAudioType))] private Object equipSound;
 
       private HybridAnimator _hybridAnimator;
       private Animator _animator;
       private RigBuilderFixed _rigBuilder;
+      private AudioSource _audioSource;
 
       private void Awake()
       {
          _hybridAnimator = GetComponent<HybridAnimator>();
          _animator = GetComponent<Animator>();
          _rigBuilder = GetComponent<RigBuilderFixed>();
+         
+         var soundsObject = new GameObject("InventorySounds").transform;
+         soundsObject.SetParent(transform);
+         soundsObject.localPosition = Vector3.zero;
+         _audioSource = soundsObject.gameObject.AddComponent<AudioSource>();
       }
 
       private void Update()
@@ -70,6 +80,7 @@ using UTPS.FightingStateMachine.Extras;
          var bool_ = base.AddItem(itemData, count);
          if (itemData is WeaponData weaponData)
             Equip(weaponData);
+         PlaySound(equipSound);
          return bool_;
       }
 
@@ -89,19 +100,21 @@ using UTPS.FightingStateMachine.Extras;
 
          weaponData = items.KeysArray[index] as WeaponData;
          Equip(weaponData);
+         PlaySound(equipSound);
       }
 
       public void Equip(BaseItemData data)
       {
          if (data is WeaponData weaponData)
             Equip(weaponData);
+         PlaySound(equipSound);
       }
 #pragma warning restore CS4014
 
 
       public async Task Equip(WeaponData weaponData)
       {
-         if (weaponData == equipedItemData) return;
+         if (weaponData == equippedItemData) return;
 
          // wait for previous Fighting Hide Animation
          if (fightingStateMachine != null && fightingStateMachine is global::FightingStateMachine fighting &&
@@ -153,9 +166,41 @@ using UTPS.FightingStateMachine.Extras;
 
          fightingStateMachine = instance;
 
-         equipedItemData = weaponData;
+         equippedItemData = weaponData;
 
          onItemEquiped.Invoke(weaponData);
+      }
+      
+      private void PlaySound(Object audioType)
+      {
+         switch (audioType)
+         {
+            case null: {_audioSource.Stop(); return;}
+            case AudioClip clip:
+            {
+               if (!_audioSource.isPlaying || _audioSource.clip != clip) 
+                  PlayClip(clip);
+               return;
+            }
+            case IAudioType audio:
+            {
+               audio.Play(_audioSource);
+               return;
+            }
+         }
+      }
+    
+      private void PlayClip(AudioClip clip, float volume = 1f,float pitch = 1f)
+      {
+         if (_audioSource.isPlaying) 
+            _audioSource.Stop();
+         _audioSource.clip = clip;
+         _audioSource.spatialBlend = 0f;
+         _audioSource.volume = volume;
+         _audioSource.pitch = pitch;
+         _audioSource.Play();
+
+         _audioSource.SetScheduledEndTime( AudioSettings.dspTime + 3.0F+clip.length);
       }
 
       public void EquipImmediateEditor(int i)
@@ -212,7 +257,7 @@ using UTPS.FightingStateMachine.Extras;
             _rigBuilder.layers[(int) RigTypes.Fighting] = new RigLayer(null);
          }
 
-         equipedItemData = weaponData;
+         equippedItemData = weaponData;
          fightingStateMachine = instance;
       }
    }

@@ -10,4 +10,5 @@ public interface IWeaponInfo
     public int remainingAmmo { get; }
     public int maxAmmo { get; }
 
+    public float reloadingOrCooldownTime { get; }
 }

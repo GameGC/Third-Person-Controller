@@ -60,7 +60,7 @@ public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
                     }
                 }
 
-                gameObject.GetComponentInChildren<HealthComponent>().OnHit(in hit, this);
+                gameObject.GetComponentInChildren<HealthComponent>().OnHit(hit, this);
             }
         }
         else

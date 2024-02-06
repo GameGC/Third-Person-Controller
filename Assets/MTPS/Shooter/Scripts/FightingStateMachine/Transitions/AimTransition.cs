@@ -1,11 +1,10 @@
-using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using UnityEngine;
 
 namespace Fighting.Pushing
 {
-    public class AimTransition : BaseStateTransition
+    public class AimTransition : CouldAimNoIntersectTransition
     {
         [SerializeField] private bool isAim;
 
@@ -13,8 +12,18 @@ namespace Fighting.Pushing
         public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
         {
             _input = resolver.GetComponent<IBaseInputReader>();
+            base.Initialise(variables,resolver);
         }
 
-        public override bool couldHaveTransition => _input.IsAim == isAim;
+        public override bool couldHaveTransition
+        {
+            get
+            {
+                if (isAim)
+                    return _input.IsAim && base.couldHaveTransition;
+
+                return !_input.IsAim || !base.couldHaveTransition;
+            }
+        }
     }
 }

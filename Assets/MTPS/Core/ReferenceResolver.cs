@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameGC.Collections;
-using ThirdPersonController.Core.DI.CustomEditor;
+using GameGC.CommonEditorUtils.Attributes;
 using UnityEditor;
 using UnityEngine;
 
 namespace ThirdPersonController.Core.DI
 {
+    [DisallowMultipleComponent]
     public class ReferenceResolver : MonoBehaviour , IReferenceResolver
     {
         [SerializeField,ComponentSelect] private List<Component> cachedComponents;
@@ -76,7 +77,13 @@ namespace ThirdPersonController.Core.DI
             }
         }
 
-        public void AddComponent<T>() where T : Component => cachedComponents.Add(gameObject.AddComponent<T>());
+        // ReSharper disable Unity.PerformanceAnalysis
+        public T AddComponent<T>() where T : Component
+        {
+            var component = gameObject.AddComponent<T>();
+            cachedComponents.Add(component);
+            return component;
+        }
 
         public void AddCachedComponent<T>(T component)  where T : Component
         {

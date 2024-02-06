@@ -82,8 +82,9 @@ namespace ThirdPersonController.Core.StateMachine
                         codeState.features[f].path =
                             features.GetArrayElementAtIndex(f).propertyPath;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
+                        // ignored
                     }
                 }
 
@@ -137,9 +138,9 @@ namespace ThirdPersonController.Core.StateMachine
                         states[i].features[f].path =
                             features.GetArrayElementAtIndex(f).propertyPath;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
-                        
+                        // ignored
                     }
                 }
 
@@ -151,8 +152,9 @@ namespace ThirdPersonController.Core.StateMachine
                         states[i].Transitions[f].path =
                             transitions.GetArrayElementAtIndex(f).propertyPath;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
+                        // ignored
                     }
                 }
             }

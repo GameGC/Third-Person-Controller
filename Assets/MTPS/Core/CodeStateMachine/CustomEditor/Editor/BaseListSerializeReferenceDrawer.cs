@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using GameGC.CommonEditorUtils.Editor;
+using GameGC.CommonEditorUtils.Editor.NativeReferences;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -20,7 +22,7 @@ public class BaseListSerializeReferenceDrawer
             var currentIndex = int.Parse(path.Substring(index0 + 1, path.Length - 2 - index0));
             return currentIndex < 1;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return false;
         }

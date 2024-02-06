@@ -11,6 +11,7 @@ public class DeathWithReplaceFeature : BaseHealthFeature
 
     private Animator _animator;
     private Transform _transform;
+    private Rigidbody _rigidbody;
 
     private static readonly IEnumerable<HumanBodyBones> BoneValues 
         = Enum.GetValues(typeof(HumanBodyBones)).Cast<HumanBodyBones>();
@@ -19,11 +20,17 @@ public class DeathWithReplaceFeature : BaseHealthFeature
     {
         _animator = resolver.GetComponent<Animator>();
         _transform = resolver.GetComponent<Transform>();
+        _rigidbody = resolver.GetComponent<Rigidbody>();
     }
 
     public override void OnHit(in float previousHealth, in float newHealth, in Vector3 hitPoint, in Vector3 hitNormal, IDamageSender damageSender)
     {
         var instance = Object.Instantiate(deathPrefab, _transform.position, _transform.rotation);
+        
+        var velocity = _rigidbody.velocity;
+        var angularVelocity = _rigidbody.angularVelocity;
+
+        Rigidbody tempRigidBody;
         foreach (var value in BoneValues)
         {
             if(value == HumanBodyBones.LastBone) continue;
@@ -34,6 +41,11 @@ public class DeathWithReplaceFeature : BaseHealthFeature
             if(!oldTransform) continue;
             oldTransform.GetLocalPositionAndRotation(out var localPosition, out var localRotation);
             newTransform.SetLocalPositionAndRotation(localPosition,localRotation);
+            if (newTransform.TryGetComponent(out tempRigidBody))
+            {
+                tempRigidBody.velocity += velocity;
+                tempRigidBody.angularVelocity += angularVelocity;
+            }
         }
         Destroy.Invoke();
     }

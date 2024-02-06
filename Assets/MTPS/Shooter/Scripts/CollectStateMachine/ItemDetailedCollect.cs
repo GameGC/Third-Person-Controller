@@ -17,7 +17,7 @@ public class ItemDetailedCollect : ItemCollect
         
         if(collectVariables.IsCollecting) return;
         
-        if (receiver.EquipedItemData.name != "Hands")
+        if (receiver.EquippedItemData.name != "Hands")
         {
             var hands = receiver.removeExceptions.Find(i => i.name == "Hands") as WeaponData;
             await receiver.Equip(hands);

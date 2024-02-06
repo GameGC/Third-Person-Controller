@@ -1,3 +1,4 @@
+using GameGC.CommonEditorUtils.Attributes;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,15 +32,13 @@ namespace Weapons
     }
 
     [CustomEditor(typeof(WeaponOffset))]
-    public class WeaponOffsetEditor : Editor
+    public class WeaponOffsetEditor : BaseWeaponExtensionEditor
     {
         public override void OnInspectorGUI()
         {
-            GUI.enabled = false;
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
-            GUI.enabled = true;
+            DrawScriptHeader();
 
-            using (new GUILayout.VerticalScope(GUI.skin.box))
+            using (new GUILayout.VerticalScope(box))
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("localPosition"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("localRotation"));

@@ -17,25 +17,25 @@ public partial class FuzzyWindow : EditorWindow
             BindingFlags.Instance | BindingFlags.NonPublic);
     }
 
-    private readonly float height = 320;
+    private readonly float _height = 320;
     private float _minOptionWidth;
     private Rect _activatorPosition;
     private bool _scrollToSelected;
     private float _initialY;
     private bool _initialYSet;
 
-    private const float searchFieldHeight = 20;
-    private const float headerHeight = 25;
+    private const float SearchFieldHeight = 20;
+    private const float HeaderHeight = 25;
 
-    private const float initialSpace = 7;
-    private static Event e => Event.current;
+    private const float InitialSpace = 7;
+    private static Event E => Event.current;
 
     private FuzzySearchPanel _searchPanel;
     private FuzzyHeaderWithBackButtonPanel _headerWithBackButtonPanel;
     private FuzzyListPanel _list;
 
-    private IOptionTree[] hierarchyTree;
-    private IOptionTree[] typeTree1d;
+    private IOptionTree[] _hierarchyTree;
+    private IOptionTree[] _typeTree1d;
 
     private static Type _baseType;
     private void OnEnable()
@@ -49,13 +49,13 @@ public partial class FuzzyWindow : EditorWindow
 
         var types = GetNonAbstractTypesSubclassOf(_baseType);
 
-        hierarchyTree = BuildTreeHierarchy(types,_baseType == typeof(BaseFeature)).Childs.ToArray();
-        _list.SetData(hierarchyTree);
+        _hierarchyTree = BuildTreeHierarchy(types,_baseType == typeof(BaseFeature)).Childs.ToArray();
+        _list.SetData(_hierarchyTree);
         _list.NextClicked += EnterChild;
         _list.TypeClicked += ListOnTypeClicked;
         
 
-        typeTree1d = BuildTree1d(types);
+        _typeTree1d = BuildTree1d(types);
     }
 
     private void ListOnTypeClicked(Type type)
@@ -68,15 +68,15 @@ public partial class FuzzyWindow : EditorWindow
     {
         if (string.IsNullOrWhiteSpace(query))
         {
-            _list.SetData(hierarchyTree);
+            _list.SetData(_hierarchyTree);
             _list.Repaint = true;
         }
         else
         {
             var queryChars = query.ToCharArray();
 
-            Array.Sort(typeTree1d, Sort);
-            _list.SetData(typeTree1d);
+            Array.Sort(_typeTree1d, Sort);
+            _list.SetData(_typeTree1d);
 
             int Sort(IOptionTree a, IOptionTree b)
             {
@@ -99,8 +99,8 @@ public partial class FuzzyWindow : EditorWindow
             }
         }
 
-        animTarget = 1;
-        lastRepaintTime = DateTime.Now;
+        _animTarget = 1;
+        _lastRepaintTime = DateTime.Now;
     }
 
     private void OnHeaderBackClicked()
@@ -125,12 +125,12 @@ public partial class FuzzyWindow : EditorWindow
     {
         anim = Mathf.Floor(anim) + Mathf.SmoothStep(0, 1, Mathf.Repeat(anim, 1));
 
-        var levelPosition = new Rect(position.width * (1 - anim) + 1, 30, position.width - 2, height - 31);
+        var levelPosition = new Rect(position.width * (1 - anim) + 1, 30, position.width - 2, _height - 31);
         GUILayout.BeginArea(levelPosition);
 
         if (_list.Parent.Parent != null)
         {
-            var headerPosition = GUILayoutUtility.GetRect(16, headerHeight);
+            var headerPosition = GUILayoutUtility.GetRect(16, HeaderHeight);
 
             _headerWithBackButtonPanel.OnGUI(_list.Parent, headerPosition,in isRepaint);
         }
@@ -143,7 +143,7 @@ public partial class FuzzyWindow : EditorWindow
 
     private static readonly MethodInfo ShowAsDropDownFitToScreen;
 
-    private static FuzzyWindow instance;
+    private static FuzzyWindow _instance;
 
     public static void Show(Rect activatorPosition,Vector2 size, Type type,Action<Type> onClicked)
     {
@@ -152,35 +152,36 @@ public partial class FuzzyWindow : EditorWindow
 
         _baseType = type;
 
-        if (instance != null)
+        if (_instance != null)
         {
             try
             {
-                instance.Close();
+                _instance.Close();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
+                // ignored
             }
         }
 
         {
             
-            instance = CreateInstance<FuzzyWindow>();
+            _instance = CreateInstance<FuzzyWindow>();
 
-            instance.CreateWindow(activatorPosition,size);
-            instance.TypeClicked += onClicked;
+            _instance.CreateWindow(activatorPosition,size);
+            _instance.TypeClicked += onClicked;
         }
     }
 
-    private float anim = 1;
-    private int animTarget = 1;
-    private float animationSpeed = 4;
+    private float _anim = 1;
+    private int _animTarget = 1;
+    private float _animationSpeed = 4;
 
-    private DateTime lastRepaintTime;
+    private DateTime _lastRepaintTime;
 
-    private float repaintDeltaTime => (float) (DateTime.Now - lastRepaintTime).TotalSeconds;
+    private float RepaintDeltaTime => (float) (DateTime.Now - _lastRepaintTime).TotalSeconds;
 
-    private bool isAnimating => anim != animTarget;
+    private bool IsAnimating => _anim != _animTarget;
 
     //Be sure do not call any layout change while the UI is repainting or force a repaint
     //before the layout is completed.
@@ -192,13 +193,13 @@ public partial class FuzzyWindow : EditorWindow
 
         bool isRepaint = Event.current.type == EventType.Repaint;
 
-        var searchFieldPosition = GUILayoutUtility.GetRect(10, searchFieldHeight);
+        var searchFieldPosition = GUILayoutUtility.GetRect(10, SearchFieldHeight);
         searchFieldPosition.x += 8;
         searchFieldPosition.width -= 16;
 
         _searchPanel.OnGUI(searchFieldPosition);
 
-        OnLevelGUI(anim, in isRepaint);
+        OnLevelGUI(_anim, in isRepaint);
 
         UpdateAnimation(in isRepaint);
         if (isRepaint) 
@@ -208,21 +209,21 @@ public partial class FuzzyWindow : EditorWindow
     private void Rescale()
     {
         var copy = position;
-        copy.height = headerHeight + initialSpace + searchFieldHeight + Mathf.Max(_list.GetHeight(), 100);
+        copy.height = HeaderHeight + InitialSpace + SearchFieldHeight + Mathf.Max(_list.GetHeight(), 100);
         copy.width = Mathf.Max(_headerWithBackButtonPanel.GetWidth(), _searchPanel.GetWidth(), _list.Width) + 18f;
         position = copy;
     }
 
-    private Vector2 startPostion;
-    private Vector2 savedSize;
+    private Vector2 _startPostion;
+    private Vector2 _savedSize;
     private void CreateWindow(Rect activatorPosition,Vector2 size)
     {
         // Show and focus the window
         wantsMouseMove = true;
-        var initialSize = new Vector2(size.x, headerHeight + initialSpace + searchFieldHeight + 100); 
-        startPostion = new Vector2(activatorPosition.x,activatorPosition.y);
+        var initialSize = new Vector2(size.x, HeaderHeight + InitialSpace + SearchFieldHeight + 100); 
+        _startPostion = new Vector2(activatorPosition.x,activatorPosition.y);
         ShowAsDropDown(EditorGUIUtility.GUIToScreenRect(activatorPosition),initialSize);
-        savedSize = initialSize;
+        _savedSize = initialSize;
         Focus();
     }
 }

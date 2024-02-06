@@ -18,5 +18,6 @@ namespace ThirdPersonController.Code.AnimatedStateMachine
         public bool isCooldown { get; set; }
         public bool isReloading { get; set; }
         public bool RequestedHolsterWeapon  { get; set; }
+        public float MinAimingDistance { get; }
     }
 }

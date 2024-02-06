@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameGC.CommonEditorUtils.Editor;
 using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -28,7 +29,8 @@ namespace UTPS.Inventory.Editor
         private void OnValidate()
         {
             names = (target as Inventory).EDItorREF.KeysArray.Select(w => w.name).ToArray();
-            choises.choices = new List<string>(names);
+            if(choises != null)
+                choises.choices = new List<string>(names);
         }
 
         private PopupField<string> choises;
@@ -41,7 +43,8 @@ namespace UTPS.Inventory.Editor
             horizontalScope.style.flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row);
 
             var button = new Button(Switch);
-            button.text = "Switch GUN:";
+            button.text = "Equip GUN:";
+            button.tooltip = "Equip gun to be selected as first on play";
             button.style.width = w50;
             horizontalScope.Add(button);
 

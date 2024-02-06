@@ -6,8 +6,6 @@ using System.Net.Http;
 using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Networking;
 
 internal static class CustomWebClient
 {

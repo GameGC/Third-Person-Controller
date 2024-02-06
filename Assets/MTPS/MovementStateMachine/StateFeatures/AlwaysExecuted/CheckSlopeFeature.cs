@@ -38,14 +38,17 @@ namespace ThirdPersonController.MovementStateMachine.Features
             float radius = _capsuleCollider.radius;
             var moveDirection = _input.moveDirection;
             
-            
+//            var ray = new Ray(_transform.position + Vector3.up * _capsuleCollider.height / 2, _transform.forward);
+//#if UNITY_EDITOR
+//                Debug.DrawRay(ray.origin, ray.direction * (_capsuleCollider.radius + 1.5f),new Color(0.34f, 0.64f, 0.8f));
+//#endif
             Vector3 rayStart = _transform.position + Vector3.up * halfHeight;
 
 #if UNITY_EDITOR
             if(visualiseRaycast)
-                Debug.DrawLine(rayStart, _transform.position + moveDirection * (radius + 0.2f),Color.yellow);
+                Debug.DrawLine(rayStart, _transform.position + _input.moveDirection * (radius + 0.2f),Color.yellow);
 #endif
-            if (Physics.Linecast(rayStart, _transform.position + moveDirection * (radius + 0.2f), out var hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
+            if (Physics.Linecast(rayStart, _transform.position + _input.moveDirection * (radius + 0.2f), out var hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
             {
                 float hitAngle = Vector3.Angle(Vector3.up, hitInfo.normal);
 
@@ -58,24 +61,22 @@ namespace ThirdPersonController.MovementStateMachine.Features
                 if (hitAngle > slopeLimit && Physics.Linecast(rayStart, targetPoint, out hitInfo, _variables.GroundLayer,QueryTriggerInteraction.Ignore))
                 {
                     hitAngle = Vector3.Angle(Vector3.up, hitInfo.normal);
+                    
                     _variables.SlopeAngle = hitAngle;
-
-                
-                    if (hitAngle > slopeLimit && hitAngle < 85f)
-                        _variables.IsSlopeBadForMove = true;
-                    else
-                        _variables.IsSlopeBadForMove = false;
+                    _variables.IsSlopeBadForMove = hitAngle > slopeLimit;
                 }
                 else
                 {
                     _variables.SlopeAngle = hitAngle;
-                    _variables.IsSlopeBadForMove = false;
+                    _variables.IsSlopeBadForMove = hitAngle > slopeLimit;
                 }
             }
             else
             {
+                _variables.SlopeAngle = 0;
                 _variables.IsSlopeBadForMove = false;
             }
+            
         }
     }
 }

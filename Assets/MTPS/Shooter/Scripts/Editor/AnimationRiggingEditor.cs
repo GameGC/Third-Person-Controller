@@ -1,7 +1,10 @@
+using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UIElements;
+using UTPS.FightingStateMachine.Extras;
 
 [CustomEditor(typeof(RigBuilder),true,isFallback = false)]
 internal class AnimationRiggingEditor : Editor
@@ -10,6 +13,10 @@ internal class AnimationRiggingEditor : Editor
                                     "Unity.Animation.Rigging.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
 
     private Editor _editor;
+
+    private MethodInfo OnEnableMathod = typeof(Editor).GetMethod("OnEnable",
+        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
     public override VisualElement CreateInspectorGUI()
     {
         var root = new VisualElement();
@@ -67,15 +74,41 @@ internal class AnimationRiggingEditor : Editor
             animator.Play(prevState);
     }
 
+    private void Refresh()
+    {
+        Debug.Log("refresh");
+       // OnEnableMathod.Invoke(_editor,null);
+       EditorUtility.SetDirty(target);
+        _editor.Repaint();
+    }
+
+    private void OnEnable()
+    {
+        if(target is RigBuilderFixed)
+            EditorApplication.update += Update;
+    }
+
+    private void Update()
+    {
+        (target as RigBuilderFixed).OnValidate();
+    }
+
     private void OnDestroy()
     {
-        if(_editor)
+        if (_editor)
+        {
+            EditorApplication.update -= Update;
             DestroyImmediate(_editor);
+        }
     }
 
     private void OnDisable()
     {
-        if(_editor)
+        if (_editor)
+        {
+            if(target is RigBuilderFixed)
+                EditorApplication.update -= Update;
             DestroyImmediate(_editor);
+        }
     }
 }

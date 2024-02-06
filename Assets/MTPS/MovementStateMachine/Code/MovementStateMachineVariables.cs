@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ThirdPersonController.MovementStateMachine
 {
+    [DisallowMultipleComponent]
     public class MovementStateMachineVariables : MonoBehaviour,IMoveStateMachineVariables
     {
         [field: SerializeField][field: Range(1f, 20f)]

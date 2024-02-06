@@ -101,7 +101,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
             Playable playable = default;
             switch (States[i])
             {
-                case null: playable = Playable.Null; break;
+                case null: playable = Playable.Create(graph); break;
                 
                 // for some un common cases when playables buggy blend
                 case RuntimeAnimatorController anim:
@@ -126,7 +126,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
                     break;
                 }
                 case AnimationValue animationValue: playable = animationValue.GetPlayable(graph, root);          break;
-                default:playable = Playable.Null; break;
+                default: playable = Playable.Create(graph); break;
             }
             graph.Connect(playable, 0, _mixerPlayable, i);
         }
@@ -138,7 +138,6 @@ public class AnimationLayer : FollowingStateMachine<Object>
     private void OnStateChanged()
     {
         CurrentGraph?.Stop();
-
 
         var prevIndex = CurrentStateIndex;
         var newIndex = Array.FindIndex(_codeStateMachine.states,s=>s.Name == _codeStateMachine.CurrentState.Name);
@@ -168,7 +167,7 @@ public class AnimationLayer : FollowingStateMachine<Object>
     public async Task WaitForNextState()
     {
         var newIndex = _codeStateMachine.CurrentStateIndex;
-        while (Application.isPlaying && _mixerPlayable.GetInputWeight(newIndex) < 1) await Task.Delay(100);
+        while (Application.isPlaying && this && _mixerPlayable.GetInputWeight(newIndex) < 1) await Task.Delay(100);
     }
 
     public async Task WaitForStateWeight0(int stateIndex)
@@ -207,11 +206,9 @@ public class AnimationLayer : FollowingStateMachine<Object>
             if (playable.GetInputWeight(i) > 0.5f)
             {
                 var currentPlayble = playable.GetInput(i);
-                Debug.Log(currentPlayble.GetLeadTime());
-                Debug.Log(currentPlayble.GetPreviousTime());
 
                 float duration = (float) currentPlayble.GetDuration();
-                if (duration == Mathf.Infinity)
+                if (float.IsPositiveInfinity(duration))
                 {
                     GetAnimationValuePlayableRemainingTime(currentPlayble, out time);
                     return;
@@ -283,7 +280,8 @@ public class AnimationLayer : FollowingStateMachine<Object>
             if (States[newStateIndex] is AnimationClip clip && !clip.isLooping)
             {
                 var playable = _mixerPlayable.GetInput(newStateIndex);
-                if (!playable.IsNull() && playable.IsValid())
+                
+                if (!playable.IsNull() && playable.IsValid()) 
                     playable.SetTime(0);
             }
             else if(States[newStateIndex] is TimelineAsset asset)
@@ -356,15 +354,16 @@ public class AnimationLayer : FollowingStateMachine<Object>
     public void SetCustomVariables<T0, T1, T2, T3>(int index, T0 arg0, T1 arg1, T2 arg2, T3 arg3) =>
         ((AnimationValue) States[index]).SetCustomVariables(_mixerPlayable.GetInput(index),arg0,arg1,arg2,arg3);
 
-
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if (_graphs != null && _graphs.Length > 0)
+        if(_mixerPlayable.IsNull()) return;
+        for (int i = 0,length = States.Length; i < length; i++)
         {
-            foreach (var timelineGraph in _graphs)
-            {
-                timelineGraph?.Destroy();
-            }
+            var state = States[i];
+            if (state is AnimationValue value)
+                value.OnDestroyPlayable(_mixerPlayable.GetInput(i));
+            else if(state is TimelineAsset)
+                _graphs[i].Destroy();
         }
     }
 #if UNITY_EDITOR

@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.CodeStateMachine;
 using ThirdPersonController.Core.DI;
+using UnityEngine;
 
 public class EndPlayTransition : BaseStateTransition
 {
@@ -22,7 +23,7 @@ public class EndPlayTransition : BaseStateTransition
         {
             if (!_wasStarted)
             {
-                waitTask = _layer.WaitForLastStateFinish();
+                waitTask = _layer.WaitForAnimationFinish(_layer.CurrentStateIndex,1);
                 _wasStarted = true;
             }
 

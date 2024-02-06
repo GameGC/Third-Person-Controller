@@ -45,9 +45,31 @@ public class AnimationLayerInspector : FollowingStateMachineEditor
             UpdateVisualSelection();
         }
 
-        EditorGUILayout.PropertyField(weight);
-        EditorGUILayout.PropertyField(avatarMask);
-        EditorGUILayout.PropertyField(isAdditive);
+        using (var changeCheckScope = new EditorGUI.ChangeCheckScope())
+        {
+            EditorGUILayout.PropertyField(weight);
+            if (changeCheckScope.changed)
+            {
+                serializedObject.ApplyModifiedProperties();
+                target.Weight = target.Weight;
+                return;
+            }
+            EditorGUILayout.PropertyField(avatarMask);
+            if (changeCheckScope.changed)
+            {
+                serializedObject.ApplyModifiedProperties();
+                target.AvatarMask = target.AvatarMask;
+                return;
+            }
+            EditorGUILayout.PropertyField(isAdditive);
+            if (changeCheckScope.changed)
+            {
+                serializedObject.ApplyModifiedProperties();
+                target.IsAdditive = target.IsAdditive;
+                return;
+            }              
+        }
+    
 
         base.DrawStateList();
         

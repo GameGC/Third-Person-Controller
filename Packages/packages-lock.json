@@ -15,26 +15,24 @@
       "url": "https://packages.unity.com"
     },
     "com.gamegc.animation.rigging.saver": {
-      "version": "1.0.0",
+      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.animation.rigging.saverf/com.gamegc.animation.rigging.saver-1.0.0.tgz",
       "depth": 0,
-      "source": "registry",
+      "source": "local-tarball",
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.animation.rigging": "1.2.1"
-      },
-      "url": "http://registry.npmjs.com"
+      }
     },
     "com.gamegc.collections": {
-      "version": "1.0.0",
+      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.collectionsf/com.gamegc.collections-1.0.0.tgz",
       "depth": 0,
-      "source": "registry",
+      "source": "local-tarball",
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
-      },
-      "url": "http://registry.npmjs.com"
+      }
     },
     "com.gamegc.common-editor-utils": {
-      "version": "file:Local/GameGC/com.gamegc.common-editor-utilsf/com.gamegc.common-editor-utils-1.0.3.tgz",
+      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.common-editor-utilsf/com.gamegc.common-editor-utils-1.0.5.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -42,21 +40,21 @@
       }
     },
     "com.gamegc.surfacesystem": {
-      "version": "file:Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.0.tgz",
+      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.gamegc.collections": "1.0.0"
+        "com.gamegc.collections": "1.0.0",
+        "com.gamegc.common-editor-utils": "1.0.5"
       }
     },
     "com.gamegc.timeline.legacy-animation": {
-      "version": "1.0.0",
+      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.timeline.legacy-animationf/com.gamegc.timeline.legacy-animation-1.0.0.tgz",
       "depth": 0,
-      "source": "registry",
+      "source": "local-tarball",
       "dependencies": {
         "com.unity.timeline": "1.7.5"
-      },
-      "url": "http://registry.npmjs.com"
+      }
     },
     "com.singularitygroup.hotreload": {
       "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.9",

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using Cinemachine;
+using GameGC.CommonEditorUtils.Attributes;
 using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using ThirdPersonController.Input.New;

@@ -1,11 +1,13 @@
 using System;
 using System.Threading.Tasks;
+using Fighting.Pushing;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
+[RequireComponent(typeof(FightingStateMachineVariables))]
 public class FightingStateMachine : CodeStateMachine
 {
    public bool hasGetWeaponState = true;

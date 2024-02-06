@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using System.Linq;
+using GameGC.CommonEditorUtils.Editor;
 using ThirdPersonController.Core.CodeStateMachine;
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;

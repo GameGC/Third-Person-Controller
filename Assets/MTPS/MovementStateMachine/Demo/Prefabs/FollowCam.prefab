@@ -692,7 +692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6829505761415675568, guid: 8338ded2f92f4a4488076cfad913665a, type: 3}
       propertyPath: m_YAxis.Value
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6829505761415675568, guid: 8338ded2f92f4a4488076cfad913665a, type: 3}
       propertyPath: m_XAxis.m_MaxSpeed
@@ -843,6 +843,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1940033fc5c6dad4eb85a8077d180ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8776367977926606530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951457861174012894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 6
+    m_FrequencyGain: 4
+    m_Duration: 0.5
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &7951457861174012895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6829505761415675571, guid: 8338ded2f92f4a4488076cfad913665a, type: 3}

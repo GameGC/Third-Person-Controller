@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator)),DisallowMultipleComponent]
 public class HybridAnimator : MonoBehaviour
 {
     public AnimationLayer[] stateMachines;
@@ -63,17 +63,18 @@ public class HybridAnimator : MonoBehaviour
     {
         _layerPlayable.GetInput(i).Destroy();
         _layerPlayable.DisconnectInput(i);
-        
+
         var stateMachine = stateMachines[i-1];
         if(!stateMachine) return;
-        _playableGraph.Connect(stateMachine.ConstructPlayable(_playableGraph,gameObject), 0, _layerPlayable, i);
+        _playableGraph.Connect(stateMachine.ConstructPlayable(_playableGraph,gameObject), 
+            0, _layerPlayable, i);
             
         if(stateMachine.AvatarMask)
             _layerPlayable.SetLayerMaskFromAvatarMask((uint)i,stateMachine.AvatarMask);
             
         _layerPlayable.SetLayerAdditive((uint) i,stateMachine.IsAdditive);
         _layerPlayable.SetInputWeight(i,stateMachine.Weight);
-        
+
         SubscribeCallbacks(i, stateMachine);
     }
 
@@ -111,7 +112,15 @@ public class HybridAnimator : MonoBehaviour
         get => m_MecanimOverride;
         set
         {
-            _animator.runtimeAnimatorController = value;
+            RuntimeAnimatorController valueToSet = value;
+            if (!value)
+            {
+                if (_animator.runtimeAnimatorController is AnimatorOverrideController override_)
+                {
+                    valueToSet = override_.runtimeAnimatorController;
+                }
+            }
+            _animator.runtimeAnimatorController = valueToSet;
             m_MecanimOverride = value;
 
             _playableGraph.Disconnect(_layerPlayable,0);

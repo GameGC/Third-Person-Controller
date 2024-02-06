@@ -21,7 +21,7 @@ namespace ThirdPersonController.Core.DI
         /// <summary>
         /// add component cached
         /// </summary>
-        public void AddComponent<T>() where T : Component;
+        public T AddComponent<T>() where T : Component;
         
         /// <summary>
         /// add existing component cached

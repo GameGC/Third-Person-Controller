@@ -54,10 +54,11 @@ namespace DefaultNamespace
         
         public async void Stop()
         {
-            while (_graph.IsDone() == false)
+            while (_graph.IsValid() && _graph.IsDone() == false)
             {
                 await Task.Delay(100);
             }
+            if(!_graph.IsValid()) return;
             if (_graph.IsPlaying())
                 _graph.Stop();
         }
@@ -97,8 +98,9 @@ namespace DefaultNamespace
         
         public async void UnSubscribeNotification(string outputName, INotificationReceiver receiver)
         {
-            while (_graph.IsPlaying()) 
+            while (_graph.IsValid() && _graph.IsPlaying()) 
                 await Task.Delay(100);
+            if(!_graph.IsValid()) return;
             await Task.Delay(100);
             for (int i = 0; i < _graph.GetOutputCount(); i++)
             {

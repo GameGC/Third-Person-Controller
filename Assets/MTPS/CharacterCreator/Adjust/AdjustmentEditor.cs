@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using GameGC.CommonEditorUtils.Editor;
 using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditor.Overlays;
@@ -316,7 +317,7 @@ public class AdjustmentEditor : Editor
             tab1Target = target._currentCharacter.GetComponent<RigBuilder>().layers[(int) RigTypes.Fighting].rig.gameObject;
                         
         var weaponData =
-            target._currentCharacter.GetComponent<Inventory>().EquipedItemData as WeaponData;
+            target._currentCharacter.GetComponent<Inventory>().EquippedItemData as WeaponData;
         var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(weaponData.rigLayer);
                         
         

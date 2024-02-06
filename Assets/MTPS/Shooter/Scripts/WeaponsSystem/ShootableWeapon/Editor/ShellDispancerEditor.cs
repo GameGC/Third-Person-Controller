@@ -1,8 +1,9 @@
 using UnityEditor;
 using UnityEngine;
+using Weapons;
 
 [CustomEditor(typeof(ShellDispancer))]
-public class ShellDispancerEditor : Editor
+public class ShellDispancerEditor : BaseWeaponExtensionEditor
 {
     private new ShellDispancer target;
 
@@ -16,11 +17,9 @@ public class ShellDispancerEditor : Editor
     
     public override void OnInspectorGUI()
     {
-        GUI.enabled = false;
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("m_Script"));
-        GUI.enabled = true;
+        DrawScriptHeader();
 
-        using (new GUILayout.VerticalScope(GUI.skin.box))
+        using (new GUILayout.VerticalScope(box))
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("shell"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("shellLifeTime"));
@@ -28,13 +27,13 @@ public class ShellDispancerEditor : Editor
         GUILayout.Space(9f);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("relativePoint"));
         
-        using (new GUILayout.VerticalScope(GUI.skin.box))
+        using (new GUILayout.VerticalScope(box))
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("minVelocity"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("maxVelocity"));
         }
             
-        using (new GUILayout.VerticalScope(GUI.skin.box))
+        using (new GUILayout.VerticalScope(box))
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("minTorque"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("maxTorque"));

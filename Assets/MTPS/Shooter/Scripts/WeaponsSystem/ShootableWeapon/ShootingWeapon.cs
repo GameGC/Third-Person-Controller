@@ -1,11 +1,13 @@
 using System;
 using Cinemachine;
+using GameGC.CommonEditorUtils.Attributes;
 using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UTPS.Inventory;
 using UTPS.Inventory.ItemTypes;
 
+[DisallowMultipleComponent]
 public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
 {
     public Transform spawnPoint;
@@ -30,7 +32,7 @@ public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
     public void CacheReferences(IFightingStateMachineVariables variables,IReferenceResolver resolver)
     {
         _inventory = resolver.GetComponent<Inventory>();
-        _currentAmmoType = ((WeaponData) _inventory.EquipedItemData).ammoItem;
+        _currentAmmoType = ((WeaponData) _inventory.EquippedItemData).ammoItem;
         
         Variables = variables;
         _impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -49,7 +51,7 @@ public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
 
     private void AutoReload()
     {
-        if (_inventory.MinusItem(_currentAmmoType, ammoImMagazine)) return;
+        if (!_inventory.MinusItem(_currentAmmoType, ammoImMagazine)) return;
         remainingAmmo = ammoImMagazine;
     }
 
@@ -94,6 +96,7 @@ public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
 
     public int remainingAmmo { get; private set; }
     public int maxAmmo => ammoImMagazine;
+    public float reloadingOrCooldownTime => reloadingTime;
 
     private void Reload()
     {
