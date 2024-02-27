@@ -1,5 +1,5 @@
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.DI;
 
 public interface IWeaponInfo
 {

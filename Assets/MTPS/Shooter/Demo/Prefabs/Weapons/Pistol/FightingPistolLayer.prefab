@@ -318,14 +318,14 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 1
     - rid: 8271787834290208782
-      type: {class: RunStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      type: {class: RunStateTransition, ns: MTPS.Movement.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[4]
         _transitionIndex: 2
         _transitionName: RunUnAimed
         IsRunning: 1
     - rid: 8271787834290208783
-      type: {class: RunStateTransition, ns: ThirdPersonController.MovementStateMachine.Code.Transitions, asm: Assembly-CSharp}
+      type: {class: RunStateTransition, ns: MTPS.Movement.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[4]
         _transitionIndex: 1

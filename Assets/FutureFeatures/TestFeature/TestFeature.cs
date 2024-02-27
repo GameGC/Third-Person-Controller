@@ -1,5 +1,5 @@
 using System;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
 
 [Serializable]
 public class TestFeature : BaseMultiParamFeature<TestFeatureVariable>

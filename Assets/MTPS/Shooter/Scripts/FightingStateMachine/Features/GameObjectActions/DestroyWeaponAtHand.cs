@@ -1,8 +1,7 @@
 using System;
 using GameGC.CommonEditorUtils.Attributes;
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

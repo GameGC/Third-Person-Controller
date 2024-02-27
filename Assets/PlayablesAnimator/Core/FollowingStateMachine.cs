@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ThirdPersonController.Core.StateMachine;
+using MTPS.Core.CodeStateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;

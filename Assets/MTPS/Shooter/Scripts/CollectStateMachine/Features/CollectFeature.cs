@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Input;
+using MTPS.Core;
+using MTPS.Movement.Core.Input;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UTPS.Inventory;
@@ -25,7 +24,7 @@ public class CollectFeature : BaseFeature
     private RigBuilder _rigBuilder;
 
     private Animator _animator;
-    private IBaseInputReader _input;
+    private IMoveInput _input;
 
     private Inventory Switch;
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
@@ -37,7 +36,7 @@ public class CollectFeature : BaseFeature
         _layer = _variables.AnimationLayer;
 
         _animator = resolver.GetComponent<Animator>();
-        _input = resolver.GetComponent<IBaseInputReader>();
+        _input = resolver.GetComponent<IMoveInput>();
         _transform = resolver.GetComponent<Transform>();
         Switch = resolver.GetComponent<Inventory>();
         

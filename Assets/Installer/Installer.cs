@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Editor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -301,7 +300,9 @@ public class Installer : EditorWindow
     private async void SendPackageRequest(int i)
     {
         var package = _downloaderItems[i].PackageName;
-        var result = await CustomWebClient.Get("http://cvhelpers.byethost7.com/Backend/getfile.php?key=" + invoice+"&url="+package);
+        var request =
+            $"http://cvhelpers.byethost7.com/Backend/getfile.php?key={invoice}&id={package}&v={_downloaderItems[i].Version}";
+        var result = await CustomWebClient.Get(request);
 
         //hacker protection 
         if (result.Contains("false"))

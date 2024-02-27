@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Attributes;
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 

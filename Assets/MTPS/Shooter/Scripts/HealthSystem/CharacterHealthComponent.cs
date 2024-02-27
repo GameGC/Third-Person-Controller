@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using GameGC.SurfaceSystem;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
+using MTPS.Core.Attributes;
 using UnityEngine;
 
 [DisallowMultipleComponent]

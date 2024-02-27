@@ -1,7 +1,7 @@
+using MTPS.Core;
+using MTPS.Core.CodeStateMachine;
+using MTPS.Movement.Core.Input;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.CodeStateMachine;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,11 +11,11 @@ namespace Fighting.Pushing
     {
         [SerializeField] private InputActionReference shootButtonReference;
 
-        private IBaseInputReader _input;
+        private IMoveInput _input;
         private IFightingStateMachineVariables _variables;
         public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            _input = resolver.GetComponent<IBaseInputReader>();
+            _input = resolver.GetComponent<IMoveInput>();
             _variables= variables as IFightingStateMachineVariables;
         }
 

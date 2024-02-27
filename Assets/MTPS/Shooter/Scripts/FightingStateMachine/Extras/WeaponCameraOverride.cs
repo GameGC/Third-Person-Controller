@@ -2,7 +2,7 @@ using System;
 using Cinemachine;
 using GameGC.Collections;
 using GameGC.CommonEditorUtils.Attributes;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
 using UnityEngine;
 
 namespace UTPS.FightingStateMachine.Extras

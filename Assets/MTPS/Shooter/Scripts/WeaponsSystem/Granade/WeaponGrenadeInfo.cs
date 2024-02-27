@@ -1,7 +1,7 @@
 using System;
 using GameGC.CommonEditorUtils.Attributes;
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UTPS.Inventory;
 using UTPS.Inventory.ItemTypes;
@@ -44,7 +44,7 @@ public class WeaponGrenadeInfo : BaseWeaponWithExtensions,IWeaponInfo
 
         if (remainingAmmo > 0)
         {
-            var line = transform.root.Find("StateMachines").GetComponentInChildren<BallisticTrajectoryGeneratorPreview>();
+            var line = transform.root.Find("StateMachines").GetComponentInChildren<BallisticTrajectoryGenerator>();
             line.GenerateTrajectoryOut(out var points);
             
             _tempGranade.enabled = true;

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
-using ThirdPersonController.Core.CodeStateMachine;
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
+using MTPS.Core.Attributes;
+using MTPS.Core.CodeStateMachine;
+using MTPS.Core.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,7 +29,15 @@ public class MultipleConditionTransition : BaseStateTransition
     {
         foreach (var transition in Transitions)
         {
-            transition.Initialise(variables,resolver);
+            try
+            {
+                transition.Initialise(variables,resolver);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("tr path:"+transition?.path+" "+e);
+                Debug.LogError((variables as Component).name);
+            }
         }
     }
 

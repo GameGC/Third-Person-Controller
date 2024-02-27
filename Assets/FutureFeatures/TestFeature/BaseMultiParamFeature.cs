@@ -1,7 +1,7 @@
 using System;
 using GameGC.Collections;
 using GameGC.CommonEditorUtils.Editor;
-using ThirdPersonController.Core;
+using MTPS.Core;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

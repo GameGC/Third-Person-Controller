@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -112,6 +113,14 @@ public class HybridAnimator : MonoBehaviour
         get => m_MecanimOverride;
         set
         {
+            // read previous state hashes
+            int layerCount = _animator.layerCount;
+            
+            var stateHashes = new int[layerCount];
+            for (int i = 0; i < layerCount; i++) 
+                stateHashes[i] = _animator.GetCurrentAnimatorStateInfo(i).fullPathHash;
+            
+            //override animator
             RuntimeAnimatorController valueToSet = value;
             if (!value)
             {
@@ -123,11 +132,26 @@ public class HybridAnimator : MonoBehaviour
             _animator.runtimeAnimatorController = valueToSet;
             m_MecanimOverride = value;
 
+            //recreate first layer
+            
             _playableGraph.Disconnect(_layerPlayable,0);
             var animatorPlayable = AnimatorControllerPlayable.Create(_playableGraph, _animator.runtimeAnimatorController);
             _playableGraph.Connect(animatorPlayable, 0, _layerPlayable, 0);
+
+            //restore previous states
+            RestoreStates(stateHashes, layerCount);
         }
-    } 
+    }
+
+    private async void RestoreStates(IReadOnlyList<int> stateHashes,int layerCount)
+    {
+        //this is required otherwise will be bug
+        await Task.Yield();
+        
+        for (int i = 0; i < layerCount; i++)
+            _animator.Play(stateHashes[i], i);
+    }
+    
     [SerializeField] private AnimatorOverrideController m_MecanimOverride;
 
     private List<KeyValuePair<object, AnimationClip>> _overridesCache= new(capacity:5);

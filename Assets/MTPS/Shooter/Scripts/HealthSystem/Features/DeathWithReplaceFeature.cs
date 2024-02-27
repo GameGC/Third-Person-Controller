@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

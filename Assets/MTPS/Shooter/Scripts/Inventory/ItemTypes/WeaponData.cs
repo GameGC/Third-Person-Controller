@@ -1,4 +1,4 @@
-using ThirdPersonController.Core.StateMachine;
+using MTPS.Core.CodeStateMachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Serialization;

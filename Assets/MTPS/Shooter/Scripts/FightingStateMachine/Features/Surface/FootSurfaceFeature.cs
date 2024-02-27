@@ -1,8 +1,9 @@
 using GameGC.SurfaceSystem;
 using GameGC.SurfaceSystem.Audio;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Input;
-using ThirdPersonController.MovementStateMachine;
+using MTPS.Core;
+using MTPS.Movement.Core.Input;
+using MTPS.Movement.Core.StateMachine;
+using MTPS.Movement.Core.StateMachine.Editor;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -28,13 +29,13 @@ public class FootSurfaceFeature : StepDecalFeature
     
 
     private AudioSource _source;
-    private IBaseInputReader _inputReader;
+    private IMoveInput _inputReader;
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         base.CacheReferences(variables,resolver);
         _source = (moveVariables as MovementStateMachineVariables).gameObject.AddComponent<AudioSource>();
         
-        _inputReader = resolver.GetComponent<IBaseInputReader>();
+        _inputReader = resolver.GetComponent<IMoveInput>();
     }
 
     public override void OnUpdateState()

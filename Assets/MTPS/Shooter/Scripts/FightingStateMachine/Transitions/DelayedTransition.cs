@@ -1,8 +1,8 @@
 using System;
 using System.Timers;
 using GameGC.CommonEditorUtils.Attributes;
-using ThirdPersonController.Core.CodeStateMachine;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
+using MTPS.Core.CodeStateMachine;
 using UnityEngine;
 
 [Serializable]

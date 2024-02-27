@@ -1,7 +1,7 @@
 using GameGC.SurfaceSystem;
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.MovementStateMachine;
+using MTPS.Core;
+using MTPS.Movement.Core;
+using MTPS.Movement.Features.Utils;
 using UnityEngine;
 
 public class StepDecalFeature : BaseFeature

@@ -1,8 +1,8 @@
 using System;
 using Cinemachine;
 using GameGC.CommonEditorUtils.Attributes;
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.DI;
 using UnityEngine;
 using UTPS.Inventory;
 using UTPS.Inventory.ItemTypes;

@@ -1,5 +1,4 @@
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
 using UnityEngine;
 
 public class SetCameraFeature : BaseFeature

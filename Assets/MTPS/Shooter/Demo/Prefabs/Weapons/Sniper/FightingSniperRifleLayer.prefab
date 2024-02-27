@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7496659491380728965}
   - component: {fileID: -3723019905366359828}
   - component: {fileID: -2469758948940512443}
-  - component: {fileID: 6310950329806497740}
   m_Layer: 2
   m_Name: FightingSniperRifleLayer
   m_TagString: Untagged
@@ -860,15 +859,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Controller: {fileID: 22100000, guid: 60de550443d904c2a959571d36e570f8, type: 2}
---- !u!114 &6310950329806497740
-MonoBehaviour:
-  m_ObjectHideFlags: 16
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506062242848116311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93024c4bd743e46d08e10ed86c2ff3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

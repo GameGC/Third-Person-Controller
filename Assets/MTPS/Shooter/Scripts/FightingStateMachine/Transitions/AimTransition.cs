@@ -1,4 +1,4 @@
-using ThirdPersonController.Core.DI;
+using MTPS.Core;
 using ThirdPersonController.Input;
 using UnityEngine;
 
@@ -8,10 +8,10 @@ namespace Fighting.Pushing
     {
         [SerializeField] private bool isAim;
 
-        private IBaseInputReader _input;
+        private IShooterInput _input;
         public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            _input = resolver.GetComponent<IBaseInputReader>();
+            _input = resolver.GetComponent<IShooterInput>();
             base.Initialise(variables,resolver);
         }
 

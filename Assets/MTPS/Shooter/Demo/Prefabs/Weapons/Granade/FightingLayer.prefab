@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: -5611037283389731989}
   - component: {fileID: 8129081330054931135}
   - component: {fileID: 7064223376673911428}
-  - component: {fileID: 7532023491509594240}
   - component: {fileID: -6952241663362289916}
+  - component: {fileID: -5976385326979165443}
+  - component: {fileID: 7532023491509594240}
   m_Layer: 0
   m_Name: FightingLayer
   m_TagString: Untagged
@@ -29,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095070348527172489}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2095070348527172492
 MonoBehaviour:
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e1db32aea341198b37478ddbde1d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MinAimingDistance>k__BackingField: Infinity
 --- !u!114 &-5611037283389731989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +141,7 @@ MonoBehaviour:
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[1]
-        layerName: shooter_layer
+        layerType: 0
         returnPreviousValueOnExit: 0
         weight: 0
     - rid: 8271788079842591043
@@ -153,6 +155,7 @@ MonoBehaviour:
         path: states.Array.data[1].Transitions.Array.data[1]
         _transitionIndex: 2
         _transitionName: Aim
+        visualiseRaycast: 0
         isAim: 1
     - rid: 8271788079842591045
       type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
@@ -165,7 +168,7 @@ MonoBehaviour:
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[0]
-        layerName: shooter_layer
+        layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 8271788079842591047
@@ -197,12 +200,13 @@ MonoBehaviour:
         path: states.Array.data[2].Transitions.Array.data[2]
         _transitionIndex: 1
         _transitionName: Idle
+        visualiseRaycast: 0
         isAim: 0
     - rid: 8271788079842591052
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[0]
-        layerName: shooter_layer
+        layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 8271788079842591053
@@ -215,6 +219,7 @@ MonoBehaviour:
         path: states.Array.data[3].features.Array.data[2]
         changeCooldownToAwait: 0
         setAimingWeaigh0DuringShoot: 1
+        shootAnimationLength: 0
     - rid: 8271788079842591055
       type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
       data:
@@ -242,7 +247,7 @@ MonoBehaviour:
       type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[1]
-        layerName: shooter_layer
+        layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 8271788079842591060
@@ -302,6 +307,7 @@ MonoBehaviour:
         path: 
         _transitionIndex: 0
         _transitionName: 
+        visualiseRaycast: 0
         isAim: 1
     - rid: 8271788079842591069
       type: {class: DestroyWeaponAtHand, ns: , asm: Assembly-CSharp}
@@ -390,9 +396,34 @@ MonoBehaviour:
       followPath: 
       LookPath: 
     <HasValue>k__BackingField: 0
+--- !u!114 &-6952241663362289916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095070348527172489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591965154da4642649cbdc3956cb531f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linePoints: 25
+  heightMul: 0.25
+--- !u!114 &-5976385326979165443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095070348527172489}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bbf7234fcc476ab928a729948f5c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &7532023491509594240
 LineRenderer:
-  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -411,7 +442,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -478,31 +509,13 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
-  m_ApplyActiveColorSpace: 0
---- !u!114 &-6952241663362289916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095070348527172489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 591965154da4642649cbdc3956cb531f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linePoints: 25
-  heightMul: 0.25

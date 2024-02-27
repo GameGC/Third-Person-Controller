@@ -3,7 +3,6 @@ using GameGC.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Create RandomAnimationAsset", fileName = "RandomAnimationAsset", order = 0)]
 public class RandomAnimationAsset : AnimationValue

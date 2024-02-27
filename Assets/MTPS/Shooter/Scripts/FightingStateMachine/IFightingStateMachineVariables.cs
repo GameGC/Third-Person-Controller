@@ -1,4 +1,4 @@
-﻿using ThirdPersonController.Core.DI;
+﻿using MTPS.Core;
 using UnityEngine;
 
 namespace ThirdPersonController.Code.AnimatedStateMachine

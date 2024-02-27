@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Fighting.Pushing;
+using MTPS.Core.CodeStateMachine;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

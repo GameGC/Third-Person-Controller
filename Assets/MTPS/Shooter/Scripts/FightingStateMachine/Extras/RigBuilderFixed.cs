@@ -1,7 +1,6 @@
 #if UNITY_EDITOR
 using System;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.Animations.Rigging;
 #endif
 

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Attributes;
 using GameGC.SurfaceSystem.Audio;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Core.StateMachine;
+using MTPS.Core;
+using MTPS.Core.CodeStateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -116,6 +116,8 @@ namespace UTPS.Inventory
       {
          if (weaponData == equippedItemData) return;
 
+         bool hasAnimatorOverride = fightingStateMachine.GetComponent<WeaponAnimatorOverride>();
+         
          // wait for previous Fighting Hide Animation
          if (fightingStateMachine != null && fightingStateMachine is global::FightingStateMachine fighting &&
              fighting.hasPutWeaponBackState)
@@ -124,9 +126,6 @@ namespace UTPS.Inventory
          Destroy(fightingStateMachine.gameObject);
 
          var stateMachineParent = transform.Find("rig_controllers");
-
-         int prevState = _animator.GetCurrentAnimatorStateInfo(0).shortNameHash;
-         _animator.enabled = false;
 
          // remove previous rig
          if (_rigBuilder.layers.Count > 0 && _rigBuilder.layers[0].rig)
@@ -148,24 +147,16 @@ namespace UTPS.Inventory
          //assign new Animations      
          stateMachineParent = transform.Find("StateMachines");
          var instance = Instantiate(weaponData.stateMachine, stateMachineParent);
+         if (instance.GetComponent<WeaponAnimatorOverride>())
+            hasAnimatorOverride = true;
          instance.ReferenceResolver = GetComponent<ReferenceResolver>();
 
          _hybridAnimator.stateMachines[0] = instance.GetComponent<AnimationLayer>();
          _hybridAnimator.Rebuild(1);
 
-
-         // rebuild everything
          _rigBuilder.Build();
-         _animator.Rebind();
-
-         _animator.enabled = true;
-         if (prevState != _animator.GetCurrentAnimatorStateInfo(0).shortNameHash)
-         {
-            _animator.Play(prevState);
-         }
 
          fightingStateMachine = instance;
-
          equippedItemData = weaponData;
 
          onItemEquiped.Invoke(weaponData);
@@ -227,7 +218,6 @@ namespace UTPS.Inventory
          }
 
          _hybridAnimator = GetComponent<HybridAnimator>();
-         _animator = GetComponent<Animator>();
          _rigBuilder = GetComponent<RigBuilderFixed>();
 
          //assign new Animations      

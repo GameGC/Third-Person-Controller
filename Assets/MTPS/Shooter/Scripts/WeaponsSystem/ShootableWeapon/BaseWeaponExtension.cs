@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public abstract class BaseWeaponExtension : MonoBehaviour

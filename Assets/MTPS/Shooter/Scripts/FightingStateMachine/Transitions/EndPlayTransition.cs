@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
+using MTPS.Core;
+using MTPS.Core.CodeStateMachine;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.CodeStateMachine;
-using ThirdPersonController.Core.DI;
-using UnityEngine;
 
 public class EndPlayTransition : BaseStateTransition
 {

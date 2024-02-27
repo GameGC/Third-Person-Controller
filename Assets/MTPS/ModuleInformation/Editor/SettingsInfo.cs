@@ -1,11 +1,19 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Security.AccessControl;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
+using UnityEditor.PackageManager;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace ThirdPersonController.ModuleInformation.Editor
 {
-    public class SettingsInfo :  ScriptableObject
+    internal class SettingsInfo :  ScriptableObject
     {
         [Serializable]
         private struct TwoKeysValuePair
@@ -18,6 +26,13 @@ namespace ThirdPersonController.ModuleInformation.Editor
         [SerializeField] private TwoKeysValuePair[] packages;
     
     
+        public enum RendererPipeline
+        {
+            BuildIn = 0,
+            Universal = 1,
+            HDRP = 2
+        }
+        
         public enum InputHandler
         {
             OldInputManager = 0,
@@ -34,12 +49,13 @@ namespace ThirdPersonController.ModuleInformation.Editor
     
         public InputHandler input;
         public ScriptingType scriptingType;
+        public RendererPipeline rendererPipeline;
 
 
         [InitializeOnLoadMethod]
         public static void SelectOnStart()
         {
-            const string kShowSettings = "Tps.Settings.ShowDefaults";
+            const string kShowSettings = "MTps.Settings.ShowDefaults";
             if (!SessionState.GetBool(kShowSettings, false))
             {
                 EditorApplication.delayCall += () =>
@@ -49,22 +65,100 @@ namespace ThirdPersonController.ModuleInformation.Editor
                 };
             }
 
+            PassReferences();
+        }
+
+        private static void PassReferences()
+        {
+            var settings = AssetDatabase.LoadAssetAtPath<SettingsInfo>(
+                AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t:" + typeof(SettingsInfo)).First()));
+
+            string inputPath = Path.Combine("Assets/",
+                (int) settings.input > 0
+                    ? "MTPS/Movement/Demo/Input/InputNew.prefab"
+                    : "MTPS/Movement/Demo/Input/InputOld.prefab");
+            string characterPath = Path.Combine("Assets/", 
+                (settings.scriptingType == ScriptingType.CodeStateMachine || settings.scriptingType == ScriptingType.BothStateMachineTypes)
+                ? "MTPS/Movement/Demo/Prefabs/Character/Default/MoveDemoCharacter.prefab"
+                    : "MTPS/Movement/Demo/Prefabs/Character/VSStateMachinew/MoveDemoCharacterVC.prefab");
+
+            TPSMoveDemoSceneTemplatePipeline.InputPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(inputPath);
+            TPSMoveDemoSceneTemplatePipeline.CharacterPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(characterPath);
         }
 
 
+        public void ImportSample(string packageName,string sampleName)
+        {
+            string jsonText = File.ReadAllText("Packages/manifest.json");
+            var json = JObject.Parse(jsonText);
+            
+            var values = json["dependencies"].ToObject<Dictionary<string, string>>();
+            if (!values.TryGetValue(packageName, out var packageVersion)) return;
 
+            if (packageVersion.EndsWith("git"))
+                packageVersion = "1.0.0";
+            
+            Sample sample = default;
+            try
+            {
+                sample = Sample.FindByPackage(packageName, packageVersion).FirstOrDefault(s=>s.displayName == sampleName);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            if(string.IsNullOrEmpty(sample.resolvedPath)) return;
+            
+            string targetPath = Path.Combine(Application.dataPath, "MTPS");
+
+            var proxyField = typeof(Sample).GetField("m_IOProxy", BindingFlags.Instance | BindingFlags.NonPublic);
+            var proxyValue = proxyField.GetValue(sample);
+            
+            var dirCopyMethod =proxyValue.GetType()
+                .GetMethod("DirectoryCopy", BindingFlags.Public | BindingFlags.Instance);
+
+            string[] files = Directory.GetFiles(sample.resolvedPath, "*", SearchOption.AllDirectories);
+            foreach (var file in Directory.GetFiles(targetPath,"*",SearchOption.AllDirectories))
+            {
+                foreach (var s in files)
+                {
+                    if (s.Replace(sample.resolvedPath,"") == file.Replace(targetPath,""))
+                    {
+                        File.Delete(file);
+                        break;
+                    }
+                }
+            }
+            
+            Action<string, float> progressAction = (fileName, progress) =>
+            {
+                string info = fileName.Replace(sample.resolvedPath + Path.DirectorySeparatorChar.ToString(), "");
+                EditorUtility.DisplayProgressBar(L10n.Tr("Copying samples files"), info, progress);
+            };
+            dirCopyMethod.Invoke(proxyValue, new object[] {sample.resolvedPath, targetPath, true, progressAction});
+            EditorUtility.ClearProgressBar();
+            AssetDatabase.Refresh();
+            //this.m_IOProxy.DirectoryCopy(sourcePath, this.importPath, true, (Action<string, float>) ((fileName, progress) =>
+            //{
+            //    string info = fileName.Replace(sourcePath + Path.DirectorySeparatorChar.ToString(), "");
+            //    EditorUtility.DisplayProgressBar(Sample.k_CopySamplesFilesTitle, info, progress);
+            //}));
+        }
         private void OnValidate()
         {
           //  if(EditorApplication.isCompiling || EditorApplication.isUpdating) return;
             
             var systemInputValue =  (InputHandler) GetPropertyOrNull("activeInputHandler").intValue;
 
-            if (systemInputValue != input)
-            {
-              //  Selection.activeObject = this;
-                return;
-                ImportTargetPackages(systemInputValue, scriptingType);
-            }
+            //if (systemInputValue != input)
+            //{
+            //  //  Selection.activeObject = this;
+            //    return;
+            //    ImportTargetPackages(systemInputValue, scriptingType);
+            //}
+
+            DetectRendererPipeline();
+            PassReferences();
         }
 
         public void ImportTargetPackages(InputHandler input, ScriptingType scriptingType)
@@ -152,8 +246,19 @@ namespace ThirdPersonController.ModuleInformation.Editor
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
         }
-    
-    
+
+        private void DetectRendererPipeline()
+        {
+            if (RenderPipelineManager.currentPipeline == null)
+            {
+                rendererPipeline = RendererPipeline.BuildIn;
+                return;
+            }
+            switch (RenderPipelineManager.currentPipeline.ToString())
+            {
+                case "Built-in Pipeline": rendererPipeline = RendererPipeline.BuildIn; break;
+            }
+        }
     
         private static SerializedProperty GetPropertyOrNull(string name)
         {
@@ -162,37 +267,6 @@ namespace ThirdPersonController.ModuleInformation.Editor
                 return null;
             var playerSettingsObject = new SerializedObject(playerSettings);
             return playerSettingsObject.FindProperty(name);
-        }
-    }
-
-    [CustomEditor(typeof(SettingsInfo))]
-    public class SettingsInfoEditor : UnityEditor.Editor
-    {
-        private Texture _inputTypesTex;
-        private Texture _stateMachinesTex;
-        
-        private SettingsInfo _target;
-        private void Awake()
-        {
-            _inputTypesTex = EditorGUIUtility.Load("ThirdPersonController/Settings/inputtypes.png") as Texture;
-            _stateMachinesTex = EditorGUIUtility.Load("ThirdPersonController/Settings/statemachines.png") as Texture;
-            
-            _target = base.target as SettingsInfo; 
-        }
-
-        public override void OnInspectorGUI()
-        {
-            EditorGUI.DrawTextureTransparent(GUILayoutUtility.GetAspectRect(2,GUILayout.ExpandWidth(true)),_inputTypesTex);
-            EditorGUI.DrawTextureTransparent(GUILayoutUtility.GetAspectRect(2,GUILayout.ExpandWidth(true)),_stateMachinesTex);
-            
-            
-            EditorGUI.BeginChangeCheck();
-            var newInput =EditorGUILayout.EnumPopup("InputHandler", _target.input);
-            var scriptingType =EditorGUILayout.EnumPopup("ScriptingType", _target.scriptingType);
-            if (EditorGUI.EndChangeCheck())
-            {
-                _target.ImportTargetPackages((SettingsInfo.InputHandler) newInput,(SettingsInfo.ScriptingType) scriptingType);
-            }
         }
     }
 }

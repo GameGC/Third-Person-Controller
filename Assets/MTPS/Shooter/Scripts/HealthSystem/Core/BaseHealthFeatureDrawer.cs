@@ -1,4 +1,4 @@
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
+using MTPS.Core.Editor;
 using UnityEditor;
 
 [CustomPropertyDrawer(typeof(BaseHealthFeature), true)]

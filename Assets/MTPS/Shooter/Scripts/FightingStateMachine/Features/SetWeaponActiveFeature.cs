@@ -1,6 +1,5 @@
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
 
 public class SetWeaponActiveFeature : BaseFeature
 {

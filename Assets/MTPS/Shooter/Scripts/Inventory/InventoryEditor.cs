@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameGC.CommonEditorUtils.Editor;
-using ThirdPersonController.Core.CodeStateMachine.CustomEditor.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;

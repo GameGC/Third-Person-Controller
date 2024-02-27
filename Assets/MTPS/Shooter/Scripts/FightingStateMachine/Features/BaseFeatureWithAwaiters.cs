@@ -1,4 +1,4 @@
-using ThirdPersonController.Core;
+using MTPS.Core;
 
 public abstract class BaseFeatureWithAwaiters : BaseFeature
 {

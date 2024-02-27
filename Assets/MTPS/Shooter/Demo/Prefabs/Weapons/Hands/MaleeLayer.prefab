@@ -76,6 +76,7 @@ MonoBehaviour:
   - Name: Attack
     features:
     - rid: 915123986997706767
+    - rid: 8662724616997306368
     Transitions:
     - rid: 915123986997706764
     - rid: 8662724604171386881
@@ -167,7 +168,12 @@ MonoBehaviour:
         path: states.Array.data[3].Transitions.Array.data[1]
         _transitionIndex: 1
         _transitionName: Idle
-        delayTime: 0.1
+        delayTime: 0.01
+    - rid: 8662724616997306368
+      type: {class: PlaySoundFeature, ns: , asm: Assembly-CSharp}
+      data:
+        path: states.Array.data[2].features.Array.data[1]
+        sound: {fileID: 8300000, guid: 7e33d5c7b96d74b98b6c506292ce559d, type: 3}
 --- !u!114 &8129081330054931135
 MonoBehaviour:
   m_ObjectHideFlags: 0

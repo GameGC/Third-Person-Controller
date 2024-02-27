@@ -1,6 +1,5 @@
 using GameGC.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UTPS.Inventory.ItemTypes;
 
 namespace UTPS.Inventory

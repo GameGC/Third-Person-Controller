@@ -1,6 +1,5 @@
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Core.StateMachine;
-using UnityEditor;
+using MTPS.Core;
+using MTPS.Core.CodeStateMachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UTPS.Inventory;
@@ -17,7 +16,7 @@ public class AdjustmentBehavior : MonoBehaviour
 
    #region References
 
-   public TestNewInput input;
+   public BlankAdjustmenInput input;
    public CameraManager CameraManager;
    public Transform TargetLook;
    

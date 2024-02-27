@@ -1,9 +1,8 @@
 using System;
 using System.Timers;
 using GameGC.CommonEditorUtils.Attributes;
+using MTPS.Core;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
 
 [Serializable]
 public class ResetCooldownFeature : BaseFeature

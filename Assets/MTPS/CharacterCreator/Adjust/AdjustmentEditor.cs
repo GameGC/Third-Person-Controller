@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using GameGC.CommonEditorUtils.Editor;
-using ThirdPersonController.Core.StateMachine;
+using MTPS.Core.CodeStateMachine;
 using UnityEditor;
 using UnityEditor.Overlays;
+using UnityEditor.SceneManagement;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -13,8 +14,15 @@ using UTPS.Inventory;
 using UTPS.Inventory.ItemTypes;
 
 [CustomEditor(typeof(AdjustmentBehavior))]
-public class AdjustmentEditor : Editor
+internal class AdjustmentEditor : Editor
 {
+    [MenuItem("Tools/MTPS/Adjust")]
+    public static void OpenSetupScene()
+    {
+        EditorSceneManager.OpenScene(Application.dataPath + "/MTPS/CharacterCreator/Adjust/AdjustmentScene.unity", OpenSceneMode.Single);
+    }
+    
+    
     public int selectedTab1;
     public int selectedTab2
     {

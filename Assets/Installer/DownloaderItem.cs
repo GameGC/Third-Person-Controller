@@ -1,18 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 internal class DownloaderItem
 {
     public readonly string PackageName;
-    private readonly string _version;
+    public readonly string Version;
 
     public int Progress
     {
@@ -29,7 +24,7 @@ internal class DownloaderItem
     public HttpWebRequestDownload DownloadClient => _downloadClient;
 
     public string DownloadPath =>
-        $"{Application.dataPath.Replace("/Assets", "")}/Packages/Local/GameGC/{PackageName}f/{PackageName}-{_version}.tgz";
+        $"{Application.dataPath.Replace("/Assets", "")}/Packages/Local/GameGC/{PackageName}f/{PackageName}-{Version}.tgz";
 
     
     private int _progress;
@@ -37,7 +32,7 @@ internal class DownloaderItem
 
     public DownloaderItem(string packageName , string version)
     {
-        this._version = version;
+        this.Version = version;
         this.PackageName = packageName;
         if (IsDownloaded())
         {
@@ -64,7 +59,7 @@ internal class DownloaderItem
             packageVersion = packageVersion.Substring(cIndex + 1, packageVersion.LastIndexOf('.') - cIndex - 1);
         }
 
-        return packageVersion == _version;
+        return packageVersion == Version;
     }
     
     public bool IsInstalled()
@@ -84,7 +79,7 @@ internal class DownloaderItem
             packageVersion = packageVersion.Substring(cIndex + 1, packageVersion.LastIndexOf('.') - cIndex - 1);
         }
 
-        return packageVersion == _version;
+        return packageVersion == Version;
     }
 
     //public bool IsInstalled(ListRequest request)

@@ -1,6 +1,6 @@
+using MTPS.Core;
+using MTPS.Core.CodeStateMachine;
 using ThirdPersonController.Code.AnimatedStateMachine;
-using ThirdPersonController.Core.CodeStateMachine;
-using ThirdPersonController.Core.DI;
 using ThirdPersonController.Input;
 using UnityEngine;
 
@@ -10,11 +10,11 @@ namespace Fighting.Pushing
     {
         [SerializeField] private bool isAttacking;
 
-        private IBaseInputReader _input;
+        private IShooterInput _input;
         private IFightingStateMachineVariables _variables;
         public override void Initialise(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            _input = resolver.GetComponent<IBaseInputReader>();
+            _input = resolver.GetComponent<IShooterInput>();
             _variables= variables as IFightingStateMachineVariables;
         }
 

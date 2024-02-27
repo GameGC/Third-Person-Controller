@@ -1,7 +1,6 @@
 ﻿using System;
-using ThirdPersonController.Core;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Input;
+using MTPS.Core;
+using MTPS.Movement.Core.Input;
 using UnityEngine;
 
 [Serializable]
@@ -9,12 +8,12 @@ public class AimForceLookFeature : BaseFeature
 {
     private Transform _targetLookTransform;
     private Transform _bodyTransform;
-    private IBaseInputReader _reader;
+    private IMoveInput _reader;
 
     public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
     {
         _bodyTransform = resolver.GetComponent<Transform>();
-        _reader = resolver.GetComponent<IBaseInputReader>();
+        _reader = resolver.GetComponent<IMoveInput>();
         _targetLookTransform =resolver.GetNamedComponent<Transform>("TargetLook");
     }
 

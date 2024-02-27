@@ -39,6 +39,15 @@
         "com.gamegc.collections": "1.0.0"
       }
     },
+    "com.gamegc.mtps.core": {
+      "version": "https://github.com/GameGC/MTPS.Core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "hash": "c5d88832e9c8d9360f02eb0aa1de49e437fc3240"
+    },
     "com.gamegc.surfacesystem": {
       "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.1.tgz",
       "depth": 0,
@@ -205,6 +214,16 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "com.unity.visualscripting": {
+      "version": "1.8.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.modules.animation": {
       "version": "1.0.0",

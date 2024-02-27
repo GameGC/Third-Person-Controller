@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using DefaultNamespace;
-using ThirdPersonController.Core.StateMachine;
+using MTPS.Core.CodeStateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;

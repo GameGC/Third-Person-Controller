@@ -3,9 +3,9 @@ using System.Collections;
 using System.Linq;
 using Cinemachine;
 using GameGC.CommonEditorUtils.Attributes;
-using ThirdPersonController.Core.DI;
-using ThirdPersonController.Input;
-using ThirdPersonController.Input.New;
+using MTPS.Core;
+using MTPS.Movement.Core.Input;
+using MTPS.Movement.Core.Input.New;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -167,14 +167,14 @@ public class CameraManager : MonoBehaviour
     {
         newLook.Follow = resolver.GetComponent<Transform>();
         newLook.LookAt = resolver.GetNamedComponent<Transform>("HeadLookAt");
-        newLook.GetComponent<CameraInputProvider>()._inputReader = resolver.GetComponent<IBaseInputReader>();
+        newLook.GetComponent<CameraInputProvider>().InputReader = resolver.GetComponent<IMoveInput>();
     }
     
     private void PasteCustomTargets(CinemachineVirtualCameraBase newLook,Transform follow,Transform lookAt)
     {
         newLook.Follow = follow ? follow : resolver.GetComponent<Transform>();
         newLook.LookAt = lookAt ? lookAt : resolver.GetNamedComponent<Transform>("HeadLookAt");
-        newLook.GetComponent<CameraInputProvider>()._inputReader = resolver.GetComponent<IBaseInputReader>();
+        newLook.GetComponent<CameraInputProvider>().InputReader = resolver.GetComponent<IMoveInput>();
     }
 
     public void UpdateTargets()
