@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Transitions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Fighting.Pushing.CooldownTransition))]
-	public class PropertyProvider_Fighting_Pushing_CooldownTransition : Unity.VisualScripting.SerializedPropertyProvider<Fighting.Pushing.CooldownTransition>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Transitions.CooldownTransition))]
+	public class PropertyProvider_Fighting_Pushing_CooldownTransition : Unity.VisualScripting.SerializedPropertyProvider<CooldownTransition>
 	{
 	}
 }

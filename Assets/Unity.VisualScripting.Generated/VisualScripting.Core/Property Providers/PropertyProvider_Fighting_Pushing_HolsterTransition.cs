@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Transitions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Fighting.Pushing.HolsterTransition))]
-	public class PropertyProvider_Fighting_Pushing_HolsterTransition : Unity.VisualScripting.SerializedPropertyProvider<Fighting.Pushing.HolsterTransition>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Transitions.HolsterTransition))]
+	public class PropertyProvider_Fighting_Pushing_HolsterTransition : Unity.VisualScripting.SerializedPropertyProvider<HolsterTransition>
 	{
 	}
 }

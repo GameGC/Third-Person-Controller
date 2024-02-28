@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::SetCooldownFeature))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.SetCooldownFeature))]
 	public class PropertyProvider_SetCooldownFeature : Unity.VisualScripting.SerializedPropertyProvider<SetCooldownFeature>
 	{
 	}

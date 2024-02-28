@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Weapons.WeaponOffsetApplyFeature))]
-	public class PropertyProvider_Weapons_WeaponOffsetApplyFeature : Unity.VisualScripting.SerializedPropertyProvider<Weapons.WeaponOffsetApplyFeature>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.WeaponOffsetApplyFeature))]
+	public class PropertyProvider_Weapons_WeaponOffsetApplyFeature : Unity.VisualScripting.SerializedPropertyProvider<WeaponOffsetApplyFeature>
 	{
 	}
 }

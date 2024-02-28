@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.AccessControl;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -16,16 +14,19 @@ namespace ThirdPersonController.ModuleInformation.Editor
     internal class SettingsInfo :  ScriptableObject
     {
         [Serializable]
-        private struct TwoKeysValuePair
+        private struct PackagePathCollection
         {
-            public InputHandler input;
-            public ScriptingType type;
+            public string PackageName;
 
-            public ModuleInformation package;
+            public string CharacterPrefabPath;
+            public string VSCharacterPrefabPath;
+
+            public string InputOldPrefabPath;
+            public string InputNewPrefabPath;
         }
-        [SerializeField] private TwoKeysValuePair[] packages;
-    
-    
+
+        [SerializeField] private PackagePathCollection[] pathCollections;
+        
         public enum RendererPipeline
         {
             BuildIn = 0,
@@ -73,21 +74,27 @@ namespace ThirdPersonController.ModuleInformation.Editor
             var settings = AssetDatabase.LoadAssetAtPath<SettingsInfo>(
                 AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t:" + typeof(SettingsInfo)).First()));
 
-            string inputPath = Path.Combine("Assets/",
+            var packagePathCollection = settings.pathCollections.Last();
+            string inputPath = Path.Combine("Assets/MTPS/",
                 (int) settings.input > 0
-                    ? "MTPS/Movement/Demo/Input/InputNew.prefab"
-                    : "MTPS/Movement/Demo/Input/InputOld.prefab");
-            string characterPath = Path.Combine("Assets/", 
-                (settings.scriptingType == ScriptingType.CodeStateMachine || settings.scriptingType == ScriptingType.BothStateMachineTypes)
-                ? "MTPS/Movement/Demo/Prefabs/Character/Default/MoveDemoCharacter.prefab"
-                    : "MTPS/Movement/Demo/Prefabs/Character/VSStateMachinew/MoveDemoCharacterVC.prefab");
+                    ? packagePathCollection.InputNewPrefabPath
+                    : packagePathCollection.InputOldPrefabPath);
+            string characterPath = Path.Combine("Assets/MTPS/", 
+                (settings.scriptingType == ScriptingType.CodeStateMachine || settings.scriptingType == ScriptingType.BothStateMachineTypes) || string.IsNullOrWhiteSpace(packagePathCollection.VSCharacterPrefabPath)
+                ? packagePathCollection.CharacterPrefabPath
+                    : packagePathCollection.VSCharacterPrefabPath);
 
             TPSMoveDemoSceneTemplatePipeline.InputPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(inputPath);
             TPSMoveDemoSceneTemplatePipeline.CharacterPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(characterPath);
         }
 
+        public void ImportSample(string sampleName)
+        {
+            foreach (var packagePathCollection in pathCollections)
+                ImportSample(packagePathCollection.PackageName, sampleName);
+        }
 
-        public void ImportSample(string packageName,string sampleName)
+        private static void ImportSample(string packageName,string sampleName)
         {
             string jsonText = File.ReadAllText("Packages/manifest.json");
             var json = JObject.Parse(jsonText);
@@ -159,92 +166,6 @@ namespace ThirdPersonController.ModuleInformation.Editor
 
             DetectRendererPipeline();
             PassReferences();
-        }
-
-        public void ImportTargetPackages(InputHandler input, ScriptingType scriptingType)
-        {
-            if(this.input == input && this.scriptingType == scriptingType) return;
-        
-            foreach (var twoKeysValuePair in packages) 
-                twoKeysValuePair.package.UnloadPackage();
-
-            // handle for both situations
-            if (input == InputHandler.InputBoth)
-            {
-                var mType = scriptingType == ScriptingType.BothStateMachineTypes ? ScriptingType.CodeStateMachine : scriptingType;
-            
-            
-                var oldInput = packages.First(p => p.input == InputHandler.OldInputManager && p.type == mType);
-                var newInput = packages.First(p => p.input == InputHandler.NewInputSystem  && p.type == mType);
-
-                oldInput.package.LoadPackage();
-                newInput.package.LoadPackage();
-
-                if (scriptingType == ScriptingType.BothStateMachineTypes)
-                {
-                    mType = ScriptingType.VisualScriptingStateMachine;
-                    oldInput = packages.First(p => p.input == InputHandler.OldInputManager && p.type == mType);
-                    newInput = packages.First(p => p.input == InputHandler.NewInputSystem  && p.type == mType);
-                
-                    oldInput.package.LoadPackage();
-                    newInput.package.LoadPackage();
-                }
-            }
-            else
-            {
-                if (scriptingType == ScriptingType.BothStateMachineTypes)
-                {
-                    var codeMachine = packages.First(p => p.input == input && p.type == ScriptingType.CodeStateMachine);
-                    var visualMachine = packages.First(p => p.input == input && p.type == ScriptingType.VisualScriptingStateMachine);
-                
-                    //codeMachine.package.LoadPackage();
-                    //visualMachine.package.LoadPackage();
-
-                    codeMachine.package.LoadPackage();
-                    visualMachine.package.LoadPackage();
-                }
-                else
-                {
-                    var machine = packages.First(p => p.input == input && p.type == scriptingType);
-                
-                    machine.package.LoadPackage();
-                }
-
-            }
-
-           //if (this.input != input)
-           //{
-                var property =   GetPropertyOrNull("activeInputHandler");
-                if (property != null)
-                {
-                    property.intValue = (int) input;
-                    property.serializedObject.ApplyModifiedPropertiesWithoutUndo();
-                    property.serializedObject.Update();
-                }
-
-                property = GetPropertyOrNull("enableNativePlatformBackendsForNewInputSystem");
-                if (property != null)
-                {
-                    property.boolValue = input == InputHandler.InputBoth || input == InputHandler.NewInputSystem;
-                    property.serializedObject.ApplyModifiedProperties();
-                    property.serializedObject.Update();
-                }
-            
-                property = GetPropertyOrNull( "disableOldInputManagerSupport");
-                if (property != null)
-                {
-                    property.boolValue = input == InputHandler.NewInputSystem;
-                    property.serializedObject.ApplyModifiedProperties();
-                }
-            
-                // property?.serializedObject.Update();
-
-                this.input = input;
-            //}
-
-            this.scriptingType = scriptingType;
-            EditorUtility.SetDirty(this);
-            AssetDatabase.SaveAssets();
         }
 
         private void DetectRendererPipeline()

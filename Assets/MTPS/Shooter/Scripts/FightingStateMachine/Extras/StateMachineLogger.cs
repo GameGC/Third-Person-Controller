@@ -1,7 +1,7 @@
 using MTPS.Core.CodeStateMachine;
 using UnityEngine;
 
-namespace UTPS.FightingStateMachine.Extras
+namespace MTPS.FightingStateMachine.Extras
 {
    public class StateMachineLogger : MonoBehaviour
    {

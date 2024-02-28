@@ -1,6 +1,6 @@
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon.Extensions;
 using UnityEditor;
 using UnityEngine;
-using Weapons;
 
 [CustomEditor(typeof(ShellDispancer))]
 public class ShellDispancerEditor : BaseWeaponExtensionEditor

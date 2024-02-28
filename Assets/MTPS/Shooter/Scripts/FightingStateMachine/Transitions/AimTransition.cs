@@ -2,7 +2,7 @@ using MTPS.Core;
 using ThirdPersonController.Input;
 using UnityEngine;
 
-namespace Fighting.Pushing
+namespace MTPS.Shooter.FightingStateMachine.Transitions
 {
     public class AimTransition : CouldAimNoIntersectTransition
     {

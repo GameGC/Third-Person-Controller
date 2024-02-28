@@ -2,118 +2,120 @@ using System;
 using Cinemachine;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
+using MTPS.Inventory.ItemTypes;
+using MTPS.Shooter.FightingStateMachine;
 using UnityEngine;
-using UTPS.Inventory;
-using UTPS.Inventory.ItemTypes;
 
-[DisallowMultipleComponent]
-public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {
-    public Transform spawnPoint;
-    
-    public bool hasAutoReloadOnStart = true;
-    public int ammoImMagazine = 5;
-    
-    public float cooldownTime = 3;
-    [ClipToSeconds]
-    public float reloadingTime = 10;
-
-    public bool calcFormat;
-    public int maxShootsPerMinute;
-    
-
-    private IFightingStateMachineVariables Variables;
-    
-    private CinemachineImpulseSource _impulseSource;
-    private Inventory _inventory;
-    private AmmoData _currentAmmoType;
-    
-    public void CacheReferences(IFightingStateMachineVariables variables,IReferenceResolver resolver)
+    [DisallowMultipleComponent]
+    public class ShootingWeapon : BaseWeaponWithExtensions,IWeaponInfo
     {
-        _inventory = resolver.GetComponent<Inventory>();
-        _currentAmmoType = ((WeaponData) _inventory.EquippedItemData).ammoItem;
-        
-        Variables = variables;
-        _impulseSource = GetComponent<CinemachineImpulseSource>();
+        public Transform spawnPoint;
+    
+        public bool hasAutoReloadOnStart = true;
+        public int ammoImMagazine = 5;
+    
+        public float cooldownTime = 3;
+        [ClipToSeconds]
+        public float reloadingTime = 10;
 
-        if (calcFormat)
+        public bool calcFormat;
+        public int maxShootsPerMinute;
+    
+
+        private IFightingStateMachineVariables Variables;
+    
+        private CinemachineImpulseSource _impulseSource;
+        private Inventory.Inventory _inventory;
+        private AmmoData _currentAmmoType;
+    
+        public void CacheReferences(IFightingStateMachineVariables variables,IReferenceResolver resolver)
         {
-            float reloadsPerMinute = (float)maxShootsPerMinute / ammoImMagazine;
-            reloadingTime = 60f / reloadsPerMinute;
-        }
-    }
-    private void Start()
-    {
-        if (hasAutoReloadOnStart) 
-            AutoReload();
-    }
-
-    private void AutoReload()
-    {
-        if (!_inventory.MinusItem(_currentAmmoType, ammoImMagazine)) return;
-        remainingAmmo = ammoImMagazine;
-    }
-
-    public void Shoot()
-    { 
-        if(Variables.isCooldown)   throw new Exception("Wrong Cooldown execution, check conditions in executor class");
-        if(Variables.isReloading)  throw new Exception("Wrong Reloading execution, check conditions in executor class");
-        if(!Variables.couldAttack) throw new Exception("Wrong CouldAttack execution, check conditions in executor class");
+            _inventory = resolver.GetComponent<Inventory.Inventory>();
+            _currentAmmoType = ((WeaponData) _inventory.EquippedItemData).ammoItem;
         
-        if (remainingAmmo > 0)
+            Variables = variables;
+            _impulseSource = GetComponent<CinemachineImpulseSource>();
+
+            if (calcFormat)
+            {
+                float reloadsPerMinute = (float)maxShootsPerMinute / ammoImMagazine;
+                reloadingTime = 60f / reloadsPerMinute;
+            }
+        }
+        private void Start()
         {
-            remainingAmmo--;
-            Variables.couldAttack = remainingAmmo > 0;
-
-
-            Instantiate(_currentAmmoType.bulletPrefab, spawnPoint.position, spawnPoint.rotation);
-            
-            Execute_OnShootExtensions();
-
-            _impulseSource?.GenerateImpulse();
+            if (hasAutoReloadOnStart) 
+                AutoReload();
         }
-        
 
-        //reload
-        if (remainingAmmo < 1)
-        {  
-            if (_inventory.AllItems.TryGetValue(_currentAmmoType, out var totalAmmo) && totalAmmo - ammoImMagazine <= 0) return; 
-            Variables.isReloading = true;
-            
-            Execute_BeginReloadExtensions();
-            Invoke(nameof(Reload),reloadingTime);
-        }
-        //cooldown
-        else
+        private void AutoReload()
         {
-            Variables.isCooldown = true;
-            
-            Execute_BeginCooldownExtensions();
-            Invoke(nameof(Cooldown),cooldownTime);
-        }
-    }
-
-    public int remainingAmmo { get; private set; }
-    public int maxAmmo => ammoImMagazine;
-    public float reloadingOrCooldownTime => reloadingTime;
-
-    private void Reload()
-    {
-        if (_inventory.MinusItem(_currentAmmoType, ammoImMagazine)) 
+            if (!_inventory.MinusItem(_currentAmmoType, ammoImMagazine)) return;
             remainingAmmo = ammoImMagazine;
-        Variables.isReloading = false;
-        Variables.couldAttack = true;
-        Execute_EndReloadExtensions();
-    }
+        }
+
+        public void Shoot()
+        { 
+            if(Variables.isCooldown)   throw new Exception("Wrong Cooldown execution, check conditions in executor class");
+            if(Variables.isReloading)  throw new Exception("Wrong Reloading execution, check conditions in executor class");
+            if(!Variables.couldAttack) throw new Exception("Wrong CouldAttack execution, check conditions in executor class");
+        
+            if (remainingAmmo > 0)
+            {
+                remainingAmmo--;
+                Variables.couldAttack = remainingAmmo > 0;
+
+
+                Instantiate(_currentAmmoType.bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+            
+                Execute_OnShootExtensions();
+
+                _impulseSource?.GenerateImpulse();
+            }
+        
+
+            //reload
+            if (remainingAmmo < 1)
+            {  
+                if (_inventory.AllItems.TryGetValue(_currentAmmoType, out var totalAmmo) && totalAmmo - ammoImMagazine <= 0) return; 
+                Variables.isReloading = true;
+            
+                Execute_BeginReloadExtensions();
+                Invoke(nameof(Reload),reloadingTime);
+            }
+            //cooldown
+            else
+            {
+                Variables.isCooldown = true;
+            
+                Execute_BeginCooldownExtensions();
+                Invoke(nameof(Cooldown),cooldownTime);
+            }
+        }
+
+        public int remainingAmmo { get; private set; }
+        public int maxAmmo => ammoImMagazine;
+        public float reloadingOrCooldownTime => reloadingTime;
+
+        private void Reload()
+        {
+            if (_inventory.MinusItem(_currentAmmoType, ammoImMagazine)) 
+                remainingAmmo = ammoImMagazine;
+            Variables.isReloading = false;
+            Variables.couldAttack = true;
+            Execute_EndReloadExtensions();
+        }
     
-    private void Cooldown()
-    {
-        Variables.isCooldown = false;
-        Execute_EndCooldownExtensions();
+        private void Cooldown()
+        {
+            Variables.isCooldown = false;
+            Execute_EndCooldownExtensions();
+        }
+
+        private void OnDrawGizmos() => Gizmos.DrawRay(spawnPoint.position,spawnPoint.forward*100);
+
+        private void OnDisable() => CancelInvoke();
     }
-
-    private void OnDrawGizmos() => Gizmos.DrawRay(spawnPoint.position,spawnPoint.forward*100);
-
-    private void OnDisable() => CancelInvoke();
 }

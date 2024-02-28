@@ -1,11 +1,10 @@
 using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
 using MTPS.Movement.Core.Input;
-using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fighting.Pushing
+namespace MTPS.Shooter.FightingStateMachine.Transitions
 {
     public class LongShootTransition : BaseStateTransition
     {

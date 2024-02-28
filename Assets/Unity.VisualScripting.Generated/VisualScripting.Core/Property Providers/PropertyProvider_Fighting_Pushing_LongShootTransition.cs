@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Transitions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Fighting.Pushing.LongShootTransition))]
-	public class PropertyProvider_Fighting_Pushing_LongShootTransition : Unity.VisualScripting.SerializedPropertyProvider<Fighting.Pushing.LongShootTransition>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Transitions.LongShootTransition))]
+	public class PropertyProvider_Fighting_Pushing_LongShootTransition : Unity.VisualScripting.SerializedPropertyProvider<LongShootTransition>
 	{
 	}
 }

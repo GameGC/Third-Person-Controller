@@ -1,8 +1,7 @@
 using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
-using ThirdPersonController.Code.AnimatedStateMachine;
 
-namespace Fighting.Pushing
+namespace MTPS.Shooter.FightingStateMachine.Transitions
 {
     public class HolsterTransition : BaseStateTransition
     {

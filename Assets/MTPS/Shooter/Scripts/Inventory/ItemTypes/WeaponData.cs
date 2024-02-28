@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Serialization;
 
-namespace UTPS.Inventory.ItemTypes
+namespace MTPS.Inventory.ItemTypes
 {
 
     [CreateAssetMenu(menuName = "Create WeaponData", fileName = "WeaponData")]

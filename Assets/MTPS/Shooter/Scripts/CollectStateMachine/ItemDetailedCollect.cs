@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using UTPS.Inventory;
-using UTPS.Inventory.ItemTypes;
+using MTPS.Inventory;
+using MTPS.Inventory.ItemTypes;
 
 public class ItemDetailedCollect : ItemCollect
 {

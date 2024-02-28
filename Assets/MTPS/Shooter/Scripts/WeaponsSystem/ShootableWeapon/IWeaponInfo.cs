@@ -1,14 +1,17 @@
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
+using MTPS.Shooter.FightingStateMachine;
 
-public interface IWeaponInfo
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {
-    public void CacheReferences(IFightingStateMachineVariables variables,IReferenceResolver resolver);
+    public interface IWeaponInfo
+    {
+        public void CacheReferences(IFightingStateMachineVariables variables,IReferenceResolver resolver);
 
-    public void Shoot();
+        public void Shoot();
     
-    public int remainingAmmo { get; }
-    public int maxAmmo { get; }
+        public int remainingAmmo { get; }
+        public int maxAmmo { get; }
 
-    public float reloadingOrCooldownTime { get; }
+        public float reloadingOrCooldownTime { get; }
+    }
 }

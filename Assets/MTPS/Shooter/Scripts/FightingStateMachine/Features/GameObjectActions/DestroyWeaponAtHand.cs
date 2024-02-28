@@ -1,28 +1,30 @@
 using System;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-[Serializable]
-public class DestroyWeaponAtHand : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features.GameObjectActions
 {
-    [SerializeField,ClipToSeconds] private float delay = 1;
-    
-    private IFightingStateMachineVariables _variables;
-    
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    [Serializable]
+    public class DestroyWeaponAtHand : BaseFeature
     {
-        _variables = variables as IFightingStateMachineVariables;
-    }
+        [SerializeField,ClipToSeconds] private float delay = 1;
+    
+        private IFightingStateMachineVariables _variables;
+    
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _variables = variables as IFightingStateMachineVariables;
+        }
 
-    public override void OnEnterState()
-    {
-        Object.Destroy(_variables.weaponInstance,delay);
+        public override void OnEnterState()
+        {
+            Object.Destroy(_variables.weaponInstance,delay);
         
-        //if weapon is 2 handed
-        if(_variables.secondaryWeaponInstance)
-            Object.Destroy(_variables.secondaryWeaponInstance,delay);
+            //if weapon is 2 handed
+            if(_variables.secondaryWeaponInstance)
+                Object.Destroy(_variables.secondaryWeaponInstance,delay);
+        }
     }
 }

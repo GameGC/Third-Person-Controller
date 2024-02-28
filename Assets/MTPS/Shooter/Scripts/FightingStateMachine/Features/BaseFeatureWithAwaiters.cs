@@ -1,15 +1,18 @@
 using MTPS.Core;
 
-public abstract class BaseFeatureWithAwaiters : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features
 {
-    protected bool IsRunning;
-    public override void OnEnterState()
+    public abstract class BaseFeatureWithAwaiters : BaseFeature
     {
-        IsRunning = true;
-    }
+        protected bool IsRunning;
+        public override void OnEnterState()
+        {
+            IsRunning = true;
+        }
 
-    public override void OnExitState()
-    {
-        IsRunning = false;
+        public override void OnExitState()
+        {
+            IsRunning = false;
+        }
     }
 }

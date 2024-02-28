@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Transitions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MultipleConditionTransition))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Transitions.MultipleConditionTransition))]
 	public class PropertyProvider_MultipleConditionTransition : Unity.VisualScripting.SerializedPropertyProvider<MultipleConditionTransition>
 	{
 	}

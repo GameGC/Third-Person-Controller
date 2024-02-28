@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Fighting.Pushing.ShootFeature))]
-	public class PropertyProvider_Fighting_Pushing_ShootFeature : Unity.VisualScripting.SerializedPropertyProvider<Fighting.Pushing.ShootFeature>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.ShootFeature))]
+	public class PropertyProvider_Fighting_Pushing_ShootFeature : Unity.VisualScripting.SerializedPropertyProvider<ShootFeature>
 	{
 	}
 }

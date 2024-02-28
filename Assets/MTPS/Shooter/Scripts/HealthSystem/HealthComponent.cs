@@ -1,4 +1,5 @@
 using GameGC.SurfaceSystem;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 using UnityEngine.Serialization;
 

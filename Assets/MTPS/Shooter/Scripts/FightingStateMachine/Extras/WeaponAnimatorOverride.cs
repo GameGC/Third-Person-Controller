@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UTPS.FightingStateMachine.Extras
+namespace MTPS.FightingStateMachine.Extras
 {
     public class WeaponAnimatorOverride : MonoBehaviour
     {

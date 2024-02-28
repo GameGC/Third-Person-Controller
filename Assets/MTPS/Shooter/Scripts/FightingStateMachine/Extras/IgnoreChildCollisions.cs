@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UTPS.FightingStateMachine.Extras
+namespace MTPS.FightingStateMachine.Extras
 {
     public class IgnoreChildCollisions : MonoBehaviour
     {

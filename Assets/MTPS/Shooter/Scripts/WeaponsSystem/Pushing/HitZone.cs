@@ -1,3 +1,4 @@
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 
 public class HitZone : MonoBehaviour, IDamageSender

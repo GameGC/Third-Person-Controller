@@ -2,7 +2,7 @@ using GameGC.CommonEditorUtils.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace Weapons
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon.Extensions
 {
     [ToolBarDisplayGroup("SpawnOffset")]
     public class WeaponOffset : BaseWeaponExtension

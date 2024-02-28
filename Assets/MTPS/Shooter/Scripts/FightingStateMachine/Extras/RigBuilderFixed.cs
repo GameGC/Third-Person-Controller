@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine.Animations.Rigging;
 #endif
 
-namespace UTPS.FightingStateMachine.Extras
+namespace MTPS.FightingStateMachine.Extras
 {
    /// <summary>
    /// Rig Builder with fixed size

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Weapons
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon.Extensions
 {
     [ToolBarDisplayGroup("Shooting"),DisallowMultipleComponent]
     public class WeaponMuzzle : BaseWeaponExtension

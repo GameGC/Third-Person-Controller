@@ -3,31 +3,34 @@ using MTPS.Core;
 using MTPS.Movement.Core.Input;
 using UnityEngine;
 
-[Serializable]
-public class AimForceLookFeature : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features.Aim
 {
-    private Transform _targetLookTransform;
-    private Transform _bodyTransform;
-    private IMoveInput _reader;
-
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    [Serializable]
+    public class AimForceLookFeature : BaseFeature
     {
-        _bodyTransform = resolver.GetComponent<Transform>();
-        _reader = resolver.GetComponent<IMoveInput>();
-        _targetLookTransform =resolver.GetNamedComponent<Transform>("TargetLook");
-    }
+        private Transform _targetLookTransform;
+        private Transform _bodyTransform;
+        private IMoveInput _reader;
 
-
-    public override void OnFixedUpdateState()
-    {
-        if (_reader.moveInput.y < 0 || _reader.moveInput.x !=0)
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            var forward = Camera.main.transform.forward;
-            forward.y = 0;
-            _bodyTransform.rotation = Quaternion.LookRotation(forward,_bodyTransform.up);
-            return;
+            _bodyTransform = resolver.GetComponent<Transform>();
+            _reader = resolver.GetComponent<IMoveInput>();
+            _targetLookTransform =resolver.GetNamedComponent<Transform>("TargetLook");
         }
+
+
+        public override void OnFixedUpdateState()
+        {
+            if (_reader.moveInput.y < 0 || _reader.moveInput.x !=0)
+            {
+                var forward = Camera.main.transform.forward;
+                forward.y = 0;
+                _bodyTransform.rotation = Quaternion.LookRotation(forward,_bodyTransform.up);
+                return;
+            }
         
-        _bodyTransform.rotation = Quaternion.AngleAxis(_targetLookTransform.eulerAngles.y,_bodyTransform.up);
+            _bodyTransform.rotation = Quaternion.AngleAxis(_targetLookTransform.eulerAngles.y,_bodyTransform.up);
+        }
     }
 }

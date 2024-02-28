@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace UTPS.Inventory.Editor
+namespace MTPS.Inventory.Editor
 {
     [CustomEditor(typeof(Inventory))]
     public class InventoryEditor : UnityEditor.Editor

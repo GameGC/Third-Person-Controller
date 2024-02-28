@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features.Scope;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::SetSniperScopeActiveFeature))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.Scope.SetSniperScopeActiveFeature))]
 	public class PropertyProvider_SetSniperScopeActiveFeature : Unity.VisualScripting.SerializedPropertyProvider<SetSniperScopeActiveFeature>
 	{
 	}

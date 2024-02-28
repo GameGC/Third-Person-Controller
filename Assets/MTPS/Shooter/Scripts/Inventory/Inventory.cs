@@ -3,16 +3,16 @@ using GameGC.CommonEditorUtils.Attributes;
 using GameGC.SurfaceSystem.Audio;
 using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
+using MTPS.FightingStateMachine.Extras;
+using MTPS.Inventory.ItemTypes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
-using UTPS.FightingStateMachine.Extras;
-using UTPS.Inventory.ItemTypes;
 
-namespace UTPS.Inventory
+namespace MTPS.Inventory
 {
    [DisallowMultipleComponent]
    public class Inventory : BaseInventory
@@ -119,7 +119,7 @@ namespace UTPS.Inventory
          bool hasAnimatorOverride = fightingStateMachine.GetComponent<WeaponAnimatorOverride>();
          
          // wait for previous Fighting Hide Animation
-         if (fightingStateMachine != null && fightingStateMachine is global::FightingStateMachine fighting &&
+         if (fightingStateMachine != null && fightingStateMachine is global::MTPS.Shooter.FightingStateMachine.FightingStateMachine fighting &&
              fighting.hasPutWeaponBackState)
             await fighting.RequestForPutBack();
 

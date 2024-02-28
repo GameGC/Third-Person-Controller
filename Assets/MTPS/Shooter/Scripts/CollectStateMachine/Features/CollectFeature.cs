@@ -3,7 +3,7 @@ using MTPS.Core;
 using MTPS.Movement.Core.Input;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UTPS.Inventory;
+using MTPS.Inventory;
 
 public class CollectFeature : BaseFeature
 {

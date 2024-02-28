@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using GameGC.Collections;
+using MTPS.Inventory.ItemTypes;
 using UnityEngine;
 using UnityEngine.Events;
-using UTPS.Inventory.ItemTypes;
 
-namespace UTPS.Inventory
+namespace MTPS.Inventory
 {
     public abstract class BaseInventory : MonoBehaviour
     {

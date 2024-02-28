@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features.AnimationRig;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::BaseRigFeature))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.AnimationRig.BaseRigFeature))]
 	public class PropertyProvider_BaseRigFeature : Unity.VisualScripting.SerializedPropertyProvider<BaseRigFeature>
 	{
 	}

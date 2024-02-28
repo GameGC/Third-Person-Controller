@@ -1,9 +1,9 @@
 using System.Linq;
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon.Extensions;
 using UnityEngine;
 
-namespace Weapons
+namespace MTPS.Shooter.FightingStateMachine.Features
 {
     public class WeaponOffsetApplyFeature : BaseFeatureWithAwaiters
     {

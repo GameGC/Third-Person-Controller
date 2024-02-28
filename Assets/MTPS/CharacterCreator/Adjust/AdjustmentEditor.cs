@@ -10,8 +10,8 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Animations.Rigging.Saving;
-using UTPS.Inventory;
-using UTPS.Inventory.ItemTypes;
+using MTPS.Inventory;
+using MTPS.Inventory.ItemTypes;
 
 [CustomEditor(typeof(AdjustmentBehavior))]
 internal class AdjustmentEditor : Editor

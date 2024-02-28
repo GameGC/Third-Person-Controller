@@ -2,51 +2,53 @@ using System;
 using System.Timers;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 using UnityEngine.Timeline;
 using Object = UnityEngine.Object;
 
-[Serializable]
-public class SetCooldownFeature : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features
 {
-    [ValidateBaseType(typeof(AnimationClip), typeof(TimelineAsset), typeof(AnimationValue))] [SerializeField]
-    private Object clip;
-
-    private IFightingStateMachineVariables _variables;
-    private Timer _timer;
-
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    [Serializable]
+    public class SetCooldownFeature : BaseFeature
     {
-        _timer = new Timer();
-        _timer.AutoReset = false;
-        _timer.Elapsed += TimerOnElapsed;
-        _variables = variables as IFightingStateMachineVariables;
-    }
+        [ValidateBaseType(typeof(AnimationClip), typeof(TimelineAsset), typeof(AnimationValue))] [SerializeField]
+        private Object clip;
 
-    public override void OnEnterState()
-    {
-        float length = 0;
-        switch (clip)
+        private IFightingStateMachineVariables _variables;
+        private Timer _timer;
+
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
         {
-            case AnimationClip clip: length = clip.length; break;
-            case TimelineAsset timeline: length = (float) timeline.duration; break;
-            case AnimationValue value: length = value.MaxLength; break;
+            _timer = new Timer();
+            _timer.AutoReset = false;
+            _timer.Elapsed += TimerOnElapsed;
+            _variables = variables as IFightingStateMachineVariables;
         }
+
+        public override void OnEnterState()
+        {
+            float length = 0;
+            switch (clip)
+            {
+                case AnimationClip clip: length = clip.length; break;
+                case TimelineAsset timeline: length = (float) timeline.duration; break;
+                case AnimationValue value: length = value.MaxLength; break;
+            }
         
-        _timer.Interval = length;
-        _timer.Enabled = true;
-        _timer.Start();
-    }
+            _timer.Interval = length;
+            _timer.Enabled = true;
+            _timer.Start();
+        }
 
-    private void TimerOnElapsed(object sender, ElapsedEventArgs e)
-    {
-        _variables.isCooldown = true;
-    }
+        private void TimerOnElapsed(object sender, ElapsedEventArgs e)
+        {
+            _variables.isCooldown = true;
+        }
 
-    public override void OnExitState()
-    {
-        _timer.Stop();
-        _timer.Enabled = false;
+        public override void OnExitState()
+        {
+            _timer.Stop();
+            _timer.Enabled = false;
+        }
     }
 }

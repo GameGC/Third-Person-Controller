@@ -1,36 +1,39 @@
 using Cinemachine;
 using UnityEngine;
 
-public class InvisibleLayers : CinemachineExtension
+namespace MTPS.Shooter.WeaponsSystem.Extras
 {
-    public LayerMask newLayerMask;
-
-    private Camera _camera;
-    private int _previousLayerMask;
-
-    protected override void OnEnable()
+    public class InvisibleLayers : CinemachineExtension
     {
-        var brain = CinemachineCore.Instance.FindPotentialTargetBrain(VirtualCamera);
-        _camera = brain.OutputCamera;
-        _previousLayerMask = _camera.cullingMask;
-    }
+        public LayerMask newLayerMask;
 
-    private void OnDisable()
-    {
-        _camera.cullingMask = _previousLayerMask;
-    }
+        private Camera _camera;
+        private int _previousLayerMask;
 
-    public override bool OnTransitionFromCamera(ICinemachineCamera fromCam, Vector3 worldUp, float deltaTime)
-    {
-        _camera.cullingMask = newLayerMask.value;
-        return false;
-    }
+        protected override void OnEnable()
+        {
+            var brain = CinemachineCore.Instance.FindPotentialTargetBrain(VirtualCamera);
+            _camera = brain.OutputCamera;
+            _previousLayerMask = _camera.cullingMask;
+        }
 
-    public override void PrePipelineMutateCameraStateCallback(CinemachineVirtualCameraBase vcam, ref CameraState curState, float deltaTime)
-    {
-    }
+        private void OnDisable()
+        {
+            _camera.cullingMask = _previousLayerMask;
+        }
 
-    protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
-    {
+        public override bool OnTransitionFromCamera(ICinemachineCamera fromCam, Vector3 worldUp, float deltaTime)
+        {
+            _camera.cullingMask = newLayerMask.value;
+            return false;
+        }
+
+        public override void PrePipelineMutateCameraStateCallback(CinemachineVirtualCameraBase vcam, ref CameraState curState, float deltaTime)
+        {
+        }
+
+        protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
+        {
+        }
     }
 }

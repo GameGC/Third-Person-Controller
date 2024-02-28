@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UIElements;
-using UTPS.FightingStateMachine.Extras;
+using MTPS.FightingStateMachine.Extras;
 
 [CustomEditor(typeof(RigBuilder),true,isFallback = false)]
 internal class AnimationRiggingEditor : Editor

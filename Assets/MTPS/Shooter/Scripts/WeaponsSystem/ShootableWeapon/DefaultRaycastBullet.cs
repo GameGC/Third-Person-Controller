@@ -3,89 +3,92 @@ using GameGC.SurfaceSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {
-    private new Transform transform;
-    private Vector3 _flyDestination;
-
-    public LayerMask impactMask;
-    [field: SerializeField] public float damage { get; private set; } = 10;
-
-    [field: SerializeField, FormerlySerializedAs("HitType")]
-    public SurfaceHitType HitType { get; } = SurfaceHitType.Bullet;
-    
-    public int speed = 100;
-    public int distance = 1000;
-    
-    public SurfaceEffect defaultImpactEffect;
-
-    // Start is called before the first frame update
-
-    private void Reset()
+    public class DefaultRaycastBullet : MonoBehaviour , IDamageSender
     {
-        impactMask = LayerMask.GetMask("Default","Character","Char_Collision");
-    }
+        private new Transform transform;
+        private Vector3 _flyDestination;
 
-    private void Awake() => transform = base.transform;
+        public LayerMask impactMask;
+        [field: SerializeField] public float damage { get; private set; } = 10;
 
-    private void Start()
-    {
-        var ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray,out var hit, distance, impactMask, QueryTriggerInteraction.Ignore))
+        [field: SerializeField, FormerlySerializedAs("HitType")]
+        public SurfaceHitType HitType { get; } = SurfaceHitType.Bullet;
+    
+        public int speed = 100;
+        public int distance = 1000;
+    
+        public SurfaceEffect defaultImpactEffect;
+
+        // Start is called before the first frame update
+
+        private void Reset()
         {
-            var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
-            
-           // Debug.DrawLine(transform.position,hit.point,Color.red,100);
-            _flyDestination = hit.point;
-            try
-            {
-                SurfaceSystem.instance.OnSurfaceHit(hit,(int) HitType, defaultImpactEffect);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
+            impactMask = LayerMask.GetMask("Default","Character","Char_Collision");
+        }
 
-            if (isCharacter)
+        private void Awake() => transform = base.transform;
+
+        private void Start()
+        {
+            var ray = new Ray(transform.position, transform.forward);
+            if (Physics.Raycast(ray,out var hit, distance, impactMask, QueryTriggerInteraction.Ignore))
             {
-                var gameObject = hit.collider.gameObject;
-                bool isCharPart = gameObject.layer == LayerMask.NameToLayer("Char_Collision");
-                if (!isCharPart)
+                var isCharacter = hit.collider.gameObject.layer == LayerMask.NameToLayer("Character") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Char_Collision");
+            
+                // Debug.DrawLine(transform.position,hit.point,Color.red,100);
+                _flyDestination = hit.point;
+                try
                 {
-                    ray.origin = hit.point;
-                    if (Physics.Raycast(ray, out var newHit, distance,
-                            LayerMask.GetMask("Char_Collision"), QueryTriggerInteraction.Ignore))
-                    {
-                        hit = newHit;
-                    }
+                    SurfaceSystem.instance.OnSurfaceHit(hit,(int) HitType, defaultImpactEffect);
+                }
+                catch (Exception)
+                {
+                    // ignored
                 }
 
-                gameObject.GetComponentInChildren<HealthComponent>().OnHit(hit, this);
+                if (isCharacter)
+                {
+                    var gameObject = hit.collider.gameObject;
+                    bool isCharPart = gameObject.layer == LayerMask.NameToLayer("Char_Collision");
+                    if (!isCharPart)
+                    {
+                        ray.origin = hit.point;
+                        if (Physics.Raycast(ray, out var newHit, distance,
+                                LayerMask.GetMask("Char_Collision"), QueryTriggerInteraction.Ignore))
+                        {
+                            hit = newHit;
+                        }
+                    }
+
+                    gameObject.GetComponentInChildren<HealthComponent>().OnHit(hit, this);
+                }
+            }
+            else
+            {
+                _flyDestination = transform.position + transform.forward * distance;
             }
         }
-        else
+
+        public void Init(Vector3 flyDestination)
         {
-            _flyDestination = transform.position + transform.forward * distance;
+            this._flyDestination = flyDestination;
         }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _flyDestination, Time.deltaTime * speed);
+            if(Vector3.Distance(transform.position,_flyDestination)<0.1f)
+                Destroy(gameObject);
+        }
+
     }
 
-    public void Init(Vector3 flyDestination)
+    public interface IDamageSender
     {
-        this._flyDestination = flyDestination;
+        public float damage { get; }
+        public SurfaceHitType HitType { get; }
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, _flyDestination, Time.deltaTime * speed);
-        if(Vector3.Distance(transform.position,_flyDestination)<0.1f)
-            Destroy(gameObject);
-    }
-
-}
-
-public interface IDamageSender
-{
-    public float damage { get; }
-    public SurfaceHitType HitType { get; }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Cinemachine.Editor;
 using GameGC.CommonEditorUtils.Editor;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEditor;
 using UnityEngine;
 

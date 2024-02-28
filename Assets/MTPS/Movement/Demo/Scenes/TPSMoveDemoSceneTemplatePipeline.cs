@@ -4,10 +4,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneTemplate;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Animations;
-using Task = System.Threading.Tasks.Task;
 
 public class TPSMoveDemoSceneTemplatePipeline :  ISceneTemplatePipeline
 {

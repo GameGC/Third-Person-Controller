@@ -2,8 +2,9 @@ using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UTPS.Inventory;
-using UTPS.Inventory.ItemTypes;
+using MTPS.Inventory;
+using MTPS.Inventory.ItemTypes;
+using MTPS.Shooter.Cameras;
 
 public class AdjustmentBehavior : MonoBehaviour
 {

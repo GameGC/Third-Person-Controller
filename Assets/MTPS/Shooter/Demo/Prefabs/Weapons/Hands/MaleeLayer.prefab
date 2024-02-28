@@ -99,78 +99,78 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 915123986997706754
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[1]
         _transitionIndex: 2
         _transitionName: Attack
         isAttacking: 1
     - rid: 915123986997706759
-      type: {class: InstantiateTwoHandedWeapon, ns: , asm: Assembly-CSharp}
+      type: {class: InstantiateTwoHandedWeapon, ns: MTPS.Shooter.FightingStateMachine.Features.GameObjectActions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[0].features.Array.data[0]
         leftPrefab: {fileID: 3782190609094788747, guid: f49e010fd1ba24442a668bb71e22a7bc, type: 3}
         rightPrefab: {fileID: 3782190609094788747, guid: f49e010fd1ba24442a668bb71e22a7bc, type: 3}
     - rid: 915123986997706760
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[0].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
         delayTime: 0.01
     - rid: 915123986997706761
-      type: {class: DestroyWeaponAtHand, ns: , asm: Assembly-CSharp}
+      type: {class: DestroyWeaponAtHand, ns: MTPS.Shooter.FightingStateMachine.Features.GameObjectActions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[0]
         delay: 0
     - rid: 915123986997706763
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[0]
         _transitionIndex: 4
         _transitionName: PutWeaponBackFromAim
     - rid: 915123986997706764
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
     - rid: 915123986997706765
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
     - rid: 915123986997706766
-      type: {class: SetWeaponActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetWeaponActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[0]
         active: 0
     - rid: 915123986997706767
-      type: {class: SetWeaponActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetWeaponActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[0]
         active: 1
     - rid: 915123986997706768
-      type: {class: SetWeaponActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetWeaponActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[0]
         active: 0
     - rid: 8662724604171386881
-      type: {class: EndPlayTransition, ns: , asm: Assembly-CSharp}
+      type: {class: EndPlayTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[1]
         _transitionIndex: 3
         _transitionName: Cooldown
     - rid: 8662724604171386882
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].Transitions.Array.data[1]
         _transitionIndex: 1
         _transitionName: Idle
         delayTime: 0.01
     - rid: 8662724616997306368
-      type: {class: PlaySoundFeature, ns: , asm: Assembly-CSharp}
+      type: {class: PlaySoundFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[1]
         sound: {fileID: 8300000, guid: 7e33d5c7b96d74b98b6c506292ce559d, type: 3}

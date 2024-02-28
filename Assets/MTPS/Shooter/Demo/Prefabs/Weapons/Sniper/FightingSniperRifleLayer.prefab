@@ -166,51 +166,51 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 2369757174817882257
-      type: {class: IntantiateWeaponAtHand, ns: , asm: Assembly-CSharp}
+      type: {class: IntantiateWeaponAtHand, ns: MTPS.Shooter.FightingStateMachine.Features.GameObjectActions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[0].features.Array.data[0]
         prefab: {fileID: 7008781531238062193, guid: 6efc0dc1483fa4129bb6cce60e63f661, type: 3}
     - rid: 2369757174817882258
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[0].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
         delayTime: 2.6
     - rid: 2369757174817882259
-      type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
+      type: {class: RigSetFeature, ns: MTPS.Shooter.FightingStateMachine.Features.AnimationRig, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[0]
         layerType: 0
         returnPreviousValueOnExit: 0
         weight: 0
     - rid: 2369757174817882260
-      type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetCameraFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[1]
         _cameraType: 0
     - rid: 2369757174817882261
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[0]
         _transitionIndex: 9
         _transitionName: PutWeaponBackFromAim
     - rid: 2369757174817882262
-      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ReloadingTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[1]
         _transitionIndex: 8
         _transitionName: Reload
         isReloading: 1
     - rid: 2369757174817882263
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[2]
         _transitionIndex: 4
         _transitionName: Shoot
         isAttacking: 1
     - rid: 2369757174817882264
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].Transitions.Array.data[3]
         _transitionIndex: 2
@@ -218,38 +218,38 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 1
     - rid: 2369757174817882265
-      type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
+      type: {class: RigSetFeature, ns: MTPS.Shooter.FightingStateMachine.Features.AnimationRig, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[0]
         layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 2369757174817882266
-      type: {class: AimLookFeature, ns: , asm: Assembly-CSharp}
+      type: {class: AimLookFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Aim, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[1]
         rotationSpeed: 90
         forceLookDegree: 45
     - rid: 2369757174817882267
-      type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetCameraFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[2]
         _cameraType: 1
     - rid: 2369757174817882268
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
     - rid: 2369757174817882269
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[1]
         _transitionIndex: 4
         _transitionName: Shoot
         isAttacking: 1
     - rid: 2369757174817882270
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[2]
         _transitionIndex: 1
@@ -257,50 +257,50 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 0
     - rid: 2369757174817882271
-      type: {class: ShootFeature, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ShootFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[0]
         changeCooldownToAwait: 1
         setAimingWeaigh0DuringShoot: 1
         shootAnimationLength: 0
     - rid: 2369757174817882272
-      type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
+      type: {class: RigSetFeature, ns: MTPS.Shooter.FightingStateMachine.Features.AnimationRig, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[1]
         layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 2369757174817882273
-      type: {class: AimForceLookFeature, ns: , asm: Assembly-CSharp}
+      type: {class: AimForceLookFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Aim, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[2]
     - rid: 2369757174817882274
-      type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetCameraFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[3]
         _cameraType: 1
     - rid: 2369757174817882275
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[0]
         _transitionIndex: 6
         _transitionName: Cooldown
         delayTime: 0.5
     - rid: 2369757174817882277
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[6].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
     - rid: 2369757174817882278
-      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ReloadingTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[6].Transitions.Array.data[1]
         _transitionIndex: 8
         _transitionName: Reload
         isReloading: 1
     - rid: 2369757174817882279
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[6].Transitions.Array.data[3]
         _transitionIndex: 1
@@ -309,7 +309,7 @@ MonoBehaviour:
         - rid: 2369757174817882282
         - rid: 2369757174817882283
     - rid: 2369757174817882280
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[6].Transitions.Array.data[4]
         _transitionIndex: 2
@@ -318,7 +318,7 @@ MonoBehaviour:
         - rid: 2369757174817882284
         - rid: 2369757174817882285
     - rid: 2369757174817882281
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[6].Transitions.Array.data[2]
         _transitionIndex: 4
@@ -327,14 +327,14 @@ MonoBehaviour:
         - rid: 2369757174817882286
         - rid: 2369757174817882287
     - rid: 2369757174817882282
-      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: CooldownTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[1].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
         isCooldown: 0
     - rid: 2369757174817882283
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[1].Transitions.Array.data[1]
         _transitionIndex: 1
@@ -342,14 +342,14 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 0
     - rid: 2369757174817882284
-      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: CooldownTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[2].Transitions.Array.data[0]
         _transitionIndex: 2
         _transitionName: Aim
         isCooldown: 0
     - rid: 2369757174817882285
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[2].Transitions.Array.data[1]
         _transitionIndex: 2
@@ -357,39 +357,39 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 1
     - rid: 2369757174817882286
-      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: CooldownTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[3].Transitions.Array.data[0]
         _transitionIndex: 3
         _transitionName: Shoot
         isCooldown: 0
     - rid: 2369757174817882287
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[3].Transitions.Array.data[1]
         _transitionIndex: 3
         _transitionName: Shoot
         isAttacking: 1
     - rid: 2369757174817882288
-      type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
+      type: {class: RigSetFeature, ns: MTPS.Shooter.FightingStateMachine.Features.AnimationRig, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].features.Array.data[0]
         layerType: 0
         returnPreviousValueOnExit: 0
         weight: 0
     - rid: 2369757174817882289
-      type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetCameraFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].features.Array.data[1]
         _cameraType: 0
     - rid: 2369757174817882290
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].Transitions.Array.data[0]
         _transitionIndex: 2
         _transitionName: Aim
     - rid: 2369757174817882291
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].Transitions.Array.data[2]
         _transitionIndex: 1
@@ -398,7 +398,7 @@ MonoBehaviour:
         - rid: 2369757174817882293
         - rid: 2369757174817882294
     - rid: 2369757174817882292
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].Transitions.Array.data[3]
         _transitionIndex: 2
@@ -407,14 +407,14 @@ MonoBehaviour:
         - rid: 2369757174817882295
         - rid: 2369757174817882296
     - rid: 2369757174817882293
-      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ReloadingTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].Transitions.Array.data[0].Transitions.Array.data[0]
         _transitionIndex: 0
         _transitionName: GetWeapon
         isReloading: 0
     - rid: 2369757174817882294
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].Transitions.Array.data[0].Transitions.Array.data[1]
         _transitionIndex: 0
@@ -422,14 +422,14 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 0
     - rid: 2369757174817882295
-      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ReloadingTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].Transitions.Array.data[1].Transitions.Array.data[0]
         _transitionIndex: 0
         _transitionName: GetWeapon
         isReloading: 0
     - rid: 2369757174817882296
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].Transitions.Array.data[1].Transitions.Array.data[1]
         _transitionIndex: 0
@@ -437,43 +437,43 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 1
     - rid: 2369757174817882297
-      type: {class: DestroyWeaponAtHand, ns: , asm: Assembly-CSharp}
+      type: {class: DestroyWeaponAtHand, ns: MTPS.Shooter.FightingStateMachine.Features.GameObjectActions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[9].features.Array.data[0]
         delay: 2.5
     - rid: 8271787882543316993
-      type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
+      type: {class: RigSetFeature, ns: MTPS.Shooter.FightingStateMachine.Features.AnimationRig, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[0]
         layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 8271787882543316994
-      type: {class: AimLookFeature, ns: , asm: Assembly-CSharp}
+      type: {class: AimLookFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Aim, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[1]
         rotationSpeed: 90
         forceLookDegree: 45
     - rid: 8271787882543316995
-      type: {class: SetCameraFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetCameraFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[2]
         _cameraType: 2
     - rid: 8271787882543316997
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].Transitions.Array.data[0]
         _transitionIndex: 2
         _transitionName: Aim
     - rid: 8271787882543316998
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].Transitions.Array.data[1]
         _transitionIndex: 5
         _transitionName: ShootFullScreen
         isAttacking: 1
     - rid: 8271787882543316999
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].Transitions.Array.data[2]
         _transitionIndex: 2
@@ -481,45 +481,45 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 0
     - rid: 8271787898842382336
-      type: {class: ShootFeature, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ShootFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[1]
         changeCooldownToAwait: 1
         setAimingWeaigh0DuringShoot: 0
         shootAnimationLength: 0
     - rid: 8271787898842382337
-      type: {class: RigSetFeature, ns: , asm: Assembly-CSharp}
+      type: {class: RigSetFeature, ns: MTPS.Shooter.FightingStateMachine.Features.AnimationRig, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[0]
         layerType: 0
         returnPreviousValueOnExit: 0
         weight: 1
     - rid: 8271787898842382338
-      type: {class: AimForceLookFeature, ns: , asm: Assembly-CSharp}
+      type: {class: AimForceLookFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Aim, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[2]
     - rid: 8271787898842382340
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].Transitions.Array.data[1]
         _transitionIndex: 7
         _transitionName: CooldownFullScreen
         delayTime: 0.5
     - rid: 8271787898842382343
-      type: {class: HolsterTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: HolsterTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[7].Transitions.Array.data[0]
         _transitionIndex: 2
         _transitionName: Aim
     - rid: 8271787898842382344
-      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ReloadingTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[7].Transitions.Array.data[1]
         _transitionIndex: 8
         _transitionName: Reload
         isReloading: 1
     - rid: 8271787898842382345
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[7].Transitions.Array.data[2]
         _transitionIndex: 2
@@ -528,7 +528,7 @@ MonoBehaviour:
         - rid: 8271787898842382348
         - rid: 8271787898842382349
     - rid: 8271787898842382346
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[7].Transitions.Array.data[3]
         _transitionIndex: 3
@@ -537,7 +537,7 @@ MonoBehaviour:
         - rid: 8271787898842382350
         - rid: 8271787898842382351
     - rid: 8271787898842382347
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[7].Transitions.Array.data[4]
         _transitionIndex: 5
@@ -547,14 +547,14 @@ MonoBehaviour:
         - rid: 8271787898842382353
         - rid: 8271787898842382368
     - rid: 8271787898842382348
-      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: CooldownTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[1].Transitions.Array.data[0]
         _transitionIndex: 1
         _transitionName: Idle
         isCooldown: 0
     - rid: 8271787898842382349
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[1].Transitions.Array.data[1]
         _transitionIndex: 1
@@ -562,14 +562,14 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 0
     - rid: 8271787898842382350
-      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: CooldownTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[2].Transitions.Array.data[0]
         _transitionIndex: 2
         _transitionName: Aim
         isCooldown: 0
     - rid: 8271787898842382351
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[2].Transitions.Array.data[1]
         _transitionIndex: 2
@@ -577,21 +577,21 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 1
     - rid: 8271787898842382352
-      type: {class: CooldownTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: CooldownTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[3].Transitions.Array.data[0]
         _transitionIndex: 3
         _transitionName: Shoot
         isCooldown: 0
     - rid: 8271787898842382353
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].Transitions.Array.data[3].Transitions.Array.data[1]
         _transitionIndex: 3
         _transitionName: Shoot
         isAttacking: 1
     - rid: 8271787898842382356
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].Transitions.Array.data[0]
         _transitionIndex: 6
@@ -600,14 +600,14 @@ MonoBehaviour:
         - rid: 8271787898842382357
         - rid: 8271787898842382358
     - rid: 8271787898842382357
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
         _transitionName: 
         delayTime: 0.5
     - rid: 8271787898842382358
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
@@ -615,7 +615,7 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 0
     - rid: 8271787898842382368
-      type: {class: AimTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AimTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
@@ -623,67 +623,67 @@ MonoBehaviour:
         visualiseRaycast: 0
         isAim: 1
     - rid: 8271788052120862741
-      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetSniperScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[3]
         _active: 0
     - rid: 8271788052120862742
-      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetSniperScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[4]
         _active: 0
     - rid: 8271788052120862743
-      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[1].features.Array.data[2]
         _active: 0
     - rid: 8271788052120862744
-      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].features.Array.data[3]
         _active: 1
     - rid: 8271788052120862745
-      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetSniperScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[4]
         _active: 1
     - rid: 8271788052120862746
-      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[3]
         _active: 0
     - rid: 8271788052120862747
-      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[4]
         _active: 1
     - rid: 8271788052120862748
-      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetSniperScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[4].features.Array.data[5]
         _active: 0
     - rid: 8271788052120862749
-      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[3]
         _active: 0
     - rid: 8271788052120862750
-      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetSniperScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[4]
         _active: 1
     - rid: 8271788052120862751
-      type: {class: SetScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].features.Array.data[2]
         _active: 0
     - rid: 8271788052120862752
-      type: {class: SetSniperScopeActiveFeature, ns: , asm: Assembly-CSharp}
+      type: {class: SetSniperScopeActiveFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Scope, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].features.Array.data[3]
         _active: 0
     - rid: 8271788052120862754
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[2].Transitions.Array.data[3]
         _transitionIndex: 3
@@ -692,20 +692,20 @@ MonoBehaviour:
         - rid: 8271788052120862755
         - rid: 8271788052120862756
     - rid: 8271788052120862755
-      type: {class: Weight1Transition, ns: , asm: Assembly-CSharp}
+      type: {class: Weight1Transition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
         _transitionName: 
     - rid: 8271788052120862756
-      type: {class: DelayedTransition, ns: , asm: Assembly-CSharp}
+      type: {class: DelayedTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
         _transitionName: 
         delayTime: 0.25
     - rid: 8271788052120862759
-      type: {class: MultipleConditionTransition, ns: , asm: Assembly-CSharp}
+      type: {class: MultipleConditionTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: states.Array.data[8].Transitions.Array.data[1]
         _transitionIndex: 4
@@ -714,27 +714,27 @@ MonoBehaviour:
         - rid: 8271788052120862761
         - rid: 8271788052120862760
     - rid: 8271788052120862760
-      type: {class: AttackTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: AttackTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
         _transitionName: 
         isAttacking: 1
     - rid: 8271788052120862761
-      type: {class: ReloadingTransition, ns: Fighting.Pushing, asm: Assembly-CSharp}
+      type: {class: ReloadingTransition, ns: MTPS.Shooter.FightingStateMachine.Transitions, asm: Assembly-CSharp}
       data:
         path: 
         _transitionIndex: 0
         _transitionName: 
         isReloading: 0
     - rid: 8271788242098716675
-      type: {class: WeaponOffsetApplyFeature, ns: Weapons, asm: Assembly-CSharp}
+      type: {class: WeaponOffsetApplyFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[5].features.Array.data[5]
         applyWhenName: AimScoped
         waitForStateWeight1: 0
     - rid: 8271788242098716676
-      type: {class: WeaponOffsetApplyFeature, ns: Weapons, asm: Assembly-CSharp}
+      type: {class: WeaponOffsetApplyFeature, ns: MTPS.Shooter.FightingStateMachine.Features, asm: Assembly-CSharp}
       data:
         path: states.Array.data[3].features.Array.data[5]
         applyWhenName: AimScoped

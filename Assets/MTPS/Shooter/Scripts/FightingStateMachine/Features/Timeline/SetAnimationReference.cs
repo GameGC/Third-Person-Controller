@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class SetAnimationReference : SetReferenceDefault
+namespace MTPS.Shooter.FightingStateMachine.Features.Timeline
 {
-    public override void OnEnterState()
+    public class SetAnimationReference : SetReferenceDefault
     {
-        if(value == null)
-            value = _variables.weaponInstance.GetComponent<Animation>();
-        base.OnEnterState();
+        public override void OnEnterState()
+        {
+            if(value == null)
+                value = _variables.weaponInstance.GetComponent<Animation>();
+            base.OnEnterState();
+        }
     }
 }

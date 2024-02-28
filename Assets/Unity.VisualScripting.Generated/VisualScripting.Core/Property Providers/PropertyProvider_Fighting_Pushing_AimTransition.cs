@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Transitions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Fighting.Pushing.AimTransition))]
-	public class PropertyProvider_Fighting_Pushing_AimTransition : Unity.VisualScripting.SerializedPropertyProvider<Fighting.Pushing.AimTransition>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Transitions.AimTransition))]
+	public class PropertyProvider_Fighting_Pushing_AimTransition : Unity.VisualScripting.SerializedPropertyProvider<AimTransition>
 	{
 	}
 }

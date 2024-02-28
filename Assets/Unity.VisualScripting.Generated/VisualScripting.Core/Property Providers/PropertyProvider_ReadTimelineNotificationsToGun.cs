@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features.Timeline;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::ReadTimelineNotificationsToGun))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.Timeline.ReadTimelineNotificationsToGun))]
 	public class PropertyProvider_ReadTimelineNotificationsToGun : Unity.VisualScripting.SerializedPropertyProvider<ReadTimelineNotificationsToGun>
 	{
 	}

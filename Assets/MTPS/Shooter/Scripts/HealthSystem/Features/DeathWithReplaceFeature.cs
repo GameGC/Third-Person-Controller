@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MTPS.Core;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

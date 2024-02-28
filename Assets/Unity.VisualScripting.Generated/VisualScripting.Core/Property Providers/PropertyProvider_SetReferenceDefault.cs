@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features.Timeline;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::SetReferenceDefault))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.Timeline.SetReferenceDefault))]
 	public class PropertyProvider_SetReferenceDefault : Unity.VisualScripting.SerializedPropertyProvider<SetReferenceDefault>
 	{
 	}

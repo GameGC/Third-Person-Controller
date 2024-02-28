@@ -12,18 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d01431967512e4c96932a9e5dcc836, type: 3}
   m_Name: PackageSettings
   m_EditorClassIdentifier: 
-  packages:
-  - input: 0
-    type: 0
-    package: {fileID: 11400000, guid: 5cee63356e51b8b4faf1fbd3c2e7ae7b, type: 2}
-  - input: 1
-    type: 0
-    package: {fileID: 11400000, guid: 9b5d081800919084998bbe883341ab96, type: 2}
-  - input: 0
-    type: 1
-    package: {fileID: 11400000, guid: 74b615f676777c9408c90b252a565f5e, type: 2}
-  - input: 1
-    type: 1
-    package: {fileID: 11400000, guid: f299081442add0e4dbc78e62b139f1e3, type: 2}
+  pathCollections:
+  - PackageName: com.gamegc.mtps.core
+    CharacterPrefabPath: Movement/Demo/Prefabs/Character/Default/MoveDemoCharacter.prefab
+    VSCharacterPrefabPath: Movement/Demo/Prefabs/Character/VSStateMachinew/MoveDemoCharacterVC.prefab
+    InputOldPrefabPath: Movement/Demo/Input/InputOld.prefab
+    InputNewPrefabPath: Movement/Demo/Input/InputNew.prefab
   input: 1
   scriptingType: 0
+  rendererPipeline: 0

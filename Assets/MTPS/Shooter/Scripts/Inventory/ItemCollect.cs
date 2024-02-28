@@ -1,8 +1,8 @@
 using GameGC.Collections;
+using MTPS.Inventory.ItemTypes;
 using UnityEngine;
-using UTPS.Inventory.ItemTypes;
 
-namespace UTPS.Inventory
+namespace MTPS.Inventory
 {
     public class ItemCollect : MonoBehaviour
     {

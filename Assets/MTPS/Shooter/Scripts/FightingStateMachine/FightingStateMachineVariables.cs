@@ -1,7 +1,6 @@
-﻿using ThirdPersonController.Code.AnimatedStateMachine;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Fighting.Pushing
+namespace MTPS.Shooter.FightingStateMachine
 {
     [DisallowMultipleComponent]
     public class FightingStateMachineVariables : MonoBehaviour,IFightingStateMachineVariables

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UTPS.Inventory.ItemTypes
+namespace MTPS.Inventory.ItemTypes
 {
     public abstract class BaseItemData : ScriptableObject
     {

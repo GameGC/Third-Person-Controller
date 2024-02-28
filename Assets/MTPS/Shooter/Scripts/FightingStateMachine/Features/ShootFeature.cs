@@ -2,11 +2,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-namespace Fighting.Pushing
+namespace MTPS.Shooter.FightingStateMachine.Features
 {
     public class ShootFeature : BaseFeatureWithAwaiters
     {

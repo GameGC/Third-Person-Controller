@@ -1,41 +1,43 @@
 ﻿using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public abstract class BaseRigFeature : BaseFeatureWithAwaiters
+namespace MTPS.Shooter.FightingStateMachine.Features.AnimationRig
 {
-    //[SerializeField] protected string waitForStateWeight;
-    [SerializeField] private RigTypes layerType = RigTypes.Fighting;
-    [SerializeField] private bool returnPreviousValueOnExit = true;
-    
-    protected RigLayer _targetLayer;
-    private float _previousValue;
-
-    protected AnimationLayer _animationLayer;
-    
-    
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    public abstract class BaseRigFeature : BaseFeatureWithAwaiters
     {
-        //if (!string.IsNullOrEmpty(waitForStateWeight))
-        if (variables is IFightingStateMachineVariables fighting)
-            _animationLayer = fighting.AnimationLayer;
-        else if(variables is ICollectStateMachineVariables collect) 
-            _animationLayer = collect.AnimationLayer;
+        //[SerializeField] protected string waitForStateWeight;
+        [SerializeField] private RigTypes layerType = RigTypes.Fighting;
+        [SerializeField] private bool returnPreviousValueOnExit = true;
+    
+        protected RigLayer _targetLayer;
+        private float _previousValue;
 
-        _targetLayer = resolver.GetComponent<RigBuilder>().layers[(int) layerType];
-    }
+        protected AnimationLayer _animationLayer;
+    
+    
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            //if (!string.IsNullOrEmpty(waitForStateWeight))
+            if (variables is IFightingStateMachineVariables fighting)
+                _animationLayer = fighting.AnimationLayer;
+            else if(variables is ICollectStateMachineVariables collect) 
+                _animationLayer = collect.AnimationLayer;
 
-    public override void OnEnterState()
-    {
-        base.OnEnterState();
-        _previousValue = _targetLayer.rig.weight;
-    }
+            _targetLayer = resolver.GetComponent<RigBuilder>().layers[(int) layerType];
+        }
 
-    public override void OnExitState()
-    {
-        base.OnExitState();
-        if (returnPreviousValueOnExit)
-            _targetLayer.rig.weight = _previousValue;
+        public override void OnEnterState()
+        {
+            base.OnEnterState();
+            _previousValue = _targetLayer.rig.weight;
+        }
+
+        public override void OnExitState()
+        {
+            base.OnExitState();
+            if (returnPreviousValueOnExit)
+                _targetLayer.rig.weight = _previousValue;
+        }
     }
 }

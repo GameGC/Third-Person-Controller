@@ -1,21 +1,24 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
-public class RigSetFeature : BaseRigFeature
+namespace MTPS.Shooter.FightingStateMachine.Features.AnimationRig
 {
-    [SerializeField] private float weight;
-
-    public override async void OnEnterState()
+    [Serializable]
+    public class RigSetFeature : BaseRigFeature
     {
-        base.OnEnterState();
-        if (_animationLayer && weight > 0)
-        {
-            await _animationLayer.WaitForNextState();
-            //avoid wrong execution
-            if(!IsRunning) return;
-        }
+        [SerializeField] private float weight;
 
-        _targetLayer.rig.weight = weight;
+        public override async void OnEnterState()
+        {
+            base.OnEnterState();
+            if (_animationLayer && weight > 0)
+            {
+                await _animationLayer.WaitForNextState();
+                //avoid wrong execution
+                if(!IsRunning) return;
+            }
+
+            _targetLayer.rig.weight = weight;
+        }
     }
 }

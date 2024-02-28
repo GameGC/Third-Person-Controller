@@ -1,10 +1,9 @@
 using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
-using ThirdPersonController.Code.AnimatedStateMachine;
 using ThirdPersonController.Input;
 using UnityEngine;
 
-namespace Fighting.Pushing
+namespace MTPS.Shooter.FightingStateMachine.Transitions
 {
     public class AttackTransition : BaseStateTransition
     {

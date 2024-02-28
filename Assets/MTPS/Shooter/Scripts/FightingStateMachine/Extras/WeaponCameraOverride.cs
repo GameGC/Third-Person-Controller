@@ -3,9 +3,11 @@ using Cinemachine;
 using GameGC.Collections;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
+using MTPS.Shooter.Cameras;
 using UnityEngine;
+using CameraType = MTPS.Shooter.Cameras.CameraType;
 
-namespace UTPS.FightingStateMachine.Extras
+namespace MTPS.FightingStateMachine.Extras
 {
    public class WeaponCameraOverride : MonoBehaviour
    {

@@ -1,5 +1,6 @@
 using System;
 using MTPS.Core;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 
 [Serializable]

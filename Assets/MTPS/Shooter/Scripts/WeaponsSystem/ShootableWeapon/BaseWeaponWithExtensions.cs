@@ -1,52 +1,55 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public abstract class BaseWeaponWithExtensions : MonoBehaviour
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {
-    [FormerlySerializedAs("EDITOR_extensions")] [SerializeField, HideInInspector] internal BaseWeaponExtension[] extensions;
-    
-    protected virtual void OnValidate()
+    public abstract class BaseWeaponWithExtensions : MonoBehaviour
     {
-        extensions = GetComponents<BaseWeaponExtension>();
-    }
+        [FormerlySerializedAs("EDITOR_extensions")] [SerializeField, HideInInspector] internal BaseWeaponExtension[] extensions;
+    
+        protected virtual void OnValidate()
+        {
+            extensions = GetComponents<BaseWeaponExtension>();
+        }
 
-    protected void Execute_OnShootExtensions()
-    {
-        foreach (var baseWeaponExtension in extensions)
+        protected void Execute_OnShootExtensions()
         {
-            baseWeaponExtension.OnShoot();
+            foreach (var baseWeaponExtension in extensions)
+            {
+                baseWeaponExtension.OnShoot();
+            }
         }
-    }
     
-    protected void Execute_BeginReloadExtensions()
-    {
-        foreach (var baseWeaponExtension in extensions)
+        protected void Execute_BeginReloadExtensions()
         {
-            baseWeaponExtension.OnBeginReload();
+            foreach (var baseWeaponExtension in extensions)
+            {
+                baseWeaponExtension.OnBeginReload();
+            }
         }
-    }
     
-    protected void Execute_EndReloadExtensions()
-    {
-        foreach (var baseWeaponExtension in extensions)
+        protected void Execute_EndReloadExtensions()
         {
-            baseWeaponExtension.OnEndReload();
+            foreach (var baseWeaponExtension in extensions)
+            {
+                baseWeaponExtension.OnEndReload();
+            }
         }
-    }
     
-    protected void Execute_BeginCooldownExtensions()
-    {
-        foreach (var baseWeaponExtension in extensions)
+        protected void Execute_BeginCooldownExtensions()
         {
-            baseWeaponExtension.OnBeginCooldown();
+            foreach (var baseWeaponExtension in extensions)
+            {
+                baseWeaponExtension.OnBeginCooldown();
+            }
         }
-    }
 
-    protected void Execute_EndCooldownExtensions()
-    {
-        foreach (var baseWeaponExtension in extensions)
+        protected void Execute_EndCooldownExtensions()
         {
-            baseWeaponExtension.OnEndCooldown();
+            foreach (var baseWeaponExtension in extensions)
+            {
+                baseWeaponExtension.OnEndCooldown();
+            }
         }
     }
 }

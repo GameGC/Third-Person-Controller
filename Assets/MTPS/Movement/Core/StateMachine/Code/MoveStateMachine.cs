@@ -3,7 +3,6 @@ using GameGC.CommonEditorUtils.Editor;
 using MTPS.Core;
 using MTPS.Core.Attributes;
 using MTPS.Core.CodeStateMachine;
-using MTPS.Movement.Core.StateMachine;
 using UnityEditor;
 using UnityEngine;
 

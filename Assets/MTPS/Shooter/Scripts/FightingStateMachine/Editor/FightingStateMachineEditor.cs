@@ -1,5 +1,6 @@
 using MTPS.Core.CodeStateMachine;
 using MTPS.Core.Editor;
+using MTPS.Shooter.FightingStateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

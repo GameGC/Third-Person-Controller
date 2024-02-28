@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::BaseFeatureWithAwaiters))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.BaseFeatureWithAwaiters))]
 	public class PropertyProvider_BaseFeatureWithAwaiters : Unity.VisualScripting.SerializedPropertyProvider<BaseFeatureWithAwaiters>
 	{
 	}

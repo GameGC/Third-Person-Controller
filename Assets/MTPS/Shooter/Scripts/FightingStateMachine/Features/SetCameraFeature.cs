@@ -1,22 +1,27 @@
 using MTPS.Core;
+using MTPS.Shooter.Cameras;
 using UnityEngine;
+using CameraType = MTPS.Shooter.Cameras.CameraType;
 
-public class SetCameraFeature : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features
 {
-    [SerializeField] private CameraType _cameraType;
-
-    private CameraManager _cameraManager;
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    public class SetCameraFeature : BaseFeature
     {
-        _cameraManager = resolver.GetNamedComponent<CameraManager>("CameraManager");
-    }
+        [SerializeField] private CameraType _cameraType;
 
-    public override void OnEnterState()
-    {
-        _cameraManager.SetActiveCamera(_cameraType);
-    }
+        private Shooter.Cameras.CameraManager _cameraManager;
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _cameraManager = resolver.GetNamedComponent<CameraManager>("CameraManager");
+        }
 
-    public override void OnExitState()
-    {
+        public override void OnEnterState()
+        {
+            _cameraManager.SetActiveCamera(_cameraType);
+        }
+
+        public override void OnExitState()
+        {
+        }
     }
 }

@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features.GameObjectActions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::IntantiateWeaponAtHand))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.GameObjectActions.IntantiateWeaponAtHand))]
 	public class PropertyProvider_IntantiateWeaponAtHand : Unity.VisualScripting.SerializedPropertyProvider<IntantiateWeaponAtHand>
 	{
 	}

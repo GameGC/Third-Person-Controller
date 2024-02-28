@@ -1,19 +1,23 @@
 using MTPS.Core;
+using MTPS.Shooter.WeaponsUI;
 using UnityEngine;
 
-public class SetScopeActiveFeature : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features.Scope
 {
-    [SerializeField] private bool _active;
-
-    private PlayerHUD _hud;
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+    public class SetScopeActiveFeature : BaseFeature
     {
-        _hud = resolver.GetNamedComponent<PlayerHUD>("PlayerHUD");
-    }
+        [SerializeField] private bool _active;
 
-    public override void OnEnterState()
-    {
-        if(_hud)
-            _hud.SetScopeActive(_active);
+        private PlayerHUD _hud;
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _hud = resolver.GetNamedComponent<PlayerHUD>("PlayerHUD");
+        }
+
+        public override void OnEnterState()
+        {
+            if(_hud)
+                _hud.SetScopeActive(_active);
+        }
     }
 }

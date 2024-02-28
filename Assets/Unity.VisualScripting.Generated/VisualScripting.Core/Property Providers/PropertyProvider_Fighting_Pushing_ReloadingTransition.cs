@@ -8,12 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Transitions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::Fighting.Pushing.ReloadingTransition))]
-	public class PropertyProvider_Fighting_Pushing_ReloadingTransition : Unity.VisualScripting.SerializedPropertyProvider<Fighting.Pushing.ReloadingTransition>
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Transitions.ReloadingTransition))]
+	public class PropertyProvider_Fighting_Pushing_ReloadingTransition : Unity.VisualScripting.SerializedPropertyProvider<ReloadingTransition>
 	{
 	}
 }

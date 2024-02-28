@@ -1,31 +1,34 @@
 using System;
 using MTPS.Core;
-using ThirdPersonController.Code.AnimatedStateMachine;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-[Serializable]
-public class IntantiateWeaponAtHand : BaseFeature
+namespace MTPS.Shooter.FightingStateMachine.Features.GameObjectActions
 {
-    [SerializeField] private GameObject prefab;
+    [Serializable]
+    public class IntantiateWeaponAtHand : BaseFeature
+    {
+        [SerializeField] private GameObject prefab;
     
-    private Animator _animator;
-    private IFightingStateMachineVariables _variables;
-    private IReferenceResolver _resolver;
+        private Animator _animator;
+        private IFightingStateMachineVariables _variables;
+        private IReferenceResolver _resolver;
 
-    public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
-    {
-        _animator = resolver.GetComponent<Animator>();
-        _variables = variables as IFightingStateMachineVariables;
-        _resolver = resolver;
-    }
+        public override void CacheReferences(IStateMachineVariables variables, IReferenceResolver resolver)
+        {
+            _animator = resolver.GetComponent<Animator>();
+            _variables = variables as IFightingStateMachineVariables;
+            _resolver = resolver;
+        }
 
-    public override void OnEnterState()
-    {
-        var instance = Object.Instantiate(prefab, _animator.GetBoneTransform(HumanBodyBones.RightHand),false);
-        _variables.weaponInstance = instance;
+        public override void OnEnterState()
+        {
+            var instance = Object.Instantiate(prefab, _animator.GetBoneTransform(HumanBodyBones.RightHand),false);
+            _variables.weaponInstance = instance;
         
-        if (instance.TryGetComponent<IWeaponInfo>(out var info)) 
-            info.CacheReferences(_variables,_resolver);
+            if (instance.TryGetComponent<IWeaponInfo>(out var info)) 
+                info.CacheReferences(_variables,_resolver);
+        }
     }
 }

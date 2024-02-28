@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
 
-[AttributeUsage(AttributeTargets.Class)]
-public class ToolBarDisplayGroup : PropertyAttribute
+namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {
-    public string groupName;
-
-    public ToolBarDisplayGroup(string groupName)
+    [AttributeUsage(AttributeTargets.Class)]
+    public class ToolBarDisplayGroup : PropertyAttribute
     {
-        this.groupName = groupName;
+        public string groupName;
+
+        public ToolBarDisplayGroup(string groupName)
+        {
+            this.groupName = groupName;
+        }
     }
 }

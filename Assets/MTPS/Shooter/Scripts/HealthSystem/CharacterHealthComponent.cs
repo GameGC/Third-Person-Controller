@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GameGC.SurfaceSystem;
 using MTPS.Core;
 using MTPS.Core.Attributes;
+using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 
 [DisallowMultipleComponent]

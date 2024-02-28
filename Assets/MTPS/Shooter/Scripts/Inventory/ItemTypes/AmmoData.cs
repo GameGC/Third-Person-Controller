@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UTPS.Inventory.ItemTypes
+namespace MTPS.Inventory.ItemTypes
 {
     [CreateAssetMenu(menuName = "Create AmmoData", fileName = "AmmoData", order = 0)]
     public class AmmoData : BaseItemData

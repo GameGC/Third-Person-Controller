@@ -7,8 +7,6 @@ namespace ThirdPersonController.ModuleInformation.Editor
     [CustomEditor(typeof(SettingsInfo))]
     public class SettingsInfoEditor : UnityEditor.Editor
     {
-        private const string mtpsCore = "com.gamegc.mtps.core";
-        
         private Texture _inputTypesTex;
         private Texture _stateMachinesTex;
         
@@ -40,15 +38,15 @@ namespace ThirdPersonController.ModuleInformation.Editor
             {
                 if (_target.input == SettingsInfo.InputHandler.InputBoth)
                 {
-                    _target.ImportSample(mtpsCore,"Input New");
-                    _target.ImportSample(mtpsCore,"Input Old");
+                    _target.ImportSample("Input New");
+                    _target.ImportSample("Input Old");
                 }
                 else
                 {
                     string sample = _target.input == SettingsInfo.InputHandler.NewInputSystem
                         ? "Input New"
                         : "Input Old";
-                    _target.ImportSample(mtpsCore,sample);
+                    _target.ImportSample(sample);
                 }
             }
             GUILayout.Space(1);
@@ -57,15 +55,15 @@ namespace ThirdPersonController.ModuleInformation.Editor
             {
                 if (_target.scriptingType == SettingsInfo.ScriptingType.BothStateMachineTypes)
                 {
-                    _target.ImportSample(mtpsCore,"Move State Machine");
-                    _target.ImportSample(mtpsCore,"Move State Machine VS");
+                    _target.ImportSample("Move State Machine");
+                    _target.ImportSample("Move State Machine VS");
                 }
                 else
                 {
                     string sample = _target.scriptingType == SettingsInfo.ScriptingType.CodeStateMachine
                         ? "Move State Machine"
                         : "Move State Machine VS";
-                    _target.ImportSample(mtpsCore,sample);
+                    _target.ImportSample(sample);
                 }
             }
             serializedObject.ApplyModifiedProperties();

@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using MTPS.Shooter.FightingStateMachine.Features.GameObjectActions;
+
 namespace Unity.VisualScripting.Generated.PropertyProviders
 {
 	
 	
-	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::InstantiateTwoHandedWeapon))]
+	[global::Unity.VisualScripting.SerializedPropertyProviderAttribute(typeof(global::MTPS.Shooter.FightingStateMachine.Features.GameObjectActions.InstantiateTwoHandedWeapon))]
 	public class PropertyProvider_InstantiateTwoHandedWeapon : Unity.VisualScripting.SerializedPropertyProvider<InstantiateTwoHandedWeapon>
 	{
 	}

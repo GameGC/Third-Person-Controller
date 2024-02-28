@@ -1,7 +1,7 @@
 ﻿using MTPS.Core;
 using UnityEngine;
 
-namespace ThirdPersonController.Code.AnimatedStateMachine
+namespace MTPS.Shooter.FightingStateMachine
 {
     public interface IFightingStateMachineVariables : IStateMachineVariables
     {
