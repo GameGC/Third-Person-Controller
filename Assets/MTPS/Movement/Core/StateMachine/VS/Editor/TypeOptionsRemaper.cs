@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GameGC.CommonEditorUtils.Editor;
+//using GameGC.CommonEditorUtils.Editor;
 using MTPS.Core;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -35,18 +35,18 @@ namespace MTPS.Movement.Core.StateMachine.VS.Editor
         
         private static List<Type> GetNonAbstractTypesSubclassOf(Type parentType)
         {
-            List<Type> types = AllTypesContainer.AllTypes
-                .FindAll(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType));
-
-            return types;
+           // List<Type> types = AllTypesContainer.AllTypes
+           //     .FindAll(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(parentType));
+//
+            return null; //types;
         }
         
         private static List<Type> GetNonAbstractTypesWithInterface(Type parentType)
         {
-            List<Type> types = AllTypesContainer.AllTypes
-                .FindAll(parentType.IsAssignableFrom);
+            //List<Type> types = AllTypesContainer.AllTypes
+            //    .FindAll(parentType.IsAssignableFrom);
 
-            return types;
+            return null; //types;
         }
     }
 }

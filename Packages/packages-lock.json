@@ -24,17 +24,17 @@
       }
     },
     "com.gamegc.collections": {
-      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.collectionsf/com.gamegc.collections-1.0.0.tgz",
+      "version": "file:/Users/user/unityProjects/GameGCCollections/Assets",
       "depth": 0,
-      "source": "local-tarball",
+      "source": "local",
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
       }
     },
     "com.gamegc.common-editor-utils": {
-      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.common-editor-utilsf/com.gamegc.common-editor-utils-1.0.5.tgz",
+      "version": "file:/Users/user/unityProjects/CommonEditorUtils/Assets",
       "depth": 0,
-      "source": "local-tarball",
+      "source": "local",
       "dependencies": {
         "com.gamegc.collections": "1.0.0"
       }

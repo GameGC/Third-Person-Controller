@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c415e5bced94dbd98063dcb83aad56, type: 3}
   m_Name: CameraType
   m_EditorClassIdentifier: 
-  nameSpace: 
+  nameSpace: MTPS.Shooter.Cameras
   flags: 0
   baseType: 2
   hasNumbers: 1
