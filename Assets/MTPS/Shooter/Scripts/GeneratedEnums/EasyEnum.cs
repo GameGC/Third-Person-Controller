@@ -11,7 +11,7 @@ internal class EasyEnum : ScriptableObject
 {
    private enum BaseType
    {
-      none_, int_,byte_,short_
+      @none, @int,@byte,@short
    }
 
    [SerializeField] private string nameSpace;
@@ -87,10 +87,10 @@ internal class EasyEnum : ScriptableObject
    private string GetWhiteSpace(int count) => new(' ', count);
    private string GetBaseTypeString()
    {
-      if (baseType == BaseType.none_) return "";
+      if (baseType == BaseType.none) return "";
       else
       {
-         return " : " + baseType.ToString().Replace("_", "");
+         return " : " + baseType.ToString().Replace("@", "");
       }
    }
 }

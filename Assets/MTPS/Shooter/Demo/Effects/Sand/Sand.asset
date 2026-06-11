@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866b0a852d23248988faf26378e0d316, type: 3}
   m_Name: Sand
   m_EditorClassIdentifier: 
-  SurfaceEffectsForHits:
+  surfaceEffectsForHits:
   - {fileID: 104916281997013325}
   - {fileID: -7133189975286898685}
   - {fileID: 5114240846921818927}

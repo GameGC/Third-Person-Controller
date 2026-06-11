@@ -3,6 +3,7 @@ using GameGC.SurfaceSystem.Audio;
 using MTPS.Core;
 using MTPS.Movement.Core.Input;
 using MTPS.Movement.Core.StateMachine;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 

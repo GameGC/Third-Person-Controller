@@ -12,6 +12,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.Animations.Rigging.Saving;
 using MTPS.Inventory;
 using MTPS.Inventory.ItemTypes;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 
 [CustomEditor(typeof(AdjustmentBehavior))]
 internal class AdjustmentEditor : Editor

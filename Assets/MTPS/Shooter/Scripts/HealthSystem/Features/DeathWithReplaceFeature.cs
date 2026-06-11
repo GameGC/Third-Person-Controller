@@ -28,7 +28,7 @@ public class DeathWithReplaceFeature : BaseHealthFeature
     {
         var instance = Object.Instantiate(deathPrefab, _transform.position, _transform.rotation);
         
-        var velocity = _rigidbody.velocity;
+        var velocity = _rigidbody.linearVelocity;
         var angularVelocity = _rigidbody.angularVelocity;
 
         Rigidbody tempRigidBody;
@@ -44,7 +44,7 @@ public class DeathWithReplaceFeature : BaseHealthFeature
             newTransform.SetLocalPositionAndRotation(localPosition,localRotation);
             if (newTransform.TryGetComponent(out tempRigidBody))
             {
-                tempRigidBody.velocity += velocity;
+                tempRigidBody.linearVelocity += velocity;
                 tempRigidBody.angularVelocity += angularVelocity;
             }
         }

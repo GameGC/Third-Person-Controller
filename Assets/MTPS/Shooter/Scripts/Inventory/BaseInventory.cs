@@ -3,6 +3,7 @@ using GameGC.Collections;
 using MTPS.Inventory.ItemTypes;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace MTPS.Inventory
 {
@@ -14,8 +15,8 @@ namespace MTPS.Inventory
 
         public List<BaseItemData> removeExceptions;
 
-        public UnityEvent<BaseItemData, int> onItemAdded;
-        public UnityEvent<BaseItemData, int> onItemMinus;
+        [FormerlySerializedAs("onItemAdded")] public UnityEvent<BaseItemData, int> onItemIncreased;
+        [FormerlySerializedAs("onItemMinus")] public UnityEvent<BaseItemData, int> onItemReduced;
         public UnityEvent<BaseItemData> onItemRemoved;
 
         public virtual bool AddItem(BaseItemData itemData, int count = 1)
@@ -25,7 +26,7 @@ namespace MTPS.Inventory
             if (itemData.MaxItemCount > prevCount + count)
             {
                 items[itemData] += count;
-                onItemAdded.Invoke(itemData, count);
+                onItemIncreased.Invoke(itemData, count);
                 return true;
             }
 
@@ -46,7 +47,7 @@ namespace MTPS.Inventory
                     return false;
                 }
 
-                onItemMinus.Invoke(itemData, count);
+                onItemReduced.Invoke(itemData, count);
                 return true;
             }
 

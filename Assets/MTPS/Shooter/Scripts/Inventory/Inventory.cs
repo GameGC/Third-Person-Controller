@@ -5,6 +5,7 @@ using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
 using MTPS.FightingStateMachine.Extras;
 using MTPS.Inventory.ItemTypes;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -84,7 +85,7 @@ namespace MTPS.Inventory
          return bool_;
       }
 
-      public bool AddItemNonEqip(BaseItemData itemData, int count = 1)
+      public bool AddItemNonEquip(BaseItemData itemData, int count = 1)
       {
          return base.AddItem(itemData, count);
       }

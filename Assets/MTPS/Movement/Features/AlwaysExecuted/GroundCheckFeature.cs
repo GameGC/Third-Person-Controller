@@ -14,9 +14,9 @@ namespace MTPS.Movement.Features.AlwaysExecuted
         private static readonly int GroundDistance = Animator.StringToHash("GroundDistance");
     
     
-        private static PhysicMaterial _frictionPhysics;
-        private static PhysicMaterial _slippyPhysics;
-        private static PhysicMaterial _maxFrictionPhysics;
+        private static PhysicsMaterial _frictionPhysics;
+        private static PhysicsMaterial _slippyPhysics;
+        private static PhysicsMaterial _maxFrictionPhysics;
     
         
         [Tooltip("Distance to became not grounded")]
@@ -55,30 +55,30 @@ namespace MTPS.Movement.Features.AlwaysExecuted
             if (_frictionPhysics) return;
         
             // slides the character through walls and edges
-            _frictionPhysics = new PhysicMaterial
+            _frictionPhysics = new PhysicsMaterial
             {
                 name = "frictionPhysics",
                 staticFriction = .25f,
                 dynamicFriction = .25f,
-                frictionCombine = PhysicMaterialCombine.Multiply
+                frictionCombine = PhysicsMaterialCombine.Multiply
             };
 
             // prevents the collider from slipping on ramps
-            _slippyPhysics = new PhysicMaterial
+            _slippyPhysics = new PhysicsMaterial
             {
                 name = "slippyPhysics",
                 staticFriction = 0f,
                 dynamicFriction = 0f,
-                frictionCombine = PhysicMaterialCombine.Minimum
+                frictionCombine = PhysicsMaterialCombine.Minimum
             };
 
             // air physics 
-            _maxFrictionPhysics = new PhysicMaterial
+            _maxFrictionPhysics = new PhysicsMaterial
             {
                 name = "maxFrictionPhysics",
                 staticFriction = 1f,
                 dynamicFriction = 1f,
-                frictionCombine = PhysicMaterialCombine.Maximum
+                frictionCombine = PhysicsMaterialCombine.Maximum
             };
         }
 

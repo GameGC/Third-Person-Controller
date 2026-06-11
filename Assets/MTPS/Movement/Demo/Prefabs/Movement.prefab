@@ -138,7 +138,7 @@ MonoBehaviour:
         _transitionName: Move
         shouldBeGrounded: 1
     - rid: 915123889255219200
-      type: {class: FootSurfaceFeature, ns: , asm: Assembly-CSharp}
+      type: {class: FootSurfaceFeature, ns: MTPS.Shooter.FightingStateMachine.Features.Surface , asm: Assembly-CSharp}
       data:
         path: alwaysExecutedFeatures.Array.data[2]
         footStepPlaceInterval: 0.5

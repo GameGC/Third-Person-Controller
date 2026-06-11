@@ -54,9 +54,9 @@ namespace MTPS.Movement.Features
             }
 
             Vector3 targetVelocity = _input.moveDirection * airSpeed;
-            targetVelocity.y = _rigidbody.velocity.y;
+            targetVelocity.y = _rigidbody.linearVelocity.y;
 
-            _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, targetVelocity, airSmooth * dt);
+            _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, targetVelocity, airSmooth * dt);
         }
 
         private void RotateToDirection(Vector3 direction,in float dt)

@@ -76,7 +76,7 @@ public class AdjustmentBehavior : MonoBehaviour
          var inventory = _currentCharacter.gameObject.GetComponent<Inventory>();
          foreach (var t in weapons)
          {
-            inventory.AddItemNonEqip(t);
+            inventory.AddItemNonEquip(t);
          }
       }
       

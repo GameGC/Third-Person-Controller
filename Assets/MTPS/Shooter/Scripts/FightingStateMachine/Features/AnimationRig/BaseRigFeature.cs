@@ -1,4 +1,5 @@
 ﻿using MTPS.Core;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 

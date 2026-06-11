@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using UnityEditor;
 using UnityEngine.Animations.Rigging;
 #endif

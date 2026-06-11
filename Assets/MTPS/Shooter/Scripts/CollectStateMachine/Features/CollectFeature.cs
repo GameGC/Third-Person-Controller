@@ -4,6 +4,7 @@ using MTPS.Movement.Core.Input;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using MTPS.Inventory;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 
 public class CollectFeature : BaseFeature
 {

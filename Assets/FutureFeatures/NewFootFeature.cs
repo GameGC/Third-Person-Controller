@@ -234,7 +234,7 @@ public class NewFootFeature : BaseFeature
     {
         if (!m_Anim.enabled) return;
 
-        if (m_Anim.updateMode != AnimatorUpdateMode.AnimatePhysics)
+        if (m_Anim.updateMode != AnimatorUpdateMode.Fixed)
             FootIK();
         else
         {
@@ -261,7 +261,7 @@ public class NewFootFeature : BaseFeature
         //    pos.y = DirectionalFootHeight(transform.forward).y+ DirectionalPlaceHeight(transform.forward);
         //}
         m_Anim.bodyPosition = pos;
-        if (m_Anim.updateMode == AnimatorUpdateMode.AnimatePhysics) FootIK();
+        if (m_Anim.updateMode == AnimatorUpdateMode.Fixed) FootIK();
 
        
     }

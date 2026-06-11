@@ -45,8 +45,8 @@ namespace MTPS.Movement.Features.Move
         protected void MoveCharacter(bool stopMove,Vector3 direction)
         {
             Vector3 targetVelocity = direction * (stopMove || Input.isInputFrozen ? 0 : Variables.MoveSpeed);
-            targetVelocity.y = _rigidbody.velocity.y;
-            _rigidbody.velocity = targetVelocity;
+            targetVelocity.y = _rigidbody.linearVelocity.y;
+            _rigidbody.linearVelocity = targetVelocity;
         }
 
         protected void RotateToDirection(Vector3 direction,in float dt)

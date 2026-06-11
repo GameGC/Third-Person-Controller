@@ -1,5 +1,6 @@
 using System;
 using GameGC.SurfaceSystem;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -84,11 +85,5 @@ namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
                 Destroy(gameObject);
         }
 
-    }
-
-    public interface IDamageSender
-    {
-        public float damage { get; }
-        public SurfaceHitType HitType { get; }
     }
 }

@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;

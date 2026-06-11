@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using GameGC.CommonEditorUtils.Editor;
 using MTPS.Core;
 using MTPS.Core.Attributes;
@@ -12,7 +13,7 @@ namespace MTPS.Movement.Core.StateMachine.Editor
     public class MoveStateMachine : CodeStateMachine
     {
         [SerializeReference, SerializeReferenceAddButton(typeof(BaseFeature))]
-        public BaseFeature[] alwaysExecutedFeatures = new BaseFeature[0];//= new BaseFeature[]{ new GroundCheckFeature(), new CheckSlopeFeature(), };
+        public BaseFeature[] alwaysExecutedFeatures = Array.Empty<BaseFeature>();//= new BaseFeature[]{ new GroundCheckFeature(), new CheckSlopeFeature(), };
         
         protected override void Awake()
         {
@@ -82,7 +83,7 @@ namespace MTPS.Movement.Core.StateMachine.Editor
                     Debug.Log(missing.serializedData);
                     var newType = JsonUtility.FromJson(missing.serializedData, allTypes[index]);
                         
-                    SerializationUtility.SetManagedReferenceIdForObject(this, newType, missing.referenceId);
+                    UnityEngine.Serialization.ManagedReferenceUtility.SetManagedReferenceIdForObject(this, newType, missing.referenceId);
                 }
             }
         }

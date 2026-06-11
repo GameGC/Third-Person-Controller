@@ -1,3 +1,4 @@
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 
@@ -26,10 +27,4 @@ public class HitZone : MonoBehaviour, IDamageSender
         
         healthComponent.OnHit(transform.position,hitCollider,rootCollider,this);
     }
-
-    //private void OnTriggerExit(Collider hitCollider)
-    //{
-    //    if(hitCollider.attachedRigidbody == _thisColliderRigidbody) return;
-    //    Debug.Log(hitCollider.name);
-    //}
 }

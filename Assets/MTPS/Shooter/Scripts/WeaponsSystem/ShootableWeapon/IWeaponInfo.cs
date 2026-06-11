@@ -1,5 +1,6 @@
 using MTPS.Core;
 using MTPS.Shooter.FightingStateMachine;
+// ReSharper disable InconsistentNaming
 
 namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {

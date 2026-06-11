@@ -9,10 +9,12 @@ using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Installer : EditorWindow
 {
     public Texture2D startTex;
+    
     public Texture2D otherTex;
     
     public TextAsset manifestFile;
@@ -50,10 +52,127 @@ public class Installer : EditorWindow
     private DownloaderItem[] _downloaderItems;
     private ReorderableList _downloadsDisplay;
 
+
+    private VisualElement _startPage;
+    private Button _nextButton;
+
+    private void Awake()
+    {
+        // Clear root for reloading UI
+        rootVisualElement.Clear();
+
+        _startPage = new VisualElement
+        {
+            style =
+            {
+                flexDirection = FlexDirection.Column,
+                alignItems = Align.Center,
+                justifyContent = Justify.Center,
+                flexGrow = 1,
+                backgroundColor = Color.black // fallback background
+            }
+        };
+
+        // Background image setup
+        var _backgroundImage = new Image
+        {
+            image = startTex,
+            scaleMode = ScaleMode.StretchToFill,
+            style =
+            {
+                position = Position.Absolute,
+                top = 0,
+                left = 0,
+                width = Length.Percent(100),
+                height = Length.Percent(100)
+            } // Match EditorGUI.DrawPreviewTexture exactly
+        };
+
+        // Add background first to be behind everything else
+        _startPage.Add(_backgroundImage);
+
+        // Version label with big font, white color, centered
+        var _versionLabel = new Label(Version)
+        {
+            style =
+            {
+                unityTextAlign = TextAnchor.MiddleCenter,
+                fontSize = 55,
+                color = Color.white,
+                marginTop = new StyleLength(new Length(15, LengthUnit.Percent)),
+                marginBottom = new StyleLength(new Length(10, LengthUnit.Percent)),
+                unityFontStyleAndWeight = FontStyle.Bold
+            }
+        };
+        _startPage.Add(_versionLabel);
+
+        // Invoice instruction button (acts like a label with clickable action)
+        var invoiceInfoButton = new Button(() => { Application.OpenURL("https://assetstore.unity.com/orders"); })
+        {
+            text = "Type invoice number:",
+            tooltip = "CLICK ME TO FIND YOUR INVOICE\nTYPE INVOICE NUMBER WITH BEGINNING \"IN\"",
+            style =
+            {
+                color = Color.white,
+                unityFontStyleAndWeight = FontStyle.Normal,
+                unityTextAlign = TextAnchor.MiddleLeft,
+                marginBottom = 5
+            }
+        };
+        invoiceInfoButton.RegisterCallback<MouseOverEvent>(evt =>
+        {
+            invoiceInfoButton.style.color = new Color(0.2f, 0.2f, 1f);
+        });
+        invoiceInfoButton.RegisterCallback<MouseOutEvent>(evt => { invoiceInfoButton.style.color = Color.white; });
+        _startPage.Add(invoiceInfoButton);
+
+        // Invoice input field
+        var _invoiceTextField = new TextField
+        {
+            value = invoice, multiline = false, style = {width = 250, marginBottom = 10}
+        };
+        _invoiceTextField.RegisterValueChangedCallback(evt =>
+        {
+            invoice = evt.newValue.Trim();
+            UpdateNextButtonVisibility();
+        });
+        _startPage.Add(_invoiceTextField);
+
+        // Next button
+        _nextButton = new Button(() =>
+        {
+            stage++;
+            SendValidateRequest();
+        })
+        {
+            text = "Next",
+            style =
+            {
+                unityFontStyleAndWeight = FontStyle.Bold,
+                fontSize = 20,
+                color = Color.white,
+                backgroundColor = new StyleColor(new Color32(210, 88, 247, 255)),
+                width = 200,
+                height = 30,
+                unityTextAlign = TextAnchor.MiddleCenter,
+            }
+        };
+        _startPage.Add(_nextButton);
+
+        // Initially hide Next button if invoice invalid
+        UpdateNextButtonVisibility();
+
+        // Add root to window
+       // rootVisualElement.Add(_startPage);
+    }
+    private void UpdateNextButtonVisibility()
+    {
+        _nextButton.SetEnabled(!string.IsNullOrEmpty(invoice) && invoice.StartsWith("IN"));
+    }
+
     private void OnEnable()
     {
         var packageList = JsonConvert.DeserializeObject<Dictionary<string, string>>(manifestFile.text);
-        
         
         _downloaderItems = new DownloaderItem[packageList.Count];
         

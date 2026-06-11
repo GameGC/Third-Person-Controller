@@ -25,7 +25,16 @@ namespace MTPS.Movement.Features.AlwaysExecuted
         [FormerlySerializedAs("wfdCast2Offset")] public float startOffsetY = -0.1f;
         [SerializeField] private float stepLength;
         [SerializeField] private float minDiffToAdjustBodyPos =  0.15f;
-    
+        
+        [Header("IK Settings")]
+        [SerializeField] private float footHeightOffset = 0.02f;
+        [SerializeField] private float footXOffset = 0.02f;
+
+        [Header("CapsuleCast Settings")]
+        [SerializeField] private float capsuleRadius = 0.1f;
+        [SerializeField] private float capsuleHeight = 0.5f;
+
+
 #if UNITY_EDITOR
         [SerializeField] private bool visualiseRaycast;
 #endif
@@ -51,6 +60,8 @@ namespace MTPS.Movement.Features.AlwaysExecuted
 
         private int _lastLeftPoseID = -1;
         private int _lastRightPoseID = -1;
+
+        private float _prevDiffDistance;
 
         #endregion
 
@@ -115,11 +126,16 @@ namespace MTPS.Movement.Features.AlwaysExecuted
 
             float diffDistance = Mathf.Abs(distance0 * leftFootWeight + distance1 * rightFootWeight);
             if (diffDistance > minDiffToAdjustBodyPos)
+            {
+                _prevDiffDistance = Mathf.MoveTowards(_prevDiffDistance, diffDistance, 0.01f);
                 _animator.bodyPosition -= Vector3.up * diffDistance;
+            }
+
             // high slope surface support 
             else if (_variables.SlopeAngle > 15f) _animator.bodyPosition -= Vector3.up * diffDistance;
+            else
+                _prevDiffDistance = 0;
         }
-
 
 
         private LegData _leftLegData = new LegData();
@@ -194,7 +210,121 @@ namespace MTPS.Movement.Features.AlwaysExecuted
                     wasHit ? Color.green : new Color(0.71f, 1f, 0.66f));
 #endif
         }
+        
+        private enum CastPurpose
+        {
+            HeightCast,
+            ForwardCast,
+            MidHeightCast
+        }
+        
+        private void DoRaycasts2(LegData data)
+        {
+            int groundLayer = _variables.GroundLayer;
 
+            // Height cast capsule
+            SampleFootWithCapsule(
+                data.HeightCastRay.origin,
+                data.HeightCastRay.direction,
+                raycastHeight,
+                groundLayer,
+                CastPurpose.HeightCast,
+                out data.HeightCastHit);
+
+            // Forward initial capsule
+            SampleFootWithCapsule(
+                data.ForwardInitialRay.origin,
+                data.ForwardInitialRay.direction,
+                stepLength,
+                groundLayer,
+                CastPurpose.ForwardCast,
+                out data.ForwardCastHit);
+
+            // Mid height cast capsule
+            SampleFootWithCapsule(
+                data.MidHeightCastRay.origin,
+                data.MidHeightCastRay.direction,
+                raycastHeight,
+                groundLayer,
+                CastPurpose.MidHeightCast,
+                out data.MidCastHit);
+
+#if UNITY_EDITOR
+            if (visualiseRaycast)
+            {
+                Debug.DrawRay(data.HeightCastRay.origin, data.HeightCastRay.direction * raycastHeight, Color.white);
+                Debug.DrawRay(data.ForwardInitialRay.origin, data.ForwardInitialRay.direction * stepLength, Color.red);
+                Debug.DrawRay(data.MidHeightCastRay.origin, data.MidHeightCastRay.direction * raycastHeight, Color.green);
+            }
+#endif
+        }
+        
+        
+        private bool SampleFootWithCapsule(
+            Vector3 origin,
+            Vector3 direction,
+            float distance,
+            int groundLayer,
+            CastPurpose purpose,
+            out RaycastHit bestHit)
+        {
+            Vector3 capsuleBottom = origin + Vector3.up * capsuleRadius;
+            Vector3 capsuleTop = origin + Vector3.up * (capsuleHeight - capsuleRadius);
+    
+            RaycastHit[] hits = Physics.CapsuleCastAll(
+                capsuleTop,
+                capsuleBottom,
+                capsuleRadius,
+                direction,
+                distance,
+                groundLayer,
+                QueryTriggerInteraction.Ignore);
+
+            bestHit = default;
+            float bestScore = float.MinValue;
+
+            foreach (var hit in hits)
+            {
+                if (hit.collider == null) continue;
+
+                float angleToUp = Vector3.Angle(hit.normal, Vector3.up);
+                float score = 0;
+
+                Vector3 hitVector = hit.distance * hit.normal;
+
+                switch (purpose)
+                {
+                    case CastPurpose.HeightCast:
+                        // Prefer hits closer to the foot (lower height)
+                        // Negative y means closer (lower point) is better (higher score)
+                        score = -hitVector.y;
+                        break;
+
+                    case CastPurpose.ForwardCast:
+                        // Prefer hits farther along the forward direction (larger x distance)
+                        // Use hit.distance along forward (x) to prefer higher step
+                        // Negative because you want smaller offset from stepLength
+                        score = -hit.distance;
+                        break;
+
+                    case CastPurpose.MidHeightCast:
+                        // Prefer hits near level surface: combine height and forward offset
+                        // Smaller difference means higher score, so negative of sum of absolute x and y
+                        score = -(Mathf.Abs(hitVector.x) + Mathf.Abs(hitVector.y));
+                        break;
+                }
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestHit = hit;
+                }
+            }
+
+            return bestHit.collider != null;
+        }
+
+        
+        
         /// <summary>
         /// this function choose footstep position from 4 variants
         /// </summary>
@@ -485,3 +615,4 @@ namespace MTPS.Movement.Features.AlwaysExecuted
         }
     }
 }
+

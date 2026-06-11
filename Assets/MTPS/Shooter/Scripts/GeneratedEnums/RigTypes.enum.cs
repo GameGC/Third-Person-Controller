@@ -1,5 +1,8 @@
-public enum RigTypes : int
+namespace MTPS.Shooter.Scripts.GeneratedEnums
 {
-    Fighting = 0,
-    Collect  = 1
+    public enum RigTypes : byte
+    {
+        Fighting = 0,
+        Collect  = 1
+    }
 }

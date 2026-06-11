@@ -1,5 +1,6 @@
 using GameGC.CommonEditorUtils.Attributes;
 using GameGC.SurfaceSystem;
+using MTPS.Shooter.Scripts.GeneratedEnums;
 using UnityEngine;
 using UnityEngine.Serialization;
 
