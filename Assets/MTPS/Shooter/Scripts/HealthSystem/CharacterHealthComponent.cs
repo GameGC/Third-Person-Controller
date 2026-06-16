@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
-using GameGC.SurfaceSystem;
 using MTPS.Core;
 using MTPS.Core.Attributes;
 using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
@@ -99,8 +98,6 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
             Health -= damage;
         }
 
-        SurfaceSystem.instance.OnSurfaceHit(hit,(int) source.HitType,defaultHitEffect);
-
         if (alivePreviously)
         {
             //delay for realistic velocity copy to rigidbody
@@ -133,7 +130,7 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
         var hitNormal = (hitPointClosest - hitPointOrigin).normalized;
         
         
-        SurfaceSystem.instance.OnSurfaceHit(hitCollider,rootCollider,hitPointClosest,hitNormal,defaultHitEffect);
+      //  SurfaceSystem.instance.OnSurfaceHit(hitCollider,rootCollider,hitPointClosest,hitNormal,defaultHitEffect);
 
         if (alivePreviously)
         {

@@ -17,15 +17,27 @@ public class ItemDetailedCollect : ItemCollect
         
         if(collectVariables.IsCollecting) return;
         
-        if (receiver.EquippedItemData.name != "Hands")
+        // Only try to swap to Hands if a fighting state machine is present and armed
+        if (receiver.FightingStateMachine != null &&
+            receiver.EquippedItemData != null &&
+            receiver.EquippedItemData.name != "Hands")
         {
             var hands = receiver.removeExceptions.Find(i => i.name == "Hands") as WeaponData;
-            await receiver.Equip(hands);
-            await Task.Delay(3000);
+            if (hands != null)
+            {
+                await receiver.Equip(hands);
+                await Task.Delay(3000);
+            }
         }
 
         if(collectVariables.IsCollecting) return;
         
+        var handler = receiver.GetComponent<GrenadePickupHandler>();
+        if (handler != null)
+        {
+            handler.Collect(this);
+            return;
+        }
         collectVariables.OnItemCollect
             .Invoke(collectOffset,this,characterPoint,leftTarget,rightTarget);
         //base.Collect(receiver);

@@ -1,5 +1,3 @@
-using MTPS.Shooter.Scripts.GeneratedEnums;
-
 namespace MTPS.Shooter.WeaponsSystem.ShootableWeapon
 {
     public interface IDamageSender

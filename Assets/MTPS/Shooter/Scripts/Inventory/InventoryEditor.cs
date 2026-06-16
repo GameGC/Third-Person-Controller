@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GameGC.CommonEditorUtils.Editor;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace MTPS.Inventory.Editor

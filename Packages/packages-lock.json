@@ -58,15 +58,6 @@
         "com.gamegc.collections": "1.0.0"
       }
     },
-    "com.gamegc.surfacesystem": {
-      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.surfacesystemf/com.gamegc.surfacesystem-1.0.1.tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {
-        "com.gamegc.collections": "1.0.0",
-        "com.gamegc.common-editor-utils": "1.0.5"
-      }
-    },
     "com.gamegc.timeline.legacy-animation": {
       "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.timeline.legacy-animationf/com.gamegc.timeline.legacy-animation-1.0.0.tgz",
       "depth": 0,
@@ -311,16 +302,6 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
-    },
-    "com.unity.visualscripting": {
-      "version": "1.9.6",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

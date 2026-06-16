@@ -1,4 +1,4 @@
-﻿#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM
 
 using ThirdPersonController.Input;
 using UnityEngine;
@@ -23,13 +23,11 @@ namespace MTPS.Movement.Core.Input.New
 
         void InputActions.IShooterActions.OnAim(InputAction.CallbackContext obj)
         {
-            if (isInputFrozen) return; 
-            IsAim = obj.action.IsPressed();
+            // Shooting stripped — aim disabled
         }
         void InputActions.IShooterActions.OnAttack(InputAction.CallbackContext obj)
         {
-            if (isInputFrozen) return; 
-            IsAttack = obj.action.IsPressed();
+            // Shooting stripped — attack disabled
         }
 
         void InputActions.IShooterActions.OnLongShoot(InputAction.CallbackContext context)

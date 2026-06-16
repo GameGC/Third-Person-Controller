@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Attributes;
-using GameGC.SurfaceSystem.Audio;
 using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
 using MTPS.FightingStateMachine.Extras;
@@ -28,7 +27,7 @@ namespace MTPS.Inventory
 
       [SerializeField] private CodeStateMachine fightingStateMachine;
 
-      [SerializeField,ValidateBaseType(typeof(AudioClip),typeof(IAudioType))] private Object equipSound;
+      [SerializeField,ValidateBaseType(typeof(AudioClip))] private Object equipSound;
 
       private HybridAnimator _hybridAnimator;
       private Animator _animator;
@@ -118,11 +117,6 @@ namespace MTPS.Inventory
          if (weaponData == equippedItemData) return;
 
          bool hasAnimatorOverride = fightingStateMachine.GetComponent<WeaponAnimatorOverride>();
-         
-         // wait for previous Fighting Hide Animation
-         if (fightingStateMachine != null && fightingStateMachine is global::MTPS.Shooter.FightingStateMachine.FightingStateMachine fighting &&
-             fighting.hasPutWeaponBackState)
-            await fighting.RequestForPutBack();
 
          Destroy(fightingStateMachine.gameObject);
 
@@ -172,11 +166,6 @@ namespace MTPS.Inventory
             {
                if (!_audioSource.isPlaying || _audioSource.clip != clip) 
                   PlayClip(clip);
-               return;
-            }
-            case IAudioType audio:
-            {
-               audio.Play(_audioSource);
                return;
             }
          }
