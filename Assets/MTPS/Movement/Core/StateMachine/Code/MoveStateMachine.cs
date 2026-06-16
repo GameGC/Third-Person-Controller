@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using GameGC.CommonEditorUtils.Editor;
 using MTPS.Core;
@@ -30,15 +30,17 @@ namespace MTPS.Movement.Core.StateMachine.Editor
 
         protected override IEnumerator Start()
         {
+            if (ReferenceResolver == null || Variables == null) yield break;
             StartCoroutine(base.Start());
             
             if (startWhenResolverIsReady)
             {
-                yield return new WaitUntil(() => ReferenceResolver.isReady);
+                yield return new WaitUntil(() => ReferenceResolver != null && ReferenceResolver.isReady);
                 
                 foreach (var feature in alwaysExecutedFeatures)
                 {
-                    feature.CacheReferences(Variables,ReferenceResolver);
+                    if (feature != null)
+                        feature.CacheReferences(Variables,ReferenceResolver);
                 }
             }
         }
@@ -52,20 +54,24 @@ namespace MTPS.Movement.Core.StateMachine.Editor
         protected override void Update()
         {
             if(!isStarted) return;
+            if (Variables == null || ReferenceResolver == null) return;
             base.Update();
             foreach (var feature in alwaysExecutedFeatures)
             {
-                feature.OnUpdateState();
+                if (feature != null)
+                    feature.OnUpdateState();
             }
         }
 
         protected override void FixedUpdate()
         {
             if(!isStarted) return;
+            if (Variables == null || ReferenceResolver == null) return;
             base.FixedUpdate();
             foreach (var feature in alwaysExecutedFeatures)
             {
-                feature.OnFixedUpdateState();
+                if (feature != null)
+                    feature.OnFixedUpdateState();
             }
         }
 

@@ -2,12 +2,10 @@ using System.Threading.Tasks;
 using GameGC.CommonEditorUtils.Attributes;
 using MTPS.Core;
 using MTPS.Core.CodeStateMachine;
-using MTPS.FightingStateMachine.Extras;
 using MTPS.Inventory.ItemTypes;
-using MTPS.Shooter.Scripts.GeneratedEnums;
+
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -29,17 +27,10 @@ namespace MTPS.Inventory
 
       [SerializeField,ValidateBaseType(typeof(AudioClip))] private Object equipSound;
 
-      private HybridAnimator _hybridAnimator;
-      private Animator _animator;
-      private RigBuilderFixed _rigBuilder;
       private AudioSource _audioSource;
 
       private void Awake()
       {
-         _hybridAnimator = GetComponent<HybridAnimator>();
-         _animator = GetComponent<Animator>();
-         _rigBuilder = GetComponent<RigBuilderFixed>();
-         
          var soundsObject = new GameObject("InventorySounds").transform;
          soundsObject.SetParent(transform);
          soundsObject.localPosition = Vector3.zero;
@@ -116,42 +107,10 @@ namespace MTPS.Inventory
       {
          if (weaponData == equippedItemData) return;
 
-         bool hasAnimatorOverride = fightingStateMachine.GetComponent<WeaponAnimatorOverride>();
-
          Destroy(fightingStateMachine.gameObject);
 
-         var stateMachineParent = transform.Find("rig_controllers");
 
-         // remove previous rig
-         if (_rigBuilder.layers.Count > 0 && _rigBuilder.layers[0].rig)
-            Destroy(_rigBuilder.layers[0].rig.gameObject);
 
-         //assign new Rig
-         if (weaponData.rigLayer)
-         {
-            var rig = Instantiate(weaponData.rigLayer, stateMachineParent);
-            rig.name = weaponData.rigLayer.name;
-
-            _rigBuilder.layers[(int) RigTypes.Fighting] = new RigLayer(rig);
-         }
-         else
-         {
-            _rigBuilder.layers[(int) RigTypes.Fighting] = new RigLayer(null);
-         }
-
-         //assign new Animations      
-         stateMachineParent = transform.Find("StateMachines");
-         var instance = Instantiate(weaponData.stateMachine, stateMachineParent);
-         if (instance.GetComponent<WeaponAnimatorOverride>())
-            hasAnimatorOverride = true;
-         instance.ReferenceResolver = GetComponent<ReferenceResolver>();
-
-         _hybridAnimator.stateMachines[0] = instance.GetComponent<AnimationLayer>();
-         _hybridAnimator.Rebuild(1);
-
-         _rigBuilder.Build();
-
-         fightingStateMachine = instance;
          equippedItemData = weaponData;
 
          onItemEquiped.Invoke(weaponData);
@@ -207,8 +166,6 @@ namespace MTPS.Inventory
             DestroyImmediate(fightingStateMachine.gameObject);
          }
 
-         _hybridAnimator = GetComponent<HybridAnimator>();
-         _rigBuilder = GetComponent<RigBuilderFixed>();
 
          //assign new Animations      
          var stateMachineParent = transform.Find("StateMachines");
@@ -216,26 +173,6 @@ namespace MTPS.Inventory
             PrefabUtility.InstantiatePrefab(weaponData.stateMachine, stateMachineParent) as CodeStateMachine;
          instance.ReferenceResolver = GetComponent<ReferenceResolver>();
 
-         _hybridAnimator.stateMachines[0] = instance.GetComponent<AnimationLayer>();
-
-         stateMachineParent = transform.Find("rig_controllers");
-
-         // remove previous rig
-         if (_rigBuilder.layers.Count > 0 && _rigBuilder.layers[(int) RigTypes.Fighting].rig)
-            DestroyImmediate(_rigBuilder.layers[(int) RigTypes.Fighting].rig.gameObject);
-
-         //assign new Rig
-         if (weaponData.rigLayer)
-         {
-            var rig = PrefabUtility.InstantiatePrefab(weaponData.rigLayer, stateMachineParent) as Rig;
-            rig.name = weaponData.rigLayer.name;
-
-            _rigBuilder.layers[(int) RigTypes.Fighting] = new RigLayer(rig);
-         }
-         else
-         {
-            _rigBuilder.layers[(int) RigTypes.Fighting] = new RigLayer(null);
-         }
 
          equippedItemData = weaponData;
          fightingStateMachine = instance;

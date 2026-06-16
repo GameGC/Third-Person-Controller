@@ -21,11 +21,15 @@ namespace MTPS.Inventory
 
         public virtual bool AddItem(BaseItemData itemData, int count = 1)
         {
-            if (items.TryGetValue(itemData, out int prevCount) && itemData is WeaponData)
+            bool exists = items.TryGetValue(itemData, out int prevCount);
+            if (exists && itemData is WeaponData)
                 return false;
             if (itemData.MaxItemCount > prevCount + count)
             {
-                items[itemData] += count;
+                if (exists)
+                    items[itemData] += count;
+                else
+                    items.Add(itemData, count);
                 onItemIncreased.Invoke(itemData, count);
                 return true;
             }
@@ -37,6 +41,7 @@ namespace MTPS.Inventory
         {
             if (itemData is WeaponData) return false;
 
+
             if (items[itemData] - count > -1)
             {
                 items[itemData] -= count;
@@ -44,7 +49,7 @@ namespace MTPS.Inventory
                 if (items[itemData] < 1)
                 {
                     RemoveItem(itemData);
-                    return false;
+                    return true;
                 }
 
                 onItemReduced.Invoke(itemData, count);

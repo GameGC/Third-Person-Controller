@@ -95,7 +95,7 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
                 }
             }
 
-            Health -= damage;
+            SetHealth(Health - damage);
         }
 
         if (alivePreviously)
@@ -123,7 +123,7 @@ public class CharacterHealthComponent : HealthComponent, ICharacterHealthVariabl
                 }
             }
 
-            Health -= damage;
+            SetHealth(Health - damage);
         }
 
         var hitPointClosest = hitCollider.ClosestPoint(hitPointOrigin);

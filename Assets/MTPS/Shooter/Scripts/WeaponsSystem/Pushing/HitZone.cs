@@ -1,4 +1,4 @@
-using MTPS.Shooter.Scripts.GeneratedEnums;
+
 using MTPS.Shooter.WeaponsSystem.ShootableWeapon;
 using UnityEngine;
 
