@@ -1,0 +1,36 @@
+{
+  "name": "com.gamegc.mtps.core",
+  "displayName": "MTPS Core",
+  "version": "1.0.1",
+  "description": "MTPS core with samples",
+  "author" : {
+    "name": "GameGC"
+  },
+  "dependencies": {
+    "com.unity.modules.imgui": "1.0.0",
+    "com.gamegc.common-editor-utils": "1.0.5",
+    "com.gamegc.collections": "1.0.0"
+  },
+  "samples": [
+    {
+      "displayName": "Input Old",
+      "description": "",
+      "path": "Samples~/InputOld"
+    },
+    {
+      "displayName": "Input New",
+      "description": "",
+      "path": "Samples~/InputNew"
+    },
+    {
+      "displayName": "Move State Machine",
+      "description": "",
+      "path": "Samples~/MoveStateMachine"
+    },
+    {
+      "displayName": "Move State Machine VS",
+      "description": "",
+      "path": "Samples~/MoveStateMachineVS"
+    }
+  ]
+}

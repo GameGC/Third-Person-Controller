@@ -1,0 +1,12 @@
+{
+  "name": "com.gamegc.collections",
+  "displayName": "Collections",
+  "version": "1.0.0",
+  "description": "Serializable c# Collections",
+  "author" : {
+    "name": "GameGC"
+  },
+  "dependencies": {
+    "com.unity.modules.imgui": "1.0.0"
+  }
+}

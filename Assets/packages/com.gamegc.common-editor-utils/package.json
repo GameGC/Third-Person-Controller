@@ -1,0 +1,12 @@
+{
+  "name": "com.gamegc.common-editor-utils",
+  "displayName": "Common Editor Utils",
+  "version": "1.0.5", 
+  "description": "",
+  "author" : {
+    "name": "GameGC"
+  },
+  "dependencies": {
+    "com.gamegc.collections": "1.0.0"
+  }
+}

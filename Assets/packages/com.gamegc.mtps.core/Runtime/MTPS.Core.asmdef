@@ -1,0 +1,23 @@
+{
+    "name": "MTPS.Core",
+    "rootNamespace": "MTPS.Core",
+    "references": [
+        "GUID:67484b43d2f174f13a0f76bd25d17ee6",
+        "GUID:b3ef0eb44fc56495e81d17c21b33b513"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualscripting",
+            "expression": "",
+            "define": "ENABLE_VisualScripting"
+        }
+    ],
+    "noEngineReferences": false
+}
