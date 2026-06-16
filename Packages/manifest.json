@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.adjoint.editor": "https://github.com/adjointdev/adjoint-beta-dist.git",
     "com.alexeytaranov.serializereferencedropdown": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
     "com.gamegc.animation.rigging.saver": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.animation.rigging.saverf/com.gamegc.animation.rigging.saver-1.0.0.tgz",
     "com.gamegc.collections": "file:/Users/user/unityProjects/GameGCCollections/Assets",

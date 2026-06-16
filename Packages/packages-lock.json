@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.adjoint.editor": {
+      "version": "https://github.com/adjointdev/adjoint-beta-dist.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "2be1a802c4dbad94d70f3ed91d67a25eeb3be5ac"
+    },
     "com.alexeytaranov.serializereferencedropdown": {
       "version": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
       "depth": 0,
