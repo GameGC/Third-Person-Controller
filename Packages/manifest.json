@@ -2,9 +2,9 @@
   "dependencies": {
     "com.alexeytaranov.serializereferencedropdown": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.cinemachine": "2.10.3",
-    "com.unity.ide.rider": "3.0.36",
-    "com.unity.inputsystem": "1.14.0",
+    "com.unity.cinemachine": "2.10.4",
+    "com.unity.ide.rider": "3.0.39",
+    "com.unity.inputsystem": "1.18.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.ugui": "2.0.0",
     "com.unity.modules.accessibility": "1.0.0",
