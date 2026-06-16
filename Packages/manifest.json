@@ -1,18 +1,10 @@
 {
   "dependencies": {
-    "com.adjoint.editor": "https://github.com/adjointdev/adjoint-beta-dist.git",
     "com.alexeytaranov.serializereferencedropdown": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
-    "com.gamegc.animation.rigging.saver": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.animation.rigging.saverf/com.gamegc.animation.rigging.saver-1.0.0.tgz",
-    "com.gamegc.collections": "file:/Users/user/unityProjects/GameGCCollections/Assets",
-    "com.gamegc.common-editor-utils": "file:/Users/user/unityProjects/CommonEditorUtils/Assets",
-    "com.gamegc.mtps.core": "file:/Users/user/unityProjects/MTPSCore/Assets",
-    "com.gamegc.timeline.legacy-animation": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.timeline.legacy-animationf/com.gamegc.timeline.legacy-animation-1.0.0.tgz",
-    "com.singularitygroup.hotreload": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.9",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.cinemachine": "2.10.3",
     "com.unity.ide.rider": "3.0.36",
     "com.unity.inputsystem": "1.14.0",
-    "com.unity.multiplayer.center": "1.0.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.ugui": "2.0.0",
     "com.unity.modules.accessibility": "1.0.0",

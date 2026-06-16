@@ -1,7 +1,5 @@
 using MTPS.Core.CodeStateMachine;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
-using UnityEngine.Serialization;
 
 namespace MTPS.Inventory.ItemTypes
 {
@@ -10,7 +8,6 @@ namespace MTPS.Inventory.ItemTypes
     public class WeaponData : BaseItemData
     {
         [Space(9)] public CodeStateMachine stateMachine;
-        [FormerlySerializedAs("rig")] public Rig rigLayer;
 
         public AmmoData ammoItem;
 

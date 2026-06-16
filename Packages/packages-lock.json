@@ -1,14 +1,5 @@
 {
   "dependencies": {
-    "com.adjoint.editor": {
-      "version": "https://github.com/adjointdev/adjoint-beta-dist.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "3.0.2"
-      },
-      "hash": "2be1a802c4dbad94d70f3ed91d67a25eeb3be5ac"
-    },
     "com.alexeytaranov.serializereferencedropdown": {
       "version": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
       "depth": 0,
@@ -16,84 +7,11 @@
       "dependencies": {},
       "hash": "635dba02c808e2b4881c689a57c43b60e627698f"
     },
-    "com.gamegc.animation.rigging.saver": {
-      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.animation.rigging.saverf/com.gamegc.animation.rigging.saver-1.0.0.tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {
-        "com.unity.modules.imgui": "1.0.0",
-        "com.unity.animation.rigging": "1.2.1"
-      }
-    },
-    "com.gamegc.collections": {
-      "version": "file:/Users/user/unityProjects/GameGCCollections/Assets",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.modules.imgui": "1.0.0"
-      }
-    },
-    "com.gamegc.common-editor-utils": {
-      "version": "file:/Users/user/unityProjects/CommonEditorUtils/Assets",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.gamegc.collections": "1.0.0"
-      }
-    },
-    "com.gamegc.mtps.core": {
-      "version": "file:/Users/user/unityProjects/MTPSCore/Assets",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.modules.imgui": "1.0.0",
-        "com.gamegc.common-editor-utils": "1.0.5",
-        "com.gamegc.collections": "1.0.0"
-      }
-    },
-    "com.gamegc.timeline.legacy-animation": {
-      "version": "file:/Users/user/unityProjects/CustomCharacterController/Packages/Local/GameGC/com.gamegc.timeline.legacy-animationf/com.gamegc.timeline.legacy-animation-1.0.0.tgz",
-      "depth": 0,
-      "source": "local-tarball",
-      "dependencies": {
-        "com.unity.timeline": "1.7.5"
-      }
-    },
-    "com.singularitygroup.hotreload": {
-      "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.9",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0",
-        "com.unity.modules.unitywebrequest": "1.0.0"
-      },
-      "hash": "15115347b80179b483f7f4022c18fe48604dee8d"
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
       "source": "builtin",
       "dependencies": {}
-    },
-    "com.unity.animation.rigging": {
-      "version": "1.3.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.burst": "1.4.1",
-        "com.unity.test-framework": "1.1.24"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.burst": {
-      "version": "1.8.21",
-      "depth": 2,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.mathematics": "1.2.1",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
       "version": "2.10.3",
@@ -128,21 +46,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.mathematics": {
-      "version": "1.3.2",
-      "depth": 3,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.multiplayer.center": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      }
-    },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.1",
       "depth": 0,
@@ -159,18 +62,6 @@
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       }
-    },
-    "com.unity.timeline": {
-      "version": "1.8.7",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.audio": "1.0.0",
-        "com.unity.modules.director": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.particlesystem": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.ugui": {
       "version": "2.0.0",
